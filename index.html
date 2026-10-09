@@ -1438,7 +1438,10 @@ body {
           <div id="darshan-admin-controls" style="display: none; margin-top: 10px; margin-bottom: 8px; gap: 8px; justify-content: center; flex-wrap: wrap;">
             <input type="file" id="darshan-photo-input" accept="image/*" style="display: none;" />
             <button type="button" class="pill-btn" id="btn-change-darshan-photo" style="background: #ffd700; color: #3e0409; font-weight: 600; font-size: 0.82rem; border-color: #ffd700;" title="Change Altar Pratima Photo (Admin Only)">
-              📷 প্রতিমা ছবি আপলোড করুন
+              📷 ছবি আপলোড করুন
+            </button>
+            <button type="button" class="pill-btn" id="btn-link-darshan-photo" style="background: rgba(255, 215, 0, 0.18); color: #fff; font-size: 0.82rem; border-color: #ffd700;" title="Enter Online Image Link">
+              🔗 ছবির লিংক দিন
             </button>
             <button type="button" class="pill-btn" id="btn-reset-darshan-photo" style="background: #7a1b24; color: #fff; font-size: 0.82rem; border-color: #5c0b15;" title="Reset Altar Pratima Photo (Admin Only)">
               🗑️ ছবি মুছুন / রিসেট
@@ -2126,9 +2129,13 @@ const firebaseConfig = {
       <p style="font-family: var(--font-bengali), sans-serif; color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
         "ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"
       </p>
-      <p style="font-size: 0.85rem; color: #caa2a8;">
+      <p style="font-size: 0.85rem; color: #caa2a8; margin-bottom: 1.2rem;">
         May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon Amfan (N.S.C.C) Club and all families.
       </p>
+
+      <div style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px dashed rgba(229, 169, 59, 0.4); font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; color: #ffd700; text-transform: uppercase;">
+        ✨ CREATED AND DEVELOPED BY SUDIPTA MAITY ✨
+      </div>
     </div>
   </footer>
 
@@ -2485,6 +2492,56 @@ class FirebaseService {
           callback(doc.data().value);
         }
       }, () => {});
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  // --- DEITY PHOTO (Virtual Darshan Cloud Sync) ---
+  async getDeityPhoto() {
+    if (!this.isReady) return null;
+    try {
+      const doc = await this.db.collection('puja_settings').doc('altar').get();
+      return doc.exists ? doc.data().deityImageUrl : null;
+    } catch (e) {
+      console.warn('Firebase getDeityPhoto error:', e);
+      return null;
+    }
+  }
+
+  async saveDeityPhoto(imageUrl) {
+    if (!this.isReady) return false;
+    try {
+      await this.db.collection('puja_settings').doc('altar').set({
+        deityImageUrl: imageUrl,
+        updatedAt: new Date().toISOString()
+      }, { merge: true });
+      return true;
+    } catch (e) {
+      console.error('Firebase saveDeityPhoto error:', e);
+      return false;
+    }
+  }
+
+  async resetDeityPhoto() {
+    if (!this.isReady) return false;
+    try {
+      await this.db.collection('puja_settings').doc('altar').delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  onDeityPhotoChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_settings').doc('altar')
+      .onSnapshot((doc) => {
+        if (doc.exists && doc.data().deityImageUrl) {
+          callback(doc.data().deityImageUrl);
+        } else {
+          callback(null);
+        }
+      }, (err) => {
+        console.warn('Deity photo listener error:', err);
+      });
     this.listeners.push(unsubscribe);
     return unsubscribe;
   }
@@ -3470,7 +3527,41 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
         const mTx = this.db.transaction(['meta'], 'readwrite');
         mTx.objectStore('meta').put({ key: 'diyas_lit', value: 142 });
       }
-    };
+  // --- DEITY PHOTO (Virtual Darshan Cloud & Local Sync) ---
+  async getDeityPhoto() {
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        const cloudPhoto = await window.firebaseService.getDeityPhoto();
+        if (cloudPhoto) return cloudPhoto;
+      } catch (e) {
+        console.warn('Could not fetch cloud deity photo:', e);
+      }
+    }
+    return localStorage.getItem('puja_deity_photo') || null;
+  }
+
+  async saveDeityPhoto(imageUrl) {
+    localStorage.setItem('puja_deity_photo', imageUrl);
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.saveDeityPhoto(imageUrl);
+      } catch (e) {
+        console.warn('Could not sync deity photo to cloud:', e);
+      }
+    }
+    return true;
+  }
+
+  async resetDeityPhoto() {
+    localStorage.removeItem('puja_deity_photo');
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.resetDeityPhoto();
+      } catch (e) {
+        console.warn('Could not reset cloud deity photo:', e);
+      }
+    }
+    return true;
   }
 }
 
@@ -3537,6 +3628,7 @@ async function initPujaApp() {
   const darshanAdminControls = document.getElementById('darshan-admin-controls');
   const darshanPhotoInput = document.getElementById('darshan-photo-input');
   const btnChangeDarshanPhoto = document.getElementById('btn-change-darshan-photo');
+  const btnLinkDarshanPhoto = document.getElementById('btn-link-darshan-photo');
   const btnResetDarshanPhoto = document.getElementById('btn-reset-darshan-photo');
   const DEFAULT_DEITY_URL = 'https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1200&q=85';
 
@@ -4395,33 +4487,74 @@ async function initPujaApp() {
       darshanPhotoInput.click();
     });
 
-    darshanPhotoInput.addEventListener('change', (e) => {
+    darshanPhotoInput.addEventListener('change', async (e) => {
       const file = e.target.files && e.target.files[0];
       if (!file) return;
+
       const reader = new FileReader();
       reader.onload = (event) => {
-        const dataUrl = event.target.result;
-        try {
-          localStorage.setItem('puja_deity_photo', dataUrl);
-          if (deityMainImg) deityMainImg.src = dataUrl;
-          showToast('🪔 ভার্চুয়াল দর্শনের প্রতিমা ছবি সফলভাবে পরিবর্তন করা হয়েছে!');
-          window.pujaAudio.playTempleBell();
-        } catch (err) {
-          console.warn('Storage limit for local image:', err);
-          if (deityMainImg) deityMainImg.src = dataUrl;
-          showToast('🪔 প্রতিমা ছবি আপডেট করা হয়েছে!');
-        }
+        const img = new Image();
+        img.onload = async () => {
+          const maxDim = 1200;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+
+          try {
+            await window.pujaDB.saveDeityPhoto(dataUrl);
+            if (deityMainImg) deityMainImg.src = dataUrl;
+            showToast('🪔 ভার্চুয়াল দর্শনের প্রতিমা ছবি সফলভাবে সেভ করা হয়েছে!');
+            window.pujaAudio.playTempleBell();
+          } catch (err) {
+            console.warn('Storage limit for deity image:', err);
+            if (deityMainImg) deityMainImg.src = dataUrl;
+            showToast('🪔 প্রতিমা ছবি আপডেট করা হয়েছে!');
+          }
+        };
+        img.src = event.target.result;
       };
       reader.readAsDataURL(file);
     });
   }
 
   if (btnResetDarshanPhoto) {
-    btnResetDarshanPhoto.addEventListener('click', () => {
+    btnResetDarshanPhoto.addEventListener('click', async () => {
       if (confirm('ভার্চুয়াল দর্শনের প্রতিমা ছবি মুছে আসল ছবিতে ফিরিয়ে আনতে চান?')) {
-        localStorage.removeItem('puja_deity_photo');
+        await window.pujaDB.resetDeityPhoto();
         if (deityMainImg) deityMainImg.src = DEFAULT_DEITY_URL;
         showToast('🗑️ প্রতিমা ছবি মুছে আসল ছবিতে রিসেট করা হয়েছে।');
+      }
+    });
+  }
+
+  if (btnLinkDarshanPhoto) {
+    btnLinkDarshanPhoto.addEventListener('click', async () => {
+      const url = prompt('প্রতিমার ছবির সরাসরি অনলাইন লিংক (Image URL) পেস্ট করুন:');
+      if (url && url.trim().startsWith('http')) {
+        try {
+          await window.pujaDB.saveDeityPhoto(url.trim());
+          if (deityMainImg) deityMainImg.src = url.trim();
+          showToast('🪔 প্রতিমা ছবির অনলাইন লিংক সফলভাবে সেভ করা হয়েছে!');
+          window.pujaAudio.playTempleBell();
+        } catch (err) {
+          console.warn('Error saving deity link:', err);
+        }
+      } else if (url !== null && url.trim() !== '') {
+        alert('অনুগ্রহ করে একটি সঠিক অনলাইন ছবির লিংক (http:// বা https://) দিন।');
       }
     });
   }
@@ -4620,6 +4753,17 @@ async function initPujaApp() {
       const btnDiya = document.getElementById('btn-light-diya');
       if (btnDiya) btnDiya.innerHTML = `✨ Diya Lit for Maa (${count})`;
     });
+
+    window.firebaseService.onDeityPhotoChanged((photoUrl) => {
+      console.log('Firebase: Real-time deity photo received');
+      if (photoUrl && deityMainImg) {
+        deityMainImg.src = photoUrl;
+        localStorage.setItem('puja_deity_photo', photoUrl);
+      } else if (!photoUrl && deityMainImg) {
+        deityMainImg.src = DEFAULT_DEITY_URL;
+        localStorage.removeItem('puja_deity_photo');
+      }
+    });
   }
 
   // Open/Close Firebase Modal
@@ -4787,6 +4931,15 @@ async function initPujaApp() {
   await loadPhotos();
   await loadUpdates();
   await loadWishes();
+
+  try {
+    const savedDeity = await window.pujaDB.getDeityPhoto();
+    if (savedDeity && deityMainImg) {
+      deityMainImg.src = savedDeity;
+    }
+  } catch (err) {
+    console.warn('Deity load error:', err);
+  }
 
   const initialDiyas = await window.pujaDB.getCounter('diyas_lit', 142);
   state.diyasLit = initialDiyas;
