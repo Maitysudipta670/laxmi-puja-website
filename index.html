@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও মিনি স্পোর্টস</title>
+  <title>আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</title>
   
   <!-- Google Fonts for Festive Elegance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1325,9 +1325,9 @@ body {
     </div>
 
     <h1 class="puja-title">শ্রী শ্রী মহালক্ষ্মী পূজা</h1>
-    <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক মিনি স্পোর্টস</div>
+    <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</div>
     <p class="puja-tagline">
-      এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের মিনি স্পোর্টস এর মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
+      এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
     </p>
 
     <!-- Quick Audio & Action Bar -->
@@ -1383,7 +1383,7 @@ body {
 
   <!-- Admin Active Banner (Only shown when Admin is logged in) -->
   <div id="admin-active-banner" style="display: none; background: #fff8e1; border: 1px solid #ffd54f; border-radius: 8px; padding: 10px 16px; margin: 0 auto 1.5rem; max-width: 1240px; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #5d4037;">
-    <span>👑 <strong>আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছতে পারবেন।</span>
+    <span>👑 <strong>আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন, প্রতিমা ছবি বদলাতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছতে পারবেন।</span>
     <button class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem; background: #8b1320; color: #fff;" onclick="document.getElementById('admin-status-pill').click()">
       লগআউট (Logout)
     </button>
@@ -1406,7 +1406,7 @@ body {
             📷 Explore Photo Gallery
           </button>
           <button class="btn-primary" onclick="switchTab('updates')">
-            🕒 View Tithi & Sports Schedule
+            🕒 View Tithi & Event Schedule
           </button>
         </div>
       </div>
@@ -1432,6 +1432,17 @@ body {
               class="deity-image"
               id="deity-main-img"
             />
+          </div>
+
+          <!-- Admin Only Virtual Darshan Photo Controls (Public has NO option) -->
+          <div id="darshan-admin-controls" style="display: none; margin-top: 10px; margin-bottom: 8px; gap: 8px; justify-content: center; flex-wrap: wrap;">
+            <input type="file" id="darshan-photo-input" accept="image/*" style="display: none;" />
+            <button type="button" class="pill-btn" id="btn-change-darshan-photo" style="background: #ffd700; color: #3e0409; font-weight: 600; font-size: 0.82rem; border-color: #ffd700;" title="Change Altar Pratima Photo (Admin Only)">
+              📷 প্রতিমা ছবি আপলোড করুন
+            </button>
+            <button type="button" class="pill-btn" id="btn-reset-darshan-photo" style="background: #7a1b24; color: #fff; font-size: 0.82rem; border-color: #5c0b15;" title="Reset Altar Pratima Photo (Admin Only)">
+              🗑️ ছবি মুছুন / রিসেট
+            </button>
           </div>
 
           <!-- Altar Flickering Flame & Diya -->
@@ -1491,7 +1502,7 @@ body {
 
             <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🏆 বার্ষিক মিনি স্পোর্টস:</span>
+                <span>🏆 বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান:</span>
                 <strong>সকাল ৮:৩০ AM</strong>
               </li>
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
@@ -1503,7 +1514,7 @@ body {
                 <strong>০৯:৩০ PM onwards</strong>
               </li>
               <li style="display: flex; justify-content: space-between;">
-                <span>🥇 স্পোর্টস প্রাইজ বিতরণ:</span>
+                <span>🥇 সাংস্কৃতিক ও ক্রীড়া পুরস্কার বিতরণী:</span>
                 <strong>পূজার দিন সন্ধ্যায়</strong>
               </li>
             </ul>
@@ -1537,7 +1548,7 @@ body {
               <span class="update-badge badge-urgent">Priority</span>
             </div>
             <p style="font-size: 0.88rem; color: #493338; line-height: 1.5;">
-              সাধারণ ভক্ত ও সদস্যরা পুজো ও মিনি স্পোর্টসের ছবি আপলোড করতে পারবেন। গুরুত্বপূর্ণ নোটিশ ও আপডেট শুধুমাত্র ক্লাব কর্তৃপক্ষ প্রকাশ করবে।
+              সাধারণ ভক্ত ও সদস্যরা পুজো ও ক্রীড়া-সাংস্কৃতিক অনুষ্ঠানের ছবি আপলোড করতে পারবেন। গুরুত্বপূর্ণ নোটিশ ও আপডেট শুধুমাত্র ক্লাব কর্তৃপক্ষ প্রকাশ করবে।
             </p>
             <button class="btn-primary" style="margin-top: 0.75rem; padding: 6px 14px; font-size: 0.82rem;" onclick="switchTab('updates')">
               Read All Updates &rarr;
@@ -1554,8 +1565,8 @@ body {
     <section class="tab-pane" id="pane-gallery">
       <div class="section-banner">
         <div>
-          <h2>আমফান (N.S.C.C) ফটো গ্যালারি | Puja & Mini Sports Album</h2>
-          <p>পূজার প্রতিমা, মণ্ডপ সজ্জা এবং ক্লাবের বার্ষিক মিনি স্পোর্টসের স্মরণীয় মুহূর্তসমূহ। ভক্তরা ছবি যোগ করতে পারেন।</p>
+          <h2>আমফান (N.S.C.C) ফটো গ্যালারি | Puja & Cultural Album</h2>
+          <p>পূজার প্রতিমা, মণ্ডপ সজ্জা এবং ক্লাবের বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের স্মরণীয় মুহূর্তসমূহ। ভক্তরা ছবি যোগ করতে পারেন।</p>
         </div>
         <button class="btn-primary" id="btn-open-upload-modal">
           📸 Upload Photo (ছবি আপলোড করুন)
@@ -1565,7 +1576,7 @@ body {
       <div class="gallery-controls">
         <div class="category-chips" id="photo-chips">
           <button class="chip-btn active" data-category="all">All Photos</button>
-          <button class="chip-btn" data-category="🏆 ক্লাব মিনি স্পোর্টস">🏆 ক্লাব মিনি স্পোর্টস</button>
+          <button class="chip-btn" data-category="🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান">🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</button>
           <button class="chip-btn" data-category="Maa Lakshmi Idol / Pratima">প্রতিমা (Idol)</button>
           <button class="chip-btn" data-category="Mandap & Pandal">মণ্ডপ (Mandap)</button>
           <button class="chip-btn" data-category="Alpona Designs">আলপনা (Alpona)</button>
@@ -1580,7 +1591,7 @@ body {
             type="text" 
             id="photo-search-input" 
             class="gallery-search-input" 
-            placeholder="Search photos, sports, titles..." 
+            placeholder="Search photos, sports, cultural events..." 
           />
         </div>
       </div>
@@ -1594,8 +1605,8 @@ body {
     <section class="tab-pane" id="pane-updates">
       <div class="section-banner">
         <div>
-          <h2>আমফান (এন.এস.সি.সি) পূজা ও মিনি স্পোর্টস নোটিশ বোর্ড</h2>
-          <p>শুধুমাত্র ক্লাবের গুরুত্বপূর্ণ ঘোষণা: পূজা নির্ঘণ্ট, ভোগ বিতরণ ও মিনি স্পোর্টস সংক্রান্ত আপডেট।</p>
+          <h2>আমফান (এন.এস.সি.সি) পূজা ও ক্রীড়া-সাংস্কৃতিক নোটিশ বোর্ড</h2>
+          <p>শুধুমাত্র ক্লাবের গুরুত্বপূর্ণ ঘোষণা: পূজা নির্ঘণ্ট, ভোগ বিতরণ ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান সংক্রান্ত আপডেট।</p>
         </div>
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
           <button class="btn-primary" id="btn-open-update-modal" style="display: none;">
@@ -1610,7 +1621,7 @@ body {
       <div class="updates-controls">
         <div class="category-chips" id="update-chips">
           <button class="chip-btn active" data-category="all">All Updates</button>
-          <button class="chip-btn" data-category="cultural">🏆 মিনি স্পোর্টস ও সাংস্কৃতিক</button>
+          <button class="chip-btn" data-category="cultural">🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</button>
           <button class="chip-btn" data-category="schedule">🕒 পূজা সময়সূচী</button>
           <button class="chip-btn" data-category="bhog">🍲 ভোগ ও প্রসাদ</button>
           <button class="chip-btn" data-category="urgent">🔴 জরুরি ঘোষণা</button>
@@ -1833,13 +1844,13 @@ body {
 
         <div class="form-group">
           <label class="form-label" for="photo-title-input">Photo Title *</label>
-          <input type="text" id="photo-title-input" class="form-input" placeholder="e.g. আমফান মিনি স্পোর্টস ১০০মি দৌড় প্রতিযোগিতা" required />
+          <input type="text" id="photo-title-input" class="form-input" placeholder="e.g. আমফান বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান" required />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="photo-category-input">Category *</label>
           <select id="photo-category-input" class="form-select">
-            <option value="🏆 ক্লাব মিনি স্পোর্টস">🏆 ক্লাব মিনি স্পোর্টস (Club Mini Sports)</option>
+            <option value="🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান">🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান (Sports & Cultural Events)</option>
             <option value="Maa Lakshmi Idol / Pratima">প্রতিমা (Maa Lakshmi Idol / Pratima)</option>
             <option value="Mandap & Pandal">মণ্ডপ (Mandap & Pandal)</option>
             <option value="Alpona Designs">আলপনা (Alpona Designs)</option>
@@ -1861,7 +1872,7 @@ body {
         </div>
 
         <div style="font-size: 0.8rem; color: #777; margin-bottom: 1rem; background: #faf5eb; padding: 8px 12px; border-radius: 6px;">
-          ℹ️ সাধারণ ভক্ত ও সদস্যরা পুজো, মণ্ডপ ও মিনি স্পোর্টসের ছবি আপলোড করতে পারেন। আপলোড করা ছবি মোছার অধিকার শুধুমাত্র Amfan (N.S.C.C) ক্লাবের অ্যাডমিনের কাছে সংরক্ষিত।
+          ℹ️ সাধারণ ভক্ত ও সদস্যরা পুজো, মণ্ডপ ও ক্রীড়া-সাংস্কৃতিক অনুষ্ঠানের ছবি আপলোড করতে পারেন। আপলোড করা ছবি মোছার অধিকার শুধুমাত্র Amfan (N.S.C.C) ক্লাবের অ্যাডমিনের কাছে সংরক্ষিত।
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -1932,14 +1943,14 @@ body {
       <form id="update-post-form">
         <div class="form-group">
           <label class="form-label" for="update-title-input">নোটিশ শিরোনাম / Headline *</label>
-          <input type="text" id="update-title-input" class="form-input" placeholder="e.g. আমফান মিনি স্পোর্টস ফলাফল ও ট্রফি বিতরণী" required />
+          <input type="text" id="update-title-input" class="form-input" placeholder="e.g. আমফান ক্রীড়া ও সাংস্কৃতিক প্রতিযোগিতা ফলাফল ও ট্রফি বিতরণী" required />
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div class="form-group">
             <label class="form-label" for="update-category-input">ক্যাটাগরি *</label>
             <select id="update-category-input" class="form-select">
-              <option value="cultural">🏆 মিনি স্পোর্টস ও সাংস্কৃতিক</option>
+              <option value="cultural">🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</option>
               <option value="schedule">🕒 পূজা সময়সূচী ও নির্ঘণ্ট</option>
               <option value="bhog">🍲 ভোগ ও প্রসাদ বিতরণ</option>
               <option value="urgent">🔴 জরুরি ঘোষণা</option>
@@ -2081,9 +2092,16 @@ const firebaseConfig = {
 
       <form id="admin-login-form">
         <div class="form-group">
-          <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret PIN *</label>
-          <input type="password" id="admin-pin-input" class="form-input" placeholder="ডিফল্ট পিন: 1234" required />
-          <small style="color: #888; font-size: 0.78rem;">ডিফল্ট পিন: <strong>1234</strong></small>
+          <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret Password *</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="password" id="admin-pin-input" class="form-input" placeholder="ডিফল্ট পাসওয়ার্ড: 24689011" style="flex: 1;" required />
+            <button type="button" id="btn-toggle-pin-visibility" class="pill-btn" style="padding: 10px 14px; font-size: 0.82rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
+              👁️ পাসওয়ার্ড দেখুন
+            </button>
+          </div>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: #5d4037; background: #fff8e1; border: 1px solid #ffe082; padding: 8px 12px; border-radius: 6px;">
+            🔑 <strong>ডিফল্ট অ্যাডমিন পাসওয়ার্ড:</strong> <span style="font-family: monospace; font-size: 1.05rem; color: #8b1320; font-weight: bold; letter-spacing: 1px;">24689011</span>
+          </div>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.25rem;">
@@ -2106,7 +2124,7 @@ const firebaseConfig = {
     <div class="footer-content">
       <div class="alpona-border footer-alpona" aria-hidden="true"></div>
       <h3 style="font-family: var(--font-bengali), var(--font-heading), sans-serif; color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
-        আমফান (N.S.C.C) কোজাগরী মহালক্ষ্মী পূজা ও মিনি স্পোর্টস
+        আমফান (N.S.C.C) কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান
       </h3>
       <p style="font-family: var(--font-bengali), sans-serif; color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
         "ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"
@@ -3321,10 +3339,10 @@ class PujaDB {
           },
           {
             id: 'photo_seed_sports_1',
-            title: 'আমফান (N.S.C.C) বার্ষিক মিনি স্পোর্টস প্রতিযোগিতা',
-            category: '🏆 ক্লাব মিনি স্পোর্টস',
-            photographer: 'Amfan (N.S.C.C) স্পোর্টস সেল',
-            caption: 'পাড়ার কচিকাঁচাদের নিয়ে আয়োজিত জমজমাট বাৎসরিক মিনি স্পোর্টস ও দৌড় প্রতিযোগিতা। বিজয়ীদের পুজো মণ্ডপে পুরস্কৃত করা হবে।',
+            title: 'আমফান (N.S.C.C) বার্ষিক ক্রীড়া ও সাংস্কৃতিক প্রতিযোগিতা',
+            category: '🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান',
+            photographer: 'Amfan (N.S.C.C) ক্রীড়া ও সাংস্কৃতিক বিভাগ',
+            caption: 'পাড়ার কচিকাঁচাদের নিয়ে আয়োজিত জমজমাট বাৎসরিক ক্রীড়া ও সাংস্কৃতিক প্রতিযোগিতা ও অনুষ্ঠান। বিজয়ীদের পুজো মণ্ডপে পুরস্কৃত করা হবে।',
             imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80',
             timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
             likes: 72
@@ -3338,14 +3356,14 @@ class PujaDB {
         const seedUpdates = [
           {
             id: 'update_seed_sports_1',
-            title: '🏆 আমফান (N.S.C.C) ক্লাব মিনি স্পোর্টস সময়সূচী ও তালিকা',
+            title: '🏆 আমফান (N.S.C.C) ক্লাব বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান সময়সূচী',
             category: 'cultural',
             priority: 'urgent',
             isPinned: true,
-            author: 'Amfan (N.S.C.C) স্পোর্টস কমিটি',
+            author: 'Amfan (N.S.C.C) ক্রীড়া ও সাংস্কৃতিক কমিটি',
             body: `আমফান (N.S.C.C) ক্লাবের সকল সদস্য ও পাড়াবাসীদের জানানো যাচ্ছে:
-আমাদের বার্ষিক মিনি স্পোর্টস প্রতিযোগিতা অনুষ্ঠিত হবে!
-• ইভেন্টস: ১০০মি ও ৫০মি দৌড়, বিস্কুট রেস, লেবু-চামচ ব্যালেন্স দৌড়, ও বড়দের মিউজিক্যাল চেয়ার।
+আমাদের বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান অনুষ্ঠিত হবে!
+• ইভেন্টস: বিভিন্ন বয়সভিত্তিক দৌড়, বিস্কুট রেস, লেবু-চামচ ব্যালেন্স দৌড়, চিত্রাঙ্কন ও সাংস্কৃতিক পরিবেশনা।
 • রিপোর্টিং টাইম: সকাল ৮:৩০ AM ক্লাব প্রাঙ্গণে।
 • বিশেষ দ্রষ্টব্য: বিজয়ী প্রতিযোগীদের কোজাগরী লক্ষ্মী পূজার দিন সন্ধ্যায় মণ্ডপ মঞ্চে মেডেল ও ট্রফি প্রদান করা হবে।`,
             timestamp: new Date().toISOString()
@@ -3515,6 +3533,15 @@ async function initPujaApp() {
   const publicNoticeTag = document.getElementById('public-notice-tag');
   const btnOpenUpdateModal = document.getElementById('btn-open-update-modal');
   const adminBanner = document.getElementById('admin-active-banner');
+  const btnTogglePinVisibility = document.getElementById('btn-toggle-pin-visibility');
+
+  // Virtual Darshan Deity Elements (Admin Only Change/Delete)
+  const deityMainImg = document.getElementById('deity-main-img');
+  const darshanAdminControls = document.getElementById('darshan-admin-controls');
+  const darshanPhotoInput = document.getElementById('darshan-photo-input');
+  const btnChangeDarshanPhoto = document.getElementById('btn-change-darshan-photo');
+  const btnResetDarshanPhoto = document.getElementById('btn-reset-darshan-photo');
+  const DEFAULT_DEITY_URL = 'https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1200&q=85';
 
   // Stats Elements
   const statPhotos = document.getElementById('stat-photos');
@@ -4295,6 +4322,12 @@ async function initPujaApp() {
     });
   }
 
+  // Load saved deity photo if set by Admin
+  const savedDeityPhoto = localStorage.getItem('puja_deity_photo');
+  if (savedDeityPhoto && deityMainImg) {
+    deityMainImg.src = savedDeityPhoto;
+  }
+
   // ==========================================================
   // AMFAN (N.S.C.C) CLUB ADMIN MANAGEMENT
   // ==========================================================
@@ -4309,6 +4342,7 @@ async function initPujaApp() {
       if (btnOpenUpdateModal) btnOpenUpdateModal.style.display = 'inline-flex';
       if (publicNoticeTag) publicNoticeTag.style.display = 'none';
       if (adminBanner) adminBanner.style.display = 'flex';
+      if (darshanAdminControls) darshanAdminControls.style.display = 'flex';
     } else {
       if (adminStatusPill) {
         adminStatusPill.innerHTML = `👑 ক্লাবের অ্যাডমিন`;
@@ -4319,6 +4353,7 @@ async function initPujaApp() {
       if (btnOpenUpdateModal) btnOpenUpdateModal.style.display = 'none';
       if (publicNoticeTag) publicNoticeTag.style.display = 'inline-block';
       if (adminBanner) adminBanner.style.display = 'none';
+      if (darshanAdminControls) darshanAdminControls.style.display = 'none';
     }
   }
 
@@ -4344,12 +4379,65 @@ async function initPujaApp() {
     });
   }
 
+  // Admin PIN Visibility Toggle
+  if (btnTogglePinVisibility && adminPinInput) {
+    btnTogglePinVisibility.addEventListener('click', () => {
+      if (adminPinInput.type === 'password') {
+        adminPinInput.type = 'text';
+        btnTogglePinVisibility.innerHTML = '🙈 পাসওয়ার্ড লুকান';
+      } else {
+        adminPinInput.type = 'password';
+        btnTogglePinVisibility.innerHTML = '👁️ পাসওয়ার্ড দেখুন';
+      }
+    });
+  }
+
+  // Virtual Darshan Photo Handlers (Admin Only)
+  if (btnChangeDarshanPhoto && darshanPhotoInput) {
+    btnChangeDarshanPhoto.addEventListener('click', () => {
+      darshanPhotoInput.click();
+    });
+
+    darshanPhotoInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target.result;
+        try {
+          localStorage.setItem('puja_deity_photo', dataUrl);
+          if (deityMainImg) deityMainImg.src = dataUrl;
+          showToast('🪔 ভার্চুয়াল দর্শনের প্রতিমা ছবি সফলভাবে পরিবর্তন করা হয়েছে!');
+          window.pujaAudio.playTempleBell();
+        } catch (err) {
+          console.warn('Storage limit for local image:', err);
+          if (deityMainImg) deityMainImg.src = dataUrl;
+          showToast('🪔 প্রতিমা ছবি আপডেট করা হয়েছে!');
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (btnResetDarshanPhoto) {
+    btnResetDarshanPhoto.addEventListener('click', () => {
+      if (confirm('ভার্চুয়াল দর্শনের প্রতিমা ছবি মুছে আসল ছবিতে ফিরিয়ে আনতে চান?')) {
+        localStorage.removeItem('puja_deity_photo');
+        if (deityMainImg) deityMainImg.src = DEFAULT_DEITY_URL;
+        showToast('🗑️ প্রতিমা ছবি মুছে আসল ছবিতে রিসেট করা হয়েছে।');
+      }
+    });
+  }
+
   if (adminLoginForm) {
     adminLoginForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPin = (adminPinInput ? adminPinInput.value.trim() : '');
-      const validPin = localStorage.getItem('puja_admin_pin') || '1234';
-      if (enteredPin === validPin) {
+      if (localStorage.getItem('puja_admin_pin') === '1234') {
+        localStorage.setItem('puja_admin_pin', '24689011');
+      }
+      const validPin = localStorage.getItem('puja_admin_pin') || '24689011';
+      if (enteredPin === validPin || enteredPin === '24689011') {
         sessionStorage.setItem('puja_is_admin', 'true');
         state.isAdmin = true;
         if (adminModal) adminModal.classList.remove('active');
@@ -4359,7 +4447,7 @@ async function initPujaApp() {
         window.pujaAudio.playTempleBell();
         showToast('👑 স্বাগতম! আমফান (N.S.C.C) অ্যাডমিন হিসেবে লগইন সফল। আপনি এখন আপডেট ও ফটো ম্যানেজ করতে পারবেন।');
       } else {
-        alert('❌ ভুল পিন! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। (ডিফল্ট পিন: 1234)');
+        alert('❌ ভুল পাসওয়ার্ড! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। (ডিফল্ট পাসওয়ার্ড: 24689011)');
       }
     });
   }
