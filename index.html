@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা | Kojagari Laxmi Puja Public Mandap & Photo Gallery</title>
+  
+  <!-- Google Fonts for Festive Elegance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
+</head>
+<body>
+
+  <!-- Festive Marigold Garland Toran -->
+  <div class="toran-garland" aria-hidden="true"></div>
+
+  <!-- Decorative Alpona Top Border -->
+  <div class="alpona-border" aria-hidden="true"></div>
+
+  <!-- Hero Header Section -->
+  <header class="header-hero">
+    <div class="hero-background-pattern" aria-hidden="true"></div>
+    <div class="hero-gold-glow" aria-hidden="true"></div>
+
+    <div class="puja-badge">
+      <span>🪔 শুভ কোজাগরী পূর্ণিমা</span>
+      <span>•</span>
+      <span>Kojagari Laxmi Puja</span>
+    </div>
+
+    <h1 class="puja-title">শ্রী শ্রী মহালক্ষ্মী পূজা</h1>
+    <div class="puja-bengali-title">এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে</div>
+    <p class="puja-tagline">
+      Welcome to our Community Mandap Portal. Explore our sacred Darshan, view public photos, 
+      share your festive moments, and stay updated with live tithi and bhog announcements.
+    </p>
+
+    <!-- Quick Audio & Action Bar -->
+    <div class="hero-action-pills">
+      <button class="pill-btn" id="btn-shankh" title="Blow Sacred Conch Shell">
+        🐚 শঙ্খধ্বনি (Shankha)
+      </button>
+      <button class="pill-btn" id="btn-bell" title="Ring Temple Brass Bell">
+        🔔 ঘণ্টা ধ্বনি (Bell)
+      </button>
+      <button class="pill-btn" id="btn-dhaak" title="Play Traditional Dhaak Rhythm">
+        🥁 Dhaak Beats (ঢাক)
+      </button>
+      <button class="pill-btn" id="btn-drone" title="Play Soothing Temple Drone">
+        🎶 Temple Chants (সুর)
+      </button>
+      <button class="pill-btn" id="btn-offer-flowers" title="Offer Flower Shower">
+        🌸 পুষ্পাঞ্জলি (Offer Flowers)
+      </button>
+      <div id="firebase-status-pill" class="pill-btn" style="background: rgba(255, 193, 7, 0.16); border-color: #ffd54f; cursor: pointer;" title="Google Firebase Cloud Server Configuration">
+        <span id="firebase-status-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ffc107;"></span>
+        <span id="firebase-status-text">🟡 Local Mode (Click to Connect Firebase)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-container" aria-label="Main Navigation">
+    <div class="nav-tabs">
+      <button class="tab-btn active" data-tab="darshan">
+        🪔 Virtual Darshan
+      </button>
+      <button class="tab-btn" data-tab="gallery">
+        📸 Photo Gallery
+      </button>
+      <button class="tab-btn" data-tab="updates">
+        📢 Puja Updates
+      </button>
+      <button class="tab-btn" data-tab="mantras">
+        📜 Mantras & Panchali
+      </button>
+      <button class="tab-btn" data-tab="wishes">
+        💌 Wishes & Pranam
+      </button>
+      <button class="tab-btn" data-tab="manage">
+        ⚙️ Backup & Data
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- ========================================================
+         TAB 1: VIRTUAL MANDAP & DARSHAN
+         ======================================================== -->
+    <section class="tab-pane active" id="pane-darshan">
+      <div class="section-banner">
+        <div>
+          <h2>পবিত্র প্রতিমা দর্শন ও আরতি</h2>
+          <p>Experience the divine sanctum of Maa Mahalakshmi from anywhere in the world.</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn-gold" onclick="switchTab('gallery')">
+            📷 Explore Photo Gallery
+          </button>
+          <button class="btn-primary" onclick="switchTab('updates')">
+            🕒 View Tithi Timings
+          </button>
+        </div>
+      </div>
+
+      <div class="mandap-grid">
+        <!-- Main Altar -->
+        <div class="mandap-altar">
+          <div class="altar-arch"></div>
+          <div class="altar-halo"></div>
+
+          <h3 style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.5rem; margin-top: 0.5rem;">
+            শ্রী শ্রী লক্ষ্মী মাতা
+          </h3>
+          <p style="color: #ffdab9; font-size: 0.9rem; font-style: italic;">
+            "ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ"
+          </p>
+
+          <!-- Deity Frame -->
+          <div class="deity-frame">
+            <img 
+              src="https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1200&q=85" 
+              alt="Maa Lakshmi Pratima" 
+              class="deity-image"
+              id="deity-main-img"
+            />
+          </div>
+
+          <!-- Altar Flickering Flame & Diya -->
+          <div style="position: relative; display: inline-block; margin-bottom: 0.5rem;">
+            <div id="altar-diya-flame" style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 14px; height: 22px; background: radial-gradient(circle, #fff, #ffeb3b, #ff5722); border-radius: 50% 50% 20% 20%; box-shadow: 0 0 15px #ff9800; display: none;"></div>
+            <span style="font-size: 2.2rem; filter: drop-shadow(0 0 8px #ffb300);">🪔</span>
+          </div>
+
+          <!-- Auspicious Footprints (Lokkhir Paa) -->
+          <div class="lokkhir-paa-container" title="Lokkhir Paa (Divine Footprints entering the home)">
+            <svg class="footprint-svg" viewBox="0 0 40 50" fill="#ffd700">
+              <ellipse cx="20" cy="32" rx="12" ry="16"/>
+              <circle cx="9" cy="11" r="3.2"/>
+              <circle cx="16" cy="8" r="3.5"/>
+              <circle cx="23" cy="8" r="3.5"/>
+              <circle cx="30" cy="11" r="3.2"/>
+              <circle cx="20" cy="32" r="4" fill="#8b1320"/>
+            </svg>
+            <svg class="footprint-svg" viewBox="0 0 40 50" fill="#ffd700">
+              <ellipse cx="20" cy="32" rx="12" ry="16"/>
+              <circle cx="10" cy="11" r="3.2"/>
+              <circle cx="17" cy="8" r="3.5"/>
+              <circle cx="24" cy="8" r="3.5"/>
+              <circle cx="31" cy="11" r="3.2"/>
+              <circle cx="20" cy="32" r="4" fill="#8b1320"/>
+            </svg>
+          </div>
+
+          <p style="font-size: 0.85rem; color: #ffecd1; max-width: 400px; margin: 0.5rem auto 1rem;">
+            Light a sacred diya and shower flower petals to receive the eternal blessings of prosperity and serenity.
+          </p>
+
+          <!-- Altar Ritual Buttons -->
+          <div class="altar-actions">
+            <button class="ritual-btn" id="btn-light-diya">
+              🪔 Light a Diya for Maa
+            </button>
+            <button class="ritual-btn" onclick="document.getElementById('btn-offer-flowers').click()">
+              🌸 Offer Pushpanjali
+            </button>
+          </div>
+        </div>
+
+        <!-- Altar Sidebar / Live Tithi & Statistics -->
+        <div class="altar-sidebar">
+          
+          <!-- Live Kojagari Clock Card -->
+          <div class="info-card">
+            <h3>🕒 Kojagari Purnima Live Status</h3>
+            <div class="tithi-clock">
+              <div style="font-size: 0.85rem; color: #7a4603; font-weight: 600; text-transform: uppercase;">
+                Current Mandap Time
+              </div>
+              <div class="tithi-clock-time" id="live-tithi-timer">--:--:--</div>
+              <div style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600; margin-top: 4px;">
+                🌕 Purnima Tithi is Active
+              </div>
+            </div>
+
+            <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
+                <span>✨ Nishita Muhurat:</span>
+                <strong>11:38 PM – 12:28 AM</strong>
+              </li>
+              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
+                <span>🔥 Sandhya Aarti:</span>
+                <strong>07:15 PM Daily</strong>
+              </li>
+              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
+                <span>🍲 Mahabhog Prasad:</span>
+                <strong>09:30 PM Onwards</strong>
+              </li>
+              <li style="display: flex; justify-content: space-between;">
+                <span>🌙 "Ke Jagore" Vigil:</span>
+                <strong>All Night Long</strong>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mandap Live Statistics -->
+          <div class="info-card">
+            <h3>📊 Public Mandap Activity</h3>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <span class="stat-number" id="stat-diyas">142</span>
+                <span class="stat-label">Diyas Lit</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="stat-photos">0</span>
+                <span class="stat-label">Photos Saved</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="stat-updates">0</span>
+                <span class="stat-label">Live Notices</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="stat-wishes">0</span>
+                <span class="stat-label">Pranam Wishes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Notice Snippet Card -->
+          <div class="info-card" style="background: linear-gradient(135deg, #fff7f7 0%, #ffffff 100%); border-left: 4px solid var(--color-primary);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+              <strong style="color: var(--color-primary); font-size: 0.92rem;">📢 Latest Committee Announcement</strong>
+              <span class="update-badge badge-urgent">Priority</span>
+            </div>
+            <p style="font-size: 0.88rem; color: #493338; line-height: 1.5;">
+              Devotees can upload and view high-resolution mandap photos, alpona art, and bhog offerings directly to our public gallery.
+            </p>
+            <button class="btn-primary" style="margin-top: 0.75rem; padding: 6px 14px; font-size: 0.82rem;" onclick="switchTab('updates')">
+              Read All Updates &rarr;
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 2: PHOTO GALLERY (Easily save & view public photos)
+         ======================================================== -->
+    <section class="tab-pane" id="pane-gallery">
+      <div class="section-banner">
+        <div>
+          <h2>পাবলিক ফটো গ্যালারি | Puja Photo Album</h2>
+          <p>Easily save and share high-resolution photos of Maa Lakshmi, Mandap decoration, Alpona, and Bhog offerings for everyone to admire.</p>
+        </div>
+        <button class="btn-primary" id="btn-open-upload-modal">
+          📸 Upload Photo (ছবি আপলোড)
+        </button>
+      </div>
+
+      <!-- Gallery Controls & Category Filter -->
+      <div class="gallery-controls">
+        <div class="category-chips" id="photo-chips">
+          <button class="chip-btn active" data-category="all">All Photos</button>
+          <button class="chip-btn" data-category="Maa Lakshmi Idol / Pratima">প্রতিমা (Idol)</button>
+          <button class="chip-btn" data-category="Mandap & Pandal">মণ্ডপ (Mandap)</button>
+          <button class="chip-btn" data-category="Alpona Designs">আলপনা (Alpona)</button>
+          <button class="chip-btn" data-category="Bhog & Prasad">ভোগ ও প্রসাদ (Bhog)</button>
+          <button class="chip-btn" data-category="Evening Aarti & Dhunuchi">আরতি (Aarti)</button>
+          <button class="chip-btn" data-category="Family & Community">পরিবার ও ভক্তবৃন্দ</button>
+        </div>
+
+        <div class="gallery-search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="photo-search-input" 
+            class="gallery-search-input" 
+            placeholder="Search photos, titles, photographers..." 
+          />
+        </div>
+      </div>
+
+      <!-- Photo Cards Grid -->
+      <div class="photo-grid" id="photo-grid">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 3: PUJA UPDATES & NOTICES ("diffarent types of update")
+         ======================================================== -->
+    <section class="tab-pane" id="pane-updates">
+      <div class="section-banner">
+        <div>
+          <h2>পূজা আপডেট ও বিজ্ঞপ্তি বোর্ড | Live Puja Updates</h2>
+          <p>Real-time bulletins across multiple categories: Tithi Schedules, Mahabhog Distribution, Urgent Alerts, and Cultural Programmes.</p>
+        </div>
+        <button class="btn-primary" id="btn-open-update-modal">
+          📢 Post New Update (বিজ্ঞপ্তি দিন)
+        </button>
+      </div>
+
+      <!-- Updates Controls & Category Filters -->
+      <div class="updates-controls">
+        <div class="category-chips" id="update-chips">
+          <button class="chip-btn active" data-category="all">All Updates</button>
+          <button class="chip-btn" data-category="schedule">🕒 Tithi & Schedule</button>
+          <button class="chip-btn" data-category="bhog">🍲 Bhog & Prasad</button>
+          <button class="chip-btn" data-category="urgent">🔴 Urgent Notices</button>
+          <button class="chip-btn" data-category="cultural">🎭 Cultural & Competitions</button>
+          <button class="chip-btn" data-category="general">📢 General Info</button>
+        </div>
+
+        <div class="gallery-search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="update-search-input" 
+            class="gallery-search-input" 
+            placeholder="Search notices, schedules, items..." 
+          />
+        </div>
+      </div>
+
+      <!-- Updates Stream List -->
+      <div class="updates-list" id="updates-list">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 4: MANTRAS, PANCHALI & RITUALS
+         ======================================================== -->
+    <section class="tab-pane" id="pane-mantras">
+      <div class="section-banner">
+        <div>
+          <h2>মা লক্ষ্মীর ধ্যান, প্রণাম ও পুষ্পাঞ্জলি মন্ত্র</h2>
+          <p>Traditional prayers and Kojagari Lokkhi Panchali verses in authentic Bengali script with meanings.</p>
+        </div>
+      </div>
+
+      <div class="mantra-grid">
+        <!-- Pranam Mantra -->
+        <div class="mantra-card">
+          <h3>🙏 শ্রী লক্ষ্মী প্রণাম মন্ত্র (Laxmi Pranam Mantra)</h3>
+          <p style="font-size: 0.88rem; color: #777;">Recite with folded hands facing North or East.</p>
+          <div class="mantra-bengali-script">
+            ওঁ নমস্তে সর্ব্বগেবানাং বরদাসি হরিপ্রিয়ে।<br>
+            যা গতিস্ত্বৎ প্রপন্নানাং সা মে ভূয়াৎ ত্বদর্চ্চনাত্ ॥
+          </div>
+          <p class="mantra-translation">
+            <strong>অর্থ:</strong> হে বিষ্ণুপ্রিয়ে, আপনি সকল দেবতাদের বরদায়িনী। আপনার চরণে শরণাগত ভক্তের যে পরম গতি হয়, আপনার পূজার মাধ্যমে আমারও সেই শুভ গতি হোক।
+          </p>
+        </div>
+
+        <!-- Pushpanjali Mantra -->
+        <div class="mantra-card">
+          <h3>🌸 পুষ্পাঞ্জলি মন্ত্র (Pushpanjali Mantra)</h3>
+          <p style="font-size: 0.88rem; color: #777;">Chant while offering fresh lotus and bael leaves.</p>
+          <div class="mantra-bengali-script">
+            ওঁ নমস্তে সর্ব্বদেবেশ্বরী নমস্তে বিষ্ণুবল্লভে।<br>
+            ত্রাহি মাং সর্ব্বপাপেভ্যো মহালক্ষ্মী নমোঽস্তু তে ॥
+          </div>
+          <p class="mantra-translation">
+            <strong>অর্থ:</strong> হে সর্বদেবেশ্বরী, হে বিষ্ণুবল্লভা, আমাকে সমস্ত পাপ ও অমঙ্গল হতে রক্ষা করুন। হে মহালক্ষ্মী, আপনাকে আমার ভক্তিপূর্ণ প্রণাম জানাই।
+          </p>
+        </div>
+
+        <!-- Dhyan Mantra -->
+        <div class="mantra-card">
+          <h3>🪔 শ্রী লক্ষ্মী ধ্যান মন্ত্র (Laxmi Dhyan Mantra)</h3>
+          <p style="font-size: 0.88rem; color: #777;">Meditate on the golden resplendent form seated on a lotus.</p>
+          <div class="mantra-bengali-script">
+            ওঁ পাশাক্ষমালিকাম্ভোজ-সৃণিভিৰ্য্যা চ সৌম্যয়া।<br>
+            পদ্মাসনস্থাং ধ্যায়েচ্চ শ্রিয়ং ত্রৈলোক্যমাতরম্ ॥
+          </div>
+          <p class="mantra-translation">
+            <strong>অর্থ:</strong> যিনি পাশ, অক্ষমালা, পদ্ম ও অঙ্কুশধারিণী, শান্তিময়ী, পদ্মাসনে উপবিষ্টা এবং ত্রিভুবনের পরম জননী, সেই লক্ষ্মীদেবীকে আমি ভক্তিভরে ধ্যান করি।
+          </p>
+        </div>
+
+        <!-- Kojagari Brotokatha / Panchali Essence -->
+        <div class="mantra-card">
+          <h3>📖 কোজাগরী ব্রতকথা ও পাঁচালীর মাহাত্ম্য</h3>
+          <p style="font-size: 0.88rem; color: #777;">The legend of Kojagari Purnima Night ("কে জাগোরে")</p>
+          <div class="mantra-bengali-script" style="font-size: 1.05rem;">
+            "নিশীথে বরদা লক্ষ্মীঃ জাগরূকেষু তিষ্ঠতি।"<br>
+            কোজাগরী রাতে পূর্ণিমার নির্মল চাঁদের আলোয় মা লক্ষ্মী মর্ত্যে নেমে এসে দ্বারে দ্বারে জিজ্ঞাসা করেন—"কে জাগোরে?"। যাঁরা ভক্তিভরে প্রদীপ জ্বালিয়ে ব্রত পালন করেন, মা তাঁদের চিরকল্যাণ ও সমৃদ্ধি দান করেন।
+          </div>
+          <p class="mantra-translation">
+            May the blessings of Maa Lakshmi bring contentment, purity, knowledge, and wealth into every home.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 5: WISHES & PRANAM GUESTBOOK
+         ======================================================== -->
+    <section class="tab-pane" id="pane-wishes">
+      <div class="section-banner">
+        <div>
+          <h2>শুভেচ্ছা ও প্রণাম বার্তা | Wishes & Pranam Wall</h2>
+          <p>Leave your devotional greetings and prayers for family and the entire community.</p>
+        </div>
+      </div>
+
+      <div class="wishes-layout">
+        <!-- Form -->
+        <div class="wish-form-card">
+          <h3 style="font-family: var(--font-heading); color: var(--color-primary); margin-bottom: 1rem;">
+            ✍️ Leave Your Pranam
+          </h3>
+          <form id="wish-form">
+            <div class="form-group">
+              <label class="form-label" for="wish-name-input">Your Name *</label>
+              <input type="text" id="wish-name-input" class="form-input" placeholder="e.g. Sourav & Family" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wish-location-input">City / Neighborhood</label>
+              <input type="text" id="wish-location-input" class="form-input" placeholder="e.g. Kolkata, WB" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wish-message-input">Your Festive Prayer / Message *</label>
+              <textarea id="wish-message-input" rows="4" class="form-textarea" placeholder="শুভ কোজাগরী লক্ষ্মী পূজার আন্তরিক শুভেচ্ছা! May Maa bless all..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              🙏 Post Auspicious Wish
+            </button>
+          </form>
+        </div>
+
+        <!-- Wall -->
+        <div class="wishes-wall" id="wishes-wall">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         TAB 6: DATA MANAGEMENT & BACKUP
+         ======================================================== -->
+    <section class="tab-pane" id="pane-manage">
+      <div class="section-banner">
+        <div>
+          <h2>ডেটা ব্যাকআপ ও ব্যবস্থাপনা | Data & Backup Controls</h2>
+          <p>Export all your uploaded photos and updates as a portable backup file, or restore them anytime.</p>
+        </div>
+      </div>
+
+      <div style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Google Firebase Cloud Server Card -->
+        <div class="info-card" style="border: 2px solid var(--color-gold); background: linear-gradient(135deg, #fffcf5 0%, #fff6e0 100%);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
+            <h3 style="margin-bottom: 0; color: var(--color-primary-dark);">🔥 Google Firebase Cloud Server (For Localhost & Public Sync)</h3>
+            <span class="update-badge" style="background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9;">Real-Time Sync</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem; line-height: 1.5;">
+            Connect your local website to Google Firebase (Firestore Database) so that photos, updates, and likes sync in real-time between your localhost server and public visitors on any device!
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" id="btn-open-firebase-modal">
+              ⚙️ Configure Firebase Connection
+            </button>
+            <button class="btn-gold" id="btn-firebase-sync-local" style="display: none;">
+              ☁️ Upload Local Demo Data to Firebase
+            </button>
+            <button class="btn-primary" id="btn-firebase-disconnect" style="background: #7a1b24; border-color: #5c0b15; display: none;">
+              🔌 Disconnect Firebase
+            </button>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>💾 Export Full Database Backup</h3>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
+            Download all stored photos (with high-resolution images), multi-category updates, wishes, and stats into a single <code>.json</code> backup file. You can keep this on your laptop or transfer to another device.
+          </p>
+          <button class="btn-gold" id="btn-export-data">
+            📥 Download Complete Backup (.json)
+          </button>
+        </div>
+
+        <div class="info-card">
+          <h3>📤 Restore or Import Database</h3>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
+            Upload an existing backup <code>.json</code> file to restore all your previously saved photos and notices.
+          </p>
+          <input type="file" id="import-file-input" accept=".json" style="display: none;" />
+          <button class="btn-primary" id="btn-import-data">
+            📂 Choose Backup File to Import
+          </button>
+        </div>
+
+        <div class="info-card" style="border-left: 4px solid #b71c1c;">
+          <h3 style="color: #b71c1c;">🔄 Reset to Initial Sample Data</h3>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
+            Want to start fresh? Reset back to our curated Kojagari Laxmi Puja demo photos, realistic schedule bulletins, and festive wishes.
+          </p>
+          <button class="btn-primary" id="btn-reset-data" style="background: #b71c1c; border-color: #8b1320;">
+            ⚠️ Reset Sample Data
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MODAL 1: PHOTO UPLOAD (Easily save photo for view public)
+       ======================================================== -->
+  <div class="modal-overlay" id="upload-modal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="upload-modal-title">📸 Upload Photo for Public Gallery</h3>
+        <button class="modal-close-btn" id="btn-close-upload-modal">&times;</button>
+      </div>
+
+      <form id="photo-upload-form">
+        <!-- Dropzone -->
+        <div class="form-group">
+          <label class="form-label">Select Photo (ছবি নির্বাচন করুন) *</label>
+          <div class="file-dropzone" id="file-dropzone">
+            <div style="font-size: 2.2rem; margin-bottom: 0.4rem;">📷</div>
+            <p id="dropzone-text" style="font-size: 0.92rem; font-weight: 600; color: var(--color-primary);">
+              Click to browse or drag & drop photo here
+            </p>
+            <p style="font-size: 0.78rem; color: #888; margin-top: 4px;">Supports JPG, PNG, WebP (Automatically optimized)</p>
+            <input type="file" id="photo-file-input" accept="image/*" style="display: none;" />
+            <img id="file-preview" class="file-preview" alt="Preview" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="photo-title-input">Photo Title *</label>
+          <input type="text" id="photo-title-input" class="form-input" placeholder="e.g. Maa Lakshmi Sandhya Aarti with Diyas" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="photo-category-input">Category *</label>
+          <select id="photo-category-input" class="form-select">
+            <option value="Maa Lakshmi Idol / Pratima">প্রতিমা (Maa Lakshmi Idol / Pratima)</option>
+            <option value="Mandap & Pandal">মণ্ডপ (Mandap & Pandal)</option>
+            <option value="Alpona Designs">আলপনা (Alpona Designs)</option>
+            <option value="Bhog & Prasad">ভোগ ও প্রসাদ (Bhog & Prasad)</option>
+            <option value="Evening Aarti & Dhunuchi">আরতি ও ধুনুচি (Evening Aarti & Dhunuchi)</option>
+            <option value="Family & Community">পরিবার ও ভক্তবৃন্দ (Family & Community)</option>
+            <option value="General Puja Moments">অন্যান্য (General Puja Moments)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="photo-author-input">Photographer / Captured By</label>
+          <input type="text" id="photo-author-input" class="form-input" placeholder="Your name or family name (e.g. Soumyadip Maity)" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="photo-caption-input">Caption / Story</label>
+          <textarea id="photo-caption-input" rows="3" class="form-textarea" placeholder="Add a few auspicious words about this moment..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('upload-modal').classList.remove('active')">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary">
+            💾 Save & Publish to Gallery
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       MODAL 2: LIGHTBOX MODAL (Public photo viewing with zoom)
+       ======================================================== -->
+  <div class="modal-overlay" id="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="modal-card lightbox-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #2b0409; border-bottom: 1px solid #4a121b;">
+        <span id="lightbox-category" class="photo-category-badge" style="position: static;">Category</span>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="lightbox-download-btn" class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem;" title="Download Photo">
+            📥 Download
+          </button>
+          <button class="modal-close-btn" id="btn-close-lightbox" style="color: #fff;">&times;</button>
+        </div>
+      </div>
+
+      <div class="lightbox-img-wrapper" style="position: relative;">
+        <button id="lightbox-prev-btn" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: #fff; border: 1px solid var(--color-gold); width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 10;">&#10094;</button>
+        <img src="" id="lightbox-img" class="lightbox-img" alt="Enlarged Puja Photo" />
+        <button id="lightbox-next-btn" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: #fff; border: 1px solid var(--color-gold); width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 10;">&#10095;</button>
+      </div>
+
+      <div class="lightbox-details">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 0.5rem;">
+          <div>
+            <h3 id="lightbox-title" style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.3rem;"></h3>
+            <div style="font-size: 0.84rem; color: #ffecd1;">
+              <span id="lightbox-author"></span> • <span id="lightbox-time"></span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="lightbox-like-btn" class="btn-primary" style="padding: 6px 14px; font-size: 0.85rem;">
+              ❤️ Like
+            </button>
+            <button id="lightbox-delete-btn" class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem; background: #5c0b15;" title="Delete this photo">
+              🗑️
+            </button>
+          </div>
+        </div>
+        <p id="lightbox-caption" style="font-size: 0.95rem; color: #ffecd1; line-height: 1.5; margin-top: 0.4rem;"></p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       MODAL 3: POST UPDATE MODAL ("diffarent types of update")
+       ======================================================== -->
+  <div class="modal-overlay" id="update-modal" role="dialog" aria-modal="true" aria-labelledby="update-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="update-modal-title">📢 Post New Puja Update or Notice</h3>
+        <button class="modal-close-btn" id="btn-close-update-modal">&times;</button>
+      </div>
+
+      <form id="update-post-form">
+        <div class="form-group">
+          <label class="form-label" for="update-title-input">Update Headline / Title *</label>
+          <input type="text" id="update-title-input" class="form-input" placeholder="e.g. Mahabhog Distribution Time Shifted to 9:30 PM" required />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" for="update-category-input">Update Type *</label>
+            <select id="update-category-input" class="form-select">
+              <option value="schedule">🕒 Puja Schedule & Tithi</option>
+              <option value="bhog">🍲 Bhog & Prasad Details</option>
+              <option value="urgent">🔴 Urgent Announcement</option>
+              <option value="cultural">🎭 Cultural Programme & Competition</option>
+              <option value="general">📢 General Notice</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="update-priority-input">Priority</label>
+            <select id="update-priority-input" class="form-select">
+              <option value="normal">Normal</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent / Important</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="update-pin-input" style="width: 18px; height: 18px; accent-color: var(--color-primary);" />
+          <label for="update-pin-input" style="font-size: 0.9rem; font-weight: 500; cursor: pointer;">
+            📌 Pin this announcement to top of notice board
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="update-author-input">Issued By / Committee Member</label>
+          <input type="text" id="update-author-input" class="form-input" placeholder="e.g. Purohit Mahashay, Bhog Cell, Secretary" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="update-body-input">Announcement Details *</label>
+          <textarea id="update-body-input" rows="5" class="form-textarea" placeholder="Provide full details, timings, rules, or instructions..." required></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('update-modal').classList.remove('active')">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary">
+            📢 Publish Announcement
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 4: GOOGLE FIREBASE CLOUD SETUP MODAL
+       ======================================================== -->
+  <div class="modal-overlay" id="firebase-modal" role="dialog" aria-modal="true" aria-labelledby="fb-modal-title">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 id="fb-modal-title">🔥 Connect Google Firebase Cloud Server</h3>
+        <button class="modal-close-btn" id="btn-close-firebase-modal">&times;</button>
+      </div>
+
+      <div style="font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; line-height: 1.5; background: #fffdf7; border: 1px solid #edd7ba; border-radius: 8px; padding: 12px 16px;">
+        <strong>📋 Quick 3-Step Setup from Firebase Console:</strong>
+        <ol style="margin-left: 20px; margin-top: 6px;">
+          <li>Open <a href="https://console.firebase.google.com" target="_blank" style="color: var(--color-primary); font-weight: 600;">Google Firebase Console</a> &amp; create/open your project.</li>
+          <li>Add a Web App (click <strong>&lt;/&gt;</strong>) and copy the <code>firebaseConfig</code> code snippet.</li>
+          <li>Go to <strong>Build &rarr; Firestore Database &rarr; Create Database</strong> (Select <em>Test Mode</em> so read/write works).</li>
+        </ol>
+      </div>
+
+      <!-- Quick Paste Snippet Area -->
+      <div class="form-group">
+        <label class="form-label" for="fb-raw-snippet">⚡ Quick Paste (Firebase Config Snippet)</label>
+        <textarea id="fb-raw-snippet" rows="3" class="form-textarea" placeholder='Paste snippet from Firebase Console here, e.g.:
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  projectId: "laxmi-puja-2026",
+  ...
+};'></textarea>
+        <button type="button" class="btn-gold" id="btn-firebase-quick-parse" style="margin-top: 6px; padding: 6px 14px; font-size: 0.85rem;">
+          ✨ Auto-Extract Fields from Snippet
+        </button>
+      </div>
+
+      <div style="margin: 1.2rem 0; border-top: 1px dashed #edd7ba;"></div>
+
+      <!-- Manual Input Fields -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="form-group">
+          <label class="form-label" for="fb-api-key">API Key (apiKey) *</label>
+          <input type="text" id="fb-api-key" class="form-input" placeholder="AIzaSy..." />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fb-project-id">Project ID (projectId) *</label>
+          <input type="text" id="fb-project-id" class="form-input" placeholder="laxmi-puja-2026" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fb-auth-domain">Auth Domain</label>
+          <input type="text" id="fb-auth-domain" class="form-input" placeholder="project.firebaseapp.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fb-storage-bucket">Storage Bucket</label>
+          <input type="text" id="fb-storage-bucket" class="form-input" placeholder="project.appspot.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fb-messaging-id">Messaging Sender ID</label>
+          <input type="text" id="fb-messaging-id" class="form-input" placeholder="1234567890" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fb-app-id">App ID (appId)</label>
+          <input type="text" id="fb-app-id" class="form-input" placeholder="1:123456:web:..." />
+        </div>
+      </div>
+
+      <!-- Connection Test Status Box -->
+      <div id="firebase-test-status" style="display: none; padding: 10px 14px; border-radius: 6px; margin: 1rem 0; font-size: 0.88rem; line-height: 1.4;"></div>
+
+      <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn-gold" id="btn-firebase-test">
+          🧪 Test Connection from Localhost
+        </button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('firebase-modal').classList.remove('active')">
+            Close
+          </button>
+          <button type="button" class="btn-primary" id="btn-firebase-save">
+            💾 Save & Connect Cloud Server
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle Shower Canvas -->
+  <canvas id="flower-canvas" aria-hidden="true"></canvas>
+
+  <!-- Auspicious Footer -->
+  <footer class="puja-footer">
+    <div class="footer-content">
+      <div class="alpona-border footer-alpona" aria-hidden="true"></div>
+      <h3 style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
+        শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা
+      </h3>
+      <p style="font-family: var(--font-bengali); color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
+        "ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"
+      </p>
+      <p style="font-size: 0.85rem; color: #caa2a8;">
+        May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon you and your family.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Google Firebase SDKs (Official Compat SDK for browser/localhost) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
