@@ -260,6 +260,7 @@ body {
   display: flex;
   gap: 6px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: var(--shadow-lg);
   scrollbar-width: none;
 }
@@ -270,6 +271,7 @@ body {
 
 .tab-btn {
   flex: 1;
+  flex-shrink: 0;
   min-width: 130px;
   padding: 12px 14px;
   border: none;
@@ -755,6 +757,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   font-size: 0.8rem;
   color: #8c7377;
   padding-top: 0.75rem;
@@ -771,6 +775,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .photo-like-btn {
@@ -954,6 +959,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 0.8rem;
   padding-top: 0.6rem;
   border-top: 1px solid #f2e5d5;
@@ -1074,6 +1081,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   font-size: 0.8rem;
   color: #8c7377;
   padding-top: 0.5rem;
@@ -1282,23 +1291,372 @@ body {
   opacity: 0.6;
 }
 
-/* Responsive Tweaks */
-@media (max-width: 640px) {
+/* ==========================================================================
+   Comprehensive Mobile & Tablet Responsive Styles
+   Fixes all overlapping on phones: Virtual Darshan, Photo Gallery, Puja Updates,
+   Wishes, Navigation Tabs, and Hero Header.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Hero Header & Action Pills */
   .header-hero {
-    padding: 2rem 1rem;
+    padding: 1.8rem 1rem 2.2rem;
   }
+
+  .puja-title {
+    font-size: 1.8rem;
+    line-height: 1.25;
+    margin-bottom: 0.4rem;
+    word-break: break-word;
+  }
+
+  .puja-bengali-title {
+    font-size: 1.12rem;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+  }
+
+  .puja-tagline {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 1rem;
+    padding: 0 4px;
+  }
+
+  .hero-action-pills {
+    gap: 8px;
+    margin-top: 0.8rem;
+  }
+
+  .pill-btn {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    gap: 6px;
+  }
+
+  /* Navigation Bar - NO negative margin on mobile so it never overlaps hero pills */
+  .nav-container {
+    margin: 1rem auto 1.25rem;
+    padding: 0 0.75rem;
+  }
+
   .nav-tabs {
-    padding: 4px;
-    gap: 4px;
+    padding: 6px;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
+
   .tab-btn {
-    min-width: 100px;
-    padding: 8px 10px;
-    font-size: 0.85rem;
+    flex: 0 0 auto;
+    min-width: 105px;
+    padding: 8px 12px;
+    font-size: 0.84rem;
+    gap: 6px;
   }
-  .gallery-controls, .updates-controls {
+
+  /* Admin Banner on Mobile */
+  #admin-active-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin: 0 0.75rem 1.2rem !important;
+    text-align: left !important;
+    font-size: 0.84rem !important;
+  }
+
+  #admin-active-banner button {
+    align-self: flex-start !important;
+  }
+
+  /* Main Container & Section Banner */
+  .main-content {
+    padding: 0.5rem 0.75rem 3rem;
+  }
+
+  .section-banner {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
     flex-direction: column;
     align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  .section-banner h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .section-banner p {
+    font-size: 0.85rem;
+  }
+
+  .section-banner > div:last-child {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .section-banner .btn-gold,
+  .section-banner .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Virtual Darshan Altar on Mobile */
+  .mandap-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .mandap-altar {
+    padding: 1.4rem 0.85rem 1.8rem;
+    border-width: 3px;
+  }
+
+  .altar-halo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .deity-frame {
+    max-width: 100%;
+    margin: 1rem auto;
+  }
+
+  .deity-image {
+    height: 300px;
+  }
+
+  .altar-actions {
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .ritual-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  #darshan-admin-controls {
+    gap: 6px;
+  }
+
+  #darshan-admin-controls .pill-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .altar-sidebar .info-card {
+    padding: 1.1rem;
+  }
+
+  .altar-sidebar .info-card ul li {
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 0.85rem;
+  }
+
+  .tithi-clock {
+    padding: 0.8rem;
+  }
+
+  .tithi-clock-time {
+    font-size: 1.3rem;
+  }
+
+  .stats-grid {
+    gap: 8px;
+  }
+
+  .stat-box {
+    padding: 8px 4px;
+  }
+
+  .stat-number {
+    font-size: 1.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+  }
+
+  /* Photo Gallery on Mobile */
+  .gallery-controls,
+  .updates-controls {
+    padding: 0.85rem;
+    margin-bottom: 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .category-chips {
+    gap: 6px;
+  }
+
+  .chip-btn {
+    padding: 5px 11px;
+    font-size: 0.8rem;
+  }
+
+  .gallery-search-box {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .photo-thumbnail-container {
+    height: 220px;
+  }
+
+  .photo-info {
+    padding: 0.9rem;
+  }
+
+  .photo-title {
+    font-size: 1rem;
+  }
+
+  .photo-caption {
+    font-size: 0.84rem;
+  }
+
+  .photo-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 0.6rem;
+  }
+
+  .photo-credit {
+    font-size: 0.78rem;
+  }
+
+  .photo-actions {
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  /* Puja Updates on Mobile */
+  .updates-list {
+    gap: 0.85rem;
+  }
+
+  .update-card {
+    padding: 1rem;
+  }
+
+  .update-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .update-badge-group {
+    gap: 6px;
+  }
+
+  .update-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+  }
+
+  .update-title {
+    font-size: 1.1rem;
+  }
+
+  .update-body {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .update-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 0.5rem;
+  }
+
+  #public-notice-tag {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Mantras & Panchali on Mobile */
+  .mantra-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .mantra-card {
+    padding: 1.1rem;
+  }
+
+  .mantra-bengali-script {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    padding: 0.85rem;
+  }
+
+  /* Wishes & Pranam on Mobile */
+  .wishes-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .wish-form-card {
+    padding: 1.1rem;
+  }
+
+  .wishes-wall {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .wish-card {
+    padding: 0.95rem;
+  }
+
+  .wish-message {
+    font-size: 0.9rem;
+  }
+
+  .wish-author-info {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Modals & Lightbox on Mobile */
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-card {
+    padding: 1.25rem 1rem;
+    max-height: 92vh;
+    border-radius: var(--radius-md);
+  }
+
+  .lightbox-card {
+    max-height: 95vh;
+  }
+
+  .lightbox-img-wrapper {
+    max-height: 340px;
+  }
+
+  .lightbox-img {
+    max-height: 340px;
+  }
+
+  .lightbox-details {
+    padding: 0.9rem 1rem;
   }
 }
 
@@ -1324,7 +1682,7 @@ body {
       <span>Amfan (N.S.C.C) Kojagari Laxmi Puja</span>
     </div>
 
-    <h1 class="puja-title">শ্রী শ্রী মহালক্ষ্মী পূজা</h1>
+    <h1 class="puja-title">শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা</h1>
     <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</div>
     <p class="puja-tagline">
       এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
@@ -2449,6 +2807,12 @@ class FirebaseService {
     return { id: wishId, ...docData };
   }
 
+  async deleteWish(wishId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('puja_wishes').doc(wishId).delete();
+    return true;
+  }
+
   onWishesChanged(callback) {
     if (!this.isReady) return null;
     const unsubscribe = this.db.collection('puja_wishes')
@@ -3233,6 +3597,24 @@ class PujaDB {
     });
   }
 
+  async deleteWish(wishId) {
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.deleteWish(wishId);
+      } catch (err) {
+        console.warn('Firebase delete wish error:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['wishes'], 'readwrite');
+      const store = tx.objectStore('wishes');
+      const request = store.delete(wishId);
+      request.onsuccess = () => resolve(true);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
   // ==========================================
   // COUNTERS
   // ==========================================
@@ -3668,9 +4050,12 @@ async function initPujaApp() {
         }
       });
 
-      // Quick scroll to top of pane if on mobile
+      // Smooth scroll to top of pane if on mobile
       if (window.innerWidth < 768) {
-        window.scrollTo({ top: 380, behavior: 'smooth' });
+        const navContainer = document.querySelector('.nav-container');
+        if (navContainer) {
+          navContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
   });
@@ -3938,12 +4323,30 @@ async function initPujaApp() {
               <button class="photo-like-btn" style="background: #f7f3eb; border-color: #e5d5be; color: #555;" onclick="sharePhoto('${p.id}', event)" title="Share Photo">
                 🔗
               </button>
+              ${state.isAdmin ? `
+                <button class="photo-like-btn" style="background: #fff0f0; border-color: #ffcdd2; color: #b32134; cursor: pointer;" onclick="adminDeletePhoto('${p.id}', event)" title="Delete Photo (Admin Only)">
+                  🗑️
+                </button>
+              ` : ''}
             </div>
           </div>
         </div>
       </div>
     `).join('');
   }
+
+  // Admin delete photo
+  window.adminDeletePhoto = async (photoId, event) => {
+    if (event) event.stopPropagation();
+    if (!state.isAdmin) return;
+    const photo = state.allPhotos.find(p => p.id === photoId);
+    const title = photo ? photo.title : 'photo';
+    if (confirm(`আপনি কি "${title}" ছবিটি পাবলিক গ্যালারি থেকে মুছে ফেলতে চান?`)) {
+      await window.pujaDB.deletePhoto(photoId);
+      await loadPhotos();
+      showToast('🗑️ ছবিটি সফলভাবে মুছে ফেলা হয়েছে।');
+    }
+  };
 
   // Category Filtering
   photoCategoryChips.forEach(chip => {
@@ -4459,6 +4862,9 @@ async function initPujaApp() {
       if (tabManageBtn) tabManageBtn.style.display = 'none';
       if (firebaseStatusPill) firebaseStatusPill.style.display = 'none';
     }
+    renderUpdates();
+    renderPhotos();
+    renderWishes();
   }
 
   if (adminStatusPill) {
@@ -4622,15 +5028,35 @@ async function initPujaApp() {
     }
 
     wishesWall.innerHTML = state.allWishes.map(w => `
-      <div class="wish-card">
+      <div class="wish-card" data-id="${w.id}">
         <p class="wish-message">"${escapeHtml(w.message)}"</p>
         <div class="wish-author-info">
           <span class="wish-name">🙏 ${escapeHtml(w.name)}</span>
           <span>${escapeHtml(w.location || '')}</span>
         </div>
+        ${state.isAdmin ? `
+          <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #eedfcb; display: flex; justify-content: flex-end;">
+            <button class="photo-like-btn" style="background: #fff0f0; border-color: #ffcdd2; color: #b32134; cursor: pointer; padding: 4px 10px; font-size: 0.8rem;" onclick="deleteWish('${w.id}')" title="Delete Wish (Admin Only)">
+              🗑️ ডিলিট (Delete)
+            </button>
+          </div>
+        ` : ''}
       </div>
     `).join('');
   }
+
+  // Delete wish (Strictly Admin only)
+  window.deleteWish = async (wishId) => {
+    if (!state.isAdmin) {
+      showToast('🔒 বার্তা ডিলিট করার অধিকার শুধুমাত্র ক্লাবের অ্যাডমিনের রয়েছে।');
+      return;
+    }
+    if (confirm('আপনি কি এই শুভেচ্ছা বার্তাটি মুছে ফেলতে চান? (Delete this wish?)')) {
+      await window.pujaDB.deleteWish(wishId);
+      await loadWishes();
+      showToast('🗑️ শুভেচ্ছা বার্তা সফলভাবে মুছে ফেলা হয়েছে।');
+    }
+  };
 
   const wishForm = document.getElementById('wish-form');
   if (wishForm) {
