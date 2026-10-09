@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
@@ -1698,11 +1698,2558 @@ const firebaseConfig = {
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
-  <!-- Application Scripts (Loads from js/ or falls back to root) -->
-  <script src="js/firebase-config.js" onerror="this.onerror=null;this.src='firebase-config.js'"></script>
-  <script src="js/firebase-service.js" onerror="this.onerror=null;this.src='firebase-service.js'"></script>
-  <script src="js/audio.js" onerror="this.onerror=null;this.src='audio.js'"></script>
-  <script src="js/db.js" onerror="this.onerror=null;this.src='db.js'"></script>
-  <script src="js/app.js" onerror="this.onerror=null;this.src='app.js'"></script>
+  <!-- Embedded Complete Application Logic (Guarantees every button works 100% on any host) -->
+  <script>
+/**
+ * Google Firebase Configuration for Laxmi Puja Web Portal
+ * 
+ * Instructions:
+ * 1. Go to Google Firebase Console: https://console.firebase.google.com
+ * 2. Create a project (e.g. "laxmi-puja-2026")
+ * 3. Register a Web App ("</>")
+ * 4. Copy your firebaseConfig and paste the values below,
+ *    OR paste them directly inside the website's "Firebase Settings" modal!
+ */
+
+window.FIREBASE_CONFIG = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
+};
+
+
+/**
+ * Google Firebase Service for Laxmi Puja Web Portal
+ * Handles Cloud Firestore & Firebase Storage integration for real-time public syncing.
+ */
+
+class FirebaseService {
+  constructor() {
+    this.app = null;
+    this.db = null;
+    this.storage = null;
+    this.isReady = false;
+    this.config = null;
+    this.listeners = [];
+  }
+
+  /**
+   * Parse and retrieve current active Firebase configuration
+   */
+  getActiveConfig() {
+    // Check localStorage first (configured via UI modal)
+    try {
+      const stored = localStorage.getItem('puja_firebase_config');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.projectId && parsed.apiKey) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not parse stored Firebase config:', e);
+    }
+
+    // Check window.FIREBASE_CONFIG from firebase-config.js
+    if (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.projectId && window.FIREBASE_CONFIG.apiKey) {
+      return window.FIREBASE_CONFIG;
+    }
+
+    return null;
+  }
+
+  /**
+   * Initialize Firebase SDK
+   */
+  async init() {
+    this.config = this.getActiveConfig();
+
+    if (!this.config) {
+      console.log('Firebase: No configuration found. Running in Local Mode (IndexedDB).');
+      this.isReady = false;
+      return false;
+    }
+
+    // Verify Firebase SDK loaded
+    if (typeof firebase === 'undefined') {
+      console.warn('Firebase SDK not loaded from CDN.');
+      this.isReady = false;
+      return false;
+    }
+
+    try {
+      // Check if default app already initialized
+      if (!firebase.apps.length) {
+        this.app = firebase.initializeApp(this.config);
+      } else {
+        this.app = firebase.app();
+      }
+
+      this.db = firebase.firestore();
+
+      // Enable offline persistence if available
+      try {
+        await this.db.enablePersistence({ synchronizeTabs: true });
+      } catch (err) {
+        if (err.code !== 'failed-precondition' && err.code !== 'unimplemented') {
+          console.warn('Firestore persistence warning:', err);
+        }
+      }
+
+      if (firebase.storage) {
+        try {
+          this.storage = firebase.storage();
+        } catch (e) {
+          console.warn('Firebase storage init warning:', e);
+        }
+      }
+
+      this.isReady = true;
+      console.log('🟢 Firebase Connected successfully to project:', this.config.projectId);
+      return true;
+    } catch (err) {
+      console.error('Firebase initialization error:', err);
+      this.isReady = false;
+      return false;
+    }
+  }
+
+  /**
+   * Test Connection by doing a ping write/read
+   */
+  async testConnection(configToTest = null) {
+    const config = configToTest || this.config;
+    if (!config || !config.apiKey || !config.projectId) {
+      throw new Error('Incomplete Firebase configuration. Please provide at least apiKey and projectId.');
+    }
+
+    let testApp;
+    const testAppName = 'testApp_' + Date.now();
+    try {
+      testApp = firebase.initializeApp(config, testAppName);
+      const testDb = testApp.firestore();
+      const testRef = testDb.collection('puja_system_health').doc('connection_test');
+      
+      await testRef.set({
+        status: 'connected',
+        testedAt: new Date().toISOString(),
+        client: 'localhost-web-client'
+      });
+
+      const snap = await testRef.get();
+      if (!snap.exists) {
+        throw new Error('Could not read written test document from Firestore.');
+      }
+
+      // Cleanup
+      await testApp.delete();
+      return { success: true, projectId: config.projectId };
+    } catch (err) {
+      if (testApp) {
+        try { await testApp.delete(); } catch(e) {}
+      }
+      throw err;
+    }
+  }
+
+  // ==========================================================
+  // REAL-TIME FIRESTORE REPOSITORIES
+  // ==========================================================
+
+  // --- PHOTOS ---
+  async getPhotos() {
+    if (!this.isReady) return [];
+    try {
+      const snap = await this.db.collection('puja_photos').orderBy('timestamp', 'desc').get();
+      return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (err) {
+      console.error('Firebase getPhotos error:', err);
+      throw err;
+    }
+  }
+
+  async savePhoto(photo) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const photoId = photo.id || 'photo_' + Date.now();
+    const docData = {
+      title: photo.title || 'Untitled',
+      category: photo.category || 'General',
+      photographer: photo.photographer || 'Devotee',
+      caption: photo.caption || '',
+      imageUrl: photo.imageUrl,
+      likes: photo.likes || 0,
+      timestamp: photo.timestamp || new Date().toISOString()
+    };
+
+    await this.db.collection('puja_photos').doc(photoId).set(docData, { merge: true });
+    return { id: photoId, ...docData };
+  }
+
+  async deletePhoto(photoId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('puja_photos').doc(photoId).delete();
+    return true;
+  }
+
+  async likePhoto(photoId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const ref = this.db.collection('puja_photos').doc(photoId);
+    await ref.update({
+      likes: firebase.firestore.FieldValue.increment(1)
+    });
+    const updated = await ref.get();
+    return updated.data() ? updated.data().likes : 1;
+  }
+
+  onPhotosChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_photos')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+        const photos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        callback(photos);
+      }, (error) => {
+        console.warn('Photos listener error:', error);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- UPDATES ("diffarent types of update") ---
+  async getUpdates() {
+    if (!this.isReady) return [];
+    try {
+      const snap = await this.db.collection('puja_updates').get();
+      const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      list.sort((a, b) => {
+        if (a.isPinned && !b.isPinned) return -1;
+        if (!a.isPinned && b.isPinned) return 1;
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      return list;
+    } catch (err) {
+      console.error('Firebase getUpdates error:', err);
+      throw err;
+    }
+  }
+
+  async saveUpdate(update) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const updateId = update.id || 'update_' + Date.now();
+    const docData = {
+      title: update.title,
+      category: update.category,
+      priority: update.priority || 'normal',
+      isPinned: !!update.isPinned,
+      author: update.author || 'Puja Committee',
+      body: update.body,
+      timestamp: update.timestamp || new Date().toISOString()
+    };
+
+    await this.db.collection('puja_updates').doc(updateId).set(docData, { merge: true });
+    return { id: updateId, ...docData };
+  }
+
+  async deleteUpdate(updateId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('puja_updates').doc(updateId).delete();
+    return true;
+  }
+
+  onUpdatesChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_updates')
+      .onSnapshot((snapshot) => {
+        const list = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        list.sort((a, b) => {
+          if (a.isPinned && !b.isPinned) return -1;
+          if (!a.isPinned && b.isPinned) return 1;
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        callback(list);
+      }, (err) => {
+        console.warn('Updates listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- WISHES ---
+  async getWishes() {
+    if (!this.isReady) return [];
+    try {
+      const snap = await this.db.collection('puja_wishes').orderBy('timestamp', 'desc').get();
+      return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (err) {
+      console.error('Firebase getWishes error:', err);
+      throw err;
+    }
+  }
+
+  async saveWish(wish) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const wishId = wish.id || 'wish_' + Date.now();
+    const docData = {
+      name: wish.name,
+      location: wish.location || '',
+      message: wish.message,
+      timestamp: wish.timestamp || new Date().toISOString()
+    };
+    await this.db.collection('puja_wishes').doc(wishId).set(docData);
+    return { id: wishId, ...docData };
+  }
+
+  onWishesChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_wishes')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => {
+        const list = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        callback(list);
+      }, (err) => {
+        console.warn('Wishes listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- COUNTERS (Diyas Lit) ---
+  async getCounter(key, defaultValue = 0) {
+    if (!this.isReady) return defaultValue;
+    try {
+      const doc = await this.db.collection('puja_counters').doc(key).get();
+      return doc.exists ? (doc.data().value || defaultValue) : defaultValue;
+    } catch (e) {
+      return defaultValue;
+    }
+  }
+
+  async incrementCounter(key) {
+    if (!this.isReady) return 1;
+    const ref = this.db.collection('puja_counters').doc(key);
+    await ref.set({
+      value: firebase.firestore.FieldValue.increment(1)
+    }, { merge: true });
+    const snap = await ref.get();
+    return snap.data().value;
+  }
+
+  onCounterChanged(key, callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_counters').doc(key)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          callback(doc.data().value);
+        }
+      }, () => {});
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // ==========================================================
+  // SYNC LOCAL DATA TO CLOUD FIRESTORE
+  // ==========================================================
+  async syncLocalDataToCloud(localPhotos, localUpdates, localWishes) {
+    if (!this.isReady) throw new Error('Firebase is not connected');
+
+    let pCount = 0;
+    let uCount = 0;
+    let wCount = 0;
+
+    // Batch photos
+    for (const photo of localPhotos) {
+      await this.savePhoto(photo);
+      pCount++;
+    }
+
+    // Batch updates
+    for (const update of localUpdates) {
+      await this.saveUpdate(update);
+      uCount++;
+    }
+
+    // Batch wishes
+    for (const wish of localWishes) {
+      await this.saveWish(wish);
+      wCount++;
+    }
+
+    return { pCount, uCount, wCount };
+  }
+
+  /**
+   * Save Firebase Configuration and reload
+   */
+  saveConfig(config) {
+    localStorage.setItem('puja_firebase_config', JSON.stringify(config));
+  }
+
+  clearConfig() {
+    localStorage.removeItem('puja_firebase_config');
+  }
+}
+
+// Global instance
+window.firebaseService = new FirebaseService();
+
+
+/**
+ * Puja Audio Synthesizer using Web Audio API
+ * Provides authentic, zero-dependency temple soundscapes:
+ * 1. Shankha Dhwani (Conch Shell)
+ * 2. Pujo Ghanta (Temple Brass Bell)
+ * 3. Traditional Dhaak Beats (Bengali Festive Drums)
+ * 4. Ambient Om / Tanpura Drone
+ */
+
+class PujaSoundEngine {
+  constructor() {
+    this.ctx = null;
+    this.droneGain = null;
+    this.droneOscillators = [];
+    this.isDronePlaying = false;
+    this.isDhaakPlaying = false;
+    this.dhaakInterval = null;
+  }
+
+  // Initialize AudioContext on first user interaction (browser policy)
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  }
+
+  /**
+   * Sacred Shankha Dhwani (Conch Shell Sound)
+   * Simulates the low-frequency drone rising into a powerful resonant blow
+   */
+  playShankh() {
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    const duration = 4.2;
+
+    // Master gain for conch
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.001, now);
+    masterGain.gain.linearRampToValueAtTime(0.65, now + 0.6);
+    masterGain.gain.setValueAtTime(0.65, now + 2.8);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    // Filter to emulate conch internal cavity resonance
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(420, now);
+    filter.frequency.linearRampToValueAtTime(490, now + 0.8);
+    filter.frequency.linearRampToValueAtTime(440, now + 3.2);
+    filter.Q.value = 5.0;
+
+    // Base fundamental oscillator (conch lip vibration)
+    const osc1 = ctx.createOscillator();
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(215, now);
+    osc1.frequency.linearRampToValueAtTime(245, now + 0.8);
+    osc1.frequency.linearRampToValueAtTime(220, now + 3.5);
+
+    // Sub-harmonic oscillator
+    const osc2 = ctx.createOscillator();
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(430, now);
+    osc2.frequency.linearRampToValueAtTime(490, now + 0.8);
+    osc2.frequency.linearRampToValueAtTime(440, now + 3.5);
+
+    // Air breath noise generator
+    const bufferSize = ctx.sampleRate * duration;
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      output[i] = Math.random() * 2 - 1;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = noiseBuffer;
+
+    const noiseFilter = ctx.createBiquadFilter();
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.value = 850;
+    noiseFilter.Q.value = 3.0;
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.01, now);
+    noiseGain.gain.linearRampToValueAtTime(0.12, now + 0.5);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + duration - 0.2);
+
+    // Connect graph
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(masterGain);
+
+    noise.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(masterGain);
+
+    masterGain.connect(ctx.destination);
+
+    osc1.start(now);
+    osc2.start(now);
+    noise.start(now);
+
+    osc1.stop(now + duration);
+    osc2.stop(now + duration);
+    noise.stop(now + duration);
+  }
+
+  /**
+   * Temple Ghanta (Brass Bell)
+   * High pure strike with long sparkling harmonic decay
+   */
+  playTempleBell() {
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    const duration = 3.0;
+
+    // Harmonic frequencies typical of a sacred brass temple bell
+    const baseFreq = 880; // A5
+    const ratios = [1.0, 1.5, 2.0, 2.76, 3.8, 5.4];
+    const gains = [0.45, 0.25, 0.18, 0.12, 0.08, 0.05];
+
+    ratios.forEach((ratio, index) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = index === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(baseFreq * ratio, now);
+
+      // Strike attack and long natural exponential ring-down
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(gains[index], now + 0.006);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration / (1 + index * 0.25));
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + duration);
+    });
+  }
+
+  /**
+   * Single Dhaak (Bengali Drum) Strike
+   * @param {string} type 'open' or 'slap' or 'rim'
+   */
+  playSingleDhaakStrike(type = 'open') {
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    if (type === 'open') {
+      // Deep resonant drum body
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(145, now);
+      osc.frequency.exponentialRampToValueAtTime(65, now + 0.15);
+
+      gain.gain.setValueAtTime(0.7, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.3);
+    } else {
+      // Snappy stick strike / kanshi accent
+      const bufferSize = ctx.sampleRate * 0.1;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = noiseBuffer;
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'highpass';
+      filter.frequency.value = 1800;
+
+      const nGain = ctx.createGain();
+      nGain.gain.setValueAtTime(0.4, now);
+      nGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+      noise.connect(filter);
+      filter.connect(nGain);
+      nGain.connect(ctx.destination);
+
+      noise.start(now);
+      noise.stop(now + 0.12);
+    }
+  }
+
+  /**
+   * Rhythmic Bengali Pujo Dhaak loop
+   */
+  toggleDhaak(onUpdate) {
+    this.init();
+    if (this.isDhaakPlaying) {
+      clearInterval(this.dhaakInterval);
+      this.isDhaakPlaying = false;
+      if (onUpdate) onUpdate(false);
+      return false;
+    }
+
+    this.isDhaakPlaying = true;
+    if (onUpdate) onUpdate(true);
+
+    // Traditional 4-beat rhythm (Dha-tin-tin-ta...)
+    const rhythmPattern = ['open', 'slap', 'open', 'slap', 'open', 'slap', 'open', 'open'];
+    let step = 0;
+
+    this.dhaakInterval = setInterval(() => {
+      const beat = rhythmPattern[step % rhythmPattern.length];
+      this.playSingleDhaakStrike(beat);
+      step++;
+    }, 220);
+
+    return true;
+  }
+
+  /**
+   * Soothing Ambient Tanpura Drone
+   */
+  toggleAmbientDrone(onUpdate) {
+    this.init();
+    const ctx = this.ctx;
+
+    if (this.isDronePlaying) {
+      if (this.droneGain) {
+        this.droneGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.2);
+        setTimeout(() => {
+          this.droneOscillators.forEach(o => {
+            try { o.stop(); } catch(e) {}
+          });
+          this.droneOscillators = [];
+        }, 1300);
+      }
+      this.isDronePlaying = false;
+      if (onUpdate) onUpdate(false);
+      return false;
+    }
+
+    this.isDronePlaying = true;
+    if (onUpdate) onUpdate(true);
+
+    const now = ctx.currentTime;
+    this.droneGain = ctx.createGain();
+    this.droneGain.gain.setValueAtTime(0.001, now);
+    this.droneGain.gain.linearRampToValueAtTime(0.2, now + 2);
+    this.droneGain.connect(ctx.destination);
+
+    // Root D3 (146.8 Hz), Pa A3 (220 Hz), and upper overtone octaves
+    const freqs = [146.83, 220.0, 293.66, 440.0];
+    this.droneOscillators = freqs.map((f, i) => {
+      const osc = ctx.createOscillator();
+      const localGain = ctx.createGain();
+      osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(f, now);
+
+      // Subtle slow detune vibrato
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 0.2 + i * 0.1;
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.value = 1.2;
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+      lfo.start(now);
+
+      localGain.gain.value = 0.25 / (i + 1);
+      osc.connect(localGain);
+      localGain.connect(this.droneGain);
+      osc.start(now);
+      return osc;
+    });
+
+    return true;
+  }
+
+  /**
+   * Soft flower offering whoosh / chime
+   */
+  playFlowerChime() {
+    this.init();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 arpeggio
+
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const timeOffset = now + idx * 0.08;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, timeOffset);
+
+      gain.gain.setValueAtTime(0, timeOffset);
+      gain.gain.linearRampToValueAtTime(0.18, timeOffset + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, timeOffset + 0.8);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(timeOffset);
+      osc.stop(timeOffset + 0.9);
+    });
+  }
+}
+
+// Global instance
+window.pujaAudio = new PujaSoundEngine();
+
+
+/**
+ * Laxmi Puja Hybrid Database Management
+ * Coordinates between Google Cloud Firebase (when configured) and local IndexedDB.
+ * 
+ * - When Firebase is Connected: Real-time public cloud sync for photos, updates, wishes, and likes.
+ * - When Firebase is in Local Mode: 100% offline-ready persistent IndexedDB storage.
+ */
+
+class PujaDB {
+  constructor() {
+    this.dbName = 'LaxmiPujaDB';
+    this.dbVersion = 1;
+    this.db = null;
+  }
+
+  async init() {
+    // 1. Initialize local IndexedDB first
+    await new Promise((resolve, reject) => {
+      const request = indexedDB.open(this.dbName, this.dbVersion);
+
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+
+        // Photos Store
+        if (!db.objectStoreNames.contains('photos')) {
+          const photoStore = db.createObjectStore('photos', { keyPath: 'id' });
+          photoStore.createIndex('category', 'category', { unique: false });
+          photoStore.createIndex('timestamp', 'timestamp', { unique: false });
+        }
+
+        // Updates / Announcements Store
+        if (!db.objectStoreNames.contains('updates')) {
+          const updateStore = db.createObjectStore('updates', { keyPath: 'id' });
+          updateStore.createIndex('category', 'category', { unique: false });
+          updateStore.createIndex('timestamp', 'timestamp', { unique: false });
+          updateStore.createIndex('isPinned', 'isPinned', { unique: false });
+        }
+
+        // Community Wishes Store
+        if (!db.objectStoreNames.contains('wishes')) {
+          const wishStore = db.createObjectStore('wishes', { keyPath: 'id' });
+          wishStore.createIndex('timestamp', 'timestamp', { unique: false });
+        }
+
+        // App Meta / Counter Store
+        if (!db.objectStoreNames.contains('meta')) {
+          db.createObjectStore('meta', { keyPath: 'key' });
+        }
+      };
+
+      request.onsuccess = async (event) => {
+        this.db = event.target.result;
+        await this.seedInitialDataIfNeeded();
+        resolve(this.db);
+      };
+
+      request.onerror = (event) => {
+        console.error('IndexedDB error:', event.target.error);
+        reject(event.target.error);
+      };
+    });
+
+    // 2. Initialize Firebase if configured
+    if (window.firebaseService) {
+      try {
+        await window.firebaseService.init();
+      } catch (err) {
+        console.warn('Firebase initialization skipped or failed:', err);
+      }
+    }
+
+    return this.db;
+  }
+
+  isCloudActive() {
+    return !!(window.firebaseService && window.firebaseService.isReady);
+  }
+
+  // ==========================================
+  // PHOTOS CRUD (Cloud / Local Hybrid)
+  // ==========================================
+  async getAllPhotos() {
+    if (this.isCloudActive()) {
+      try {
+        const cloudPhotos = await window.firebaseService.getPhotos();
+        if (cloudPhotos && cloudPhotos.length > 0) {
+          return cloudPhotos;
+        }
+      } catch (err) {
+        console.warn('Could not fetch photos from Firebase, falling back to local:', err);
+      }
+    }
+
+    // Fallback to IndexedDB
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['photos'], 'readonly');
+      const store = tx.objectStore('photos');
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const photos = request.result || [];
+        photos.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        resolve(photos);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async savePhoto(photo) {
+    if (!photo.id) {
+      photo.id = 'photo_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    }
+    if (!photo.timestamp) {
+      photo.timestamp = new Date().toISOString();
+    }
+    if (typeof photo.likes !== 'number') {
+      photo.likes = 0;
+    }
+
+    // Save to Firebase if active
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.savePhoto(photo);
+      } catch (err) {
+        console.warn('Failed to save photo to Firebase, will save locally:', err);
+      }
+    }
+
+    // Always cache locally in IndexedDB
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['photos'], 'readwrite');
+      const store = tx.objectStore('photos');
+      const request = store.put(photo);
+      request.onsuccess = () => resolve(photo);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async deletePhoto(photoId) {
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.deletePhoto(photoId);
+      } catch (err) {
+        console.warn('Firebase delete photo error:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['photos'], 'readwrite');
+      const store = tx.objectStore('photos');
+      const request = store.delete(photoId);
+      request.onsuccess = () => resolve(true);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async toggleLikePhoto(photoId) {
+    if (this.isCloudActive()) {
+      try {
+        const cloudLikes = await window.firebaseService.likePhoto(photoId);
+        // Sync local cache
+        const tx = this.db.transaction(['photos'], 'readwrite');
+        const store = tx.objectStore('photos');
+        const getReq = store.get(photoId);
+        getReq.onsuccess = () => {
+          if (getReq.result) {
+            getReq.result.likes = cloudLikes;
+            store.put(getReq.result);
+          }
+        };
+        return cloudLikes;
+      } catch (err) {
+        console.warn('Firebase like failed, updating locally:', err);
+      }
+    }
+
+    // Local IndexedDB update
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['photos'], 'readwrite');
+      const store = tx.objectStore('photos');
+      const getReq = store.get(photoId);
+
+      getReq.onsuccess = () => {
+        const photo = getReq.result;
+        if (!photo) return resolve(null);
+        photo.likes = (photo.likes || 0) + 1;
+        const putReq = store.put(photo);
+        putReq.onsuccess = () => resolve(photo.likes);
+        putReq.onerror = () => reject(putReq.error);
+      };
+      getReq.onerror = () => reject(getReq.error);
+    });
+  }
+
+  // ==========================================
+  // UPDATES CRUD ("diffarent types of update")
+  // ==========================================
+  async getAllUpdates() {
+    if (this.isCloudActive()) {
+      try {
+        const cloudUpdates = await window.firebaseService.getUpdates();
+        if (cloudUpdates && cloudUpdates.length > 0) {
+          return cloudUpdates;
+        }
+      } catch (err) {
+        console.warn('Could not fetch updates from Firebase, falling back to local:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['updates'], 'readonly');
+      const store = tx.objectStore('updates');
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const updates = request.result || [];
+        updates.sort((a, b) => {
+          if (a.isPinned && !b.isPinned) return -1;
+          if (!a.isPinned && b.isPinned) return 1;
+          return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        resolve(updates);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async saveUpdate(update) {
+    if (!update.id) {
+      update.id = 'update_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    }
+    if (!update.timestamp) {
+      update.timestamp = new Date().toISOString();
+    }
+
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.saveUpdate(update);
+      } catch (err) {
+        console.warn('Failed to save update to Firebase, saving locally:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['updates'], 'readwrite');
+      const store = tx.objectStore('updates');
+      const request = store.put(update);
+      request.onsuccess = () => resolve(update);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async deleteUpdate(updateId) {
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.deleteUpdate(updateId);
+      } catch (err) {
+        console.warn('Firebase delete update error:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['updates'], 'readwrite');
+      const store = tx.objectStore('updates');
+      const request = store.delete(updateId);
+      request.onsuccess = () => resolve(true);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  // ==========================================
+  // WISHES CRUD
+  // ==========================================
+  async getAllWishes() {
+    if (this.isCloudActive()) {
+      try {
+        const cloudWishes = await window.firebaseService.getWishes();
+        if (cloudWishes && cloudWishes.length > 0) {
+          return cloudWishes;
+        }
+      } catch (err) {
+        console.warn('Could not fetch wishes from Firebase, falling back to local:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['wishes'], 'readonly');
+      const store = tx.objectStore('wishes');
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const wishes = request.result || [];
+        wishes.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        resolve(wishes);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async saveWish(wish) {
+    if (!wish.id) {
+      wish.id = 'wish_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    }
+    if (!wish.timestamp) {
+      wish.timestamp = new Date().toISOString();
+    }
+
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.saveWish(wish);
+      } catch (err) {
+        console.warn('Failed to save wish to Firebase, saving locally:', err);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(['wishes'], 'readwrite');
+      const store = tx.objectStore('wishes');
+      const request = store.put(wish);
+      request.onsuccess = () => resolve(wish);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  // ==========================================
+  // COUNTERS
+  // ==========================================
+  async getCounter(key, defaultValue = 0) {
+    if (this.isCloudActive()) {
+      try {
+        return await window.firebaseService.getCounter(key, defaultValue);
+      } catch (e) {}
+    }
+
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(['meta'], 'readonly');
+      const store = tx.objectStore('meta');
+      const req = store.get(key);
+      req.onsuccess = () => {
+        resolve(req.result ? req.result.value : defaultValue);
+      };
+      req.onerror = () => resolve(defaultValue);
+    });
+  }
+
+  async incrementCounter(key) {
+    if (this.isCloudActive()) {
+      try {
+        return await window.firebaseService.incrementCounter(key);
+      } catch (e) {}
+    }
+
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(['meta'], 'readwrite');
+      const store = tx.objectStore('meta');
+      const req = store.get(key);
+      req.onsuccess = () => {
+        const current = req.result ? req.result.value : 0;
+        const next = current + 1;
+        store.put({ key, value: next });
+        resolve(next);
+      };
+      req.onerror = () => resolve(1);
+    });
+  }
+
+  // ==========================================
+  // EXPORT / IMPORT BACKUP
+  // ==========================================
+  async exportFullBackup() {
+    const photos = await this.getAllPhotos();
+    const updates = await this.getAllUpdates();
+    const wishes = await this.getAllWishes();
+    const diyas = await this.getCounter('diyas_lit', 108);
+
+    const backup = {
+      version: 2,
+      appName: 'LaxmiPujaPublicGallery',
+      firebaseProject: this.isCloudActive() ? window.firebaseService.config.projectId : 'local-indexeddb',
+      exportedAt: new Date().toISOString(),
+      diyas_lit: diyas,
+      photos,
+      updates,
+      wishes
+    };
+    return JSON.stringify(backup, null, 2);
+  }
+
+  async importFullBackup(jsonString) {
+    try {
+      const data = JSON.parse(jsonString);
+      if (!data.photos || !data.updates) {
+        throw new Error('Invalid backup file format');
+      }
+
+      for (const p of data.photos) {
+        await this.savePhoto(p);
+      }
+      for (const u of data.updates) {
+        await this.saveUpdate(u);
+      }
+      if (data.wishes) {
+        for (const w of data.wishes) {
+          await this.saveWish(w);
+        }
+      }
+      return true;
+    } catch (e) {
+      console.error('Import failed:', e);
+      throw e;
+    }
+  }
+
+  // ==========================================
+  // SEED INITIAL FESTIVE DATA
+  // ==========================================
+  async seedInitialDataIfNeeded() {
+    const tx = this.db.transaction(['photos'], 'readonly');
+    const store = tx.objectStore('photos');
+    const req = store.count();
+
+    req.onsuccess = async () => {
+      if (req.result === 0) {
+        const seedPhotos = [
+          {
+            id: 'photo_seed_1',
+            title: 'Divine Pratima of Maa Mahalakshmi',
+            category: 'Maa Lakshmi Idol / Pratima',
+            photographer: 'Soumyadip Maity',
+            caption: 'Kojagari Purnima Pratima adorned in auspicious Benarasi silk and gold ornaments, blessing our home mandap.',
+            imageUrl: 'https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
+            likes: 42
+          },
+          {
+            id: 'photo_seed_2',
+            title: 'Auspicious Alpona with Lokkhir Paa',
+            category: 'Alpona Designs',
+            photographer: 'Priyanka Mukherjee',
+            caption: 'Traditional hand-drawn rice paste (Pithe bilati) alpona design welcoming Maa Lakshmi into the sanctum.',
+            imageUrl: 'https://images.unsplash.com/photo-1574043443890-1ac0507d6d43?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 18).toISOString(),
+            likes: 38
+          },
+          {
+            id: 'photo_seed_3',
+            title: 'Chhappan Bhog & Naru Thali Offering',
+            category: 'Bhog & Prasad',
+            photographer: 'Anindita Das',
+            caption: 'Special Kojagari Prasad thali: Narkel Naru, Til Naru, Khhoi, Moa, Chaler Payesh and seasonal fruits.',
+            imageUrl: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 12).toISOString(),
+            likes: 56
+          },
+          {
+            id: 'photo_seed_4',
+            title: 'Evening Sandhya Aarti & Glowing Diyas',
+            category: 'Evening Aarti & Dhunuchi',
+            photographer: 'Rajarshi Banerjee',
+            caption: '108 earthen diyas and brass deepam lit during Sandhya Aarti with resonant shankha and bell chimes.',
+            imageUrl: 'https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 6).toISOString(),
+            likes: 67
+          },
+          {
+            id: 'photo_seed_5',
+            title: 'Illuminated Mandap Entrance Decoration',
+            category: 'Mandap & Pandal',
+            photographer: 'Debashis Roy',
+            caption: 'Golden marigold garlands, mango leaves toran, and brass lamps welcoming devotees.',
+            imageUrl: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 3).toISOString(),
+            likes: 29
+          },
+          {
+            id: 'photo_seed_6',
+            title: 'Community Pushpanjali Ritual',
+            category: 'Family & Community',
+            photographer: 'Subhamoy Sen',
+            caption: 'Devotees offering red lotus flowers and chant prayers with utmost devotion on Kojagari night.',
+            imageUrl: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 1).toISOString(),
+            likes: 45
+          }
+        ];
+
+        const pTx = this.db.transaction(['photos'], 'readwrite');
+        const pStore = pTx.objectStore('photos');
+        seedPhotos.forEach(p => pStore.put(p));
+
+        const seedUpdates = [
+          {
+            id: 'update_seed_1',
+            title: '🌕 Kojagari Purnima Puja Muhurat & Tithi Timings',
+            category: 'schedule',
+            priority: 'urgent',
+            isPinned: true,
+            author: 'Purohit Mahashay & Puja Committee',
+            body: `The auspicious Kojagari Lakshmi Puja tithi details for this year:
+• Purnima Tithi Begins: Evening at 05:42 PM
+• Kojagari Lakshmi Puja Nishita Muhurat: 11:38 PM to 12:28 AM
+• Sandhya Aarti: 07:15 PM
+• Community Pushpanjali (First Batch): 08:30 PM
+• Community Pushpanjali (Second Batch): 10:15 PM
+• Mahabhog & Prasad Distribution: 09:30 PM onwards.
+All devotees are requested to bring fresh lotus and flowers for offering.`,
+            timestamp: new Date(Date.now() - 3600000 * 20).toISOString()
+          },
+          {
+            id: 'update_seed_2',
+            title: '🍲 Mahabhog Distribution & Prasad Counter Schedule',
+            category: 'bhog',
+            priority: 'normal',
+            isPinned: false,
+            author: 'Bhog Committee',
+            body: `The sacred Bhog prepared for Maa Lakshmi includes:
+- Gobindobhog Chaler Khichuri
+- Panch Thara Bhaja & Labra
+- Chhanar Payesh
+- Narkel Naru & Moa
+Prasad distribution coupon counter opens near Mandap Gate 2 from 7:00 PM. Parcel prasad boxes are also arranged for elderly devotees.`,
+            timestamp: new Date(Date.now() - 3600000 * 14).toISOString()
+          },
+          {
+            id: 'update_seed_3',
+            title: '📢 Notice: Photography & Mobile Upload Rules for Devotees',
+            category: 'urgent',
+            priority: 'urgent',
+            isPinned: false,
+            author: 'Media & Cultural Cell',
+            body: `Devotees and visitors are warmly welcomed to take photos of the Pratima, Mandap, and Alpona!
+You can click the "Upload Photo" button right here on this website to save and showcase your pictures to the public gallery instantly.
+Please avoid flash photography right during the solemn Pushpanjali and Aarti hours.`,
+            timestamp: new Date(Date.now() - 3600000 * 8).toISOString()
+          },
+          {
+            id: 'update_seed_4',
+            title: '🎨 Traditional Alpona Competition Results Announced!',
+            category: 'cultural',
+            priority: 'normal',
+            isPinned: false,
+            author: 'Women\'s Wing Committee',
+            body: `Congratulations to all participants in this year\'s traditional Rice Paste Alpona Competition!
+🥇 1st Prize: Rina Sen & Group (Mandap Courtyard Section)
+🥈 2nd Prize: Sneha Datta (Altar Entrance Lotus Motif)
+🥉 3rd Prize: Tanusree Ghosh (Lokkhir Paa Heritage Style)
+Winning designs are now showcased in the Photo Gallery under the "Alpona Designs" filter.`,
+            timestamp: new Date(Date.now() - 3600000 * 4).toISOString()
+          },
+          {
+            id: 'update_seed_5',
+            title: '🪔 Kojagari "Ke Jagore" Night Awakening & Bhajan Recital',
+            category: 'schedule',
+            priority: 'normal',
+            isPinned: false,
+            author: 'Cultural Secretary',
+            body: `In keeping with the sacred Kojagari tradition ("Ko Jāgarti" - Who is awake?), our Mandap will remain open through the night with devotional music, Laxmi Charitram recitation, and flute renditions from 11:00 PM to 4:00 AM. Hot tea and prasad will be served to all night-vigil devotees.`,
+            timestamp: new Date(Date.now() - 3600000 * 2).toISOString()
+          }
+        ];
+
+        const uTx = this.db.transaction(['updates'], 'readwrite');
+        const uStore = uTx.objectStore('updates');
+        seedUpdates.forEach(u => uStore.put(u));
+
+        const seedWishes = [
+          {
+            id: 'wish_seed_1',
+            name: 'Debojyoti & Family',
+            location: 'Kolkata, WB',
+            message: 'Shubho Kojagari Lokkhi Puja to everyone! May Maa Lakshmi fill all our homes with endless peace, health, and prosperity. 🪔🙏',
+            timestamp: new Date(Date.now() - 3600000 * 15).toISOString()
+          },
+          {
+            id: 'wish_seed_2',
+            name: 'Sunita Chakraborty',
+            location: 'Bengaluru',
+            message: 'Watching the mandap and darshan from afar. Beautiful idol and mesmerizing alpona! জয় মা লক্ষ্মী! 🙏✨',
+            timestamp: new Date(Date.now() - 3600000 * 9).toISOString()
+          },
+          {
+            id: 'wish_seed_3',
+            name: 'Arup Roy',
+            location: 'Howrah',
+            message: 'Heartiest festive wishes to the entire puja committee and all neighborhood families. May Maa bless our children with wisdom and happiness.',
+            timestamp: new Date(Date.now() - 3600000 * 3).toISOString()
+          }
+        ];
+
+        const wTx = this.db.transaction(['wishes'], 'readwrite');
+        const wStore = wTx.objectStore('wishes');
+        seedWishes.forEach(w => wStore.put(w));
+
+        const mTx = this.db.transaction(['meta'], 'readwrite');
+        mTx.objectStore('meta').put({ key: 'diyas_lit', value: 142 });
+      }
+    };
+  }
+}
+
+// Global instance
+window.pujaDB = new PujaDB();
+
+
+/**
+ * Laxmi Puja Interactive Application
+ * Powers photo uploads, public viewing gallery, multi-category updates,
+ * flower shower particle physics, and devotional controls.
+ */
+
+async function initPujaApp() {
+  // Initialize Database
+  try {
+    await window.pujaDB.init();
+  } catch (err) {
+    console.error('Failed to initialize database:', err);
+  }
+
+  // Application State
+  const state = {
+    currentTab: 'darshan',
+    currentPhotoCategory: 'all',
+    currentPhotoSearch: '',
+    currentUpdateCategory: 'all',
+    currentUpdateSearch: '',
+    allPhotos: [],
+    allUpdates: [],
+    allWishes: [],
+    lightboxIndex: 0,
+    filteredPhotosForLightbox: [],
+    diyasLit: 108,
+    isDhaakActive: false,
+    isDroneActive: false
+  };
+
+  // Setup DOM Elements
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panes = document.querySelectorAll('.tab-pane');
+  const photoGrid = document.getElementById('photo-grid');
+  const updatesList = document.getElementById('updates-list');
+  const wishesWall = document.getElementById('wishes-wall');
+  const photoCategoryChips = document.querySelectorAll('#photo-chips .chip-btn');
+  const updateCategoryChips = document.querySelectorAll('#update-chips .chip-btn');
+  const photoSearchInput = document.getElementById('photo-search-input');
+  const updateSearchInput = document.getElementById('update-search-input');
+
+  // Stats Elements
+  const statPhotos = document.getElementById('stat-photos');
+  const statUpdates = document.getElementById('stat-updates');
+  const statWishes = document.getElementById('stat-wishes');
+  const statDiyas = document.getElementById('stat-diyas');
+
+  // ==========================================================
+  // TAB NAVIGATION
+  // ==========================================================
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      state.currentTab = target;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      panes.forEach(p => {
+        if (p.id === `pane-${target}`) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+
+      // Quick scroll to top of pane if on mobile
+      if (window.innerWidth < 768) {
+        window.scrollTo({ top: 380, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Direct tab switcher helper
+  window.switchTab = (tabName) => {
+    const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    if (btn) btn.click();
+  };
+
+  // ==========================================================
+  // DEVOTIONAL CONTROLS & CANVAS FLOWER PARTICLES
+  // ==========================================================
+  const canvas = document.getElementById('flower-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class FlowerPetal {
+    constructor(isSpark = false) {
+      this.isSpark = isSpark;
+      this.x = Math.random() * canvas.width;
+      this.y = isSpark ? canvas.height * 0.45 + (Math.random() * 100 - 50) : -20;
+      this.size = isSpark ? Math.random() * 4 + 2 : Math.random() * 16 + 12;
+      this.speedY = isSpark ? (Math.random() - 0.5) * 4 : Math.random() * 2 + 1.8;
+      this.speedX = Math.random() * 2 - 1;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.05;
+      this.opacity = isSpark ? 1 : 0.9;
+      // Lotus pink, Marigold orange, or Sparkle gold
+      const types = ['lotus', 'marigold', 'jasmine', 'gold'];
+      this.type = isSpark ? 'gold' : types[Math.floor(Math.random() * types.length)];
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX + Math.sin(this.y * 0.015) * 0.7;
+      this.rotation += this.rotSpeed;
+      if (this.isSpark) {
+        this.opacity -= 0.018;
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = Math.max(0, this.opacity);
+
+      if (this.type === 'lotus') {
+        // Red / Pink Lotus Petal
+        ctx.fillStyle = '#e91e63';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 0.6, this.size, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#f48fb1';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 0.3, this.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.type === 'marigold') {
+        // Vibrant Orange Marigold Petal
+        ctx.fillStyle = '#ff9800';
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.55, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffc107';
+        ctx.beginPath();
+        ctx.arc(this.size * 0.1, -this.size * 0.1, this.size * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (this.type === 'jasmine') {
+        // White Jasmine / Bel Phool
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 0.4, this.size * 0.8, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Glowing Gold Sparkle
+        ctx.fillStyle = '#ffd700';
+        ctx.shadowColor = '#ffb300';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.update();
+      p.draw();
+      if (p.y > canvas.height + 30 || p.opacity <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  function triggerPetalShower(count = 45) {
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        particles.push(new FlowerPetal(false));
+      }, i * 35);
+    }
+  }
+
+  function triggerGoldenSparks(count = 30) {
+    for (let i = 0; i < count; i++) {
+      particles.push(new FlowerPetal(true));
+    }
+  }
+
+  // Hook Up Audio and Ritual Buttons
+  const btnShankh = document.getElementById('btn-shankh');
+  const btnBell = document.getElementById('btn-bell');
+  const btnDhaak = document.getElementById('btn-dhaak');
+  const btnDrone = document.getElementById('btn-drone');
+  const btnLightDiya = document.getElementById('btn-light-diya');
+  const btnOfferFlowers = document.getElementById('btn-offer-flowers');
+  const altarFlame = document.getElementById('altar-diya-flame');
+
+  if (btnShankh) {
+    btnShankh.addEventListener('click', () => {
+      window.pujaAudio.playShankh();
+      showToast('🪔 Conch Shell blown! শঙ্খধ্বনি reverberating with blessings.');
+    });
+  }
+
+  if (btnBell) {
+    btnBell.addEventListener('click', () => {
+      window.pujaAudio.playTempleBell();
+      showToast('🔔 Temple Bell ringing! ঘণ্টা ধ্বনি');
+    });
+  }
+
+  if (btnDhaak) {
+    btnDhaak.addEventListener('click', () => {
+      window.pujaAudio.toggleDhaak((isActive) => {
+        state.isDhaakActive = isActive;
+        btnDhaak.classList.toggle('active', isActive);
+        btnDhaak.innerHTML = isActive 
+          ? `🥁 Dhaak Beats (Playing...)` 
+          : `🥁 Dhaak Beats (ঢাক)`;
+        showToast(isActive ? '🥁 Festive Dhaak rhythm started!' : '🥁 Dhaak paused.');
+      });
+    });
+  }
+
+  if (btnDrone) {
+    btnDrone.addEventListener('click', () => {
+      window.pujaAudio.toggleAmbientDrone((isActive) => {
+        state.isDroneActive = isActive;
+        btnDrone.classList.toggle('active', isActive);
+        btnDrone.innerHTML = isActive 
+          ? `🎶 Temple Chants (Playing...)` 
+          : `🎶 Temple Chants (সুর)`;
+        showToast(isActive ? '🎶 Peaceful temple drone playing.' : '🎶 Music muted.');
+      });
+    });
+  }
+
+  if (btnLightDiya) {
+    btnLightDiya.addEventListener('click', async () => {
+      window.pujaAudio.playTempleBell();
+      triggerGoldenSparks(40);
+      if (altarFlame) {
+        altarFlame.style.display = 'block';
+        altarFlame.classList.add('diya-flame');
+      }
+      const newCount = await window.pujaDB.incrementCounter('diyas_lit');
+      state.diyasLit = newCount;
+      if (statDiyas) statDiyas.textContent = newCount;
+      btnLightDiya.classList.add('lit');
+      btnLightDiya.innerHTML = `✨ Diya Lit for Maa (${newCount})`;
+      showToast('🪔 You have lit a sacred Diya for Maa Mahalakshmi! May peace fill your home.');
+    });
+  }
+
+  if (btnOfferFlowers) {
+    btnOfferFlowers.addEventListener('click', () => {
+      window.pujaAudio.playFlowerChime();
+      triggerPetalShower(55);
+      showToast('🌸 Pushpanjali flowers offered at the lotus feet of Maa Lakshmi! জয় মা লক্ষ্মী!');
+    });
+  }
+
+  // ==========================================================
+  // PHOTO GALLERY SYSTEM ("easily save photo for view public")
+  // ==========================================================
+  async function loadPhotos() {
+    state.allPhotos = await window.pujaDB.getAllPhotos();
+    if (statPhotos) statPhotos.textContent = state.allPhotos.length;
+    renderPhotos();
+  }
+
+  function filterPhotos() {
+    let filtered = [...state.allPhotos];
+
+    // Filter by Category
+    if (state.currentPhotoCategory !== 'all') {
+      filtered = filtered.filter(p => p.category === state.currentPhotoCategory);
+    }
+
+    // Filter by Search Query
+    if (state.currentPhotoSearch.trim() !== '') {
+      const q = state.currentPhotoSearch.toLowerCase();
+      filtered = filtered.filter(p => 
+        (p.title && p.title.toLowerCase().includes(q)) ||
+        (p.caption && p.caption.toLowerCase().includes(q)) ||
+        (p.photographer && p.photographer.toLowerCase().includes(q)) ||
+        (p.category && p.category.toLowerCase().includes(q))
+      );
+    }
+
+    return filtered;
+  }
+
+  function renderPhotos() {
+    const photos = filterPhotos();
+    state.filteredPhotosForLightbox = photos;
+
+    if (!photoGrid) return;
+
+    if (photos.length === 0) {
+      photoGrid.innerHTML = `
+        <div class="photo-empty-state">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📷</div>
+          <h3 style="font-family: var(--font-heading); color: var(--color-primary); margin-bottom: 0.5rem;">No Photos Found</h3>
+          <p>No photos match the selected category or search query.</p>
+          <button class="btn-primary" style="margin-top: 1rem;" onclick="document.getElementById('btn-open-upload-modal').click()">
+            Upload First Photo
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    photoGrid.innerHTML = photos.map((p, index) => `
+      <div class="photo-card" data-id="${p.id}">
+        <div class="photo-thumbnail-container" onclick="openLightbox(${index})">
+          <img src="${p.imageUrl}" alt="${escapeHtml(p.title)}" class="photo-thumbnail" loading="lazy" />
+          <span class="photo-category-badge">${escapeHtml(p.category || 'Puja')}</span>
+        </div>
+        <div class="photo-info">
+          <h4 class="photo-title" onclick="openLightbox(${index})" style="cursor: pointer;">${escapeHtml(p.title)}</h4>
+          <p class="photo-caption">${escapeHtml(p.caption || '')}</p>
+          <div class="photo-meta">
+            <span class="photo-credit">
+              👤 ${escapeHtml(p.photographer || 'Devotee')}
+            </span>
+            <div class="photo-actions">
+              <button class="photo-like-btn" onclick="likePhoto('${p.id}', event)">
+                ❤️ <span class="like-count">${p.likes || 0}</span>
+              </button>
+              <button class="photo-like-btn" style="background: #f7f3eb; border-color: #e5d5be; color: #555;" onclick="sharePhoto('${p.id}', event)" title="Share Photo">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Category Filtering
+  photoCategoryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      photoCategoryChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.currentPhotoCategory = chip.dataset.category;
+      renderPhotos();
+    });
+  });
+
+  // Search input with debounce
+  if (photoSearchInput) {
+    photoSearchInput.addEventListener('input', (e) => {
+      state.currentPhotoSearch = e.target.value;
+      renderPhotos();
+    });
+  }
+
+  // Like Photo
+  window.likePhoto = async (photoId, event) => {
+    if (event) event.stopPropagation();
+    const newLikes = await window.pujaDB.toggleLikePhoto(photoId);
+    if (newLikes !== null) {
+      // Update local state
+      const photo = state.allPhotos.find(p => p.id === photoId);
+      if (photo) photo.likes = newLikes;
+      renderPhotos();
+      window.pujaAudio.playFlowerChime();
+    }
+  };
+
+  // Share Photo
+  window.sharePhoto = (photoId, event) => {
+    if (event) event.stopPropagation();
+    const photo = state.allPhotos.find(p => p.id === photoId);
+    if (!photo) return;
+
+    if (navigator.share) {
+      navigator.share({
+        title: photo.title,
+        text: `View this Laxmi Puja photo: ${photo.title} by ${photo.photographer}`,
+        url: window.location.href
+      }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      showToast('📋 Link copied to clipboard to share with family!');
+    }
+  };
+
+  // ==========================================================
+  // PHOTO UPLOADER MODAL & IMAGE COMPRESSION
+  // ==========================================================
+  const uploadModal = document.getElementById('upload-modal');
+  const btnOpenUploadModal = document.getElementById('btn-open-upload-modal');
+  const btnCloseUploadModal = document.getElementById('btn-close-upload-modal');
+  const photoForm = document.getElementById('photo-upload-form');
+  const fileDropzone = document.getElementById('file-dropzone');
+  const photoFileInput = document.getElementById('photo-file-input');
+  const filePreview = document.getElementById('file-preview');
+  let selectedImageDataUrl = null;
+
+  if (btnOpenUploadModal) {
+    btnOpenUploadModal.addEventListener('click', () => {
+      uploadModal.classList.add('active');
+    });
+  }
+
+  if (btnCloseUploadModal) {
+    btnCloseUploadModal.addEventListener('click', () => {
+      uploadModal.classList.remove('active');
+    });
+  }
+
+  // Drag and drop events
+  if (fileDropzone) {
+    fileDropzone.addEventListener('click', () => photoFileInput.click());
+    fileDropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      fileDropzone.style.borderColor = 'var(--color-primary)';
+      fileDropzone.style.background = '#f7e3e7';
+    });
+    fileDropzone.addEventListener('dragleave', () => {
+      fileDropzone.style.borderColor = 'var(--color-gold)';
+      fileDropzone.style.background = '#fdf8ee';
+    });
+    fileDropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileDropzone.style.borderColor = 'var(--color-gold)';
+      fileDropzone.style.background = '#fdf8ee';
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processSelectedImage(e.dataTransfer.files[0]);
+      }
+    });
+  }
+
+  if (photoFileInput) {
+    photoFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        processSelectedImage(e.target.files[0]);
+      }
+    });
+  }
+
+  // Compress & convert file to optimized Base64
+  function processSelectedImage(file) {
+    if (!file.type.startsWith('image/')) {
+      alert('Please select a valid image file (JPG, PNG, WebP).');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        // Resize canvas max 1400px width/height to keep storage slim and fast
+        const maxDimension = 1400;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          } else {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+
+        const resizeCanvas = document.createElement('canvas');
+        resizeCanvas.width = width;
+        resizeCanvas.height = height;
+        const rCtx = resizeCanvas.getContext('2d');
+        rCtx.drawImage(img, 0, 0, width, height);
+
+        // Quality 0.85 JPEG
+        selectedImageDataUrl = resizeCanvas.toDataURL('image/jpeg', 0.85);
+
+        // Update preview
+        filePreview.src = selectedImageDataUrl;
+        filePreview.style.display = 'block';
+        document.getElementById('dropzone-text').textContent = `Selected: ${file.name} (${Math.round(selectedImageDataUrl.length / 1024)} KB)`;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Handle Photo Form Submission
+  if (photoForm) {
+    photoForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!selectedImageDataUrl) {
+        alert('Please choose or drop an image to upload.');
+        return;
+      }
+
+      const title = document.getElementById('photo-title-input').value.trim();
+      const category = document.getElementById('photo-category-input').value;
+      const photographer = document.getElementById('photo-author-input').value.trim() || 'Devotee';
+      const caption = document.getElementById('photo-caption-input').value.trim();
+
+      const newPhoto = {
+        title,
+        category,
+        photographer,
+        caption,
+        imageUrl: selectedImageDataUrl,
+        timestamp: new Date().toISOString(),
+        likes: 0
+      };
+
+      try {
+        await window.pujaDB.savePhoto(newPhoto);
+        uploadModal.classList.remove('active');
+        photoForm.reset();
+        selectedImageDataUrl = null;
+        filePreview.style.display = 'none';
+        document.getElementById('dropzone-text').textContent = 'Click to browse or drag & drop photo here';
+
+        // Reload and switch to gallery
+        await loadPhotos();
+        window.switchTab('gallery');
+        window.pujaAudio.playTempleBell();
+        triggerPetalShower(30);
+        showToast('🎉 Photo successfully saved! It is now live in the Public Gallery for everyone to view.');
+      } catch (err) {
+        console.error('Error saving photo:', err);
+        alert('Could not save photo. Please try again.');
+      }
+    });
+  }
+
+  // ==========================================================
+  // LIGHTBOX MODAL (Full Resolution Public Viewing)
+  // ==========================================================
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const btnCloseLightbox = document.getElementById('btn-close-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxCategory = document.getElementById('lightbox-category');
+  const lightboxAuthor = document.getElementById('lightbox-author');
+  const lightboxTime = document.getElementById('lightbox-time');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxLikeBtn = document.getElementById('lightbox-like-btn');
+  const lightboxDownloadBtn = document.getElementById('lightbox-download-btn');
+  const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+  const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+  const lightboxDeleteBtn = document.getElementById('lightbox-delete-btn');
+
+  window.openLightbox = (index) => {
+    if (!state.filteredPhotosForLightbox || state.filteredPhotosForLightbox.length === 0) return;
+    state.lightboxIndex = index;
+    renderLightboxContent();
+    lightboxModal.classList.add('active');
+  };
+
+  function renderLightboxContent() {
+    const photo = state.filteredPhotosForLightbox[state.lightboxIndex];
+    if (!photo) return;
+
+    lightboxImg.src = photo.imageUrl;
+    lightboxTitle.textContent = photo.title;
+    lightboxCategory.textContent = photo.category;
+    lightboxAuthor.textContent = `Captured by ${photo.photographer || 'Devotee'}`;
+    lightboxTime.textContent = formatTimeAgo(photo.timestamp);
+    lightboxCaption.textContent = photo.caption || '';
+    lightboxLikeBtn.innerHTML = `❤️ Like (${photo.likes || 0})`;
+
+    // Download action
+    lightboxDownloadBtn.onclick = () => {
+      const a = document.createElement('a');
+      a.href = photo.imageUrl;
+      a.download = `LaxmiPuja_${photo.title.replace(/[^a-zA-Z0-9]/g, '_')}.jpg`;
+      a.click();
+    };
+
+    // Like in lightbox
+    lightboxLikeBtn.onclick = async () => {
+      const newLikes = await window.pujaDB.toggleLikePhoto(photo.id);
+      if (newLikes !== null) {
+        photo.likes = newLikes;
+        lightboxLikeBtn.innerHTML = `❤️ Like (${newLikes})`;
+        renderPhotos();
+        window.pujaAudio.playFlowerChime();
+      }
+    };
+
+    // Delete in lightbox
+    lightboxDeleteBtn.onclick = async () => {
+      if (confirm(`Delete "${photo.title}" from public gallery?`)) {
+        await window.pujaDB.deletePhoto(photo.id);
+        lightboxModal.classList.remove('active');
+        await loadPhotos();
+        showToast('🗑️ Photo removed from gallery.');
+      }
+    };
+  }
+
+  if (lightboxPrevBtn) {
+    lightboxPrevBtn.addEventListener('click', () => {
+      if (state.lightboxIndex > 0) {
+        state.lightboxIndex--;
+      } else {
+        state.lightboxIndex = state.filteredPhotosForLightbox.length - 1;
+      }
+      renderLightboxContent();
+    });
+  }
+
+  if (lightboxNextBtn) {
+    lightboxNextBtn.addEventListener('click', () => {
+      if (state.lightboxIndex < state.filteredPhotosForLightbox.length - 1) {
+        state.lightboxIndex++;
+      } else {
+        state.lightboxIndex = 0;
+      }
+      renderLightboxContent();
+    });
+  }
+
+  if (btnCloseLightbox) {
+    btnCloseLightbox.addEventListener('click', () => {
+      lightboxModal.classList.remove('active');
+    });
+  }
+
+  // Keyboard navigation for lightbox
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal.classList.contains('active')) return;
+    if (e.key === 'Escape') lightboxModal.classList.remove('active');
+    if (e.key === 'ArrowLeft') lightboxPrevBtn.click();
+    if (e.key === 'ArrowRight') lightboxNextBtn.click();
+  });
+
+  // ==========================================================
+  // UPDATES & ANNOUNCEMENTS NOTICE BOARD
+  // ("diffarent types of update": Schedule, Bhog, Urgent, Cultural, etc.)
+  // ==========================================================
+  async function loadUpdates() {
+    state.allUpdates = await window.pujaDB.getAllUpdates();
+    if (statUpdates) statUpdates.textContent = state.allUpdates.length;
+    renderUpdates();
+  }
+
+  function filterUpdates() {
+    let list = [...state.allUpdates];
+
+    if (state.currentUpdateCategory !== 'all') {
+      list = list.filter(u => u.category === state.currentUpdateCategory);
+    }
+
+    if (state.currentUpdateSearch.trim() !== '') {
+      const q = state.currentUpdateSearch.toLowerCase();
+      list = list.filter(u => 
+        (u.title && u.title.toLowerCase().includes(q)) ||
+        (u.body && u.body.toLowerCase().includes(q)) ||
+        (u.author && u.author.toLowerCase().includes(q))
+      );
+    }
+
+    return list;
+  }
+
+  function getBadgeHtml(category, isPinned, priority) {
+    let categoryBadge = '';
+    switch (category) {
+      case 'schedule':
+        categoryBadge = `<span class="update-badge badge-schedule">🕒 Puja Schedule</span>`;
+        break;
+      case 'bhog':
+        categoryBadge = `<span class="update-badge badge-bhog">🍲 Bhog & Prasad</span>`;
+        break;
+      case 'urgent':
+        categoryBadge = `<span class="update-badge badge-urgent">🔴 Urgent Notice</span>`;
+        break;
+      case 'cultural':
+        categoryBadge = `<span class="update-badge badge-cultural">🎭 Cultural & Event</span>`;
+        break;
+      default:
+        categoryBadge = `<span class="update-badge badge-general">📢 General Info</span>`;
+    }
+
+    const pinBadge = isPinned ? `<span class="update-badge badge-pinned">📌 Pinned</span>` : '';
+    const priorityBadge = priority === 'urgent' && category !== 'urgent' 
+      ? `<span class="update-badge badge-urgent">⚡ Priority</span>` 
+      : '';
+
+    return `${pinBadge} ${categoryBadge} ${priorityBadge}`;
+  }
+
+  function renderUpdates() {
+    const updates = filterUpdates();
+    if (!updatesList) return;
+
+    if (updates.length === 0) {
+      updatesList.innerHTML = `
+        <div class="photo-empty-state">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📜</div>
+          <h3 style="font-family: var(--font-heading); color: var(--color-primary);">No Updates Found</h3>
+          <p>No notices match the selected category or search term.</p>
+          <button class="btn-primary" style="margin-top: 1rem;" onclick="document.getElementById('btn-open-update-modal').click()">
+            Post New Notice
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    updatesList.innerHTML = updates.map(u => `
+      <div class="update-card ${u.category} ${u.isPinned ? 'pinned' : ''}" data-id="${u.id}">
+        <div class="update-header">
+          <div class="update-badge-group">
+            ${getBadgeHtml(u.category, u.isPinned, u.priority)}
+          </div>
+          <span class="update-time">${formatTimeAgo(u.timestamp)}</span>
+        </div>
+        <h3 class="update-title">${escapeHtml(u.title)}</h3>
+        <p class="update-body">${escapeHtml(u.body)}</p>
+        <div class="update-footer">
+          <span class="update-author">✍️ ${escapeHtml(u.author || 'Puja Committee')}</span>
+          <button class="photo-like-btn" style="background: transparent; border: none; color: #b32134; cursor: pointer;" onclick="deleteUpdate('${u.id}')" title="Delete Announcement">
+            🗑️ Delete
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Filter chips for updates
+  updateCategoryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      updateCategoryChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.currentUpdateCategory = chip.dataset.category;
+      renderUpdates();
+    });
+  });
+
+  // Search input for updates
+  if (updateSearchInput) {
+    updateSearchInput.addEventListener('input', (e) => {
+      state.currentUpdateSearch = e.target.value;
+      renderUpdates();
+    });
+  }
+
+  // Delete update
+  window.deleteUpdate = async (updateId) => {
+    if (confirm('Are you sure you want to delete this notice?')) {
+      await window.pujaDB.deleteUpdate(updateId);
+      await loadUpdates();
+      showToast('Notice removed.');
+    }
+  };
+
+  // Create Update Modal
+  const updateModal = document.getElementById('update-modal');
+  const btnOpenUpdateModal = document.getElementById('btn-open-update-modal');
+  const btnCloseUpdateModal = document.getElementById('btn-close-update-modal');
+  const updateForm = document.getElementById('update-post-form');
+
+  if (btnOpenUpdateModal) {
+    btnOpenUpdateModal.addEventListener('click', () => {
+      updateModal.classList.add('active');
+    });
+  }
+
+  if (btnCloseUpdateModal) {
+    btnCloseUpdateModal.addEventListener('click', () => {
+      updateModal.classList.remove('active');
+    });
+  }
+
+  if (updateForm) {
+    updateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('update-title-input').value.trim();
+      const category = document.getElementById('update-category-input').value;
+      const priority = document.getElementById('update-priority-input').value;
+      const isPinned = document.getElementById('update-pin-input').checked;
+      const author = document.getElementById('update-author-input').value.trim() || 'Puja Committee';
+      const body = document.getElementById('update-body-input').value.trim();
+
+      const newUpdate = {
+        title,
+        category,
+        priority,
+        isPinned,
+        author,
+        body,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        await window.pujaDB.saveUpdate(newUpdate);
+        updateModal.classList.remove('active');
+        updateForm.reset();
+        await loadUpdates();
+        window.switchTab('updates');
+        window.pujaAudio.playTempleBell();
+        showToast('📢 New update successfully posted on the public notice board!');
+      } catch (err) {
+        console.error('Error saving update:', err);
+        alert('Could not post update. Please try again.');
+      }
+    });
+  }
+
+  // ==========================================================
+  // WISHES & PRANAM GUESTBOOK
+  // ==========================================================
+  async function loadWishes() {
+    state.allWishes = await window.pujaDB.getAllWishes();
+    if (statWishes) statWishes.textContent = state.allWishes.length;
+    renderWishes();
+  }
+
+  function renderWishes() {
+    if (!wishesWall) return;
+
+    if (state.allWishes.length === 0) {
+      wishesWall.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #888;">
+          Be the first to offer wishes and pranam to Maa Lakshmi!
+        </div>
+      `;
+      return;
+    }
+
+    wishesWall.innerHTML = state.allWishes.map(w => `
+      <div class="wish-card">
+        <p class="wish-message">"${escapeHtml(w.message)}"</p>
+        <div class="wish-author-info">
+          <span class="wish-name">🙏 ${escapeHtml(w.name)}</span>
+          <span>${escapeHtml(w.location || '')}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const wishForm = document.getElementById('wish-form');
+  if (wishForm) {
+    wishForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('wish-name-input').value.trim();
+      const location = document.getElementById('wish-location-input').value.trim();
+      const message = document.getElementById('wish-message-input').value.trim();
+
+      if (!name || !message) return;
+
+      const newWish = {
+        name,
+        location,
+        message,
+        timestamp: new Date().toISOString()
+      };
+
+      await window.pujaDB.saveWish(newWish);
+      wishForm.reset();
+      await loadWishes();
+      window.pujaAudio.playFlowerChime();
+      triggerPetalShower(25);
+      showToast('🌸 Your blessings and pranam wish have been placed on the board!');
+    });
+  }
+
+  // ==========================================================
+  // BACKUP, EXPORT & IMPORT DATA
+  // ==========================================================
+  const btnExportData = document.getElementById('btn-export-data');
+  const btnImportData = document.getElementById('btn-import-data');
+  const importFileInput = document.getElementById('import-file-input');
+  const btnResetData = document.getElementById('btn-reset-data');
+
+  if (btnExportData) {
+    btnExportData.addEventListener('click', async () => {
+      const jsonBackup = await window.pujaDB.exportFullBackup();
+      const blob = new Blob([jsonBackup], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `LaxmiPuja_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('💾 Database backup exported successfully!');
+    });
+  }
+
+  if (btnImportData && importFileInput) {
+    btnImportData.addEventListener('click', () => importFileInput.click());
+    importFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+          try {
+            await window.pujaDB.importFullBackup(event.target.result);
+            await loadPhotos();
+            await loadUpdates();
+            await loadWishes();
+            showToast('✅ Backup imported successfully! All photos and updates restored.');
+          } catch (err) {
+            alert('Failed to import backup: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+  }
+
+  if (btnResetData) {
+    btnResetData.addEventListener('click', async () => {
+      if (confirm('Reset to original festive demo photos and schedule? Custom uploads will be replaced.')) {
+        indexedDB.deleteDatabase('LaxmiPujaDB');
+        location.reload();
+      }
+    });
+  }
+
+  // ==========================================================
+  // FIREBASE CLOUD REAL-TIME SYNC & CONTROLS
+  // ==========================================================
+  const firebaseStatusPill = document.getElementById('firebase-status-pill');
+  const firebaseStatusText = document.getElementById('firebase-status-text');
+  const firebaseStatusDot = document.getElementById('firebase-status-dot');
+  const firebaseModal = document.getElementById('firebase-modal');
+  const btnCloseFirebaseModal = document.getElementById('btn-close-firebase-modal');
+  const btnOpenFirebaseModal = document.getElementById('btn-open-firebase-modal');
+  const btnFirebaseQuickParse = document.getElementById('btn-firebase-quick-parse');
+  const btnFirebaseTest = document.getElementById('btn-firebase-test');
+  const btnFirebaseSave = document.getElementById('btn-firebase-save');
+  const btnFirebaseDisconnect = document.getElementById('btn-firebase-disconnect');
+  const btnFirebaseSyncLocal = document.getElementById('btn-firebase-sync-local');
+  const firebaseTestStatus = document.getElementById('firebase-test-status');
+
+  function updateFirebaseUIStatus() {
+    if (window.firebaseService && window.firebaseService.isReady) {
+      const projId = window.firebaseService.config.projectId || 'Connected';
+      if (firebaseStatusText) firebaseStatusText.textContent = `🟢 Firebase Cloud: ${projId}`;
+      if (firebaseStatusDot) firebaseStatusDot.style.background = '#4caf50';
+      if (btnFirebaseDisconnect) btnFirebaseDisconnect.style.display = 'inline-flex';
+      if (btnFirebaseSyncLocal) btnFirebaseSyncLocal.style.display = 'inline-flex';
+    } else {
+      if (firebaseStatusText) firebaseStatusText.textContent = `🟡 Local Mode (Click to Connect Firebase)`;
+      if (firebaseStatusDot) firebaseStatusDot.style.background = '#ffc107';
+      if (btnFirebaseDisconnect) btnFirebaseDisconnect.style.display = 'none';
+      if (btnFirebaseSyncLocal) btnFirebaseSyncLocal.style.display = 'none';
+    }
+  }
+
+  function setupFirebaseRealtimeListeners() {
+    if (!window.firebaseService || !window.firebaseService.isReady) return;
+
+    window.firebaseService.onPhotosChanged((photos) => {
+      console.log('Firebase: Real-time photos update received (' + photos.length + ' photos)');
+      state.allPhotos = photos;
+      if (statPhotos) statPhotos.textContent = photos.length;
+      renderPhotos();
+    });
+
+    window.firebaseService.onUpdatesChanged((updates) => {
+      console.log('Firebase: Real-time updates update received (' + updates.length + ' updates)');
+      state.allUpdates = updates;
+      if (statUpdates) statUpdates.textContent = updates.length;
+      renderUpdates();
+    });
+
+    window.firebaseService.onWishesChanged((wishes) => {
+      state.allWishes = wishes;
+      if (statWishes) statWishes.textContent = wishes.length;
+      renderWishes();
+    });
+
+    window.firebaseService.onCounterChanged('diyas_lit', (count) => {
+      state.diyasLit = count;
+      if (statDiyas) statDiyas.textContent = count;
+      const btnDiya = document.getElementById('btn-light-diya');
+      if (btnDiya) btnDiya.innerHTML = `✨ Diya Lit for Maa (${count})`;
+    });
+  }
+
+  // Open/Close Firebase Modal
+  const openFbModal = () => {
+    if (firebaseModal) {
+      firebaseModal.classList.add('active');
+      // Populate fields if config exists
+      const cfg = (window.firebaseService && window.firebaseService.config) || window.FIREBASE_CONFIG || {};
+      if (cfg.apiKey) document.getElementById('fb-api-key').value = cfg.apiKey;
+      if (cfg.projectId) document.getElementById('fb-project-id').value = cfg.projectId;
+      if (cfg.authDomain) document.getElementById('fb-auth-domain').value = cfg.authDomain;
+      if (cfg.storageBucket) document.getElementById('fb-storage-bucket').value = cfg.storageBucket;
+      if (cfg.messagingSenderId) document.getElementById('fb-messaging-id').value = cfg.messagingSenderId;
+      if (cfg.appId) document.getElementById('fb-app-id').value = cfg.appId;
+    }
+  };
+
+  if (firebaseStatusPill) firebaseStatusPill.addEventListener('click', openFbModal);
+  if (btnOpenFirebaseModal) btnOpenFirebaseModal.addEventListener('click', openFbModal);
+  if (btnCloseFirebaseModal) {
+    btnCloseFirebaseModal.addEventListener('click', () => {
+      firebaseModal.classList.remove('active');
+    });
+  }
+
+  // Quick Parse Firebase Code Snippet
+  if (btnFirebaseQuickParse) {
+    btnFirebaseQuickParse.addEventListener('click', () => {
+      const snippet = document.getElementById('fb-raw-snippet').value;
+      if (!snippet.trim()) {
+        alert('Please paste your Firebase config snippet first.');
+        return;
+      }
+
+      const extract = (key) => {
+        const regex = new RegExp(`${key}\\s*:\\s*["']([^"']+)["']`, 'i');
+        const match = snippet.match(regex);
+        return match ? match[1] : '';
+      };
+
+      const apiKey = extract('apiKey');
+      const projectId = extract('projectId');
+      const authDomain = extract('authDomain');
+      const storageBucket = extract('storageBucket');
+      const messagingSenderId = extract('messagingSenderId');
+      const appId = extract('appId');
+
+      if (apiKey) document.getElementById('fb-api-key').value = apiKey;
+      if (projectId) document.getElementById('fb-project-id').value = projectId;
+      if (authDomain) document.getElementById('fb-auth-domain').value = authDomain;
+      if (storageBucket) document.getElementById('fb-storage-bucket').value = storageBucket;
+      if (messagingSenderId) document.getElementById('fb-messaging-id').value = messagingSenderId;
+      if (appId) document.getElementById('fb-app-id').value = appId;
+
+      if (apiKey && projectId) {
+        showToast('✨ Firebase keys parsed and extracted successfully!');
+      } else {
+        alert('Could not find apiKey or projectId. Please check the snippet format or fill fields manually.');
+      }
+    });
+  }
+
+  // Test Firebase Connection
+  function getEnteredFirebaseConfig() {
+    return {
+      apiKey: document.getElementById('fb-api-key').value.trim(),
+      projectId: document.getElementById('fb-project-id').value.trim(),
+      authDomain: document.getElementById('fb-auth-domain').value.trim() || `${document.getElementById('fb-project-id').value.trim()}.firebaseapp.com`,
+      storageBucket: document.getElementById('fb-storage-bucket').value.trim() || `${document.getElementById('fb-project-id').value.trim()}.appspot.com`,
+      messagingSenderId: document.getElementById('fb-messaging-id').value.trim(),
+      appId: document.getElementById('fb-app-id').value.trim()
+    };
+  }
+
+  if (btnFirebaseTest) {
+    btnFirebaseTest.addEventListener('click', async () => {
+      const config = getEnteredFirebaseConfig();
+      if (!config.apiKey || !config.projectId) {
+        alert('Please provide at least API Key and Project ID to test connection.');
+        return;
+      }
+
+      firebaseTestStatus.style.display = 'block';
+      firebaseTestStatus.style.background = '#fff8e1';
+      firebaseTestStatus.style.color = '#7a4603';
+      firebaseTestStatus.innerHTML = '⏳ Testing connection to Firebase Cloud Firestore from localhost...';
+
+      try {
+        await window.firebaseService.testConnection(config);
+        firebaseTestStatus.style.background = '#e8f5e9';
+        firebaseTestStatus.style.color = '#2e7d32';
+        firebaseTestStatus.innerHTML = `✅ <strong>Success!</strong> Connected to Firestore project "<strong>${config.projectId}</strong>". Read & write operations verified!`;
+      } catch (err) {
+        console.error('Firebase test error:', err);
+        firebaseTestStatus.style.background = '#ffebee';
+        firebaseTestStatus.style.color = '#c62828';
+        firebaseTestStatus.innerHTML = `❌ <strong>Connection Error:</strong> ${err.message}<br><small>Tip: In Firebase Console &rarr; Firestore Database &rarr; Rules, make sure rules allow read/write: <code>allow read, write: if true;</code></small>`;
+      }
+    });
+  }
+
+  // Save & Connect to Firebase
+  if (btnFirebaseSave) {
+    btnFirebaseSave.addEventListener('click', async () => {
+      const config = getEnteredFirebaseConfig();
+      if (!config.apiKey || !config.projectId) {
+        alert('Please enter at least API Key and Project ID.');
+        return;
+      }
+
+      window.firebaseService.saveConfig(config);
+      const connected = await window.firebaseService.init();
+
+      if (connected) {
+        updateFirebaseUIStatus();
+        setupFirebaseRealtimeListeners();
+        firebaseModal.classList.remove('active');
+        await loadPhotos();
+        await loadUpdates();
+        await loadWishes();
+        window.pujaAudio.playTempleBell();
+        showToast(`🎉 Connected to Firebase Project "${config.projectId}"! Real-time public sync is now active.`);
+      } else {
+        alert('Could not initialize Firebase with these credentials. Please test connection first.');
+      }
+    });
+  }
+
+  // Disconnect Firebase
+  if (btnFirebaseDisconnect) {
+    btnFirebaseDisconnect.addEventListener('click', () => {
+      if (confirm('Disconnect from Firebase and switch back to local IndexedDB mode?')) {
+        window.firebaseService.clearConfig();
+        location.reload();
+      }
+    });
+  }
+
+  // Sync Local Data to Firebase
+  if (btnFirebaseSyncLocal) {
+    btnFirebaseSyncLocal.addEventListener('click', async () => {
+      if (!window.firebaseService.isReady) {
+        alert('Please connect Firebase first.');
+        return;
+      }
+
+      if (confirm('Upload all current local photos, updates, and wishes to your live Firebase Cloud database?')) {
+        try {
+          const res = await window.firebaseService.syncLocalDataToCloud(state.allPhotos, state.allUpdates, state.allWishes);
+          showToast(`☁️ Uploaded ${res.pCount} photos, ${res.uCount} updates, and ${res.wCount} wishes to Firebase!`);
+        } catch (e) {
+          alert('Sync failed: ' + e.message);
+        }
+      }
+    });
+  }
+
+  // ==========================================================
+  // INITIAL DATA LOADING & LIVE CLOCK
+  // ==========================================================
+  updateFirebaseUIStatus();
+  setupFirebaseRealtimeListeners();
+
+  await loadPhotos();
+  await loadUpdates();
+  await loadWishes();
+
+  const initialDiyas = await window.pujaDB.getCounter('diyas_lit', 142);
+  state.diyasLit = initialDiyas;
+  if (statDiyas) statDiyas.textContent = initialDiyas;
+
+  // Live Kojagari Countdown / Clock
+  function updateLiveClock() {
+    const clockEl = document.getElementById('live-tithi-timer');
+    if (!clockEl) return;
+    const now = new Date();
+    clockEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+  setInterval(updateLiveClock, 1000);
+  updateLiveClock();
+
+  // Helper Toast notification
+  function showToast(message) {
+    let toast = document.getElementById('puja-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'puja-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #2b080e;
+        color: #fff9e6;
+        border: 2px solid var(--color-gold);
+        padding: 12px 20px;
+        border-radius: 9999px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        z-index: 2000;
+        font-size: 0.92rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        max-width: 90vw;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+
+    clearTimeout(toast.timeoutId);
+    toast.timeoutId = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(20px)';
+    }, 4000);
+  }
+
+  // Helper Escape HTML
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Helper Relative Time
+  function formatTimeAgo(isoString) {
+    if (!isoString) return '';
+    const date = new Date(isoString);
+    const diff = Math.floor((new Date() - date) / 1000);
+
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
+    if (diff < 86400 * 7) return `${Math.floor(diff / 86400)} day ago`;
+    return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPujaApp);
+} else {
+  initPujaApp();
+}
+
+  </script>
 </body>
 </html>
