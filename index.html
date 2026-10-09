@@ -1350,7 +1350,7 @@ body {
       <button class="pill-btn" id="admin-status-pill" style="border-color: #ffd700;" title="Club Admin Login">
         👑 ক্লাবের অ্যাডমিন
       </button>
-      <div id="firebase-status-pill" class="pill-btn" style="background: rgba(255, 193, 7, 0.16); border-color: #ffd54f; cursor: pointer;" title="Google Firebase Cloud Server Configuration">
+      <div id="firebase-status-pill" class="pill-btn" style="background: rgba(255, 193, 7, 0.16); border-color: #ffd54f; cursor: pointer; display: none;" title="Google Firebase Cloud Server Configuration">
         <span id="firebase-status-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ffc107;"></span>
         <span id="firebase-status-text">🟡 Local Mode</span>
       </div>
@@ -1375,7 +1375,7 @@ body {
       <button class="tab-btn" data-tab="wishes">
         💌 Wishes & Pranam
       </button>
-      <button class="tab-btn" data-tab="manage">
+      <button class="tab-btn" data-tab="manage" id="tab-manage-btn" style="display: none;">
         ⚙️ Backup & Data
       </button>
     </div>
@@ -1383,7 +1383,7 @@ body {
 
   <!-- Admin Active Banner (Only shown when Admin is logged in) -->
   <div id="admin-active-banner" style="display: none; background: #fff8e1; border: 1px solid #ffd54f; border-radius: 8px; padding: 10px 16px; margin: 0 auto 1.5rem; max-width: 1240px; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #5d4037;">
-    <span>👑 <strong>আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন, প্রতিমা ছবি বদলাতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছতে পারবেন।</span>
+    <span>👑 <strong>আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন, প্রতিমা ছবি বদলাতে পারবেন এবং ব্যাকআপ ও ক্লাউড ডাটা ম্যানেজ করতে পারবেন।</span>
     <button class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem; background: #8b1320; color: #fff;" onclick="document.getElementById('admin-status-pill').click()">
       লগআউট (Logout)
     </button>
@@ -2494,6 +2494,8 @@ class FirebaseService {
       }, () => {});
     this.listeners.push(unsubscribe);
     return unsubscribe;
+  }
+
   // --- DEITY PHOTO (Virtual Darshan Cloud Sync) ---
   async getDeityPhoto() {
     if (!this.isReady) return null;
@@ -3527,6 +3529,9 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
         const mTx = this.db.transaction(['meta'], 'readwrite');
         mTx.objectStore('meta').put({ key: 'diyas_lit', value: 142 });
       }
+    };
+  }
+
   // --- DEITY PHOTO (Virtual Darshan Cloud & Local Sync) ---
   async getDeityPhoto() {
     if (window.firebaseService && window.firebaseService.isReady) {
@@ -3641,9 +3646,15 @@ async function initPujaApp() {
   // ==========================================================
   // TAB NAVIGATION
   // ==========================================================
+  const tabManageBtn = document.getElementById('tab-manage-btn');
+
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.dataset.tab;
+      if (target === 'manage' && !state.isAdmin) {
+        showToast('🔒 ব্যাকআপ ও ডাটা অপশন শুধুমাত্র ক্লাবের অ্যাডমিনের জন্য।');
+        return;
+      }
       state.currentTab = target;
 
       tabs.forEach(t => t.classList.remove('active'));
@@ -4432,6 +4443,8 @@ async function initPujaApp() {
       if (publicNoticeTag) publicNoticeTag.style.display = 'none';
       if (adminBanner) adminBanner.style.display = 'flex';
       if (darshanAdminControls) darshanAdminControls.style.display = 'flex';
+      if (tabManageBtn) tabManageBtn.style.display = 'inline-flex';
+      if (firebaseStatusPill) firebaseStatusPill.style.display = 'inline-flex';
     } else {
       if (adminStatusPill) {
         adminStatusPill.innerHTML = `👑 ক্লাবের অ্যাডমিন`;
@@ -4443,6 +4456,8 @@ async function initPujaApp() {
       if (publicNoticeTag) publicNoticeTag.style.display = 'inline-block';
       if (adminBanner) adminBanner.style.display = 'none';
       if (darshanAdminControls) darshanAdminControls.style.display = 'none';
+      if (tabManageBtn) tabManageBtn.style.display = 'none';
+      if (firebaseStatusPill) firebaseStatusPill.style.display = 'none';
     }
   }
 
@@ -4454,6 +4469,9 @@ async function initPujaApp() {
           state.isAdmin = false;
           updateAdminUI();
           renderUpdates();
+          if (state.currentTab === 'manage') {
+            window.switchTab('darshan');
+          }
           showToast('🔒 অ্যাডমিন মোড থেকে লগআউট করা হয়েছে। এখন পাবলিক ভিউ সক্রিয়।');
         }
       } else {
@@ -4710,6 +4728,9 @@ async function initPujaApp() {
   const firebaseTestStatus = document.getElementById('firebase-test-status');
 
   function updateFirebaseUIStatus() {
+    if (firebaseStatusPill) {
+      firebaseStatusPill.style.display = state.isAdmin ? 'inline-flex' : 'none';
+    }
     if (window.firebaseService && window.firebaseService.isReady) {
       const projId = window.firebaseService.config.projectId || 'Connected';
       if (firebaseStatusText) firebaseStatusText.textContent = `🟢 Firebase Cloud: ${projId}`;
