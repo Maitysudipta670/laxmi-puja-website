@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,924 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Stylesheet -->
+  <!-- Stylesheets (External and Local) -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+/* ==========================================================================
+   Laxmi Puja (Kojagari Lokkhi Pujo) Festive Stylesheet
+   Theme: Auspicious Vermilion (Sindoor), Radiant Gold, Chandan Ivory, Alpona
+   ========================================================================== */
+
+:root {
+  --color-primary: #8b1320;        /* Auspicious Sindoor / Deep Crimson */
+  --color-primary-dark: #5c0712;   /* Royal Deep Maroon */
+  --color-primary-light: #b32134;  /* Bright Festive Red */
+  --color-gold: #e5a93b;           /* Traditional Gold */
+  --color-gold-light: #ffd700;     /* Brilliant Golden Yellow */
+  --color-gold-bright: #fff099;    /* Gold highlight */
+  --color-gold-deep: #b37e19;      /* Antique Gold */
+  --color-ivory: #fffdf7;          /* Sacred Chandan / Rice Silk */
+  --color-cream: #fbf5ea;          /* Warm Parchment */
+  --color-lotus: #d84374;          /* Sacred Pink Lotus */
+  --color-surface: #ffffff;
+  --color-surface-trans: rgba(255, 253, 247, 0.92);
+  --color-text-main: #2b1317;
+  --color-text-muted: #6b4c52;
+  --color-border: #edd7ba;
+  
+  --shadow-sm: 0 2px 8px rgba(92, 7, 18, 0.08);
+  --shadow-md: 0 4px 16px rgba(92, 7, 18, 0.12);
+  --shadow-lg: 0 10px 30px rgba(92, 7, 18, 0.2);
+  --shadow-gold: 0 0 20px rgba(229, 169, 59, 0.45);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --font-heading: 'Cinzel Decorative', 'Cinzel', 'Noto Serif Bengali', serif;
+  --font-bengali: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-text-main);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(229, 169, 59, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(139, 19, 32, 0.05) 0%, transparent 40%),
+    radial-gradient(rgba(229, 169, 59, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.toran-garland {
+  width: 100%;
+  height: 24px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #ff9800 0px,
+    #ffb300 12px,
+    #e65100 24px,
+    #ffc107 36px,
+    #ff6f00 48px
+  );
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.alpona-border {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='20' viewBox='0 0 80 20'%3E%3Cpath d='M0 10 Q20 0 40 10 Q60 20 80 10 M40 10 A5 5 0 1 1 39.9 10 M10 10 A3 3 0 1 1 9.9 10 M70 10 A3 3 0 1 1 69.9 10' fill='none' stroke='%23e5a93b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  height: 20px;
+  background-repeat: repeat-x;
+  width: 100%;
+  opacity: 0.85;
+}
+
+.header-hero {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, #991427 100%);
+  color: var(--color-ivory);
+  padding: 2.5rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(92, 7, 18, 0.35);
+  border-bottom: 4px solid var(--color-gold);
+}
+
+.hero-background-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-rule='evenodd'%3E%3Cpath d='M30 30L15 15l15-15 15 15-15 15zm0 0l15 15-15 15-15-15 15-15z'/%3E%3Ccircle cx='30' cy='30' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-gold-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.22) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-glow 4s infinite alternate ease-in-out;
+}
+
+.puja-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 215, 0, 0.16);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold-light);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.puja-title {
+  font-family: var(--font-bengali), var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--color-ivory);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.3);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+.puja-bengali-title {
+  font-family: var(--font-bengali);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--color-gold-light);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.puja-tagline {
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+  font-size: 1.05rem;
+  color: #ffecd1;
+  opacity: 0.95;
+}
+
+.hero-action-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.pill-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  color: var(--color-ivory);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.pill-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.pill-btn.active {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.nav-container {
+  max-width: 1240px;
+  margin: -1.8rem auto 1.5rem;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 20;
+}
+
+.nav-tabs {
+  background: var(--color-surface);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-lg);
+  scrollbar-width: none;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 130px;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-bengali), var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: rgba(229, 169, 59, 0.12);
+  color: var(--color-primary);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(139, 19, 32, 0.3);
+}
+
+.main-content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem;
+}
+
+.tab-pane {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-banner {
+  background: linear-gradient(135deg, #fffcf6 0%, #fff7e6 100%);
+  border: 1px solid var(--color-border);
+  border-left: 6px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-banner h2 {
+  font-family: var(--font-bengali), var(--font-heading);
+  color: var(--color-primary-dark);
+  font-size: 1.55rem;
+  margin-bottom: 0.2rem;
+}
+
+.section-banner p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #ffffff;
+  border: 1px solid var(--color-gold);
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(139, 19, 32, 0.25);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(139, 19, 32, 0.35);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #e5a93b 0%, #f7c35f 100%);
+  color: var(--color-primary-dark);
+  border: 1px solid #c98e24;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(229, 169, 59, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #ffd700 0%, #e5a93b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(229, 169, 59, 0.45);
+}
+
+.mandap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .mandap-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.mandap-altar {
+  background: radial-gradient(circle at 50% 30%, #44030a 0%, #200104 100%);
+  border: 4px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(229, 169, 59, 0.25);
+  color: var(--color-ivory);
+}
+
+.altar-arch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-image: repeating-linear-gradient(90deg, #ff9800, #ffc107 20px, #e65100 40px);
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.altar-halo {
+  width: 280px;
+  height: 280px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.35) 0%, rgba(255, 152, 0, 0.15) 50%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-glow 3.5s infinite alternate ease-in-out;
+}
+
+.deity-frame {
+  position: relative;
+  max-width: 380px;
+  margin: 1.5rem auto 1.5rem;
+  border: 4px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(229, 169, 59, 0.4), 0 8px 24px rgba(0, 0, 0, 0.6);
+  background: #110103;
+}
+
+.deity-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.lokkhir-paa-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 1rem 0;
+  opacity: 0.9;
+}
+
+.footprint-svg {
+  width: 32px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+}
+
+.altar-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  z-index: 10;
+  position: relative;
+}
+
+.ritual-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold-light);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.ritual-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.altar-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.info-card h3 {
+  font-family: var(--font-bengali), var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tithi-clock {
+  background: linear-gradient(135deg, #fff7eb 0%, #fff1d6 100%);
+  border: 1px solid #f0c377;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tithi-clock-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat-box {
+  background: #fdfaf2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gallery-controls, .updates-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-btn {
+  background: var(--color-cream);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+  border-color: var(--color-gold);
+  color: var(--color-primary);
+}
+
+.chip-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.gallery-search-box {
+  position: relative;
+  min-width: 220px;
+}
+
+.gallery-search-input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  outline: none;
+  background: var(--color-ivory);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.photo-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-card:hover {
+  box-shadow: var(--shadow-md), 0 0 12px rgba(229, 169, 59, 0.25);
+  border-color: var(--color-gold);
+}
+
+.photo-thumbnail-container {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  background: #f0e6d6;
+  cursor: pointer;
+}
+
+.photo-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.photo-card:hover .photo-thumbnail {
+  transform: scale(1.05);
+}
+
+.photo-category-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(139, 19, 32, 0.85);
+  color: var(--color-ivory);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+}
+
+.photo-info {
+  padding: 1.1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.3rem;
+}
+
+.photo-caption {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.photo-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #8c7377;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-border);
+}
+
+.photo-like-btn {
+  background: #fff3f5;
+  border: 1px solid #ffd0d6;
+  color: var(--color-primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.updates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.update-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.update-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-urgent { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+.badge-schedule { background: #fff8e1; color: #b78103; border: 1px solid #ffe082; }
+.badge-bhog { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+.badge-cultural { background: #f3e5f5; color: #7b1fa2; border: 1px solid #e1bee7; }
+.badge-general { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+
+.mantra-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  .mantra-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mantra-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.mantra-bengali-script {
+  font-family: var(--font-bengali);
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #3b181d;
+  background: #fdf8ef;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  border-left: 3px solid var(--color-gold);
+  margin: 1rem 0;
+}
+
+.wishes-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 850px) {
+  .wishes-layout {
+    grid-template-columns: 360px 1fr;
+  }
+}
+
+.wish-form-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.wishes-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.wish-card {
+  background: #ffffff;
+  border: 1px solid #ecd8c0;
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 8, 14, 0.75);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  background: #ffffff;
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.75rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #777;
+}
+
+.lightbox-card {
+  max-width: 900px;
+  background: #1a0307;
+  color: var(--color-ivory);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.lightbox-img-wrapper {
+  background: #0d0103;
+  width: 100%;
+  max-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+.lightbox-details {
+  padding: 1.25rem 1.75rem;
+  background: #230409;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  background: #fffdf9;
+}
+
+.file-dropzone {
+  border: 2px dashed var(--color-gold);
+  background: #fdf8ee;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-preview {
+  margin-top: 0.75rem;
+  max-height: 180px;
+  border-radius: var(--radius-sm);
+  display: none;
+}
+
+#flower-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(0.96); opacity: 0.7; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.95) rotate(-1deg); }
+}
+
+.diya-flame {
+  animation: flicker 1.8s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+.puja-footer {
+  background: linear-gradient(135deg, #3d0309 0%, #200104 100%);
+  color: #ffecd1;
+  border-top: 3px solid var(--color-gold);
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+}
+  </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
 <body>
@@ -116,7 +1032,7 @@
           <div class="altar-arch"></div>
           <div class="altar-halo"></div>
 
-          <h3 style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.5rem; margin-top: 0.5rem;">
+          <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-gold-light); font-size: 1.5rem; margin-top: 0.5rem;">
             শ্রী শ্রী লক্ষ্মী মাতা
           </h3>
           <p style="color: #ffdab9; font-size: 0.9rem; font-style: italic;">
@@ -251,7 +1167,6 @@
       </div>
     </section>
 
-
     <!-- ========================================================
          TAB 2: PHOTO GALLERY (Easily save & view public photos)
          ======================================================== -->
@@ -266,7 +1181,6 @@
         </button>
       </div>
 
-      <!-- Gallery Controls & Category Filter -->
       <div class="gallery-controls">
         <div class="category-chips" id="photo-chips">
           <button class="chip-btn active" data-category="all">All Photos</button>
@@ -289,15 +1203,11 @@
         </div>
       </div>
 
-      <!-- Photo Cards Grid -->
-      <div class="photo-grid" id="photo-grid">
-        <!-- Rendered dynamically via app.js -->
-      </div>
+      <div class="photo-grid" id="photo-grid"></div>
     </section>
 
-
     <!-- ========================================================
-         TAB 3: PUJA UPDATES & NOTICES ("diffarent types of update")
+         TAB 3: PUJA UPDATES & NOTICES
          ======================================================== -->
     <section class="tab-pane" id="pane-updates">
       <div class="section-banner">
@@ -310,7 +1220,6 @@
         </button>
       </div>
 
-      <!-- Updates Controls & Category Filters -->
       <div class="updates-controls">
         <div class="category-chips" id="update-chips">
           <button class="chip-btn active" data-category="all">All Updates</button>
@@ -332,12 +1241,8 @@
         </div>
       </div>
 
-      <!-- Updates Stream List -->
-      <div class="updates-list" id="updates-list">
-        <!-- Rendered dynamically via app.js -->
-      </div>
+      <div class="updates-list" id="updates-list"></div>
     </section>
-
 
     <!-- ========================================================
          TAB 4: MANTRAS, PANCHALI & RITUALS
@@ -405,7 +1310,6 @@
       </div>
     </section>
 
-
     <!-- ========================================================
          TAB 5: WISHES & PRANAM GUESTBOOK
          ======================================================== -->
@@ -418,9 +1322,8 @@
       </div>
 
       <div class="wishes-layout">
-        <!-- Form -->
         <div class="wish-form-card">
-          <h3 style="font-family: var(--font-heading); color: var(--color-primary); margin-bottom: 1rem;">
+          <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-primary); margin-bottom: 1rem;">
             ✍️ Leave Your Pranam
           </h3>
           <form id="wish-form">
@@ -442,13 +1345,9 @@
           </form>
         </div>
 
-        <!-- Wall -->
-        <div class="wishes-wall" id="wishes-wall">
-          <!-- Rendered dynamically -->
-        </div>
+        <div class="wishes-wall" id="wishes-wall"></div>
       </div>
     </section>
-
 
     <!-- ========================================================
          TAB 6: DATA MANAGEMENT & BACKUP
@@ -522,7 +1421,7 @@
   </main>
 
   <!-- ========================================================
-       MODAL 1: PHOTO UPLOAD (Easily save photo for view public)
+       MODAL 1: PHOTO UPLOAD
        ======================================================== -->
   <div class="modal-overlay" id="upload-modal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
     <div class="modal-card">
@@ -532,7 +1431,6 @@
       </div>
 
       <form id="photo-upload-form">
-        <!-- Dropzone -->
         <div class="form-group">
           <label class="form-label">Select Photo (ছবি নির্বাচন করুন) *</label>
           <div class="file-dropzone" id="file-dropzone">
@@ -566,12 +1464,12 @@
 
         <div class="form-group">
           <label class="form-label" for="photo-author-input">Photographer / Captured By</label>
-          <input type="text" id="photo-author-input" class="form-input" placeholder="Your name or family name (e.g. Soumyadip Maity)" />
+          <input type="text" id="photo-author-input" class="form-input" placeholder="Your name (e.g. Soumyadip Maity)" />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="photo-caption-input">Caption / Story</label>
-          <textarea id="photo-caption-input" rows="3" class="form-textarea" placeholder="Add a few auspicious words about this moment..."></textarea>
+          <textarea id="photo-caption-input" rows="3" class="form-textarea" placeholder="Add a few words about this moment..."></textarea>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
@@ -586,9 +1484,8 @@
     </div>
   </div>
 
-
   <!-- ========================================================
-       MODAL 2: LIGHTBOX MODAL (Public photo viewing with zoom)
+       MODAL 2: LIGHTBOX MODAL
        ======================================================== -->
   <div class="modal-overlay" id="lightbox-modal" role="dialog" aria-modal="true">
     <div class="modal-card lightbox-card">
@@ -611,7 +1508,7 @@
       <div class="lightbox-details">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 0.5rem;">
           <div>
-            <h3 id="lightbox-title" style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.3rem;"></h3>
+            <h3 id="lightbox-title" style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-gold-light); font-size: 1.3rem;"></h3>
             <div style="font-size: 0.84rem; color: #ffecd1;">
               <span id="lightbox-author"></span> • <span id="lightbox-time"></span>
             </div>
@@ -630,9 +1527,8 @@
     </div>
   </div>
 
-
   <!-- ========================================================
-       MODAL 3: POST UPDATE MODAL ("diffarent types of update")
+       MODAL 3: POST UPDATE MODAL
        ======================================================== -->
   <div class="modal-overlay" id="update-modal" role="dialog" aria-modal="true" aria-labelledby="update-modal-title">
     <div class="modal-card">
@@ -678,12 +1574,12 @@
 
         <div class="form-group">
           <label class="form-label" for="update-author-input">Issued By / Committee Member</label>
-          <input type="text" id="update-author-input" class="form-input" placeholder="e.g. Purohit Mahashay, Bhog Cell, Secretary" />
+          <input type="text" id="update-author-input" class="form-input" placeholder="e.g. Purohit Mahashay, Bhog Cell" />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="update-body-input">Announcement Details *</label>
-          <textarea id="update-body-input" rows="5" class="form-textarea" placeholder="Provide full details, timings, rules, or instructions..." required></textarea>
+          <textarea id="update-body-input" rows="5" class="form-textarea" placeholder="Provide full details, timings, rules..." required></textarea>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
@@ -717,7 +1613,6 @@
         </ol>
       </div>
 
-      <!-- Quick Paste Snippet Area -->
       <div class="form-group">
         <label class="form-label" for="fb-raw-snippet">⚡ Quick Paste (Firebase Config Snippet)</label>
         <textarea id="fb-raw-snippet" rows="3" class="form-textarea" placeholder='Paste snippet from Firebase Console here, e.g.:
@@ -733,7 +1628,6 @@ const firebaseConfig = {
 
       <div style="margin: 1.2rem 0; border-top: 1px dashed #edd7ba;"></div>
 
-      <!-- Manual Input Fields -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <div class="form-group">
           <label class="form-label" for="fb-api-key">API Key (apiKey) *</label>
@@ -761,7 +1655,6 @@ const firebaseConfig = {
         </div>
       </div>
 
-      <!-- Connection Test Status Box -->
       <div id="firebase-test-status" style="display: none; padding: 10px 14px; border-radius: 6px; margin: 1rem 0; font-size: 0.88rem; line-height: 1.4;"></div>
 
       <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap;">
@@ -787,7 +1680,7 @@ const firebaseConfig = {
   <footer class="puja-footer">
     <div class="footer-content">
       <div class="alpona-border footer-alpona" aria-hidden="true"></div>
-      <h3 style="font-family: var(--font-heading); color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
+      <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
         শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা
       </h3>
       <p style="font-family: var(--font-bengali); color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
@@ -805,11 +1698,11 @@ const firebaseConfig = {
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
-  <!-- Application Scripts -->
-  <script src="js/firebase-config.js"></script>
-  <script src="js/firebase-service.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Application Scripts (Loads from js/ or falls back to root) -->
+  <script src="js/firebase-config.js" onerror="this.onerror=null;this.src='firebase-config.js'"></script>
+  <script src="js/firebase-service.js" onerror="this.onerror=null;this.src='firebase-service.js'"></script>
+  <script src="js/audio.js" onerror="this.onerror=null;this.src='audio.js'"></script>
+  <script src="js/db.js" onerror="this.onerror=null;this.src='db.js'"></script>
+  <script src="js/app.js" onerror="this.onerror=null;this.src='app.js'"></script>
 </body>
 </html>
