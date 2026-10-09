@@ -2094,13 +2094,10 @@ const firebaseConfig = {
         <div class="form-group">
           <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret Password *</label>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="password" id="admin-pin-input" class="form-input" placeholder="ডিফল্ট পাসওয়ার্ড: 24689011" style="flex: 1;" required />
+            <input type="password" id="admin-pin-input" class="form-input" placeholder="গোপন পাসওয়ার্ড লিখুন..." style="flex: 1;" required />
             <button type="button" id="btn-toggle-pin-visibility" class="pill-btn" style="padding: 10px 14px; font-size: 0.82rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
               👁️ পাসওয়ার্ড দেখুন
             </button>
-          </div>
-          <div style="margin-top: 10px; font-size: 0.85rem; color: #5d4037; background: #fff8e1; border: 1px solid #ffe082; padding: 8px 12px; border-radius: 6px;">
-            🔑 <strong>ডিফল্ট অ্যাডমিন পাসওয়ার্ড:</strong> <span style="font-family: monospace; font-size: 1.05rem; color: #8b1320; font-weight: bold; letter-spacing: 1px;">24689011</span>
           </div>
         </div>
 
@@ -4447,7 +4444,7 @@ async function initPujaApp() {
         window.pujaAudio.playTempleBell();
         showToast('👑 স্বাগতম! আমফান (N.S.C.C) অ্যাডমিন হিসেবে লগইন সফল। আপনি এখন আপডেট ও ফটো ম্যানেজ করতে পারবেন।');
       } else {
-        alert('❌ ভুল পাসওয়ার্ড! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। (ডিফল্ট পাসওয়ার্ড: 24689011)');
+        alert('❌ ভুল পাসওয়ার্ড! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য।');
       }
     });
   }
