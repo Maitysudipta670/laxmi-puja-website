@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা | Kojagari Laxmi Puja Public Mandap & Photo Gallery</title>
+  <title>আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও মিনি স্পোর্টস</title>
   
   <!-- Google Fonts for Festive Elegance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Stylesheets (External and Local) -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="styles.css">
 
@@ -50,6 +50,7 @@
   --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
 }
 
+/* Base Resets */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -71,6 +72,7 @@ body {
   position: relative;
 }
 
+/* Festive Top Marigold Garland Toran */
 .toran-garland {
   width: 100%;
   height: 24px;
@@ -89,6 +91,7 @@ body {
   border-bottom: 2px solid var(--color-gold);
 }
 
+/* Decorative Alpona Headers */
 .alpona-border {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='20' viewBox='0 0 80 20'%3E%3Cpath d='M0 10 Q20 0 40 10 Q60 20 80 10 M40 10 A5 5 0 1 1 39.9 10 M10 10 A3 3 0 1 1 9.9 10 M70 10 A3 3 0 1 1 69.9 10' fill='none' stroke='%23e5a93b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   height: 20px;
@@ -97,6 +100,30 @@ body {
   opacity: 0.85;
 }
 
+.alpona-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.5rem auto;
+  max-width: 480px;
+}
+
+.alpona-divider::before,
+.alpona-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.alpona-motif {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Header & Navigation */
 .header-hero {
   background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, #991427 100%);
   color: var(--color-ivory);
@@ -146,8 +173,8 @@ body {
 }
 
 .puja-title {
-  font-family: var(--font-bengali), var(--font-heading);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.6rem);
   font-weight: 700;
   color: var(--color-ivory);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.3);
@@ -172,6 +199,7 @@ body {
   opacity: 0.95;
 }
 
+/* Sound and Interactive Quick Action Bar in Hero */
 .hero-action-pills {
   display: flex;
   justify-content: center;
@@ -205,12 +233,17 @@ body {
   transform: translateY(-2px);
 }
 
+.pill-btn:active {
+  transform: translateY(0);
+}
+
 .pill-btn.active {
   background: var(--color-gold);
   color: var(--color-primary-dark);
   font-weight: 600;
 }
 
+/* Main Navigation Tabs */
 .nav-container {
   max-width: 1240px;
   margin: -1.8rem auto 1.5rem;
@@ -242,7 +275,7 @@ body {
   border: none;
   background: transparent;
   color: var(--color-text-muted);
-  font-family: var(--font-bengali), var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: var(--radius-md);
@@ -266,6 +299,7 @@ body {
   box-shadow: 0 4px 12px rgba(139, 19, 32, 0.3);
 }
 
+/* Main Content Container */
 .main-content {
   max-width: 1240px;
   margin: 0 auto;
@@ -286,6 +320,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Section Header Card */
 .section-banner {
   background: linear-gradient(135deg, #fffcf6 0%, #fff7e6 100%);
   border: 1px solid var(--color-border);
@@ -302,7 +337,7 @@ body {
 }
 
 .section-banner h2 {
-  font-family: var(--font-bengali), var(--font-heading);
+  font-family: var(--font-heading);
   color: var(--color-primary-dark);
   font-size: 1.55rem;
   margin-bottom: 0.2rem;
@@ -313,6 +348,7 @@ body {
   font-size: 0.95rem;
 }
 
+/* Primary Button Styling */
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: #ffffff;
@@ -357,6 +393,9 @@ body {
   box-shadow: 0 6px 18px rgba(229, 169, 59, 0.45);
 }
 
+/* ==========================================================================
+   Virtual Mandap & Darshan Section
+   ========================================================================== */
 .mandap-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -420,8 +459,14 @@ body {
   height: 420px;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s ease;
 }
 
+.deity-frame:hover .deity-image {
+  transform: scale(1.03);
+}
+
+/* Lokkhir Paa Footprints at Altar bottom */
 .lokkhir-paa-container {
   display: flex;
   justify-content: center;
@@ -436,6 +481,7 @@ body {
   filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
 }
 
+/* Altar Ritual Action Buttons */
 .altar-actions {
   display: flex;
   justify-content: center;
@@ -467,6 +513,14 @@ body {
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
+.ritual-btn.lit {
+  background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+  color: #3e0409;
+  box-shadow: 0 0 25px rgba(255, 179, 0, 0.7);
+  border-color: #ffffff;
+}
+
+/* Altar Right Side: Live Devotion & Schedule Highlights */
 .altar-sidebar {
   display: flex;
   flex-direction: column;
@@ -483,7 +537,7 @@ body {
 }
 
 .info-card h3 {
-  font-family: var(--font-bengali), var(--font-heading);
+  font-family: var(--font-heading);
   color: var(--color-primary);
   font-size: 1.25rem;
   margin-bottom: 1rem;
@@ -505,6 +559,7 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-primary);
+  font-family: var(--font-heading);
 }
 
 .stats-grid {
@@ -535,7 +590,10 @@ body {
   letter-spacing: 0.5px;
 }
 
-.gallery-controls, .updates-controls {
+/* ==========================================================================
+   Photo Gallery Section
+   ========================================================================== */
+.gallery-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -591,6 +649,12 @@ body {
   font-size: 0.9rem;
   outline: none;
   background: var(--color-ivory);
+  transition: border-color 0.2s;
+}
+
+.gallery-search-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(229, 169, 59, 0.2);
 }
 
 .search-icon {
@@ -602,6 +666,7 @@ body {
   pointer-events: none;
 }
 
+/* Photo Cards Grid */
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -614,11 +679,14 @@ body {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .photo-card:hover {
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md), 0 0 12px rgba(229, 169, 59, 0.25);
   border-color: var(--color-gold);
 }
@@ -654,6 +722,7 @@ body {
   padding: 4px 10px;
   border-radius: var(--radius-full);
   backdrop-filter: blur(4px);
+  letter-spacing: 0.5px;
 }
 
 .photo-info {
@@ -668,12 +737,18 @@ body {
   font-weight: 600;
   color: var(--color-text-main);
   margin-bottom: 0.3rem;
+  line-height: 1.35;
 }
 
 .photo-caption {
   font-size: 0.88rem;
   color: var(--color-text-muted);
   margin-bottom: 0.8rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .photo-meta {
@@ -686,6 +761,18 @@ body {
   border-top: 1px dashed var(--color-border);
 }
 
+.photo-credit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .photo-like-btn {
   background: #fff3f5;
   border: 1px solid #ffd0d6;
@@ -694,7 +781,48 @@ body {
   border-radius: var(--radius-full);
   font-size: 0.82rem;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.photo-like-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.photo-like-btn.liked {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.photo-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Puja Updates & Announcements Notice Board
+   ========================================================================== */
+.updates-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
 }
 
 .updates-list {
@@ -709,22 +837,138 @@ body {
   border-radius: var(--radius-md);
   padding: 1.25rem 1.5rem;
   box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.update-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
+}
+
+.update-card.pinned {
+  border-left: 5px solid #d32f2f;
+  background: linear-gradient(to right, #fff9f9, #ffffff);
+}
+
+.update-card.urgent {
+  border-left: 5px solid #c62828;
+}
+
+.update-card.schedule {
+  border-left: 5px solid #e5a93b;
+}
+
+.update-card.bhog {
+  border-left: 5px solid #2e7d32;
+}
+
+.update-card.cultural {
+  border-left: 5px solid #6a1b9a;
+}
+
+.update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0.6rem;
+}
+
+.update-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .update-badge {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 3px 10px;
   border-radius: var(--radius-full);
 }
 
-.badge-urgent { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
-.badge-schedule { background: #fff8e1; color: #b78103; border: 1px solid #ffe082; }
-.badge-bhog { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-.badge-cultural { background: #f3e5f5; color: #7b1fa2; border: 1px solid #e1bee7; }
-.badge-general { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.badge-urgent {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
 
+.badge-schedule {
+  background: #fff8e1;
+  color: #b78103;
+  border: 1px solid #ffe082;
+}
+
+.badge-bhog {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.badge-cultural {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border: 1px solid #e1bee7;
+}
+
+.badge-general {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.badge-pinned {
+  background: #fff176;
+  color: #7f6000;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.update-time {
+  font-size: 0.82rem;
+  color: #8c7377;
+}
+
+.update-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.update-body {
+  font-size: 0.95rem;
+  color: #4a3338;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.update-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #f2e5d5;
+  font-size: 0.82rem;
+  color: #8c7377;
+}
+
+.update-author {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Mantras, Panchali & Vidhi Section
+   ========================================================================== */
 .mantra-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -743,11 +987,19 @@ body {
   border-top: 4px solid var(--color-gold);
   border-radius: var(--radius-md);
   padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mantra-card h3 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
 }
 
 .mantra-bengali-script {
   font-family: var(--font-bengali);
-  font-size: 1.2rem;
+  font-size: 1.18rem;
   line-height: 1.8;
   color: #3b181d;
   background: #fdf8ef;
@@ -757,6 +1009,15 @@ body {
   margin: 1rem 0;
 }
 
+.mantra-translation {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Wishes & Pranam Board (Guestbook)
+   ========================================================================== */
 .wishes-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -774,6 +1035,8 @@ body {
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-md);
   padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  height: fit-content;
 }
 
 .wishes-wall {
@@ -787,8 +1050,44 @@ body {
   border: 1px solid #ecd8c0;
   border-radius: var(--radius-md);
   padding: 1.1rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
+.wish-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gold);
+}
+
+.wish-message {
+  font-size: 0.94rem;
+  color: var(--color-text-main);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+  flex: 1;
+}
+
+.wish-author-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #8c7377;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #f0dfcb;
+}
+
+.wish-name {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Modals & Overlays
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -803,6 +1102,7 @@ body {
 
 .modal-overlay.active {
   display: flex;
+  animation: fadeIn 0.25s ease;
 }
 
 .modal-card {
@@ -813,6 +1113,8 @@ body {
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
   padding: 1.75rem;
 }
 
@@ -825,14 +1127,27 @@ body {
   padding-bottom: 0.75rem;
 }
 
+.modal-header h3 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.35rem;
+}
+
 .modal-close-btn {
   background: transparent;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
   color: #777;
+  line-height: 1;
+  padding: 4px;
 }
 
+.modal-close-btn:hover {
+  color: var(--color-primary);
+}
+
+/* Lightbox Modal (For viewing public photos in full glory) */
 .lightbox-card {
   max-width: 900px;
   background: #1a0307;
@@ -840,6 +1155,8 @@ body {
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .lightbox-img-wrapper {
@@ -849,6 +1166,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .lightbox-img {
@@ -862,6 +1180,7 @@ body {
   background: #230409;
 }
 
+/* Form Controls */
 .form-group {
   margin-bottom: 1.1rem;
 }
@@ -870,16 +1189,29 @@ body {
   display: block;
   font-size: 0.88rem;
   font-weight: 600;
+  color: var(--color-text-main);
   margin-bottom: 0.35rem;
 }
 
-.form-input, .form-select, .form-textarea {
+.form-input,
+.form-select,
+.form-textarea {
   width: 100%;
   padding: 10px 14px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
+  font-family: inherit;
   background: #fffdf9;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(229, 169, 59, 0.2);
 }
 
 .file-dropzone {
@@ -889,6 +1221,11 @@ body {
   padding: 1.75rem 1rem;
   text-align: center;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.file-dropzone:hover {
+  background: #faeed3;
 }
 
 .file-preview {
@@ -896,8 +1233,12 @@ body {
   max-height: 180px;
   border-radius: var(--radius-sm);
   display: none;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Canvas for Flower Shower & Sparks */
 #flower-canvas {
   position: fixed;
   inset: 0;
@@ -905,6 +1246,7 @@ body {
   z-index: 999;
 }
 
+/* Animations */
 @keyframes pulse-glow {
   0% { transform: scale(0.96); opacity: 0.7; }
   100% { transform: scale(1.05); opacity: 1; }
@@ -920,6 +1262,7 @@ body {
   transform-origin: bottom center;
 }
 
+/* Footer */
 .puja-footer {
   background: linear-gradient(135deg, #3d0309 0%, #200104 100%);
   color: #ffecd1;
@@ -927,6 +1270,38 @@ body {
   padding: 3rem 1.5rem 2rem;
   text-align: center;
 }
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-alpona {
+  max-width: 320px;
+  margin: 1.5rem auto;
+  opacity: 0.6;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 640px) {
+  .header-hero {
+    padding: 2rem 1rem;
+  }
+  .nav-tabs {
+    padding: 4px;
+    gap: 4px;
+  }
+  .tab-btn {
+    min-width: 100px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  .gallery-controls, .updates-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
@@ -944,16 +1319,15 @@ body {
     <div class="hero-gold-glow" aria-hidden="true"></div>
 
     <div class="puja-badge">
-      <span>🪔 শুভ কোজাগরী পূর্ণিমা</span>
+      <span>🪔 আমফান (N.S.C.C)</span>
       <span>•</span>
-      <span>Kojagari Laxmi Puja</span>
+      <span>Amfan (N.S.C.C) Kojagari Laxmi Puja</span>
     </div>
 
     <h1 class="puja-title">শ্রী শ্রী মহালক্ষ্মী পূজা</h1>
-    <div class="puja-bengali-title">এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে</div>
+    <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক মিনি স্পোর্টস</div>
     <p class="puja-tagline">
-      Welcome to our Community Mandap Portal. Explore our sacred Darshan, view public photos, 
-      share your festive moments, and stay updated with live tithi and bhog announcements.
+      এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের মিনি স্পোর্টস এর মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
     </p>
 
     <!-- Quick Audio & Action Bar -->
@@ -973,9 +1347,12 @@ body {
       <button class="pill-btn" id="btn-offer-flowers" title="Offer Flower Shower">
         🌸 পুষ্পাঞ্জলি (Offer Flowers)
       </button>
+      <button class="pill-btn" id="admin-status-pill" style="border-color: #ffd700;" title="Club Admin Login">
+        👑 ক্লাবের অ্যাডমিন
+      </button>
       <div id="firebase-status-pill" class="pill-btn" style="background: rgba(255, 193, 7, 0.16); border-color: #ffd54f; cursor: pointer;" title="Google Firebase Cloud Server Configuration">
         <span id="firebase-status-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ffc107;"></span>
-        <span id="firebase-status-text">🟡 Local Mode (Click to Connect Firebase)</span>
+        <span id="firebase-status-text">🟡 Local Mode</span>
       </div>
     </div>
   </header>
@@ -1004,6 +1381,14 @@ body {
     </div>
   </nav>
 
+  <!-- Admin Active Banner (Only shown when Admin is logged in) -->
+  <div id="admin-active-banner" style="display: none; background: #fff8e1; border: 1px solid #ffd54f; border-radius: 8px; padding: 10px 16px; margin: 0 auto 1.5rem; max-width: 1240px; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #5d4037;">
+    <span>👑 <strong>আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছতে পারবেন।</span>
+    <button class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem; background: #8b1320; color: #fff;" onclick="document.getElementById('admin-status-pill').click()">
+      লগআউট (Logout)
+    </button>
+  </div>
+
   <!-- Main Content Area -->
   <main class="main-content">
 
@@ -1013,15 +1398,15 @@ body {
     <section class="tab-pane active" id="pane-darshan">
       <div class="section-banner">
         <div>
-          <h2>পবিত্র প্রতিমা দর্শন ও আরতি</h2>
-          <p>Experience the divine sanctum of Maa Mahalakshmi from anywhere in the world.</p>
+          <h2>আমফান (N.S.C.C) প্রতিমা দর্শন ও আরতি</h2>
+          <p>আমাদের ক্লাবের পবিত্র কোজাগরী লক্ষ্মী পূজা মণ্ডপ ও প্রতিমা দর্শন।</p>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button class="btn-gold" onclick="switchTab('gallery')">
             📷 Explore Photo Gallery
           </button>
           <button class="btn-primary" onclick="switchTab('updates')">
-            🕒 View Tithi Timings
+            🕒 View Tithi & Sports Schedule
           </button>
         </div>
       </div>
@@ -1076,10 +1461,9 @@ body {
           </div>
 
           <p style="font-size: 0.85rem; color: #ffecd1; max-width: 400px; margin: 0.5rem auto 1rem;">
-            Light a sacred diya and shower flower petals to receive the eternal blessings of prosperity and serenity.
+            মা লক্ষ্মীর চরণে ভক্তিভরে প্রদীপ জ্বালান এবং পুষ্পাঞ্জলি দিন।
           </p>
 
-          <!-- Altar Ritual Buttons -->
           <div class="altar-actions">
             <button class="ritual-btn" id="btn-light-diya">
               🪔 Light a Diya for Maa
@@ -1090,45 +1474,43 @@ body {
           </div>
         </div>
 
-        <!-- Altar Sidebar / Live Tithi & Statistics -->
+        <!-- Altar Sidebar -->
         <div class="altar-sidebar">
           
-          <!-- Live Kojagari Clock Card -->
           <div class="info-card">
-            <h3>🕒 Kojagari Purnima Live Status</h3>
+            <h3>🕒 আমফান (N.S.C.C) পূজা ও স্পোর্টস সময়</h3>
             <div class="tithi-clock">
               <div style="font-size: 0.85rem; color: #7a4603; font-weight: 600; text-transform: uppercase;">
                 Current Mandap Time
               </div>
               <div class="tithi-clock-time" id="live-tithi-timer">--:--:--</div>
               <div style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600; margin-top: 4px;">
-                🌕 Purnima Tithi is Active
+                🌕 Amfan (N.S.C.C) Kojagari Purnima
               </div>
             </div>
 
             <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>✨ Nishita Muhurat:</span>
-                <strong>11:38 PM – 12:28 AM</strong>
+                <span>🏆 বার্ষিক মিনি স্পোর্টস:</span>
+                <strong>সকাল ৮:৩০ AM</strong>
               </li>
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🔥 Sandhya Aarti:</span>
-                <strong>07:15 PM Daily</strong>
+                <span>🔥 সন্ধ্যা আরতি:</span>
+                <strong>০৭:১৫ PM</strong>
               </li>
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🍲 Mahabhog Prasad:</span>
-                <strong>09:30 PM Onwards</strong>
+                <span>🍲 মহাভাব প্রসাদ বিতরণ:</span>
+                <strong>০৯:৩০ PM onwards</strong>
               </li>
               <li style="display: flex; justify-content: space-between;">
-                <span>🌙 "Ke Jagore" Vigil:</span>
-                <strong>All Night Long</strong>
+                <span>🥇 স্পোর্টস প্রাইজ বিতরণ:</span>
+                <strong>পূজার দিন সন্ধ্যায়</strong>
               </li>
             </ul>
           </div>
 
-          <!-- Mandap Live Statistics -->
           <div class="info-card">
-            <h3>📊 Public Mandap Activity</h3>
+            <h3>📊 আমফান (N.S.C.C) অ্যাক্টিভিটি</h3>
             <div class="stats-grid">
               <div class="stat-box">
                 <span class="stat-number" id="stat-diyas">142</span>
@@ -1140,7 +1522,7 @@ body {
               </div>
               <div class="stat-box">
                 <span class="stat-number" id="stat-updates">0</span>
-                <span class="stat-label">Live Notices</span>
+                <span class="stat-label">Official Notices</span>
               </div>
               <div class="stat-box">
                 <span class="stat-number" id="stat-wishes">0</span>
@@ -1149,14 +1531,13 @@ body {
             </div>
           </div>
 
-          <!-- Quick Notice Snippet Card -->
           <div class="info-card" style="background: linear-gradient(135deg, #fff7f7 0%, #ffffff 100%); border-left: 4px solid var(--color-primary);">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-              <strong style="color: var(--color-primary); font-size: 0.92rem;">📢 Latest Committee Announcement</strong>
+              <strong style="color: var(--color-primary); font-size: 0.92rem;">📢 Amfan (N.S.C.C) নোটিশ</strong>
               <span class="update-badge badge-urgent">Priority</span>
             </div>
             <p style="font-size: 0.88rem; color: #493338; line-height: 1.5;">
-              Devotees can upload and view high-resolution mandap photos, alpona art, and bhog offerings directly to our public gallery.
+              সাধারণ ভক্ত ও সদস্যরা পুজো ও মিনি স্পোর্টসের ছবি আপলোড করতে পারবেন। গুরুত্বপূর্ণ নোটিশ ও আপডেট শুধুমাত্র ক্লাব কর্তৃপক্ষ প্রকাশ করবে।
             </p>
             <button class="btn-primary" style="margin-top: 0.75rem; padding: 6px 14px; font-size: 0.82rem;" onclick="switchTab('updates')">
               Read All Updates &rarr;
@@ -1168,28 +1549,29 @@ body {
     </section>
 
     <!-- ========================================================
-         TAB 2: PHOTO GALLERY (Easily save & view public photos)
+         TAB 2: PHOTO GALLERY
          ======================================================== -->
     <section class="tab-pane" id="pane-gallery">
       <div class="section-banner">
         <div>
-          <h2>পাবলিক ফটো গ্যালারি | Puja Photo Album</h2>
-          <p>Easily save and share high-resolution photos of Maa Lakshmi, Mandap decoration, Alpona, and Bhog offerings for everyone to admire.</p>
+          <h2>আমফান (N.S.C.C) ফটো গ্যালারি | Puja & Mini Sports Album</h2>
+          <p>পূজার প্রতিমা, মণ্ডপ সজ্জা এবং ক্লাবের বার্ষিক মিনি স্পোর্টসের স্মরণীয় মুহূর্তসমূহ। ভক্তরা ছবি যোগ করতে পারেন।</p>
         </div>
         <button class="btn-primary" id="btn-open-upload-modal">
-          📸 Upload Photo (ছবি আপলোড)
+          📸 Upload Photo (ছবি আপলোড করুন)
         </button>
       </div>
 
       <div class="gallery-controls">
         <div class="category-chips" id="photo-chips">
           <button class="chip-btn active" data-category="all">All Photos</button>
+          <button class="chip-btn" data-category="🏆 ক্লাব মিনি স্পোর্টস">🏆 ক্লাব মিনি স্পোর্টস</button>
           <button class="chip-btn" data-category="Maa Lakshmi Idol / Pratima">প্রতিমা (Idol)</button>
           <button class="chip-btn" data-category="Mandap & Pandal">মণ্ডপ (Mandap)</button>
           <button class="chip-btn" data-category="Alpona Designs">আলপনা (Alpona)</button>
-          <button class="chip-btn" data-category="Bhog & Prasad">ভোগ ও প্রসাদ (Bhog)</button>
-          <button class="chip-btn" data-category="Evening Aarti & Dhunuchi">আরতি (Aarti)</button>
-          <button class="chip-btn" data-category="Family & Community">পরিবার ও ভক্তবৃন্দ</button>
+          <button class="chip-btn" data-category="Bhog & Prasad">ভোগ ও প্রসাদ</button>
+          <button class="chip-btn" data-category="Evening Aarti & Dhunuchi">আরতি ও ধুনুচি</button>
+          <button class="chip-btn" data-category="Family & Community">ক্লাব সদস্য ও ভক্তবৃন্দ</button>
         </div>
 
         <div class="gallery-search-box">
@@ -1198,7 +1580,7 @@ body {
             type="text" 
             id="photo-search-input" 
             class="gallery-search-input" 
-            placeholder="Search photos, titles, photographers..." 
+            placeholder="Search photos, sports, titles..." 
           />
         </div>
       </div>
@@ -1207,27 +1589,32 @@ body {
     </section>
 
     <!-- ========================================================
-         TAB 3: PUJA UPDATES & NOTICES
+         TAB 3: PUJA & SPORTS UPDATES (Admin Controlled)
          ======================================================== -->
     <section class="tab-pane" id="pane-updates">
       <div class="section-banner">
         <div>
-          <h2>পূজা আপডেট ও বিজ্ঞপ্তি বোর্ড | Live Puja Updates</h2>
-          <p>Real-time bulletins across multiple categories: Tithi Schedules, Mahabhog Distribution, Urgent Alerts, and Cultural Programmes.</p>
+          <h2>আমফান (এন.এস.সি.সি) পূজা ও মিনি স্পোর্টস নোটিশ বোর্ড</h2>
+          <p>শুধুমাত্র ক্লাবের গুরুত্বপূর্ণ ঘোষণা: পূজা নির্ঘণ্ট, ভোগ বিতরণ ও মিনি স্পোর্টস সংক্রান্ত আপডেট।</p>
         </div>
-        <button class="btn-primary" id="btn-open-update-modal">
-          📢 Post New Update (বিজ্ঞপ্তি দিন)
-        </button>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <button class="btn-primary" id="btn-open-update-modal" style="display: none;">
+            📢 Post New Update (অ্যাডমিন নোটিশ দিন)
+          </button>
+          <span id="public-notice-tag" style="background: #fff8e1; border: 1px solid #ffe082; color: #b78103; font-size: 0.84rem; padding: 6px 14px; border-radius: 9999px; font-weight: 600;">
+            🔒 শুধুমাত্র আমফান (N.S.C.C) ক্লাবের অনুমোদিত নোটিশ
+          </span>
+        </div>
       </div>
 
       <div class="updates-controls">
         <div class="category-chips" id="update-chips">
           <button class="chip-btn active" data-category="all">All Updates</button>
-          <button class="chip-btn" data-category="schedule">🕒 Tithi & Schedule</button>
-          <button class="chip-btn" data-category="bhog">🍲 Bhog & Prasad</button>
-          <button class="chip-btn" data-category="urgent">🔴 Urgent Notices</button>
-          <button class="chip-btn" data-category="cultural">🎭 Cultural & Competitions</button>
-          <button class="chip-btn" data-category="general">📢 General Info</button>
+          <button class="chip-btn" data-category="cultural">🏆 মিনি স্পোর্টস ও সাংস্কৃতিক</button>
+          <button class="chip-btn" data-category="schedule">🕒 পূজা সময়সূচী</button>
+          <button class="chip-btn" data-category="bhog">🍲 ভোগ ও প্রসাদ</button>
+          <button class="chip-btn" data-category="urgent">🔴 জরুরি ঘোষণা</button>
+          <button class="chip-btn" data-category="general">📢 সাধারণ বিজ্ঞপ্তি</button>
         </div>
 
         <div class="gallery-search-box">
@@ -1236,7 +1623,7 @@ body {
             type="text" 
             id="update-search-input" 
             class="gallery-search-input" 
-            placeholder="Search notices, schedules, items..." 
+            placeholder="Search club updates & notices..." 
           />
         </div>
       </div>
@@ -1317,14 +1704,14 @@ body {
       <div class="section-banner">
         <div>
           <h2>শুভেচ্ছা ও প্রণাম বার্তা | Wishes & Pranam Wall</h2>
-          <p>Leave your devotional greetings and prayers for family and the entire community.</p>
+          <p>আমফান (N.S.C.C) ক্লাবের সদস্য ও ভক্তবৃন্দদের শুভকামনা ও শুভেচ্ছা বার্তা।</p>
         </div>
       </div>
 
       <div class="wishes-layout">
         <div class="wish-form-card">
-          <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-primary); margin-bottom: 1rem;">
-            ✍️ Leave Your Pranam
+          <h3 style="font-family: var(--font-bengali), var(--font-heading), sans-serif; color: var(--color-primary); margin-bottom: 1rem;">
+            ✍️ Leave Your Pranam & Wishes
           </h3>
           <form id="wish-form">
             <div class="form-group">
@@ -1333,11 +1720,11 @@ body {
             </div>
             <div class="form-group">
               <label class="form-label" for="wish-location-input">City / Neighborhood</label>
-              <input type="text" id="wish-location-input" class="form-input" placeholder="e.g. Kolkata, WB" />
+              <input type="text" id="wish-location-input" class="form-input" placeholder="e.g. Amfan Club Para" />
             </div>
             <div class="form-group">
               <label class="form-label" for="wish-message-input">Your Festive Prayer / Message *</label>
-              <textarea id="wish-message-input" rows="4" class="form-textarea" placeholder="শুভ কোজাগরী লক্ষ্মী পূজার আন্তরিক শুভেচ্ছা! May Maa bless all..." required></textarea>
+              <textarea id="wish-message-input" rows="4" class="form-textarea" placeholder="শুভ কোজাগরী লক্ষ্মী পূজার আন্তরিক শুভেচ্ছা!..." required></textarea>
             </div>
             <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
               🙏 Post Auspicious Wish
@@ -1355,7 +1742,7 @@ body {
     <section class="tab-pane" id="pane-manage">
       <div class="section-banner">
         <div>
-          <h2>ডেটা ব্যাকআপ ও ব্যবস্থাপনা | Data & Backup Controls</h2>
+          <h2>ডেটা ব্যাকআপ ও ক্লাউড সেটিংস | Data & Backup Controls</h2>
           <p>Export all your uploaded photos and updates as a portable backup file, or restore them anytime.</p>
         </div>
       </div>
@@ -1369,7 +1756,7 @@ body {
             <span class="update-badge" style="background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9;">Real-Time Sync</span>
           </div>
           <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem; line-height: 1.5;">
-            Connect your local website to Google Firebase (Firestore Database) so that photos, updates, and likes sync in real-time between your localhost server and public visitors on any device!
+            Connect your website to Google Firebase (Firestore Database) so that photos, updates, and likes sync in real-time between your localhost server and public visitors on any device!
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button class="btn-primary" id="btn-open-firebase-modal">
@@ -1387,7 +1774,7 @@ body {
         <div class="info-card">
           <h3>💾 Export Full Database Backup</h3>
           <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
-            Download all stored photos (with high-resolution images), multi-category updates, wishes, and stats into a single <code>.json</code> backup file. You can keep this on your laptop or transfer to another device.
+            Download all stored photos (with high-resolution images), multi-category updates, wishes, and stats into a single <code>.json</code> backup file.
           </p>
           <button class="btn-gold" id="btn-export-data">
             📥 Download Complete Backup (.json)
@@ -1408,7 +1795,7 @@ body {
         <div class="info-card" style="border-left: 4px solid #b71c1c;">
           <h3 style="color: #b71c1c;">🔄 Reset to Initial Sample Data</h3>
           <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
-            Want to start fresh? Reset back to our curated Kojagari Laxmi Puja demo photos, realistic schedule bulletins, and festive wishes.
+            Want to start fresh? Reset back to Amfan (N.S.C.C) Kojagari Laxmi Puja demo photos, realistic schedule bulletins, and sports notices.
           </p>
           <button class="btn-primary" id="btn-reset-data" style="background: #b71c1c; border-color: #8b1320;">
             ⚠️ Reset Sample Data
@@ -1421,12 +1808,12 @@ body {
   </main>
 
   <!-- ========================================================
-       MODAL 1: PHOTO UPLOAD
+       MODAL 1: PHOTO UPLOAD (Public & Admin can upload)
        ======================================================== -->
   <div class="modal-overlay" id="upload-modal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="upload-modal-title">📸 Upload Photo for Public Gallery</h3>
+        <h3 id="upload-modal-title">📸 Upload Photo (ছবি আপলোড করুন)</h3>
         <button class="modal-close-btn" id="btn-close-upload-modal">&times;</button>
       </div>
 
@@ -1446,18 +1833,19 @@ body {
 
         <div class="form-group">
           <label class="form-label" for="photo-title-input">Photo Title *</label>
-          <input type="text" id="photo-title-input" class="form-input" placeholder="e.g. Maa Lakshmi Sandhya Aarti with Diyas" required />
+          <input type="text" id="photo-title-input" class="form-input" placeholder="e.g. আমফান মিনি স্পোর্টস ১০০মি দৌড় প্রতিযোগিতা" required />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="photo-category-input">Category *</label>
           <select id="photo-category-input" class="form-select">
+            <option value="🏆 ক্লাব মিনি স্পোর্টস">🏆 ক্লাব মিনি স্পোর্টস (Club Mini Sports)</option>
             <option value="Maa Lakshmi Idol / Pratima">প্রতিমা (Maa Lakshmi Idol / Pratima)</option>
             <option value="Mandap & Pandal">মণ্ডপ (Mandap & Pandal)</option>
             <option value="Alpona Designs">আলপনা (Alpona Designs)</option>
             <option value="Bhog & Prasad">ভোগ ও প্রসাদ (Bhog & Prasad)</option>
             <option value="Evening Aarti & Dhunuchi">আরতি ও ধুনুচি (Evening Aarti & Dhunuchi)</option>
-            <option value="Family & Community">পরিবার ও ভক্তবৃন্দ (Family & Community)</option>
+            <option value="Family & Community">ক্লাব সদস্য ও পরিবার (Club & Family)</option>
             <option value="General Puja Moments">অন্যান্য (General Puja Moments)</option>
           </select>
         </div>
@@ -1472,7 +1860,11 @@ body {
           <textarea id="photo-caption-input" rows="3" class="form-textarea" placeholder="Add a few words about this moment..."></textarea>
         </div>
 
-        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
+        <div style="font-size: 0.8rem; color: #777; margin-bottom: 1rem; background: #faf5eb; padding: 8px 12px; border-radius: 6px;">
+          ℹ️ সাধারণ ভক্ত ও সদস্যরা পুজো, মণ্ডপ ও মিনি স্পোর্টসের ছবি আপলোড করতে পারেন। আপলোড করা ছবি মোছার অধিকার শুধুমাত্র Amfan (N.S.C.C) ক্লাবের অ্যাডমিনের কাছে সংরক্ষিত।
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
           <button type="button" class="btn-gold" onclick="document.getElementById('upload-modal').classList.remove('active')">
             Cancel
           </button>
@@ -1508,7 +1900,7 @@ body {
       <div class="lightbox-details">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 0.5rem;">
           <div>
-            <h3 id="lightbox-title" style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-gold-light); font-size: 1.3rem;"></h3>
+            <h3 id="lightbox-title" style="font-family: var(--font-bengali), var(--font-heading), sans-serif; color: var(--color-gold-light); font-size: 1.3rem;"></h3>
             <div style="font-size: 0.84rem; color: #ffecd1;">
               <span id="lightbox-author"></span> • <span id="lightbox-time"></span>
             </div>
@@ -1517,8 +1909,8 @@ body {
             <button id="lightbox-like-btn" class="btn-primary" style="padding: 6px 14px; font-size: 0.85rem;">
               ❤️ Like
             </button>
-            <button id="lightbox-delete-btn" class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem; background: #5c0b15;" title="Delete this photo">
-              🗑️
+            <button id="lightbox-delete-btn" class="btn-primary" style="padding: 6px 12px; font-size: 0.85rem; background: #5c0b15; display: none;" title="Delete this photo (Admin Only)">
+              🗑️ Delete
             </button>
           </div>
         </div>
@@ -1528,30 +1920,30 @@ body {
   </div>
 
   <!-- ========================================================
-       MODAL 3: POST UPDATE MODAL
+       MODAL 3: POST UPDATE MODAL (Admin Only)
        ======================================================== -->
   <div class="modal-overlay" id="update-modal" role="dialog" aria-modal="true" aria-labelledby="update-modal-title">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="update-modal-title">📢 Post New Puja Update or Notice</h3>
+        <h3 id="update-modal-title">📢 আমফান (N.S.C.C) অফিসিয়াল নোটিশ প্রকাশ</h3>
         <button class="modal-close-btn" id="btn-close-update-modal">&times;</button>
       </div>
 
       <form id="update-post-form">
         <div class="form-group">
-          <label class="form-label" for="update-title-input">Update Headline / Title *</label>
-          <input type="text" id="update-title-input" class="form-input" placeholder="e.g. Mahabhog Distribution Time Shifted to 9:30 PM" required />
+          <label class="form-label" for="update-title-input">নোটিশ শিরোনাম / Headline *</label>
+          <input type="text" id="update-title-input" class="form-input" placeholder="e.g. আমফান মিনি স্পোর্টস ফলাফল ও ট্রফি বিতরণী" required />
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div class="form-group">
-            <label class="form-label" for="update-category-input">Update Type *</label>
+            <label class="form-label" for="update-category-input">ক্যাটাগরি *</label>
             <select id="update-category-input" class="form-select">
-              <option value="schedule">🕒 Puja Schedule & Tithi</option>
-              <option value="bhog">🍲 Bhog & Prasad Details</option>
-              <option value="urgent">🔴 Urgent Announcement</option>
-              <option value="cultural">🎭 Cultural Programme & Competition</option>
-              <option value="general">📢 General Notice</option>
+              <option value="cultural">🏆 মিনি স্পোর্টস ও সাংস্কৃতিক</option>
+              <option value="schedule">🕒 পূজা সময়সূচী ও নির্ঘণ্ট</option>
+              <option value="bhog">🍲 ভোগ ও প্রসাদ বিতরণ</option>
+              <option value="urgent">🔴 জরুরি ঘোষণা</option>
+              <option value="general">📢 সাধারণ ক্লাব বিজ্ঞপ্তি</option>
             </select>
           </div>
 
@@ -1574,12 +1966,12 @@ body {
 
         <div class="form-group">
           <label class="form-label" for="update-author-input">Issued By / Committee Member</label>
-          <input type="text" id="update-author-input" class="form-input" placeholder="e.g. Purohit Mahashay, Bhog Cell" />
+          <input type="text" id="update-author-input" class="form-input" value="Amfan (N.S.C.C) কমিটি" />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="update-body-input">Announcement Details *</label>
-          <textarea id="update-body-input" rows="5" class="form-textarea" placeholder="Provide full details, timings, rules..." required></textarea>
+          <textarea id="update-body-input" rows="5" class="form-textarea" placeholder="পূর্ণ বিবরণ, সময়সূচী, নিয়মাবলী লিখুন..." required></textarea>
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
@@ -1587,7 +1979,7 @@ body {
             Cancel
           </button>
           <button type="submit" class="btn-primary">
-            📢 Publish Announcement
+            📢 Publish Official Notice
           </button>
         </div>
       </form>
@@ -1673,6 +2065,39 @@ const firebaseConfig = {
     </div>
   </div>
 
+  <!-- ========================================================
+       MODAL 5: AMFAN (N.S.C.C) CLUB ADMIN LOGIN MODAL
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 id="admin-modal-title">👑 Amfan (N.S.C.C) অ্যাডমিন লগইন</h3>
+        <button class="modal-close-btn" id="btn-close-admin-modal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; line-height: 1.5;">
+        শুধুমাত্র আমফান (N.S.C.C) ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। লগইন করলে আপনি গুরুত্বপূর্ণ আপডেট দিতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছে ফেলতে পারবেন। সাধারণ দর্শকরা কোনো নোটিশ দিতে বা ডিলিট করতে পারবে না।
+      </p>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret PIN *</label>
+          <input type="password" id="admin-pin-input" class="form-input" placeholder="ডিফল্ট পিন: 1234" required />
+          <small style="color: #888; font-size: 0.78rem;">ডিফল্ট পিন: <strong>1234</strong></small>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.25rem;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('admin-modal').classList.remove('active')">
+            বাতিল
+          </button>
+          <button type="submit" class="btn-primary">
+            🔐 লগইন করুন
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Particle Shower Canvas -->
   <canvas id="flower-canvas" aria-hidden="true"></canvas>
 
@@ -1680,14 +2105,14 @@ const firebaseConfig = {
   <footer class="puja-footer">
     <div class="footer-content">
       <div class="alpona-border footer-alpona" aria-hidden="true"></div>
-      <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
-        শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা
+      <h3 style="font-family: var(--font-bengali), var(--font-heading), sans-serif; color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
+        আমফান (N.S.C.C) কোজাগরী মহালক্ষ্মী পূজা ও মিনি স্পোর্টস
       </h3>
-      <p style="font-family: var(--font-bengali); color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
+      <p style="font-family: var(--font-bengali), sans-serif; color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
         "ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"
       </p>
       <p style="font-size: 0.85rem; color: #caa2a8;">
-        May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon you and your family.
+        May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon Amfan (N.S.C.C) Club and all families.
       </p>
     </div>
   </footer>
@@ -1698,7 +2123,7 @@ const firebaseConfig = {
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
-  <!-- Embedded Complete Application Logic (Guarantees every button works 100% on any host) -->
+  <!-- Complete Embedded Application Logic -->
   <script>
 /**
  * Google Firebase Configuration for Laxmi Puja Web Portal
@@ -2893,6 +3318,16 @@ class PujaDB {
             imageUrl: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=1000&q=80',
             timestamp: new Date(Date.now() - 3600000 * 1).toISOString(),
             likes: 45
+          },
+          {
+            id: 'photo_seed_sports_1',
+            title: 'আমফান (N.S.C.C) বার্ষিক মিনি স্পোর্টস প্রতিযোগিতা',
+            category: '🏆 ক্লাব মিনি স্পোর্টস',
+            photographer: 'Amfan (N.S.C.C) স্পোর্টস সেল',
+            caption: 'পাড়ার কচিকাঁচাদের নিয়ে আয়োজিত জমজমাট বাৎসরিক মিনি স্পোর্টস ও দৌড় প্রতিযোগিতা। বিজয়ীদের পুজো মণ্ডপে পুরস্কৃত করা হবে।',
+            imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80',
+            timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
+            likes: 72
           }
         ];
 
@@ -2902,12 +3337,26 @@ class PujaDB {
 
         const seedUpdates = [
           {
+            id: 'update_seed_sports_1',
+            title: '🏆 আমফান (N.S.C.C) ক্লাব মিনি স্পোর্টস সময়সূচী ও তালিকা',
+            category: 'cultural',
+            priority: 'urgent',
+            isPinned: true,
+            author: 'Amfan (N.S.C.C) স্পোর্টস কমিটি',
+            body: `আমফান (N.S.C.C) ক্লাবের সকল সদস্য ও পাড়াবাসীদের জানানো যাচ্ছে:
+আমাদের বার্ষিক মিনি স্পোর্টস প্রতিযোগিতা অনুষ্ঠিত হবে!
+• ইভেন্টস: ১০০মি ও ৫০মি দৌড়, বিস্কুট রেস, লেবু-চামচ ব্যালেন্স দৌড়, ও বড়দের মিউজিক্যাল চেয়ার।
+• রিপোর্টিং টাইম: সকাল ৮:৩০ AM ক্লাব প্রাঙ্গণে।
+• বিশেষ দ্রষ্টব্য: বিজয়ী প্রতিযোগীদের কোজাগরী লক্ষ্মী পূজার দিন সন্ধ্যায় মণ্ডপ মঞ্চে মেডেল ও ট্রফি প্রদান করা হবে।`,
+            timestamp: new Date().toISOString()
+          },
+          {
             id: 'update_seed_1',
-            title: '🌕 Kojagari Purnima Puja Muhurat & Tithi Timings',
+            title: '🌕 কোজাগরী পূর্ণিমা পূজা নির্ঘণ্ট ও সময়সূচী',
             category: 'schedule',
             priority: 'urgent',
             isPinned: true,
-            author: 'Purohit Mahashay & Puja Committee',
+            author: 'আমফান (N.S.C.C) পুজো কমিটি',
             body: `The auspicious Kojagari Lakshmi Puja tithi details for this year:
 • Purnima Tithi Begins: Evening at 05:42 PM
 • Kojagari Lakshmi Puja Nishita Muhurat: 11:38 PM to 12:28 AM
@@ -3030,6 +3479,7 @@ async function initPujaApp() {
 
   // Application State
   const state = {
+    isAdmin: (sessionStorage.getItem('puja_is_admin') === 'true'),
     currentTab: 'darshan',
     currentPhotoCategory: 'all',
     currentPhotoSearch: '',
@@ -3055,6 +3505,16 @@ async function initPujaApp() {
   const updateCategoryChips = document.querySelectorAll('#update-chips .chip-btn');
   const photoSearchInput = document.getElementById('photo-search-input');
   const updateSearchInput = document.getElementById('update-search-input');
+
+  // Admin Controls
+  const adminStatusPill = document.getElementById('admin-status-pill');
+  const adminModal = document.getElementById('admin-modal');
+  const btnCloseAdminModal = document.getElementById('btn-close-admin-modal');
+  const adminLoginForm = document.getElementById('admin-login-form');
+  const adminPinInput = document.getElementById('admin-pin-input');
+  const publicNoticeTag = document.getElementById('public-notice-tag');
+  const btnOpenUpdateModal = document.getElementById('btn-open-update-modal');
+  const adminBanner = document.getElementById('admin-active-banner');
 
   // Stats Elements
   const statPhotos = document.getElementById('stat-photos');
@@ -3607,15 +4067,20 @@ async function initPujaApp() {
       }
     };
 
-    // Delete in lightbox
-    lightboxDeleteBtn.onclick = async () => {
-      if (confirm(`Delete "${photo.title}" from public gallery?`)) {
-        await window.pujaDB.deletePhoto(photo.id);
-        lightboxModal.classList.remove('active');
-        await loadPhotos();
-        showToast('🗑️ Photo removed from gallery.');
-      }
-    };
+    // Delete in lightbox (Admin only)
+    if (state.isAdmin) {
+      lightboxDeleteBtn.style.display = 'inline-flex';
+      lightboxDeleteBtn.onclick = async () => {
+        if (confirm(`Delete "${photo.title}" from public gallery?`)) {
+          await window.pujaDB.deletePhoto(photo.id);
+          lightboxModal.classList.remove('active');
+          await loadPhotos();
+          showToast('🗑️ Photo removed from gallery.');
+        }
+      };
+    } else {
+      lightboxDeleteBtn.style.display = 'none';
+    }
   }
 
   if (lightboxPrevBtn) {
@@ -3739,10 +4204,12 @@ async function initPujaApp() {
         <h3 class="update-title">${escapeHtml(u.title)}</h3>
         <p class="update-body">${escapeHtml(u.body)}</p>
         <div class="update-footer">
-          <span class="update-author">✍️ ${escapeHtml(u.author || 'Puja Committee')}</span>
-          <button class="photo-like-btn" style="background: transparent; border: none; color: #b32134; cursor: pointer;" onclick="deleteUpdate('${u.id}')" title="Delete Announcement">
-            🗑️ Delete
-          </button>
+          <span class="update-author">✍️ ${escapeHtml(u.author || 'Amfan (N.S.C.C)')}</span>
+          ${state.isAdmin ? `
+            <button class="photo-like-btn" style="background: transparent; border: none; color: #b32134; cursor: pointer;" onclick="deleteUpdate('${u.id}')" title="Delete Announcement">
+              🗑️ Delete
+            </button>
+          ` : ''}
         </div>
       </div>
     `).join('');
@@ -3777,7 +4244,6 @@ async function initPujaApp() {
 
   // Create Update Modal
   const updateModal = document.getElementById('update-modal');
-  const btnOpenUpdateModal = document.getElementById('btn-open-update-modal');
   const btnCloseUpdateModal = document.getElementById('btn-close-update-modal');
   const updateForm = document.getElementById('update-post-form');
 
@@ -3825,6 +4291,75 @@ async function initPujaApp() {
       } catch (err) {
         console.error('Error saving update:', err);
         alert('Could not post update. Please try again.');
+      }
+    });
+  }
+
+  // ==========================================================
+  // AMFAN (N.S.C.C) CLUB ADMIN MANAGEMENT
+  // ==========================================================
+  function updateAdminUI() {
+    if (state.isAdmin) {
+      if (adminStatusPill) {
+        adminStatusPill.innerHTML = `👑 Amfan (N.S.C.C) অ্যাডমিন [লগআউট]`;
+        adminStatusPill.style.background = '#ffd700';
+        adminStatusPill.style.color = '#3e0409';
+        adminStatusPill.style.fontWeight = '700';
+      }
+      if (btnOpenUpdateModal) btnOpenUpdateModal.style.display = 'inline-flex';
+      if (publicNoticeTag) publicNoticeTag.style.display = 'none';
+      if (adminBanner) adminBanner.style.display = 'flex';
+    } else {
+      if (adminStatusPill) {
+        adminStatusPill.innerHTML = `👑 ক্লাবের অ্যাডমিন`;
+        adminStatusPill.style.background = 'rgba(255, 255, 255, 0.12)';
+        adminStatusPill.style.color = 'var(--color-ivory)';
+        adminStatusPill.style.fontWeight = '500';
+      }
+      if (btnOpenUpdateModal) btnOpenUpdateModal.style.display = 'none';
+      if (publicNoticeTag) publicNoticeTag.style.display = 'inline-block';
+      if (adminBanner) adminBanner.style.display = 'none';
+    }
+  }
+
+  if (adminStatusPill) {
+    adminStatusPill.addEventListener('click', () => {
+      if (state.isAdmin) {
+        if (confirm('আমফান (N.S.C.C) ক্লাব অ্যাডমিন মোড থেকে লগআউট করতে চান?')) {
+          sessionStorage.removeItem('puja_is_admin');
+          state.isAdmin = false;
+          updateAdminUI();
+          renderUpdates();
+          showToast('🔒 অ্যাডমিন মোড থেকে লগআউট করা হয়েছে। এখন পাবলিক ভিউ সক্রিয়।');
+        }
+      } else {
+        if (adminModal) adminModal.classList.add('active');
+      }
+    });
+  }
+
+  if (btnCloseAdminModal) {
+    btnCloseAdminModal.addEventListener('click', () => {
+      if (adminModal) adminModal.classList.remove('active');
+    });
+  }
+
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const enteredPin = (adminPinInput ? adminPinInput.value.trim() : '');
+      const validPin = localStorage.getItem('puja_admin_pin') || '1234';
+      if (enteredPin === validPin) {
+        sessionStorage.setItem('puja_is_admin', 'true');
+        state.isAdmin = true;
+        if (adminModal) adminModal.classList.remove('active');
+        if (adminPinInput) adminPinInput.value = '';
+        updateAdminUI();
+        renderUpdates();
+        window.pujaAudio.playTempleBell();
+        showToast('👑 স্বাগতম! আমফান (N.S.C.C) অ্যাডমিন হিসেবে লগইন সফল। আপনি এখন আপডেট ও ফটো ম্যানেজ করতে পারবেন।');
+      } else {
+        alert('❌ ভুল পিন! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। (ডিফল্ট পিন: 1234)');
       }
     });
   }
@@ -4161,6 +4696,7 @@ async function initPujaApp() {
   // INITIAL DATA LOADING & LIVE CLOCK
   // ==========================================================
   updateFirebaseUIStatus();
+  updateAdminUI();
   setupFirebaseRealtimeListeners();
 
   await loadPhotos();
