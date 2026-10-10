@@ -310,10 +310,126 @@ body {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   Festive Action Bar: Puja Countdown Timer & WhatsApp Share
+   ========================================================================== */
+.festive-action-bar-container {
+  max-width: 1240px;
+  margin: -1.6rem auto 1.25rem;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 25;
+}
+
+.festive-action-bar {
+  background: linear-gradient(135deg, #fffdfa 0%, #fff6ea 100%);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 12px 22px;
+  box-shadow: 0 4px 18px rgba(92, 7, 18, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.puja-countdown-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.countdown-badge-title {
+  font-family: var(--font-bengali), var(--font-sans);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.2px;
+}
+
+.countdown-digits-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cd-unit {
+  background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%);
+  color: #fffdf7;
+  border: 1.5px solid var(--color-gold);
+  border-radius: 8px;
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+  box-shadow: 0 2px 6px rgba(92, 7, 18, 0.22);
+}
+
+.cd-val {
+  font-family: var(--font-heading), var(--font-bengali);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffd700;
+  line-height: 1.1;
+}
+
+.cd-lbl {
+  font-size: 0.68rem;
+  color: #ffecd1;
+  font-weight: 600;
+}
+
+.cd-sep {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.whatsapp-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 10px 22px;
+  font-family: var(--font-bengali), var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.whatsapp-share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  background: linear-gradient(135deg, #2ae06f 0%, #17a493 100%);
+}
+
+.whatsapp-share-btn:active {
+  transform: translateY(0);
+}
+
+.whatsapp-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
 /* Main Navigation Tabs */
 .nav-container {
   max-width: 1240px;
-  margin: -1.8rem auto 1.5rem;
+  margin: 0 auto 1.5rem;
   padding: 0 1rem;
   position: relative;
   z-index: 20;
@@ -1510,9 +1626,49 @@ body {
     gap: 6px;
   }
 
+  /* Festive Action Bar Mobile */
+  .festive-action-bar-container {
+    margin: 0.8rem auto 0.6rem;
+    padding: 0 0.75rem;
+  }
+
+  .festive-action-bar {
+    padding: 12px 14px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .puja-countdown-box {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .countdown-digits-row {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cd-unit {
+    min-width: 42px;
+    padding: 4px 8px;
+  }
+
+  .cd-val {
+    font-size: 1.1rem;
+  }
+
+  .whatsapp-share-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
   /* Navigation Bar - NO negative margin on mobile so it never overlaps hero pills */
   .nav-container {
-    margin: 1rem auto 1.25rem;
+    margin: 0.5rem auto 1.25rem;
     padding: 0 0.75rem;
   }
 
@@ -1922,6 +2078,46 @@ body {
       </div>
     </div>
   </header>
+
+  <!-- Festive Quick Bar: Puja Countdown & WhatsApp Share -->
+  <div class="festive-action-bar-container">
+    <div class="festive-action-bar">
+      <!-- 1. Puja Countdown Timer -->
+      <div class="puja-countdown-box">
+        <div class="countdown-badge-title">
+          <span>⏳</span>
+          <span>শ্রী শ্রী কোজাগরী লক্ষ্মী পূজার বাকি:</span>
+        </div>
+        <div class="countdown-digits-row">
+          <div class="cd-unit">
+            <span class="cd-val" id="cd-days">০০</span>
+            <span class="cd-lbl">দিন</span>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <span class="cd-val" id="cd-hours">০০</span>
+            <span class="cd-lbl">ঘণ্টা</span>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <span class="cd-val" id="cd-mins">০০</span>
+            <span class="cd-lbl">মিনিট</span>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <span class="cd-val" id="cd-secs">০০</span>
+            <span class="cd-lbl">সেকেন্ড</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. WhatsApp Share Button -->
+      <button type="button" class="whatsapp-share-btn" id="btn-whatsapp-share" title="হোয়াটসঅ্যাপে ক্লাবের পুজো ও ওয়েবসাইটের লিঙ্ক শেয়ার করুন">
+        <span class="whatsapp-icon" aria-hidden="true">💬</span>
+        <span class="whatsapp-text">হোয়াটসঅ্যাপে বন্ধুদের পাঠান</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Navigation Tabs -->
   <nav class="nav-container" aria-label="Main Navigation">
@@ -2560,6 +2756,9 @@ body {
           <button id="lightbox-download-btn" class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem;" title="Download Photo">
             📥 Download
           </button>
+          <button id="lightbox-whatsapp-btn" class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem; background: #25D366; color: #fff; border-color: #25D366;" title="Share this Photo on WhatsApp">
+            💬 WhatsApp
+          </button>
           <button class="modal-close-btn" id="btn-close-lightbox" style="color: #fff;">&times;</button>
         </div>
       </div>
@@ -2798,11 +2997,11 @@ const firebaseConfig = {
           📍 পূজা ও মণ্ডপ প্রাঙ্গণ (Mandap Address & Location)
         </div>
         <div class="footer-address-text">
-          <div class="address-venue">NAIKUNDI SITALAMATA MANDIR PRANGAN</div>
-          <div class="address-details">NAIKUNDI, KUMARARA, NANDAKUMAR, PURBA MEDINIPUR, PIN - 721632</div>
+          <div class="address-venue">নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ</div>
+          <div class="address-details">নাইকুন্ডি,কুমোরআড়া,নন্দকুমার,পূর্ব মেদিনীপুর,পিন-৭২১৬৩২</div>
         </div>
-        <a href="https://maps.app.goo.gl/vdFZix7KHu1ypo9M9" target="_blank" rel="noopener noreferrer" class="footer-map-btn" title="Open location in Google Maps">
-          <span style="font-size: 1.1rem;">🗺️</span> Google Maps-এ লোকেশন দেখুন (Get Directions)
+        <a href="https://maps.app.goo.gl/vdFZix7KHu1ypo9M9" target="_blank" rel="noopener noreferrer" class="footer-map-btn" title="Google Maps এ মণ্ডপের অবস্থান দেখুন">
+          <span style="font-size: 1.15rem;">🗺️</span> Google Maps-এ অবস্থান দেখুন (দিকনির্দেশনা)
         </a>
       </div>
 
@@ -4403,6 +4602,124 @@ async function initPujaApp() {
   const statUpdates = document.getElementById('stat-updates');
   const statWishes = document.getElementById('stat-wishes');
   const statDiyas = document.getElementById('stat-diyas');
+
+  // Clear any residual dark-mode state
+  try {
+    localStorage.removeItem('amfan_theme');
+    document.body.classList.remove('dark-mode');
+    document.documentElement.classList.remove('dark-mode');
+  } catch (err) {}
+
+  // ==========================================================
+  // 1. PUJA COUNTDOWN TIMER (1 November 2026, 06:00:00 AM IST)
+  // ==========================================================
+  function initPujaCountdown() {
+    const cdDays = document.getElementById('cd-days');
+    const cdHours = document.getElementById('cd-hours');
+    const cdMins = document.getElementById('cd-mins');
+    const cdSecs = document.getElementById('cd-secs');
+
+    if (!cdDays) return;
+
+    // Target: 1 November 2026, 06:00:00 IST (Kojagari Laxmi Puja Start)
+    const targetDate = new Date('2026-11-01T06:00:00+05:30').getTime();
+    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+
+    function toBn(num) {
+      return String(num).padStart(2, '0').split('').map(d => {
+        const idx = parseInt(d, 10);
+        return isNaN(idx) ? d : bnDigits[idx];
+      }).join('');
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        cdDays.textContent = '০০';
+        cdHours.textContent = '০০';
+        cdMins.textContent = '০০';
+        cdSecs.textContent = '০০';
+        const titleEl = document.querySelector('.countdown-badge-title');
+        if (titleEl) {
+          titleEl.innerHTML = '<span>🎉</span><span>শুভ কোজাগরী লক্ষ্মী পূজা! মহোৎসব শুরু হয়েছে!</span>';
+        }
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      cdDays.textContent = toBn(days);
+      cdHours.textContent = toBn(hours);
+      cdMins.textContent = toBn(mins);
+      cdSecs.textContent = toBn(secs);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
+  initPujaCountdown();
+
+  // ==========================================================
+  // 2. WHATSAPP SHARE INVITATION
+  // ==========================================================
+  function initWhatsAppShare() {
+    const btnShare = document.getElementById('btn-whatsapp-share');
+    const btnLightboxShare = document.getElementById('lightbox-whatsapp-btn');
+
+    function shareGeneralPuja() {
+      const currentUrl = window.location.href.split('#')[0];
+      const message = 
+`🪔 আমফান (N.S.C.C) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান 🌺
+
+প্রণাম ও শারদ শুভেচ্ছা! আমাদের আমফান (N.S.C.C) ক্লাবের পুণ্য মহোৎসবে আপনারা সপরিবারে আমন্ত্রিত:
+
+📌 বাংলা তারিখ: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩
+📌 ইংরেজি তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬
+
+📍 পূজা প্রাঙ্গণ: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ
+ঠিকানা: নাইকুন্ডি,কুমোরআড়া,নন্দকুমার,পূর্ব মেদিনীপুর,পিন-৭২১৬৩২
+🗺️ ম্যাপ লোকেশন: https://maps.app.goo.gl/vdFZix7KHu1ypo9M9
+
+মা লক্ষ্মীর পবিত্র প্রতিমা দর্শন, আরতি, শঙ্খধ্বনি ও ক্লাবের অনুষ্ঠানের মুহূর্ত দেখতে আমাদের ওয়েবসাইট দেখুন:
+👉 ${currentUrl}
+
+"এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে..." 🙏✨`;
+
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+
+      if (navigator.share && /mobile/i.test(navigator.userAgent)) {
+        navigator.share({
+          title: 'আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা',
+          text: message,
+          url: currentUrl
+        }).catch(() => {
+          window.open(whatsappUrl, '_blank');
+        });
+      } else {
+        window.open(whatsappUrl, '_blank');
+      }
+    }
+
+    if (btnShare) {
+      btnShare.addEventListener('click', shareGeneralPuja);
+    }
+
+    if (btnLightboxShare) {
+      btnLightboxShare.addEventListener('click', () => {
+        const photoTitle = document.getElementById('lightbox-title')?.textContent || 'পূজা মুহূর্ত';
+        const currentUrl = window.location.href.split('#')[0];
+        const photoMsg = `🪔 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও মহোৎসব\n📸 ছবি: ${photoTitle}\n\nসম্পূর্ণ প্রতিমা দর্শন ও ক্লাবের গ্যালারি দেখুন:\n👉 ${currentUrl}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(photoMsg)}`;
+        window.open(whatsappUrl, '_blank');
+      });
+    }
+  }
+  initWhatsAppShare();
 
   // ==========================================================
   // TAB NAVIGATION
