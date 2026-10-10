@@ -2160,6 +2160,33 @@ body {
   }
 }
 
+/* Quick Entry Chips for Mobile (Name & Place) */
+.quick-chip-btn {
+  background: rgba(255, 215, 0, 0.16);
+  color: #5c0712;
+  border: 1px solid rgba(179, 126, 25, 0.45);
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-family: var(--font-bengali), sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1.4;
+}
+
+.quick-chip-btn:hover, .quick-chip-btn:active {
+  background: #ffd700;
+  color: #3e0409;
+  border-color: #b37e19;
+  transform: translateY(-1px);
+}
+
+
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
@@ -2613,7 +2640,7 @@ body {
             ত্রাহি মাং সর্ব্বপাপেভ্যো মহালক্ষ্মী নমোঽস্তু তে ॥
           </div>
           <p class="mantra-translation">
-            <strong>অর্থ:</strong> হে সর্বদেবেশ্বরী, হে বিষ্ণুবল্লভা, আমাকে সমস্ত পাপ ও অমঙ্গল হতে রক্ষা করুন। হে মহালক্ষ্মী, আপনাকে আমার ভক্তিপূর্ণ প্রণাম জানাই।
+            <strong>অর্থ:</strong> হে সর্বদেবেশ্বরী, হে বিষ্ণুবল্লভা, আমাকে সমস্ত পাপ ও অমঙ্গল হতে রক্ষা করুন। হে মা লক্ষ্মী, আপনাকে আমার ভক্তিপূর্ণ প্রণাম জানাই।
           </p>
         </div>
 
@@ -3168,13 +3195,18 @@ const firebaseConfig = {
       </div>
 
       <div style="font-size: 0.88rem; color: #555; margin-bottom: 1rem; line-height: 1.5; background: #fffcf5; padding: 10px 14px; border-radius: 6px; border: 1px solid #fedc97;">
-        🌺 আপনার নাম ও সম্বোধন (শ্রী / শ্রীমতী) বেছে নিন — ভার্চুয়াল দর্শনে রাখা মা লক্ষ্মীর প্রতিমা ছবি সহ স্বয়ংক্রিয়ভাবে আপনার ডিজিটাল আশীর্বাদপত্র তৈরি হবে।
+        🌺 <strong>মোবাইল টাইপিং সহজ করতে:</strong> আপনি সরাসরি ইংরেজিতেও (যেমন: Sudipta Maity) লিখতে পারেন, তারপর <strong>"🔄 English ➔ বাংলা"</strong> বাটনে চাপলেই তা খাঁটি বাংলায় রূপান্তর হয়ে যাবে। নিচের সহজ বাটনগুলোও স্পর্শ করতে পারেন।
       </div>
 
       <form id="blessing-card-form" onsubmit="return false;">
-        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; margin-bottom: 0.8rem;">
-          <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="blessing-title-select">সম্বোধন *</label>
+        <div style="margin-bottom: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label class="form-label" for="blessing-name-input" style="margin-bottom: 0;">আপনার বা পরিবারের নাম *</label>
+            <button type="button" id="btn-transliterate-name" class="quick-chip-btn" style="background: #8b1320; color: #fff; border-color: #ffd700;" title="ইংরেজিতে নাম লিখে এই বাটনে চাপুন">
+              🔄 English ➔ বাংলা
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: 140px 1fr; gap: 8px;">
             <select id="blessing-title-select" class="form-select">
               <option value="শ্রী" selected>শ্রী (Sri)</option>
               <option value="শ্রীমতী">শ্রীমতী (Srimati)</option>
@@ -3183,20 +3215,38 @@ const firebaseConfig = {
               <option value="পরিবার">ও পরিবার (Family)</option>
               <option value="none">কোনোটি নয় (Only Name)</option>
             </select>
+            <input type="text" id="blessing-name-input" class="form-input" placeholder="নাম লিখুন (English বা বাংলায়)..." value="" required />
           </div>
-          <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="blessing-name-input">আপনার বা পরিবারের নাম *</label>
-            <input type="text" id="blessing-name-input" class="form-input" placeholder="আপনার বা পরিবারের নাম লিখুন..." value="" required />
+          <!-- Mobile Quick Name Chips -->
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; align-items: center;">
+            <span style="color: #777; font-size: 0.76rem;">সহজ বাটন:</span>
+            <button type="button" class="quick-chip-btn" data-append-name=" ও পরিবার">+ ও পরিবার</button>
+            <button type="button" class="quick-chip-btn" data-append-name=" মহাশয়">+ মহাশয়</button>
+            <button type="button" class="quick-chip-btn" data-append-name=" ভক্তবৃন্দ">+ ভক্তবৃন্দ</button>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem;">
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="blessing-place-input">স্থান / গ্রাম (ঐচ্ছিক)</label>
-            <input type="text" id="blessing-place-input" class="form-input" placeholder="যেমন: নাইকুন্ডি, নন্দকুমার" value="নাইকুন্ডি, নন্দকুমার" />
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="form-label" for="blessing-place-input" style="margin-bottom: 0;">স্থান / গ্রাম (ঐচ্ছিক)</label>
+              <button type="button" id="btn-transliterate-place" class="quick-chip-btn" style="background: #8b1320; color: #fff; border-color: #ffd700;" title="ইংরেজিতে স্থান লিখে এই বাটনে চাপুন">
+                🔄 English ➔ বাংলা
+              </button>
+            </div>
+            <input type="text" id="blessing-place-input" class="form-input" placeholder="স্থান লিখুন (যেমন: নাইকুন্ডি, নন্দকুমার)" value="" />
+            <!-- Mobile Quick Place Chips for 1-tap entry -->
+            <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; align-items: center;">
+              <span style="color: #777; font-size: 0.76rem;">১-ক্লিকে বসান:</span>
+              <button type="button" class="quick-chip-btn" data-set-place="নাইকুন্ডি">+ নাইকুন্ডি</button>
+              <button type="button" class="quick-chip-btn" data-set-place="কুমোরআড়া">+ কুমোরআড়া</button>
+              <button type="button" class="quick-chip-btn" data-set-place="নন্দকুমার">+ নন্দকুমার</button>
+              <button type="button" class="quick-chip-btn" data-set-place="নাইকুন্ডি, নন্দকুমার">+ নাইকুন্ডি, নন্দকুমার</button>
+            </div>
           </div>
+
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label" for="blessing-wish-type">মা লক্ষ্মীর চরণে বিশেষ প্রার্থনা</label>
+            <label class="form-label" for="blessing-wish-type" style="margin-bottom: 4px;">মা লক্ষ্মীর চরণে বিশেষ প্রার্থনা</label>
             <select id="blessing-wish-type" class="form-select">
               <option value="পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি">পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি</option>
               <option value="সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি">সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি</option>
@@ -3293,13 +3343,13 @@ const firebaseConfig = {
     <div class="footer-content">
       <div class="alpona-border footer-alpona" aria-hidden="true"></div>
       <h3 style="font-family: var(--font-bengali), var(--font-heading), sans-serif; color: var(--color-gold-light); font-size: 1.4rem; margin-bottom: 0.5rem;">
-        আমফান (N.S.C.C) কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান
+        আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান
       </h3>
       <p style="font-family: var(--font-bengali), sans-serif; color: #ffecd1; font-size: 1.1rem; margin-bottom: 1rem;">
         "ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"
       </p>
       <p style="font-size: 0.85rem; color: #caa2a8; margin-bottom: 1.2rem;">
-        May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon Amfan (N.S.C.C) Club and all families.
+        May Goddess Lakshmi bestow health, peace, prosperity, and joy upon Amfan (N.S.C.C) Club and all families.
       </p>
 
       <!-- Mandap & Club Location Address Card -->
@@ -3812,6 +3862,20 @@ class FirebaseService {
     if (!this.isReady) throw new Error('Firebase not connected');
     await this.db.collection('committee_members').doc(memberId).delete();
     return true;
+  }
+
+  onCommitteeMembersChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('committee_members')
+      .onSnapshot((snapshot) => {
+        const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        list.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        callback(list);
+      }, (err) => {
+        console.warn('Committee members listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
   }
 
   /**
@@ -4877,118 +4941,38 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
 
   // --- COMMITTEE MEMBERS (Local Storage & Firebase Cloud Sync) ---
   getCommitteeStorage() {
+    // Purge any legacy dummy seed members (member_1 to member_10) from old storage
     try {
       const stored = localStorage.getItem('amfan_committee_members');
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          // If all members are legacy dummy seeds, purge them
+          const hasDummy = parsed.some(m => m.id === 'member_1' && m.name === 'শ্রী অমল জানা');
+          if (hasDummy) {
+            localStorage.removeItem('amfan_committee_members');
+            return [];
+          }
+          return parsed;
+        }
+      }
     } catch (e) {
       console.warn('Error reading committee from localStorage:', e);
     }
-
-    // Default Seed Committee for Amfan (N.S.C.C)
-    const defaultCommittee = [
-      {
-        id: 'member_1',
-        name: 'শ্রী অমল জানা',
-        role: 'সভাপতি (President)',
-        category: 'executive',
-        phone: '৯৮৩২০০XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_2',
-        name: 'শ্রী সুব্রত মাইতি',
-        role: 'সহ-সভাপতি (Vice President)',
-        category: 'executive',
-        phone: '৯৭৩৩০৪XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_3',
-        name: 'শ্রী সুদীপ্ত মাইতি',
-        role: 'সাধারণ সম্পাদক (General Secretary)',
-        category: 'executive',
-        phone: '৯৮৭৪৫৬XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_4',
-        name: 'শ্রী দীপক ঘোড়ই',
-        role: 'সহ-সম্পাদক (Asst. Secretary)',
-        category: 'executive',
-        phone: '৯৬৪৭৮৯XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_5',
-        name: 'শ্রী তরুণ পাত্র',
-        role: 'কোষাধ্যক্ষ (Treasurer)',
-        category: 'executive',
-        phone: '৯১৫৩৫৬XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_6',
-        name: 'শ্রী রাজীব মণ্ডল',
-        role: 'পূজা আহ্বায়ক (Puja Convener)',
-        category: 'executive',
-        phone: '৯৮০৪১২XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_7',
-        name: 'শ্রী সঞ্জয় মাইতি',
-        role: 'ক্রীড়া সম্পাদক (Sports Secretary)',
-        category: 'sports_cultural',
-        phone: '৯৭৩২১৫XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_8',
-        name: 'শ্রী শান্তনু মান্না',
-        role: 'সাংস্কৃতিক সম্পাদক (Cultural Secretary)',
-        category: 'sports_cultural',
-        phone: '৯৮৩২০৮XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_9',
-        name: 'শ্রী নিমাই চন্দ্র জানা',
-        role: 'প্রধান উপদেষ্টা (Chief Advisor)',
-        category: 'advisory',
-        phone: '৯৮৩২০১XXXX',
-        photo: '',
-        timestamp: new Date().toISOString()
-      },
-      {
-        id: 'member_10',
-        name: 'শ্রী অসীম বর',
-        role: 'কার্যকরী সদস্য ও স্বেচ্ছাসেবক দলপতি',
-        category: 'member',
-        phone: '',
-        photo: '',
-        timestamp: new Date().toISOString()
-      }
-    ];
-
-    try {
-      localStorage.setItem('amfan_committee_members', JSON.stringify(defaultCommittee));
-    } catch (e) {}
-    return defaultCommittee;
+    // Pure clean empty state - no fake or random members!
+    return [];
   }
 
   async getCommitteeMembers() {
     if (window.firebaseService && window.firebaseService.isReady) {
       try {
         const cloudMembers = await window.firebaseService.getCommitteeMembers();
-        if (cloudMembers && cloudMembers.length > 0) return cloudMembers;
+        if (Array.isArray(cloudMembers)) {
+          try {
+            localStorage.setItem('amfan_committee_members', JSON.stringify(cloudMembers));
+          } catch (e) {}
+          return cloudMembers;
+        }
       } catch (e) {
         console.warn('Could not fetch cloud committee members:', e);
       }
@@ -5456,7 +5440,7 @@ async function initPujaApp() {
       if (statDiyas) statDiyas.textContent = newCount;
       btnLightDiya.classList.add('lit');
       btnLightDiya.innerHTML = `✨ Diya Lit for Maa (${newCount})`;
-      showToast('🪔 You have lit a sacred Diya for Maa Mahalakshmi! May peace fill your home.');
+      showToast('🪔 You have lit a sacred Diya for Maa Lakshmi! May peace fill your home.');
     });
   }
 
@@ -6461,6 +6445,15 @@ async function initPujaApp() {
         localStorage.removeItem('puja_deity_photo');
       }
     });
+
+    window.firebaseService.onCommitteeMembersChanged((members) => {
+      console.log('Firebase: Real-time committee members received:', members.length);
+      state.committeeMembers = members;
+      renderCommittee();
+      try {
+        localStorage.setItem('amfan_committee_members', JSON.stringify(members));
+      } catch (e) {}
+    });
   }
 
   // Open/Close Firebase Modal
@@ -6621,6 +6614,9 @@ async function initPujaApp() {
   // ==========================================================
   // DIGITAL BLESSING CARD / ASHIRBAD PATRA (For Everyone)
   // ==========================================================
+  // ==========================================================
+  // DIGITAL BLESSING CARD / ASHIRBAD PATRA (For Everyone)
+  // ==========================================================
   function initBlessingCard() {
     const modal = document.getElementById('blessing-modal');
     const btnOpenAltar = document.getElementById('btn-open-blessing-modal');
@@ -6634,9 +6630,136 @@ async function initPujaApp() {
     const btnDownload = document.getElementById('btn-download-blessing');
     const btnWhatsApp = document.getElementById('btn-share-blessing-whatsapp');
     const deityMainImg = document.getElementById('deity-main-img');
+    const btnTranslitName = document.getElementById('btn-transliterate-name');
+    const btnTranslitPlace = document.getElementById('btn-transliterate-place');
 
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+
+    // Built-in English to Bangla Transliteration Engine for Mobile Users
+    function transliterateToBangla(text) {
+      if (!text) return '';
+      const wordDict = {
+        'sudipto': 'সুদীপ্ত', 'sudipta': 'সুদীপ্ত', 'maity': 'মাইতি', 'maiti': 'মাইতি',
+        'mondal': 'মণ্ডল', 'mandal': 'মণ্ডল', 'das': 'দাস', 'dash': 'দাস',
+        'ghosh': 'ঘোষ', 'hazra': 'হাজরা', 'jana': 'জানা', 'bera': 'বেড়া',
+        'samanta': 'সামন্ত', 'sau': 'সাউ', 'sahu': 'সাউ', 'sahoo': 'সাউ',
+        'pradhan': 'প্রধান', 'karan': 'করণ', 'adak': 'আদক', 'dey': 'দে',
+        'dutta': 'দত্ত', 'pal': 'পাল', 'paul': 'পাল', 'roy': 'রায়',
+        'ray': 'রায়', 'sen': 'সেন', 'bhattacharya': 'ভট্টাচার্য', 'banerjee': 'ব্যানার্জী',
+        'chatterjee': 'চট্টোপাধ্যায়', 'chakraborty': 'চক্রবর্তী', 'mukherjee': 'মুখার্জী',
+        'kundu': 'কুন্ডু', 'patra': 'পাত্র', 'manna': 'মান্না', 'khatua': 'খাটুয়া',
+        'panja': 'পাঁজা', 'khan': 'খান', 'malik': 'মালিক', 'poribar': 'পরিবার',
+        'paribar': 'পরিবার', 'bhaktobrindo': 'ভক্তবৃন্দ', 'bhakto': 'ভক্ত',
+        'rahul': 'রাহুল', 'amit': 'অমিত', 'subir': 'সুবীর', 'sourav': 'সৌরভ',
+        'ananya': 'অনন্যা', 'priya': 'প্রিয়া', 'puja': 'পূজা', 'rohit': 'রোহিত',
+        'raju': 'রাজু', 'raj': 'রাজু', 'somnath': 'সোমনাথ', 'debashis': 'দেবাশীষ',
+        'biswajit': 'বিশ্বজিৎ', 'animesh': 'অনিমেষ', 'manas': 'মানস', 'tapas': 'তাপস',
+        'swapan': 'স্বপন', 'prabir': 'প্রবীর', 'alok': 'আলোক', 'arun': 'অরুণ',
+        'bikash': 'বিকাশ', 'chandan': 'চন্দন', 'dipak': 'দীপক', 'gouranga': 'গৌরাঙ্গ',
+        'kalyan': 'কল্যাণ', 'narayan': 'নারায়ণ', 'prasanta': 'প্রশান্ত', 'ratan': 'রতন',
+        'sanjay': 'সঞ্জয়', 'tarun': 'তরুণ', 'uttam': 'উত্তম', 'subrata': 'সুব্রত',
+        'subhas': 'সুভাষ', 'sujit': 'সুজিত', 'sunil': 'সুনীল', 'shyamal': 'শ্যামল',
+        'sankar': 'শংকর', 'shankar': 'শংকর', 'ram': 'রাম', 'krishna': 'কৃষ্ণ',
+        'gopal': 'গোপাল', 'haradhan': 'হরাধন', 'nimai': 'নিমাই', 'nitai': 'নিতাই',
+        'bimal': 'বিমল', 'anup': 'অনুপ', 'ashok': 'অশোক', 'ajoy': 'অজয়',
+        'joy': 'জয়', 'mantu': 'মন্টু', 'babu': 'বাবু', 'da': 'দা', 'didi': 'দিদি',
+        'kakima': 'কাকীমা', 'kaku': 'কাকু', 'jethu': 'জেঠু', 'mashima': 'মাসিমা',
+        'pishima': 'পিসিমা', 'anita': 'অনিতা', 'anima': 'অনিমা', 'uma': 'উমা',
+        'naikundi': 'নাইকুন্ডি', 'nandakumar': 'নন্দকুমার', 'nandokumar': 'নন্দকুমার',
+        'kumarara': 'কুমোরআড়া', 'kumorara': 'কুমোরআড়া', 'purba': 'পূর্ব',
+        'medinipur': 'মেদিনীপুর', 'kolkata': 'কলকাতা', 'tamluk': 'তমলুক',
+        'haldia': 'হলদিয়া', 'howrah': 'হাওড়া', 'shitalamata': 'শীতলামাতা',
+        'mandir': 'মন্দির', 'prangan': 'প্রাঙ্গণ', 'sri': 'শ্রী', 'sree': 'শ্রী',
+        'srimati': 'শ্রীমতী', 'shrimati': 'শ্রীমতী', 'kumari': 'কুমারী'
+      };
+
+      const vowels = {
+        'aa': 'া', 'a': 'া', 'ii': 'ী', 'ee': 'ী', 'i': 'ি',
+        'uu': 'ূ', 'oo': 'ূ', 'u': 'ু', 'oi': 'ৈ', 'ai': 'ৈ',
+        'ou': 'ৌ', 'au': 'ৌ', 'e': 'ে', 'o': 'ো', 'ri': 'ৃ'
+      };
+      const initVowels = {
+        'aa': 'আ', 'a': 'অ', 'ii': 'ঈ', 'ee': 'ঈ', 'i': 'ই',
+        'uu': 'ঊ', 'oo': 'ঊ', 'u': 'উ', 'oi': 'ঐ', 'ai': 'ঐ',
+        'ou': 'ঔ', 'au': 'ঔ', 'e': 'এ', 'o': 'ও', 'ri': 'ঋ'
+      };
+      const consonants = [
+        ['kkh', 'ক্ষ'], ['chh', 'ছ'], ['ng', 'ঙ'], ['kh', 'খ'], ['gh', 'ঘ'],
+        ['ch', 'চ'], ['jh', 'ঝ'], ['th', 'থ'], ['dh', 'ধ'], ['ph', 'ফ'],
+        ['bh', 'ভ'], ['sh', 'শ'], ['k', 'ক'], ['g', 'গ'], ['j', 'জ'],
+        ['t', 'ট'], ['d', 'দ'], ['n', 'ন'], ['p', 'প'], ['f', 'ফ'],
+        ['b', 'ব'], ['v', 'ভ'], ['m', 'ম'], ['r', 'র'], ['l', 'ল'],
+        ['s', 'স'], ['h', 'হ'], ['y', 'য়'], ['z', 'য'], ['w', 'ওয়']
+      ];
+
+      return text.split(/(\s+|[,\.!\?&]+)/).map(token => {
+        if (!token || /^\s+$/.test(token) || /^[,\.!\?&]+$/.test(token)) {
+          return token;
+        }
+        const lower = token.toLowerCase();
+        if (wordDict[lower]) return wordDict[lower];
+
+        // Rule-based phonetic converter
+        let res = '';
+        let i = 0;
+        let isStart = true;
+        while (i < lower.length) {
+          let matchedConsonant = null;
+          let consLen = 0;
+          for (const [seq, char] of consonants) {
+            if (lower.startsWith(seq, i)) {
+              matchedConsonant = char;
+              consLen = seq.length;
+              break;
+            }
+          }
+
+          if (matchedConsonant) {
+            res += matchedConsonant;
+            i += consLen;
+            isStart = false;
+
+            let matchedVowel = null;
+            let vowLen = 0;
+            for (const [seq, sign] of Object.entries(vowels)) {
+              if (lower.startsWith(seq, i)) {
+                matchedVowel = sign;
+                vowLen = seq.length;
+                break;
+              }
+            }
+            if (matchedVowel) {
+              if (lower.startsWith('a', i) && !lower.startsWith('aa', i)) {
+                res += 'া';
+              } else {
+                res += matchedVowel;
+              }
+              i += vowLen;
+            }
+          } else {
+            let matchedInit = null;
+            let vowLen = 0;
+            for (const [seq, char] of Object.entries(initVowels)) {
+              if (lower.startsWith(seq, i)) {
+                matchedInit = char;
+                vowLen = seq.length;
+                break;
+              }
+            }
+            if (matchedInit) {
+              res += isStart ? matchedInit : (vowels[lower.substr(i, vowLen)] || matchedInit);
+              i += vowLen;
+            } else {
+              res += lower[i];
+              i++;
+            }
+            isStart = false;
+          }
+        }
+        return res || token;
+      }).join('');
+    }
 
     function getFormattedDevoteeName() {
       const rawName = (nameInput?.value.trim()) || '';
@@ -6653,7 +6776,7 @@ async function initPujaApp() {
 
     function drawCard(options = {}) {
       const displayName = getFormattedDevoteeName();
-      const place = (placeInput?.value.trim()) || 'নাইকুন্ডি, নন্দকুমার';
+      const place = (placeInput?.value.trim()) || '';
       const wish = wishSelect?.value || 'পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি';
 
       const w = canvas.width;
@@ -6700,11 +6823,11 @@ async function initPujaApp() {
       drawCorner(32, h - 32, 1, -1);
       drawCorner(w - 32, h - 32, -1, -1);
 
-      // 3. Top Festive Header
+      // 3. Top Festive Header (Pure Kojagari Lakshmi Puja)
       ctx.textAlign = 'center';
       ctx.fillStyle = '#6b0814';
       ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
-      ctx.fillText('🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান 🪔', w / 2, 52);
+      ctx.fillText('🪔 শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান 🪔', w / 2, 52);
 
       ctx.fillStyle = '#b37e19';
       ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
@@ -6790,7 +6913,7 @@ async function initPujaApp() {
         ctx.textAlign = 'center';
         ctx.fillText('🌺', fx + fw / 2, fy + fh / 2 - 15);
         ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
-        ctx.fillText('মা মহালক্ষ্মী', fx + fw / 2, fy + fh / 2 + 25);
+        ctx.fillText('মা লক্ষ্মী', fx + fw / 2, fy + fh / 2 + 25);
         ctx.restore();
       }
 
@@ -6864,7 +6987,7 @@ async function initPujaApp() {
       // Dedication greeting
       ctx.fillStyle = '#5c0712';
       ctx.font = '13.5px "Hind Siliguri", sans-serif';
-      ctx.fillText('মা মহালক্ষ্মীর পরম কৃপা ও শুভাশিস জ্ঞাপন করা হচ্ছে:', cx, 148);
+      ctx.fillText('মা লক্ষ্মীর পরম কৃপা ও শুভাশিস জ্ঞাপন করা হচ্ছে:', cx, 148);
 
       // Recipient Name (with Sri / Srimati)
       if (displayName) {
@@ -6887,7 +7010,7 @@ async function initPujaApp() {
         ctx.fillText('(এখানে আপনার নাম দেখা যাবে)', cx, 178);
       }
 
-      // Place
+      // Place (Only shown if filled by user)
       if (place) {
         ctx.fillStyle = '#666666';
         ctx.font = '12.5px "Hind Siliguri", sans-serif';
@@ -6992,6 +7115,56 @@ async function initPujaApp() {
     if (placeInput) placeInput.addEventListener('input', () => drawCard());
     if (wishSelect) wishSelect.addEventListener('change', () => drawCard());
 
+    // Connect Transliteration Buttons
+    if (btnTranslitName && nameInput) {
+      btnTranslitName.addEventListener('click', () => {
+        const current = nameInput.value.trim();
+        if (current) {
+          nameInput.value = transliterateToBangla(current);
+          drawCard();
+          showToast('✨ নামটি সফলভাবে বাংলায় রূপান্তর করা হয়েছে!');
+        } else {
+          showToast('⚠️ অনুগ্রহ করে প্রথমে নাম লিখুন!');
+        }
+      });
+    }
+
+    if (btnTranslitPlace && placeInput) {
+      btnTranslitPlace.addEventListener('click', () => {
+        const current = placeInput.value.trim();
+        if (current) {
+          placeInput.value = transliterateToBangla(current);
+          drawCard();
+          showToast('✨ স্থানটি সফলভাবে বাংলায় রূপান্তর করা হয়েছে!');
+        } else {
+          showToast('⚠️ অনুগ্রহ করে প্রথমে স্থান লিখুন!');
+        }
+      });
+    }
+
+    // Connect Quick Chips for Name & Place
+    document.querySelectorAll('.quick-chip-btn[data-append-name]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.getAttribute('data-append-name');
+        if (nameInput) {
+          if (!nameInput.value.includes(text.trim())) {
+            nameInput.value = (nameInput.value.trim() + text).trim();
+          }
+          drawCard();
+        }
+      });
+    });
+
+    document.querySelectorAll('.quick-chip-btn[data-set-place]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.getAttribute('data-set-place');
+        if (placeInput) {
+          placeInput.value = text;
+          drawCard();
+        }
+      });
+    });
+
     if (deityMainImg) {
       deityMainImg.addEventListener('load', () => {
         if (modal && modal.classList.contains('active')) {
@@ -7047,7 +7220,7 @@ async function initPujaApp() {
         const wish = wishSelect?.value || 'পারিবারিক সুখ ও শান্তি';
         const currentUrl = window.location.href.split('#')[0];
         const shareMsg = 
-`🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা পুণ্য আশীর্বাদপত্র 🌺
+`🪔 শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা পুণ্য আশীর্বাদপত্র 🌺
 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান
 
 প্রণাম! মা লক্ষ্মীর কৃপায় "${fullName}"-এর জীবনে "${wish}" বর্ষিত হোক।
