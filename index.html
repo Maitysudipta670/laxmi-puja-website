@@ -191,6 +191,73 @@ body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.puja-date-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 215, 0, 0.16);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  margin: 0.6rem auto 1.2rem;
+  backdrop-filter: blur(6px);
+  max-width: 780px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.96rem;
+}
+
+.date-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffecd1;
+}
+
+.date-label {
+  color: #fff9e6;
+  font-weight: 500;
+}
+
+.date-val {
+  color: #ffd700;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.date-separator {
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+
+.days-pill {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 215, 0, 0.4);
+  font-size: 0.88rem;
+  color: #fff9e6;
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.day-tag {
+  background: rgba(92, 7, 18, 0.6);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+}
+
 .puja-tagline {
   max-width: 650px;
   margin: 0 auto 1.5rem;
@@ -1331,6 +1398,36 @@ body {
     margin-bottom: 0.6rem;
   }
 
+  .puja-date-card {
+    padding: 8px 10px;
+    margin: 0.4rem auto 0.9rem;
+    width: 100%;
+  }
+
+  .date-row {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.86rem;
+  }
+
+  .date-separator {
+    display: none;
+  }
+
+  .days-pill {
+    font-size: 0.8rem;
+    gap: 6px;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .day-tag {
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    width: 100%;
+    text-align: center;
+  }
+
   .puja-tagline {
     font-size: 0.88rem;
     line-height: 1.45;
@@ -1705,6 +1802,26 @@ body {
 
     <h1 class="puja-title">শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা</h1>
     <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</div>
+
+    <!-- Auspicious Festive Dates Banner -->
+    <div class="puja-date-card">
+      <div class="date-row">
+        <div class="date-item">
+          <span class="date-label">📌 বাংলা তারিখ:</span>
+          <strong class="date-val">১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩</strong>
+        </div>
+        <span class="date-separator">•</span>
+        <div class="date-item">
+          <span class="date-label">📌 ইংরেজি তারিখ:</span>
+          <strong class="date-val">১, ২ ও ৩ নভেম্বর, ২০২৬</strong>
+        </div>
+      </div>
+      <div class="days-pill">
+        <span class="day-tag">🗓️ রবিবার — ১ নভেম্বর, ২০২৬</span>
+        <span class="day-tag">🗓️ সোমবার — ২ নভেম্বর, ২০২৬</span>
+        <span class="day-tag">🗓️ মঙ্গলবার — ৩ নভেম্বর, ২০২৬</span>
+      </div>
+    </div>
     <p class="puja-tagline">
       এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
     </p>
@@ -1873,21 +1990,43 @@ body {
         <!-- Altar Sidebar -->
         <div class="altar-sidebar">
           
-          <div class="info-card">
-            <h3>🕒 আমফান (N.S.C.C) পূজা ও স্পোর্টস সময়</h3>
-            <div class="tithi-clock">
-              <div style="font-size: 0.85rem; color: #7a4603; font-weight: 600; text-transform: uppercase;">
-                Current Mandap Time
+          <div class="info-card" style="border: 2px solid var(--color-gold); background: linear-gradient(135deg, #fffcf6 0%, #fff7eb 100%);">
+            <h3 style="color: var(--color-primary); font-size: 1.25rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
+              📅 পূজার মহোৎসব ও অনুষ্ঠান নির্ঘণ্ট
+            </h3>
+
+            <!-- Official Dates Callout Card -->
+            <div style="background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%); color: #fffdf7; border: 2px solid var(--color-gold); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 1rem; box-shadow: var(--shadow-sm);">
+              <div style="font-size: 0.8rem; color: #ffd700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
+                🌺 আমফান (N.S.C.C) মহোৎসবের পুণ্য দিনক্ষণ
               </div>
-              <div class="tithi-clock-time" id="live-tithi-timer">--:--:--</div>
-              <div style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600; margin-top: 4px;">
-                🌕 Amfan (N.S.C.C) Kojagari Purnima
+              <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; margin-bottom: 4px;">
+                📌 <strong>বাংলা তারিখ:</strong> <span style="color: #ffd700;">১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; margin-bottom: 10px;">
+                📌 <strong>ইংরেজি তারিখ:</strong> <span style="color: #ffd700;">১, ২ ও ৩ নভেম্বর, ২০২৬</span>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.86rem; background: rgba(0,0,0,0.25); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #ffd700;">
+                <div>🗓️ <strong>রবিবার — ১ নভেম্বর, ২০২৬:</strong> শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা সূচনা ও মহাপূজা</div>
+                <div>🗓️ <strong>সোমবার — ২ নভেম্বর, ২০২৬:</strong> বার্ষিক ক্রীড়া প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান</div>
+                <div>🗓️ <strong>মঙ্গলবার — ৩ নভেম্বর, ২০২৬:</strong> বাৎসরিক ক্রীড়া-সাংস্কৃতিক পুরস্কার বিতরণী পর্ব</div>
               </div>
             </div>
 
-            <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+            <div class="tithi-clock">
+              <div style="font-size: 0.82rem; color: #7a4603; font-weight: 600; text-transform: uppercase;">
+                Mandap Live Clock
+              </div>
+              <div class="tithi-clock-time" id="live-tithi-timer">--:--:--</div>
+              <div style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600; margin-top: 4px;">
+                🌕 Amfan (N.S.C.C) Kojagari Purnima Festival
+              </div>
+            </div>
+
+            <ul style="list-style: none; font-size: 0.88rem; display: flex; flex-direction: column; gap: 8px;">
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🏆 বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান:</span>
+                <span>🏆 বার্ষিক ক্রীড়া প্রতিযোগিতা:</span>
                 <strong>সকাল ৮:৩০ AM</strong>
               </li>
               <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
@@ -1899,8 +2038,8 @@ body {
                 <strong>০৯:৩০ PM onwards</strong>
               </li>
               <li style="display: flex; justify-content: space-between;">
-                <span>🥇 সাংস্কৃতিক ও ক্রীড়া পুরস্কার বিতরণী:</span>
-                <strong>পূজার দিন সন্ধ্যায়</strong>
+                <span>🥇 বাৎসরিক সাংস্কৃতিক ও ক্রীড়া পুরস্কার:</span>
+                <strong>৩ নভেম্বর সন্ধ্যায়</strong>
               </li>
             </ul>
           </div>
@@ -3952,20 +4091,32 @@ class PujaDB {
           },
           {
             id: 'update_seed_1',
-            title: '🌕 কোজাগরী পূর্ণিমা পূজা নির্ঘণ্ট ও সময়সূচী',
+            title: '📅 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও ৩ দিনব্যাপী মহোৎসবের পুণ্য নির্ঘণ্ট',
             category: 'schedule',
             priority: 'urgent',
             isPinned: true,
             author: 'আমফান (N.S.C.C) পুজো কমিটি',
-            body: `The auspicious Kojagari Lakshmi Puja tithi details for this year:
-• Purnima Tithi Begins: Evening at 05:42 PM
-• Kojagari Lakshmi Puja Nishita Muhurat: 11:38 PM to 12:28 AM
-• Sandhya Aarti: 07:15 PM
-• Community Pushpanjali (First Batch): 08:30 PM
-• Community Pushpanjali (Second Batch): 10:15 PM
-• Mahabhog & Prasad Distribution: 09:30 PM onwards.
-All devotees are requested to bring fresh lotus and flowers for offering.`,
-            timestamp: new Date(Date.now() - 3600000 * 20).toISOString()
+            body: `আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের দিনক্ষণ:
+
+📌 বাংলা তারিখ:-
+১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩
+
+📌 ইংরেজি তারিখ:-
+১, ২ ও ৩ নভেম্বর, ২০২৬
+
+৩ দিনব্যাপী উৎসবের দিনপঞ্জি:
+🗓️ রবিবার — ১ নভেম্বর, ২০২৬ (১৪ কার্তিক, ১৪৩৩):
+পবিত্র শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা সূচনা, ঘট স্থাপন, দেবীর আরাধনা, মহা সন্ধ্যা আরতি ও পুষ্পাঞ্জলি।
+
+🗓️ সোমবার — ২ নভেম্বর, ২০২৬ (১৫ কার্তিক, ১৪৩৩):
+ক্লাবের বাৎসরিক ক্রীড়া প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান। ভক্তদের মাঝে মহাভাব প্রসাদ বিতরণ।
+
+🗓️ মঙ্গলবার — ৩ নভেম্বর, ২০২৬ (১৬ কার্তিক, ১৪৩৩):
+বাৎসরিক সাংস্কৃতিক ও ক্রীড়া মেগা পুরস্কার বিতরণী পর্ব, সান্ধ্য সাংস্কৃতিক পরিবেশনা ও সমাপ্তি মহোৎসব।
+
+সকল ভক্ত ও এলাকাবাসীকে ক্লাবের তরফ থেকে সপরিবারে সাদর আমন্ত্রণ জানানো হচ্ছে।`,
+            likes: 125,
+            timestamp: new Date().toISOString()
           },
           {
             id: 'update_seed_2',
