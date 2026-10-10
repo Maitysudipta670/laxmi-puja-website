@@ -301,6 +301,21 @@ body {
   box-shadow: 0 4px 12px rgba(139, 19, 32, 0.3);
 }
 
+.badge-coming-soon {
+  font-size: 0.68rem;
+  background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+  color: #3e0409;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  margin-left: 5px;
+  font-weight: 700;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 4px rgba(255, 152, 0, 0.35);
+  white-space: nowrap;
+}
+
 /* Main Content Container */
 .main-content {
   max-width: 1240px;
@@ -1355,6 +1370,12 @@ body {
     gap: 6px;
   }
 
+  .badge-coming-soon {
+    font-size: 0.62rem;
+    padding: 1px 6px;
+    margin-left: 3px;
+  }
+
   /* Admin Banner on Mobile */
   #admin-active-banner {
     flex-direction: column !important;
@@ -1733,6 +1754,9 @@ body {
       <button class="tab-btn" data-tab="wishes">
         💌 Wishes & Pranam
       </button>
+      <button class="tab-btn" data-tab="donation">
+        🪙 আর্থিক সহায়তা <span class="badge-coming-soon">Coming Soon</span>
+      </button>
       <button class="tab-btn" data-tab="manage" id="tab-manage-btn" style="display: none;">
         ⚙️ Backup & Data
       </button>
@@ -2109,7 +2133,75 @@ body {
     </section>
 
     <!-- ========================================================
-         TAB 6: DATA MANAGEMENT & BACKUP
+         TAB 6: ARTHIK SAHAYATA (FINANCIAL CONTRIBUTION / DONATION) - COMING SOON
+         ======================================================== -->
+    <section class="tab-pane" id="pane-donation">
+      <div class="section-banner">
+        <div>
+          <h2>আমফান (N.S.C.C) আর্থিক সহায়তা ও অনুদান</h2>
+          <p>পবিত্র কোজাগরী লক্ষ্মী পূজা ও ক্লাবের বার্ষিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠানে আপনার ঐচ্ছিক অনুদান ও আর্থিক সহায়তা।</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn-gold" onclick="switchTab('wishes')">
+            💌 Wishes & Pranam Wall
+          </button>
+          <button class="btn-primary" onclick="switchTab('darshan')">
+            🪔 Virtual Darshan
+          </button>
+        </div>
+      </div>
+
+      <div style="max-width: 680px; margin: 0 auto; text-align: center; padding: 2.5rem 1.5rem; background: var(--color-surface); border: 2px solid var(--color-gold); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+        <div style="width: 80px; height: 80px; background: rgba(229, 169, 59, 0.15); border: 2px solid var(--color-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.25rem;">
+          🪙
+        </div>
+        
+        <div style="display: inline-block; background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%); color: #3e0409; font-weight: 700; font-size: 0.88rem; padding: 5px 18px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(255, 152, 0, 0.35);">
+          ⏳ Coming Soon (শীঘ্রই আসছে)
+        </div>
+
+        <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-primary); font-size: 1.6rem; margin-bottom: 0.8rem;">
+          অনলাইন আর্থিক সহায়তা ও প্রণামী পোর্টাল
+        </h3>
+
+        <p style="color: var(--color-text-muted); font-size: 1rem; line-height: 1.7; max-width: 540px; margin: 0 auto 1.5rem;">
+          আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা এবং বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের জন্য অনলাইন আর্থিক সহায়তা ও অনুদান প্রদানের সুবিধা খুব শীঘ্রই চালু করা হচ্ছে।
+        </p>
+
+        <div style="background: #fffdf7; border: 1px dashed var(--color-gold); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; max-width: 500px; margin: 0 auto 1.5rem; text-align: left;">
+          <h4 style="color: var(--color-primary-dark); font-size: 0.95rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px;">
+            ✨ শীঘ্রই যে সুবিধাগুলো যুক্ত হচ্ছে:
+          </h4>
+          <ul style="list-style: none; font-size: 0.88rem; color: #5d4037; display: flex; flex-direction: column; gap: 8px;">
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span>🔹</span> <span>সরাসরি UPI / QR কোড স্ক্যান করে সুবিধাজনক অনুদান</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span>🔹</span> <span>ক্লাবের অফিসিয়াল ব্যাংক অ্যাকাউন্ট বিবরণী</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span>🔹</span> <span>অনুদানকারী ভক্তদের তালিকা ও ডিজিটাল রশিদ</span>
+            </li>
+          </ul>
+        </div>
+
+        <p style="font-size: 0.92rem; color: #8c7377; font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
+          "আপনার আন্তরিক শুভেচ্ছা ও সহযোগিতাই আমাদের ক্লাবের প্রেরণা। মা লক্ষ্মীর কৃপায় আপনার পরিবারে সুখ, শান্তি ও সমৃদ্ধি সর্বদা বিরাজ করুক।"
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button class="btn-gold" onclick="switchTab('wishes')">
+            💌 শুভেচ্ছা ও প্রণাম বার্তা পাঠান
+          </button>
+          <button class="btn-primary" onclick="switchTab('darshan')">
+            🪔 ভার্চুয়াল প্রতিমা দর্শন করুন
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 7: DATA MANAGEMENT & BACKUP
          ======================================================== -->
     <section class="tab-pane" id="pane-manage">
       <div class="section-banner">
