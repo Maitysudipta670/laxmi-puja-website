@@ -2335,10 +2335,11 @@ body {
           <!-- Deity Frame -->
           <div class="deity-frame">
             <img 
-              src="https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1200&q=85" 
+              src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Raja_Ravi_Varma%2C_Goddess_Lakshmi%2C_1896.jpg/960px-Raja_Ravi_Varma%2C_Goddess_Lakshmi%2C_1896.jpg" 
               alt="Maa Lakshmi Pratima" 
               class="deity-image"
               id="deity-main-img"
+              crossorigin="anonymous"
             />
           </div>
 
@@ -3167,30 +3168,43 @@ const firebaseConfig = {
       </div>
 
       <div style="font-size: 0.88rem; color: #555; margin-bottom: 1rem; line-height: 1.5; background: #fffcf5; padding: 10px 14px; border-radius: 6px; border: 1px solid #fedc97;">
-        🌺 আপনার বা পরিবারের নাম লিখুন, আশীর্বাদপত্রটি তৈরি হবে এবং আপনি সাথে সাথে ছবি হিসেবে ডাউনলোড করে WhatsApp Status বা ফেসবুকে শেয়ার করতে পারবেন।
+        🌺 আপনার নাম ও সম্বোধন (শ্রী / শ্রীমতী) বেছে নিন — ভার্চুয়াল দর্শনে রাখা মা লক্ষ্মীর প্রতিমা ছবি সহ স্বয়ংক্রিয়ভাবে আপনার ডিজিটাল আশীর্বাদপত্র তৈরি হবে।
       </div>
 
       <form id="blessing-card-form" onsubmit="return false;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0.8rem;">
+        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; margin-bottom: 0.8rem;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="blessing-title-select">সম্বোধন *</label>
+            <select id="blessing-title-select" class="form-select">
+              <option value="শ্রী" selected>শ্রী (Sri)</option>
+              <option value="শ্রীমতী">শ্রীমতী (Srimati)</option>
+              <option value="শ্রী ও শ্রীমতী">শ্রী ও শ্রীমতী</option>
+              <option value="কুমারী">কুমারী (Kumari)</option>
+              <option value="পরিবার">ও পরিবার (Family)</option>
+              <option value="none">কোনোটি নয় (Only Name)</option>
+            </select>
+          </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" for="blessing-name-input">আপনার বা পরিবারের নাম *</label>
-            <input type="text" id="blessing-name-input" class="form-input" placeholder="যেমন: সুদীপ্ত মাইতি ও পরিবার" value="ভক্ত সুধীবৃন্দ" required />
+            <input type="text" id="blessing-name-input" class="form-input" placeholder="যেমন: সুদীপ্ত মাইতি" value="সুদীপ্ত মাইতি" required />
           </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem;">
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" for="blessing-place-input">স্থান / গ্রাম (ঐচ্ছিক)</label>
             <input type="text" id="blessing-place-input" class="form-input" placeholder="যেমন: নাইকুন্ডি, নন্দকুমার" value="নাইকুন্ডি, নন্দকুমার" />
           </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 1rem;">
-          <label class="form-label" for="blessing-wish-type">মা লক্ষ্মীর চরণে বিশেষ প্রার্থনা</label>
-          <select id="blessing-wish-type" class="form-select">
-            <option value="পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি">পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি</option>
-            <option value="সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি">সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি</option>
-            <option value="বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য">বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য</option>
-            <option value="ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ">ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ</option>
-            <option value="সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল">সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল</option>
-          </select>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="blessing-wish-type">মা লক্ষ্মীর চরণে বিশেষ প্রার্থনা</label>
+            <select id="blessing-wish-type" class="form-select">
+              <option value="পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি">পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি</option>
+              <option value="সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি">সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি</option>
+              <option value="বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য">বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য</option>
+              <option value="ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ">ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ</option>
+              <option value="সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল">সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল</option>
+            </select>
+          </div>
         </div>
       </form>
 
@@ -5101,7 +5115,7 @@ async function initPujaApp() {
   const btnChangeDarshanPhoto = document.getElementById('btn-change-darshan-photo');
   const btnLinkDarshanPhoto = document.getElementById('btn-link-darshan-photo');
   const btnResetDarshanPhoto = document.getElementById('btn-reset-darshan-photo');
-  const DEFAULT_DEITY_URL = 'https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=1200&q=85';
+  const DEFAULT_DEITY_URL = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Raja_Ravi_Varma%2C_Goddess_Lakshmi%2C_1896.jpg/960px-Raja_Ravi_Varma%2C_Goddess_Lakshmi%2C_1896.jpg';
 
   // Stats Elements
   const statPhotos = document.getElementById('stat-photos');
@@ -6612,18 +6626,32 @@ async function initPujaApp() {
     const btnOpenAltar = document.getElementById('btn-open-blessing-modal');
     const btnOpenHero = document.getElementById('btn-hero-blessing');
     const btnClose = document.getElementById('btn-close-blessing-modal');
+    const titleSelect = document.getElementById('blessing-title-select');
     const nameInput = document.getElementById('blessing-name-input');
     const placeInput = document.getElementById('blessing-place-input');
     const wishSelect = document.getElementById('blessing-wish-type');
     const canvas = document.getElementById('blessing-canvas');
     const btnDownload = document.getElementById('btn-download-blessing');
     const btnWhatsApp = document.getElementById('btn-share-blessing-whatsapp');
+    const deityMainImg = document.getElementById('deity-main-img');
 
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    function drawCard() {
-      const name = (nameInput?.value.trim()) || 'ভক্ত সুধীবৃন্দ';
+    function getFormattedDevoteeName() {
+      const rawName = (nameInput?.value.trim()) || 'সুদীপ্ত মাইতি';
+      const title = titleSelect?.value || 'শ্রী';
+      if (title === 'none') {
+        return rawName;
+      } else if (title === 'পরিবার') {
+        return rawName.includes('পরিবার') ? rawName : `${rawName} ও পরিবার`;
+      } else {
+        return rawName.startsWith(title) ? rawName : `${title} ${rawName}`;
+      }
+    }
+
+    function drawCard(options = {}) {
+      const displayName = getFormattedDevoteeName();
       const place = (placeInput?.value.trim()) || 'নাইকুন্ডি, নন্দকুমার';
       const wish = wishSelect?.value || 'পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি';
 
@@ -6632,37 +6660,38 @@ async function initPujaApp() {
 
       // 1. Background Parchment
       const grad = ctx.createRadialGradient(w/2, h/2, 50, w/2, h/2, 450);
-      grad.addColorStop(0, '#fffdf7');
+      grad.addColorStop(0, '#fffef8');
       grad.addColorStop(0.7, '#fef6e4');
-      grad.addColorStop(1, '#f7e5c6');
+      grad.addColorStop(1, '#f5e0be');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
       // 2. Ornate Festive Borders
       ctx.lineWidth = 14;
-      ctx.strokeStyle = '#5c0712';
+      ctx.strokeStyle = '#5c0712'; // Deep auspicious vermilion
       ctx.strokeRect(7, 7, w - 14, h - 14);
 
       ctx.lineWidth = 3;
-      ctx.strokeStyle = '#ffd700';
+      ctx.strokeStyle = '#ffd700'; // Radiant gold
       ctx.strokeRect(20, 20, w - 40, h - 40);
 
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#b37e19';
-      ctx.strokeRect(26, 26, w - 52, h - 52);
+      ctx.strokeStyle = '#b37e19'; // Antique gold
+      ctx.strokeRect(25, 25, w - 50, h - 50);
 
+      // Corner Ornaments
       const drawCorner = (x, y, dx, dy) => {
         ctx.fillStyle = '#b37e19';
         ctx.beginPath();
-        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
         ctx.fill();
         ctx.strokeStyle = '#ffd700';
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(x + dx * 10, y);
-        ctx.lineTo(x + dx * 30, y);
-        ctx.moveTo(x, y + dy * 10);
-        ctx.lineTo(x, y + dy * 30);
+        ctx.moveTo(x + dx * 8, y);
+        ctx.lineTo(x + dx * 26, y);
+        ctx.moveTo(x, y + dy * 8);
+        ctx.lineTo(x, y + dy * 26);
         ctx.stroke();
       };
       drawCorner(32, 32, 1, 1);
@@ -6670,93 +6699,270 @@ async function initPujaApp() {
       drawCorner(32, h - 32, 1, -1);
       drawCorner(w - 32, h - 32, -1, -1);
 
-      // 3. Header Text
+      // 3. Top Festive Header
       ctx.textAlign = 'center';
       ctx.fillStyle = '#6b0814';
-      ctx.font = 'bold 20px "Hind Siliguri", sans-serif';
-      ctx.fillText('🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান 🪔', w / 2, 64);
+      ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+      ctx.fillText('🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান 🪔', w / 2, 52);
 
       ctx.fillStyle = '#b37e19';
-      ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
-      ctx.fillText('আমফান (এন.এস.সি.সি) সার্বজনীন পূজা মহোৎসব', w / 2, 88);
+      ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
+      ctx.fillText('আমফান (এন.এস.সি.সি) সার্বজনীন পূজা মহোৎসব • কোজাগরী লক্ষ্মী পূজা', w / 2, 73);
 
-      ctx.fillStyle = '#6b4c52';
-      ctx.font = '13px "Hind Siliguri", sans-serif';
-      ctx.fillText('নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, কুমোরআড়া, নন্দকুমার, পূর্ব মেদিনীপুর', w / 2, 110);
+      // Gold divider line under header
+      ctx.strokeStyle = 'rgba(179, 126, 25, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(38, 83);
+      ctx.lineTo(w - 38, 83);
+      ctx.stroke();
 
-      // 4. Ribbon / Certificate Badge
+      // ========================================================
+      // 4. LEFT SIDE: Virtual Darshan Deity Photo Frame
+      // ========================================================
+      const fx = 42, fy = 96, fw = 205, fh = 320;
+
+      // Dark temple frame background
+      ctx.save();
+      ctx.fillStyle = '#260408';
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(fx, fy, fw, fh, 12);
+      } else {
+        ctx.rect(fx, fy, fw, fh);
+      }
+      ctx.fill();
+      ctx.restore();
+
+      // Draw Altar Deity Image
+      let imageDrawn = false;
+      const deityImg = deityMainImg;
+
+      if (!options?.skipExternalImg && deityImg && deityImg.complete && deityImg.naturalWidth > 0) {
+        try {
+          ctx.save();
+          ctx.beginPath();
+          if (ctx.roundRect) {
+            ctx.roundRect(fx + 4, fy + 4, fw - 8, fh - 36, 10);
+          } else {
+            ctx.rect(fx + 4, fy + 4, fw - 8, fh - 36);
+          }
+          ctx.clip();
+
+          // Object-fit: cover calculation
+          const iw = deityImg.naturalWidth || deityImg.width;
+          const ih = deityImg.naturalHeight || deityImg.height;
+          const destW = fw - 8;
+          const destH = fh - 36;
+          const imgRatio = iw / ih;
+          const targetRatio = destW / destH;
+          let sx, sy, sWidth, sHeight;
+
+          if (imgRatio > targetRatio) {
+            sHeight = ih;
+            sWidth = ih * targetRatio;
+            sx = (iw - sWidth) / 2;
+            sy = 0;
+          } else {
+            sWidth = iw;
+            sHeight = iw / targetRatio;
+            sx = 0;
+            sy = (ih - sHeight) / 2;
+          }
+
+          ctx.drawImage(deityImg, sx, sy, sWidth, sHeight, fx + 4, fy + 4, destW, destH);
+          ctx.restore();
+          imageDrawn = true;
+        } catch (err) {
+          console.warn('Deity image draw skipped:', err);
+          imageDrawn = false;
+        }
+      }
+
+      // Decorative fallback if image still loading
+      if (!imageDrawn) {
+        ctx.save();
+        ctx.fillStyle = '#4a0810';
+        ctx.fillRect(fx + 4, fy + 4, fw - 8, fh - 36);
+        ctx.fillStyle = '#ffd700';
+        ctx.font = '50px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('🌺', fx + fw / 2, fy + fh / 2 - 15);
+        ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
+        ctx.fillText('মা মহালক্ষ্মী', fx + fw / 2, fy + fh / 2 + 25);
+        ctx.restore();
+      }
+
+      // Golden ornate frame borders
+      ctx.save();
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = '#ffd700';
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(fx, fy, fw, fh, 12);
+      } else {
+        ctx.rect(fx, fy, fw, fh);
+      }
+      ctx.stroke();
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#b37e19';
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(fx + 3, fy + 3, fw - 6, fh - 6, 10);
+      } else {
+        ctx.rect(fx + 3, fy + 3, fw - 6, fh - 6);
+      }
+      ctx.stroke();
+      ctx.restore();
+
+      // Golden arch banner under deity photo
       ctx.fillStyle = '#ffd700';
       ctx.beginPath();
-      const rw = 250, rh = 34, rx = (w - rw)/2, ry = 130;
       if (ctx.roundRect) {
-        ctx.roundRect(rx, ry, rw, rh, 17);
+        ctx.roundRect(fx + 8, fy + fh - 30, fw - 16, 24, 6);
       } else {
-        ctx.rect(rx, ry, rw, rh);
+        ctx.rect(fx + 8, fy + fh - 30, fw - 16, 24);
       }
+      ctx.fill();
+      ctx.strokeStyle = '#5c0712';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.fillStyle = '#3a0208';
+      ctx.font = 'bold 12.5px "Hind Siliguri", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🌸 শ্রী শ্রী প্রতিমা দর্শন 🌸', fx + fw / 2, fy + fh - 14);
+
+      // ========================================================
+      // 5. RIGHT SIDE: Blessing Certificate Details
+      // ========================================================
+      const rx = 265;
+      const rw = w - rx - 35; // ~500px wide
+      const cx = rx + rw / 2; // ~515
+
+      // Ribbon / Certificate Badge
+      ctx.fillStyle = '#ffd700';
+      ctx.beginPath();
+      const badgeW = 220, badgeH = 28, badgeX = cx - badgeW / 2, badgeY = 96;
+      if (ctx.roundRect) {
+        ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 14);
+      } else {
+        ctx.rect(badgeX, badgeY, badgeW, badgeH);
+      }
+      ctx.fill();
+      ctx.strokeStyle = '#b37e19';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#3a0208';
+      ctx.font = 'bold 14.5px "Hind Siliguri", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('★ পুণ্য আশীর্বাদপত্র ★', cx, badgeY + 19);
+
+      // Dedication greeting
+      ctx.fillStyle = '#5c0712';
+      ctx.font = '13.5px "Hind Siliguri", sans-serif';
+      ctx.fillText('মা মহালক্ষ্মীর পরম কৃপা ও শুভাশিস জ্ঞাপন করা হচ্ছে:', cx, 148);
+
+      // Recipient Name (with Sri / Srimati)
+      ctx.fillStyle = '#8b1320';
+      ctx.font = 'bold 23px "Hind Siliguri", serif';
+      ctx.fillText(displayName, cx, 180);
+
+      // Place
+      if (place) {
+        ctx.fillStyle = '#666666';
+        ctx.font = '12.5px "Hind Siliguri", sans-serif';
+        ctx.fillText(`(${place})`, cx, 202);
+      }
+
+      // Prayer / Wish
+      ctx.fillStyle = '#b37e19';
+      ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
+      ctx.fillText('মা লক্ষ্মীর আশীর্বাদ প্রার্থনা:', cx, 228);
+
+      ctx.fillStyle = '#9c1425';
+      ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
+      ctx.fillText(`“${wish}”`, cx, 248);
+
+      // Sacred Shloka Box
+      const bx = rx + 15, by = 266, bw = rw - 30, bh = 76;
+      ctx.fillStyle = 'rgba(139, 19, 32, 0.04)';
+      ctx.strokeStyle = 'rgba(179, 126, 25, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.fillRect(bx, by, bw, bh);
+      ctx.strokeRect(bx, by, bw, bh);
+
+      ctx.fillStyle = '#4a0b12';
+      ctx.font = 'italic bold 13.5px "Hind Siliguri", serif';
+      ctx.fillText('“ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”', cx, by + 23);
+
+      ctx.fillStyle = '#6b0814';
+      ctx.font = 'italic 12px "Hind Siliguri", serif';
+      ctx.fillText('“ধনং ধান্যং পশূন্ বহুন্ পুত্রলাভং তথা পরম্।”', cx, by + 45);
+      ctx.fillText('“মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥”', cx, by + 63);
+
+      // Mandap Venue & Dates
+      ctx.fillStyle = '#555555';
+      ctx.font = '11.5px "Hind Siliguri", sans-serif';
+      ctx.fillText('📍 নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, কুমোরআড়া, নন্দকুমার, পূর্ব মেদিনীপুর', cx, 364);
+
+      ctx.fillStyle = '#7a1b24';
+      ctx.font = 'bold 12px "Hind Siliguri", sans-serif';
+      ctx.fillText('📅 পুণ্য তিথি: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩ (১, ২ ও ৩ নভেম্বর, ২০২৬)', cx, 384);
+
+      // Signatures / Authorities on Certificate
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#5c0712';
+      ctx.font = 'bold 11.5px "Hind Siliguri", sans-serif';
+      ctx.fillText('✍️ সভাপতি ও সম্পাদক', rx + 25, 414);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#5c0712';
+      ctx.font = 'bold 11.5px "Hind Siliguri", sans-serif';
+      ctx.fillText('📜 পূজা পরিচালনা কমিটি', w - 48, 414);
+
+      // Bottom Gold Seal
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, 412, 16, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd700';
       ctx.fill();
       ctx.strokeStyle = '#b37e19';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       ctx.fillStyle = '#3a0208';
-      ctx.font = 'bold 16px "Hind Siliguri", sans-serif';
-      ctx.fillText('★ পুণ্য আশীর্বাদপত্র ★', w / 2, 153);
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🪔', cx, 417);
+      ctx.restore();
 
-      // 5. Devotee Name & Place
-      ctx.fillStyle = '#5c0712';
-      ctx.font = '15px "Hind Siliguri", sans-serif';
-      ctx.fillText('মা মহালক্ষ্মীর পরম কৃপা ও শুভেচ্ছা জ্ঞাপন করা হচ্ছে:', w / 2, 196);
-
-      ctx.fillStyle = '#8b1320';
-      ctx.font = 'bold 26px "Hind Siliguri", serif';
-      ctx.fillText(`শ্রী/শ্রীমতী ${name}`, w / 2, 234);
-
-      if (place) {
-        ctx.fillStyle = '#666666';
-        ctx.font = '13px "Hind Siliguri", sans-serif';
-        ctx.fillText(`(${place})`, w / 2, 258);
-      }
-
-      // 6. Sacred Prayer / Wish
-      ctx.fillStyle = '#b32134';
-      ctx.font = 'bold 17px "Hind Siliguri", sans-serif';
-      ctx.fillText(`মা লক্ষ্মীর আশীর্বাদ প্রার্থনা: "${wish}"`, w / 2, 300);
-
-      // 7. Shloka Box
-      ctx.fillStyle = 'rgba(139, 19, 32, 0.05)';
-      ctx.strokeStyle = 'rgba(229, 169, 59, 0.4)';
+      // ========================================================
+      // 6. BOTTOM BAR (Club portal seal)
+      // ========================================================
+      ctx.strokeStyle = 'rgba(179, 126, 25, 0.3)';
       ctx.lineWidth = 1;
-      const bw = w - 100, bh = 68, bx = 50, by = 328;
-      ctx.fillRect(bx, by, bw, bh);
-      ctx.strokeRect(bx, by, bw, bh);
-
-      ctx.fillStyle = '#4a0b12';
-      ctx.font = 'italic bold 14px "Hind Siliguri", serif';
-      ctx.fillText('“ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”', w / 2, 352);
-      ctx.font = 'italic 13px "Hind Siliguri", serif';
-      ctx.fillText('“ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥”', w / 2, 376);
-
-      // 8. Footer Info
-      ctx.textAlign = 'left';
-      ctx.fillStyle = '#777777';
-      ctx.font = '12px "Hind Siliguri", sans-serif';
-      ctx.fillText('📅 পুণ্য তিথি: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩ (১, ২ ও ৩ নভেম্বর, ২০২৬)', 48, 450);
-
-      ctx.textAlign = 'right';
-      ctx.fillStyle = '#6b0814';
-      ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
-      ctx.fillText('আমফান (N.S.C.C) পূজা পরিচালনা সমিতি', w - 48, 450);
+      ctx.beginPath();
+      ctx.moveTo(38, 436);
+      ctx.lineTo(w - 38, 436);
+      ctx.stroke();
 
       ctx.textAlign = 'center';
       ctx.fillStyle = '#b37e19';
       ctx.font = 'bold 11px sans-serif';
-      ctx.fillText('✨ AMFAN (N.S.C.C) OFFICIAL FESTIVE BLESSING PORTAL ✨', w / 2, 480);
+      ctx.fillText('✨ AMFAN (N.S.C.C) KOJAGARI LAKSHMI PUJA FESTIVE BLESSING PORTAL • NAIKUNDI ✨', w / 2, 458);
+
+      ctx.fillStyle = '#777777';
+      ctx.font = '10.5px "Hind Siliguri", sans-serif';
+      ctx.fillText('আমফান (N.S.C.C) ক্লাবের সকল কর্মকর্তা ও সদস্যবৃন্দের পক্ষ থেকে আন্তরিক প্রীতি ও শুভেচ্ছা', w / 2, 478);
     }
 
     function openModal() {
       if (modal) {
         modal.classList.add('active');
-        setTimeout(drawCard, 60);
+        setTimeout(() => drawCard(), 80);
       }
     }
 
@@ -6764,35 +6970,62 @@ async function initPujaApp() {
     if (btnOpenHero) btnOpenHero.addEventListener('click', openModal);
     if (btnClose) btnClose.addEventListener('click', () => modal && modal.classList.remove('active'));
 
-    if (nameInput) nameInput.addEventListener('input', drawCard);
-    if (placeInput) placeInput.addEventListener('input', drawCard);
-    if (wishSelect) wishSelect.addEventListener('change', drawCard);
+    if (titleSelect) titleSelect.addEventListener('change', () => drawCard());
+    if (nameInput) nameInput.addEventListener('input', () => drawCard());
+    if (placeInput) placeInput.addEventListener('input', () => drawCard());
+    if (wishSelect) wishSelect.addEventListener('change', () => drawCard());
+
+    if (deityMainImg) {
+      deityMainImg.addEventListener('load', () => {
+        if (modal && modal.classList.contains('active')) {
+          drawCard();
+        }
+      });
+    }
 
     if (btnDownload) {
       btnDownload.addEventListener('click', () => {
-        const name = (nameInput?.value.trim()) || 'Devotee';
-        const link = document.createElement('a');
-        link.download = `Amfan_Lakshmi_Puja_Ashirbad_${name.replace(/\s+/g, '_')}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('📥 আপনার ডিজিটাল আশীর্বাদপত্রটি সফলভাবে ডাউনলোড হয়েছে!');
+        const cleanName = getFormattedDevoteeName().replace(/[\s\/\\]+/g, '_');
+        try {
+          const link = document.createElement('a');
+          link.download = `Amfan_Lakshmi_Puja_Ashirbad_${cleanName}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          showToast('📥 আপনার ডিজিটাল আশীর্বাদপত্রটি সফলভাবে ডাউনলোড হয়েছে!');
+        } catch (err) {
+          console.warn('Canvas export tainted fallback:', err);
+          // Redraw skipping external image to bypass CORS taint
+          drawCard({ skipExternalImg: true });
+          setTimeout(() => {
+            try {
+              const link = document.createElement('a');
+              link.download = `Amfan_Lakshmi_Puja_Ashirbad_${cleanName}.png`;
+              link.href = canvas.toDataURL('image/png');
+              link.click();
+              showToast('📥 আপনার ডিজিটাল আশীর্বাদপত্রটি ডাউনলোড হয়েছে!');
+              drawCard(); // restore image preview
+            } catch (e2) {
+              alert('ডাউনলোড করতে সমস্যা হচ্ছে। অনুগ্রহ করে কার্ডটির একটি স্ক্রিনশট নিন।');
+            }
+          }, 60);
+        }
       });
     }
 
     if (btnWhatsApp) {
       btnWhatsApp.addEventListener('click', () => {
-        const name = (nameInput?.value.trim()) || 'ভক্ত';
+        const fullName = getFormattedDevoteeName();
         const wish = wishSelect?.value || 'পারিবারিক সুখ ও শান্তি';
         const currentUrl = window.location.href.split('#')[0];
         const shareMsg = 
 `🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা পুণ্য আশীর্বাদপত্র 🌺
 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান
 
-প্রণাম! মা লক্ষ্মীর কৃপায় "${name}"-এর জীবনে "${wish}" বর্ষিত হোক।
+প্রণাম! মা লক্ষ্মীর কৃপায় "${fullName}"-এর জীবনে "${wish}" বর্ষিত হোক।
 “ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”
 
-স্থান: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, নন্দকুমার, পূর্ব মেদিনীপুর
-তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬
+স্থান: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, কুমোরআড়া, নন্দকুমার, পূর্ব মেদিনীপুর
+তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬ (১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩)
 
 আপনার নিজের ডিজিটাল আশীর্বাদপত্র সংগ্রহ করতে ও মা লক্ষ্মীর প্রতিমা দর্শন করতে ক্লিক করুন:
 👉 ${currentUrl}`;
