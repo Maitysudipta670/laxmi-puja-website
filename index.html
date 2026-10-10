@@ -1373,6 +1373,70 @@ body {
   opacity: 0.6;
 }
 
+.footer-address-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(229, 169, 59, 0.45);
+  border-radius: var(--radius-md);
+  padding: 1.3rem 1.6rem;
+  margin: 1.5rem auto 1.25rem;
+  max-width: 680px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.footer-address-title {
+  font-family: var(--font-heading);
+  color: var(--color-gold-light);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-address-text {
+  margin-bottom: 1.1rem;
+}
+
+.address-venue {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fffdf7;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.address-details {
+  font-size: 0.92rem;
+  color: #ffecd1;
+  letter-spacing: 0.4px;
+  line-height: 1.5;
+}
+
+.footer-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #e5a93b 0%, #d49320 100%);
+  color: #2b0409;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-size: 0.92rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.footer-map-btn:hover {
+  background: linear-gradient(135deg, #ffd700 0%, #e5a93b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(229, 169, 59, 0.45);
+  color: #1a0205;
+}
+
 /* ==========================================================================
    Comprehensive Mobile & Tablet Responsive Styles
    Fixes all overlapping on phones: Virtual Darshan, Photo Gallery, Puja Updates,
@@ -1776,6 +1840,31 @@ body {
   .lightbox-details {
     padding: 0.9rem 1rem;
   }
+
+  /* Footer Address Card on Mobile */
+  .footer-address-card {
+    padding: 1.1rem 0.9rem;
+    margin: 1.25rem auto 1rem;
+  }
+
+  .footer-address-title {
+    font-size: 1rem;
+  }
+
+  .address-venue {
+    font-size: 0.95rem;
+  }
+
+  .address-details {
+    font-size: 0.85rem;
+  }
+
+  .footer-map-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.86rem;
+    padding: 10px 14px;
+  }
 }
 
   </style>
@@ -1803,25 +1892,6 @@ body {
     <h1 class="puja-title">শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা</h1>
     <div class="puja-bengali-title">আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান</div>
 
-    <!-- Auspicious Festive Dates Banner -->
-    <div class="puja-date-card">
-      <div class="date-row">
-        <div class="date-item">
-          <span class="date-label">📌 বাংলা তারিখ:</span>
-          <strong class="date-val">১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩</strong>
-        </div>
-        <span class="date-separator">•</span>
-        <div class="date-item">
-          <span class="date-label">📌 ইংরেজি তারিখ:</span>
-          <strong class="date-val">১, ২ ও ৩ নভেম্বর, ২০২৬</strong>
-        </div>
-      </div>
-      <div class="days-pill">
-        <span class="day-tag">🗓️ রবিবার — ১ নভেম্বর, ২০২৬</span>
-        <span class="day-tag">🗓️ সোমবার — ২ নভেম্বর, ২০২৬</span>
-        <span class="day-tag">🗓️ মঙ্গলবার — ৩ নভেম্বর, ২০২৬</span>
-      </div>
-    </div>
     <p class="puja-tagline">
       এসো মা লক্ষ্মী বসো ঘরে, আমারই ঘরে থাকো আলো করে | পূজার পবিত্র প্রতিমা দর্শন, ক্লাবের ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের মুহূর্ত ও গুরুত্বপূর্ণ ঘোষণা
     </p>
@@ -2721,6 +2791,20 @@ const firebaseConfig = {
       <p style="font-size: 0.85rem; color: #caa2a8; margin-bottom: 1.2rem;">
         May Goddess Mahalakshmi bestow health, peace, prosperity, and joy upon Amfan (N.S.C.C) Club and all families.
       </p>
+
+      <!-- Mandap & Club Location Address Card -->
+      <div class="footer-address-card">
+        <div class="footer-address-title">
+          📍 পূজা ও মণ্ডপ প্রাঙ্গণ (Mandap Address & Location)
+        </div>
+        <div class="footer-address-text">
+          <div class="address-venue">NAIKUNDI SITALAMATA MANDIR PRANGAN</div>
+          <div class="address-details">NAIKUNDI, KUMARARA, NANDAKUMAR, PURBA MEDINIPUR, PIN - 721632</div>
+        </div>
+        <a href="https://maps.app.goo.gl/vdFZix7KHu1ypo9M9" target="_blank" rel="noopener noreferrer" class="footer-map-btn" title="Open location in Google Maps">
+          <span style="font-size: 1.1rem;">🗺️</span> Google Maps-এ লোকেশন দেখুন (Get Directions)
+        </a>
+      </div>
 
       <div style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px dashed rgba(229, 169, 59, 0.4); font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; color: #ffd700; text-transform: uppercase;">
         ✨ CREATED AND DEVELOPED BY SUDIPTA MAITY ✨
