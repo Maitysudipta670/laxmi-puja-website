@@ -1221,6 +1221,143 @@ body {
 }
 
 /* ==========================================================================
+   Committee Section (Club & Puja Committee)
+   ========================================================================== */
+.committee-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.committee-search-box {
+  flex: 1;
+  min-width: 250px;
+  max-width: 360px;
+}
+
+.committee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.committee-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.committee-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md), 0 0 14px rgba(229, 169, 59, 0.25);
+  border-color: var(--color-gold);
+}
+
+.member-avatar-wrap {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 3px solid var(--color-gold);
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+  background: linear-gradient(135deg, #fff7ea 0%, #faebd7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(92, 7, 18, 0.15);
+}
+
+.member-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-avatar-placeholder {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.member-name {
+  font-family: var(--font-bengali), var(--font-heading), sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.member-role-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%);
+  color: #ffd700;
+  border: 1px solid var(--color-gold);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.member-category-tag {
+  font-size: 0.74rem;
+  color: #7a525a;
+  background: #fdf6ee;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #ebd4bc;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.member-phone {
+  font-size: 0.85rem;
+  color: #444;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  text-decoration: none;
+  background: #fdfaf5;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid #edd9c2;
+  transition: all 0.2s ease;
+}
+
+.member-phone:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.member-admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  width: 100%;
+  justify-content: center;
+  border-top: 1px dashed #ebd4bc;
+  padding-top: 10px;
+}
+
+/* ==========================================================================
    Wishes & Pranam Board (Guestbook)
    ========================================================================== */
 .wishes-layout {
@@ -2069,6 +2206,9 @@ body {
       <button class="pill-btn" id="btn-offer-flowers" title="Offer Flower Shower">
         🌸 পুষ্পাঞ্জলি (Offer Flowers)
       </button>
+      <button class="pill-btn" id="btn-hero-blessing" style="border-color: #ffd700;" title="মা লক্ষ্মীর পুণ্য আশীর্বাদপত্র সংগ্রহ করুন">
+        📜 পুণ্য আশীর্বাদপত্র (Blessing Card)
+      </button>
       <button class="pill-btn" id="admin-status-pill" style="border-color: #ffd700;" title="Club Admin Login">
         👑 ক্লাবের অ্যাডমিন
       </button>
@@ -2133,6 +2273,9 @@ body {
       </button>
       <button class="tab-btn" data-tab="mantras">
         📜 Mantras & Panchali
+      </button>
+      <button class="tab-btn" data-tab="committee">
+        👥 পূজা ও ক্লাব কমিটি
       </button>
       <button class="tab-btn" data-tab="wishes">
         💌 Wishes & Pranam
@@ -2249,6 +2392,9 @@ body {
             </button>
             <button class="ritual-btn" onclick="document.getElementById('btn-offer-flowers').click()">
               🌸 Offer Pushpanjali
+            </button>
+            <button class="ritual-btn" id="btn-open-blessing-modal" style="background: linear-gradient(135deg, #e5a93b 0%, #b37e19 100%); color: #2b0409; font-weight: 700;">
+              📜 ডিজিটাল আশীর্বাদপত্র
             </button>
           </div>
         </div>
@@ -2499,7 +2645,43 @@ body {
     </section>
 
     <!-- ========================================================
-         TAB 5: WISHES & PRANAM GUESTBOOK
+         TAB 5: PUJA & CLUB COMMITTEE (Admin Managed, Public View)
+         ======================================================== -->
+    <section class="tab-pane" id="pane-committee">
+      <div class="section-banner">
+        <div>
+          <h2>আমফান (N.S.C.C) পূজা ও পরিচালনা কমিটি</h2>
+          <p>শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের কর্মকর্তা ও সদস্যবৃন্দ।</p>
+        </div>
+        <div>
+          <button class="btn-primary" id="btn-add-committee-member" style="display: none;">
+            ➕ নতুন কর্মকর্তা / সদস্য যোগ করুন
+          </button>
+        </div>
+      </div>
+
+      <!-- Committee Search & Category Filter Pills -->
+      <div class="committee-filter-bar">
+        <div class="committee-search-box">
+          <input type="text" id="committee-search-input" class="form-input" placeholder="🔍 সদস্য বা কর্মকর্তার নাম লিখে খুঁজুন..." />
+        </div>
+        <div class="filter-pills" id="committee-filter-pills">
+          <button class="filter-pill active" data-category="all">সব সদস্য (All)</button>
+          <button class="filter-pill" data-category="executive">প্রধান কর্মকর্তা</button>
+          <button class="filter-pill" data-category="sports_cultural">ক্রীড়া ও সাংস্কৃতিক</button>
+          <button class="filter-pill" data-category="advisory">উপদেষ্টা মণ্ডলী</button>
+          <button class="filter-pill" data-category="member">কার্যকরী সদস্য</button>
+        </div>
+      </div>
+
+      <!-- Committee Members Grid -->
+      <div class="committee-grid" id="committee-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 6: WISHES & PRANAM GUESTBOOK
          ======================================================== -->
     <section class="tab-pane" id="pane-wishes">
       <div class="section-banner">
@@ -2968,6 +3150,121 @@ const firebaseConfig = {
           </button>
           <button type="submit" class="btn-primary">
             🔐 লগইন করুন
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 6: DIGITAL BLESSING CARD / ASHIRBAD PATRA (For Everyone)
+       ======================================================== -->
+  <div class="modal-overlay" id="blessing-modal" role="dialog" aria-modal="true" aria-labelledby="blessing-modal-title">
+    <div class="modal-card" style="max-width: 720px; width: 95%;">
+      <div class="modal-header">
+        <h3 id="blessing-modal-title">📜 মা লক্ষ্মীর পুণ্য আশীর্বাদপত্র (Digital Blessing Card)</h3>
+        <button class="modal-close-btn" id="btn-close-blessing-modal">&times;</button>
+      </div>
+
+      <div style="font-size: 0.88rem; color: #555; margin-bottom: 1rem; line-height: 1.5; background: #fffcf5; padding: 10px 14px; border-radius: 6px; border: 1px solid #fedc97;">
+        🌺 আপনার বা পরিবারের নাম লিখুন, আশীর্বাদপত্রটি তৈরি হবে এবং আপনি সাথে সাথে ছবি হিসেবে ডাউনলোড করে WhatsApp Status বা ফেসবুকে শেয়ার করতে পারবেন।
+      </div>
+
+      <form id="blessing-card-form" onsubmit="return false;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0.8rem;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="blessing-name-input">আপনার বা পরিবারের নাম *</label>
+            <input type="text" id="blessing-name-input" class="form-input" placeholder="যেমন: সুদীপ্ত মাইতি ও পরিবার" value="ভক্ত সুধীবৃন্দ" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="blessing-place-input">স্থান / গ্রাম (ঐচ্ছিক)</label>
+            <input type="text" id="blessing-place-input" class="form-input" placeholder="যেমন: নাইকুন্ডি, নন্দকুমার" value="নাইকুন্ডি, নন্দকুমার" />
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="blessing-wish-type">মা লক্ষ্মীর চরণে বিশেষ প্রার্থনা</label>
+          <select id="blessing-wish-type" class="form-select">
+            <option value="পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি">পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি</option>
+            <option value="সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি">সুস্বাস্থ্য, দীর্ঘায়ু ও রোগমুক্তি</option>
+            <option value="বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য">বিদ্যা, জ্ঞান ও কর্মজীবনে সাফল্য</option>
+            <option value="ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ">ব্যবসা, অর্থভাগ্য ও লক্ষ্মীশ্রী লাভ</option>
+            <option value="সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল">সর্বজনীন সৌভাগ্য, শান্তি ও মঙ্গল</option>
+          </select>
+        </div>
+      </form>
+
+      <!-- Live Blessing Card Canvas -->
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <div style="background: #2b0409; padding: 12px; border-radius: 10px; border: 2px solid var(--color-gold); box-shadow: var(--shadow-md);">
+          <canvas id="blessing-canvas" width="800" height="520" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: block; margin: 0 auto;"></canvas>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+        <button type="button" class="btn-gold" onclick="document.getElementById('blessing-modal').classList.remove('active')">
+          বন্ধ করুন
+        </button>
+        <button type="button" class="whatsapp-share-btn" id="btn-share-blessing-whatsapp" style="padding: 9px 18px; font-size: 0.88rem;">
+          💬 WhatsApp-এ পাঠান
+        </button>
+        <button type="button" class="btn-primary" id="btn-download-blessing">
+          📥 আশীর্বাদপত্র ডাউনলোড করুন (Save Image)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 7: COMMITTEE MEMBER MODAL (Admin Only)
+       ======================================================== -->
+  <div class="modal-overlay" id="member-modal" role="dialog" aria-modal="true" aria-labelledby="member-modal-title">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 id="member-modal-title">👥 সদস্য / কর্মকর্তা তথ্য</h3>
+        <button class="modal-close-btn" id="btn-close-member-modal">&times;</button>
+      </div>
+
+      <form id="member-form">
+        <input type="hidden" id="member-id-input" />
+
+        <div class="form-group">
+          <label class="form-label" for="member-name-input">সদস্যের পূর্ণ নাম *</label>
+          <input type="text" id="member-name-input" class="form-input" placeholder="যেমন: শ্রী রামচন্দ্র মাইতি" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="member-role-input">পদবী / দায়িত্ব *</label>
+          <input type="text" id="member-role-input" class="form-input" placeholder="যেমন: সভাপতি, সম্পাদক, কোষাধ্যক্ষ, ইত্যাদি" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="member-category-input">বিভাগ / ক্যাটাগরি *</label>
+          <select id="member-category-input" class="form-select" required>
+            <option value="executive">প্রধান কর্মকর্তা (Executive)</option>
+            <option value="sports_cultural">ক্রীড়া ও সাংস্কৃতিক বিভাগ (Sports & Cultural)</option>
+            <option value="advisory">উপদেষ্টা মণ্ডলী (Advisory)</option>
+            <option value="member">কার্যকরী সদস্য (Member)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="member-phone-input">ফোন নম্বর (ঐচ্ছিক)</label>
+          <input type="text" id="member-phone-input" class="form-input" placeholder="যেমন: ৯৮XXXXXXX" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="member-photo-input">ছবি আপলোড বা ছবি URL (ঐচ্ছিক)</label>
+          <input type="file" id="member-photo-file" accept="image/*" class="form-input" style="padding: 6px; margin-bottom: 6px;" />
+          <input type="text" id="member-photo-url" class="form-input" placeholder="বা ছবির ওয়েব লিঙ্ক লিখুন..." />
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.25rem;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('member-modal').classList.remove('active')">
+            বাতিল
+          </button>
+          <button type="submit" class="btn-primary" id="btn-save-member">
+            💾 সংরক্ষণ করুন (Save Member)
           </button>
         </div>
       </form>
@@ -3466,6 +3763,41 @@ class FirebaseService {
     }
 
     return { pCount, uCount, wCount };
+  }
+
+  // --- COMMITTEE MEMBERS (Cloud Firestore) ---
+  async getCommitteeMembers() {
+    if (!this.isReady) return [];
+    try {
+      const snap = await this.db.collection('committee_members').get();
+      const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      list.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+      return list;
+    } catch (err) {
+      console.error('Firebase getCommitteeMembers error:', err);
+      return [];
+    }
+  }
+
+  async saveCommitteeMember(member) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const memberId = member.id || 'member_' + Date.now();
+    const docData = {
+      name: member.name,
+      role: member.role,
+      category: member.category || 'member',
+      phone: member.phone || '',
+      photo: member.photo || '',
+      timestamp: member.timestamp || new Date().toISOString()
+    };
+    await this.db.collection('committee_members').doc(memberId).set(docData, { merge: true });
+    return { id: memberId, ...docData };
+  }
+
+  async deleteCommitteeMember(memberId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('committee_members').doc(memberId).delete();
+    return true;
   }
 
   /**
@@ -4528,6 +4860,180 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
     }
     return true;
   }
+
+  // --- COMMITTEE MEMBERS (Local Storage & Firebase Cloud Sync) ---
+  getCommitteeStorage() {
+    try {
+      const stored = localStorage.getItem('amfan_committee_members');
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.warn('Error reading committee from localStorage:', e);
+    }
+
+    // Default Seed Committee for Amfan (N.S.C.C)
+    const defaultCommittee = [
+      {
+        id: 'member_1',
+        name: 'শ্রী অমল জানা',
+        role: 'সভাপতি (President)',
+        category: 'executive',
+        phone: '৯৮৩২০০XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_2',
+        name: 'শ্রী সুব্রত মাইতি',
+        role: 'সহ-সভাপতি (Vice President)',
+        category: 'executive',
+        phone: '৯৭৩৩০৪XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_3',
+        name: 'শ্রী সুদীপ্ত মাইতি',
+        role: 'সাধারণ সম্পাদক (General Secretary)',
+        category: 'executive',
+        phone: '৯৮৭৪৫৬XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_4',
+        name: 'শ্রী দীপক ঘোড়ই',
+        role: 'সহ-সম্পাদক (Asst. Secretary)',
+        category: 'executive',
+        phone: '৯৬৪৭৮৯XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_5',
+        name: 'শ্রী তরুণ পাত্র',
+        role: 'কোষাধ্যক্ষ (Treasurer)',
+        category: 'executive',
+        phone: '৯১৫৩৫৬XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_6',
+        name: 'শ্রী রাজীব মণ্ডল',
+        role: 'পূজা আহ্বায়ক (Puja Convener)',
+        category: 'executive',
+        phone: '৯৮০৪১২XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_7',
+        name: 'শ্রী সঞ্জয় মাইতি',
+        role: 'ক্রীড়া সম্পাদক (Sports Secretary)',
+        category: 'sports_cultural',
+        phone: '৯৭৩২১৫XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_8',
+        name: 'শ্রী শান্তনু মান্না',
+        role: 'সাংস্কৃতিক সম্পাদক (Cultural Secretary)',
+        category: 'sports_cultural',
+        phone: '৯৮৩২০৮XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_9',
+        name: 'শ্রী নিমাই চন্দ্র জানা',
+        role: 'প্রধান উপদেষ্টা (Chief Advisor)',
+        category: 'advisory',
+        phone: '৯৮৩২০১XXXX',
+        photo: '',
+        timestamp: new Date().toISOString()
+      },
+      {
+        id: 'member_10',
+        name: 'শ্রী অসীম বর',
+        role: 'কার্যকরী সদস্য ও স্বেচ্ছাসেবক দলপতি',
+        category: 'member',
+        phone: '',
+        photo: '',
+        timestamp: new Date().toISOString()
+      }
+    ];
+
+    try {
+      localStorage.setItem('amfan_committee_members', JSON.stringify(defaultCommittee));
+    } catch (e) {}
+    return defaultCommittee;
+  }
+
+  async getCommitteeMembers() {
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        const cloudMembers = await window.firebaseService.getCommitteeMembers();
+        if (cloudMembers && cloudMembers.length > 0) return cloudMembers;
+      } catch (e) {
+        console.warn('Could not fetch cloud committee members:', e);
+      }
+    }
+    return this.getCommitteeStorage();
+  }
+
+  async saveCommitteeMember(member) {
+    const list = this.getCommitteeStorage();
+    const id = member.id || 'member_' + Date.now();
+    const updatedMember = {
+      ...member,
+      id,
+      timestamp: member.timestamp || new Date().toISOString()
+    };
+
+    const existingIdx = list.findIndex(m => m.id === id);
+    if (existingIdx >= 0) {
+      list[existingIdx] = updatedMember;
+    } else {
+      list.push(updatedMember);
+    }
+
+    try {
+      localStorage.setItem('amfan_committee_members', JSON.stringify(list));
+    } catch (e) {
+      console.warn('LocalStorage save committee error:', e);
+    }
+
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.saveCommitteeMember(updatedMember);
+      } catch (e) {
+        console.warn('Could not sync committee member to cloud:', e);
+      }
+    }
+
+    return updatedMember;
+  }
+
+  async deleteCommitteeMember(id) {
+    const list = this.getCommitteeStorage();
+    const filtered = list.filter(m => m.id !== id);
+    try {
+      localStorage.setItem('amfan_committee_members', JSON.stringify(filtered));
+    } catch (e) {
+      console.warn('LocalStorage delete committee error:', e);
+    }
+
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.deleteCommitteeMember(id);
+      } catch (e) {
+        console.warn('Could not sync committee delete to cloud:', e);
+      }
+    }
+
+    return true;
+  }
 }
 
 // Global instance
@@ -5573,6 +6079,8 @@ async function initPujaApp() {
       if (darshanAdminControls) darshanAdminControls.style.display = 'flex';
       if (tabManageBtn) tabManageBtn.style.display = 'inline-flex';
       if (firebaseStatusPill) firebaseStatusPill.style.display = 'inline-flex';
+      const btnAddMem = document.getElementById('btn-add-committee-member');
+      if (btnAddMem) btnAddMem.style.display = 'inline-flex';
     } else {
       if (adminStatusPill) {
         adminStatusPill.innerHTML = `👑 ক্লাবের অ্যাডমিন`;
@@ -5586,10 +6094,13 @@ async function initPujaApp() {
       if (darshanAdminControls) darshanAdminControls.style.display = 'none';
       if (tabManageBtn) tabManageBtn.style.display = 'none';
       if (firebaseStatusPill) firebaseStatusPill.style.display = 'none';
+      const btnAddMem = document.getElementById('btn-add-committee-member');
+      if (btnAddMem) btnAddMem.style.display = 'none';
     }
     renderUpdates();
     renderPhotos();
     renderWishes();
+    if (typeof renderCommittee === 'function') renderCommittee();
   }
 
   if (adminStatusPill) {
@@ -6094,6 +6605,436 @@ async function initPujaApp() {
   }
 
   // ==========================================================
+  // DIGITAL BLESSING CARD / ASHIRBAD PATRA (For Everyone)
+  // ==========================================================
+  function initBlessingCard() {
+    const modal = document.getElementById('blessing-modal');
+    const btnOpenAltar = document.getElementById('btn-open-blessing-modal');
+    const btnOpenHero = document.getElementById('btn-hero-blessing');
+    const btnClose = document.getElementById('btn-close-blessing-modal');
+    const nameInput = document.getElementById('blessing-name-input');
+    const placeInput = document.getElementById('blessing-place-input');
+    const wishSelect = document.getElementById('blessing-wish-type');
+    const canvas = document.getElementById('blessing-canvas');
+    const btnDownload = document.getElementById('btn-download-blessing');
+    const btnWhatsApp = document.getElementById('btn-share-blessing-whatsapp');
+
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function drawCard() {
+      const name = (nameInput?.value.trim()) || 'ভক্ত সুধীবৃন্দ';
+      const place = (placeInput?.value.trim()) || 'নাইকুন্ডি, নন্দকুমার';
+      const wish = wishSelect?.value || 'পারিবারিক সুখ, শান্তি ও সর্বাঙ্গীন সমৃদ্ধি';
+
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // 1. Background Parchment
+      const grad = ctx.createRadialGradient(w/2, h/2, 50, w/2, h/2, 450);
+      grad.addColorStop(0, '#fffdf7');
+      grad.addColorStop(0.7, '#fef6e4');
+      grad.addColorStop(1, '#f7e5c6');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // 2. Ornate Festive Borders
+      ctx.lineWidth = 14;
+      ctx.strokeStyle = '#5c0712';
+      ctx.strokeRect(7, 7, w - 14, h - 14);
+
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#ffd700';
+      ctx.strokeRect(20, 20, w - 40, h - 40);
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#b37e19';
+      ctx.strokeRect(26, 26, w - 52, h - 52);
+
+      const drawCorner = (x, y, dx, dy) => {
+        ctx.fillStyle = '#b37e19';
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffd700';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x + dx * 10, y);
+        ctx.lineTo(x + dx * 30, y);
+        ctx.moveTo(x, y + dy * 10);
+        ctx.lineTo(x, y + dy * 30);
+        ctx.stroke();
+      };
+      drawCorner(32, 32, 1, 1);
+      drawCorner(w - 32, 32, -1, 1);
+      drawCorner(32, h - 32, 1, -1);
+      drawCorner(w - 32, h - 32, -1, -1);
+
+      // 3. Header Text
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#6b0814';
+      ctx.font = 'bold 20px "Hind Siliguri", sans-serif';
+      ctx.fillText('🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান 🪔', w / 2, 64);
+
+      ctx.fillStyle = '#b37e19';
+      ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
+      ctx.fillText('আমফান (এন.এস.সি.সি) সার্বজনীন পূজা মহোৎসব', w / 2, 88);
+
+      ctx.fillStyle = '#6b4c52';
+      ctx.font = '13px "Hind Siliguri", sans-serif';
+      ctx.fillText('নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, কুমোরআড়া, নন্দকুমার, পূর্ব মেদিনীপুর', w / 2, 110);
+
+      // 4. Ribbon / Certificate Badge
+      ctx.fillStyle = '#ffd700';
+      ctx.beginPath();
+      const rw = 250, rh = 34, rx = (w - rw)/2, ry = 130;
+      if (ctx.roundRect) {
+        ctx.roundRect(rx, ry, rw, rh, 17);
+      } else {
+        ctx.rect(rx, ry, rw, rh);
+      }
+      ctx.fill();
+      ctx.strokeStyle = '#b37e19';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = '#3a0208';
+      ctx.font = 'bold 16px "Hind Siliguri", sans-serif';
+      ctx.fillText('★ পুণ্য আশীর্বাদপত্র ★', w / 2, 153);
+
+      // 5. Devotee Name & Place
+      ctx.fillStyle = '#5c0712';
+      ctx.font = '15px "Hind Siliguri", sans-serif';
+      ctx.fillText('মা মহালক্ষ্মীর পরম কৃপা ও শুভেচ্ছা জ্ঞাপন করা হচ্ছে:', w / 2, 196);
+
+      ctx.fillStyle = '#8b1320';
+      ctx.font = 'bold 26px "Hind Siliguri", serif';
+      ctx.fillText(`শ্রী/শ্রীমতী ${name}`, w / 2, 234);
+
+      if (place) {
+        ctx.fillStyle = '#666666';
+        ctx.font = '13px "Hind Siliguri", sans-serif';
+        ctx.fillText(`(${place})`, w / 2, 258);
+      }
+
+      // 6. Sacred Prayer / Wish
+      ctx.fillStyle = '#b32134';
+      ctx.font = 'bold 17px "Hind Siliguri", sans-serif';
+      ctx.fillText(`মা লক্ষ্মীর আশীর্বাদ প্রার্থনা: "${wish}"`, w / 2, 300);
+
+      // 7. Shloka Box
+      ctx.fillStyle = 'rgba(139, 19, 32, 0.05)';
+      ctx.strokeStyle = 'rgba(229, 169, 59, 0.4)';
+      ctx.lineWidth = 1;
+      const bw = w - 100, bh = 68, bx = 50, by = 328;
+      ctx.fillRect(bx, by, bw, bh);
+      ctx.strokeRect(bx, by, bw, bh);
+
+      ctx.fillStyle = '#4a0b12';
+      ctx.font = 'italic bold 14px "Hind Siliguri", serif';
+      ctx.fillText('“ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”', w / 2, 352);
+      ctx.font = 'italic 13px "Hind Siliguri", serif';
+      ctx.fillText('“ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥”', w / 2, 376);
+
+      // 8. Footer Info
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#777777';
+      ctx.font = '12px "Hind Siliguri", sans-serif';
+      ctx.fillText('📅 পুণ্য তিথি: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩ (১, ২ ও ৩ নভেম্বর, ২০২৬)', 48, 450);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#6b0814';
+      ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
+      ctx.fillText('আমফান (N.S.C.C) পূজা পরিচালনা সমিতি', w - 48, 450);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#b37e19';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillText('✨ AMFAN (N.S.C.C) OFFICIAL FESTIVE BLESSING PORTAL ✨', w / 2, 480);
+    }
+
+    function openModal() {
+      if (modal) {
+        modal.classList.add('active');
+        setTimeout(drawCard, 60);
+      }
+    }
+
+    if (btnOpenAltar) btnOpenAltar.addEventListener('click', openModal);
+    if (btnOpenHero) btnOpenHero.addEventListener('click', openModal);
+    if (btnClose) btnClose.addEventListener('click', () => modal && modal.classList.remove('active'));
+
+    if (nameInput) nameInput.addEventListener('input', drawCard);
+    if (placeInput) placeInput.addEventListener('input', drawCard);
+    if (wishSelect) wishSelect.addEventListener('change', drawCard);
+
+    if (btnDownload) {
+      btnDownload.addEventListener('click', () => {
+        const name = (nameInput?.value.trim()) || 'Devotee';
+        const link = document.createElement('a');
+        link.download = `Amfan_Lakshmi_Puja_Ashirbad_${name.replace(/\s+/g, '_')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('📥 আপনার ডিজিটাল আশীর্বাদপত্রটি সফলভাবে ডাউনলোড হয়েছে!');
+      });
+    }
+
+    if (btnWhatsApp) {
+      btnWhatsApp.addEventListener('click', () => {
+        const name = (nameInput?.value.trim()) || 'ভক্ত';
+        const wish = wishSelect?.value || 'পারিবারিক সুখ ও শান্তি';
+        const currentUrl = window.location.href.split('#')[0];
+        const shareMsg = 
+`🪔 শ্রী শ্রী কোজাগরী মহালক্ষ্মী পূজা পুণ্য আশীর্বাদপত্র 🌺
+আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান
+
+প্রণাম! মা লক্ষ্মীর কৃপায় "${name}"-এর জীবনে "${wish}" বর্ষিত হোক।
+“ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”
+
+স্থান: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, নন্দকুমার, পূর্ব মেদিনীপুর
+তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬
+
+আপনার নিজের ডিজিটাল আশীর্বাদপত্র সংগ্রহ করতে ও মা লক্ষ্মীর প্রতিমা দর্শন করতে ক্লিক করুন:
+👉 ${currentUrl}`;
+
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMsg)}`;
+        window.open(url, '_blank');
+      });
+    }
+  }
+
+  // ==========================================================
+  // COMMITTEE SECTION (Admin Manage, Public View)
+  // ==========================================================
+  state.committeeMembers = [];
+  state.committeeCategory = 'all';
+  state.committeeSearch = '';
+
+  const committeeGrid = document.getElementById('committee-grid');
+  const btnAddCommitteeMember = document.getElementById('btn-add-committee-member');
+  const memberModal = document.getElementById('member-modal');
+  const btnCloseMemberModal = document.getElementById('btn-close-member-modal');
+  const memberForm = document.getElementById('member-form');
+  const memberIdInput = document.getElementById('member-id-input');
+  const memberNameInput = document.getElementById('member-name-input');
+  const memberRoleInput = document.getElementById('member-role-input');
+  const memberCategoryInput = document.getElementById('member-category-input');
+  const memberPhoneInput = document.getElementById('member-phone-input');
+  const memberPhotoFile = document.getElementById('member-photo-file');
+  const memberPhotoUrl = document.getElementById('member-photo-url');
+  const committeeSearchInput = document.getElementById('committee-search-input');
+
+  async function loadCommittee() {
+    try {
+      state.committeeMembers = await window.pujaDB.getCommitteeMembers();
+    } catch (e) {
+      console.warn('Error loading committee:', e);
+      state.committeeMembers = [];
+    }
+    renderCommittee();
+  }
+
+  function renderCommittee() {
+    if (!committeeGrid) return;
+
+    let filtered = state.committeeMembers || [];
+
+    if (state.committeeCategory !== 'all') {
+      filtered = filtered.filter(m => m.category === state.committeeCategory);
+    }
+
+    if (state.committeeSearch.trim() !== '') {
+      const q = state.committeeSearch.toLowerCase();
+      filtered = filtered.filter(m => 
+        (m.name && m.name.toLowerCase().includes(q)) || 
+        (m.role && m.role.toLowerCase().includes(q))
+      );
+    }
+
+    if (filtered.length === 0) {
+      committeeGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #888; background: var(--color-surface); border: 1px dashed var(--color-border); border-radius: var(--radius-md);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">👥</div>
+          <p style="font-size: 1.1rem; color: var(--color-primary-dark); font-weight: 600;">কোনো কর্মকর্তা বা সদস্যের নাম পাওয়া যায়নি</p>
+          <p style="font-size: 0.9rem;">${state.isAdmin ? 'ওপরের "নতুন কর্মকর্তা / সদস্য যোগ করুন" বাটনে ক্লিক করে নাম যোগ করুন।' : 'অনুগ্রহ করে অন্য বিভাগে খুঁজুন।'}</p>
+        </div>
+      `;
+      return;
+    }
+
+    committeeGrid.innerHTML = filtered.map(member => {
+      const categoryNames = {
+        executive: 'প্রধান কর্মকর্তা',
+        sports_cultural: 'ক্রীড়া ও সাংস্কৃতিক বিভাগ',
+        advisory: 'উপদেষ্টা মণ্ডলী',
+        member: 'কার্যকরী সদস্য'
+      };
+      const catLabel = categoryNames[member.category] || 'সদস্য';
+      const avatarContent = member.photo 
+        ? `<img src="${escapeHtml(member.photo)}" alt="${escapeHtml(member.name)}" class="member-avatar-img" />`
+        : `<span class="member-avatar-placeholder">👤</span>`;
+
+      return `
+        <div class="committee-card" data-id="${member.id}">
+          <div class="member-avatar-wrap">
+            ${avatarContent}
+          </div>
+          <h4 class="member-name">${escapeHtml(member.name)}</h4>
+          <div class="member-role-badge">${escapeHtml(member.role)}</div>
+          <div class="member-category-tag">${catLabel}</div>
+          ${member.phone ? `<a href="tel:${escapeHtml(member.phone)}" class="member-phone">📞 ${escapeHtml(member.phone)}</a>` : ''}
+
+          ${state.isAdmin ? `
+            <div class="member-admin-actions">
+              <button class="pill-btn btn-edit-member" data-id="${member.id}" style="padding: 4px 10px; font-size: 0.78rem; background: #fffdf7; border-color: #ffd54f;">
+                ✏️ সম্পাদনা
+              </button>
+              <button class="pill-btn btn-delete-member" data-id="${member.id}" style="padding: 4px 10px; font-size: 0.78rem; background: #6b0814; color: #fff; border-color: #6b0814;">
+                🗑️ মুছুন
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Attach Admin Edit/Delete Event Listeners
+    if (state.isAdmin) {
+      committeeGrid.querySelectorAll('.btn-edit-member').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const member = state.committeeMembers.find(m => m.id === id);
+          if (member && memberModal) {
+            memberIdInput.value = member.id;
+            memberNameInput.value = member.name;
+            memberRoleInput.value = member.role;
+            memberCategoryInput.value = member.category || 'executive';
+            memberPhoneInput.value = member.phone || '';
+            memberPhotoUrl.value = member.photo || '';
+            document.getElementById('member-modal-title').textContent = '✏️ সদস্য তথ্য সম্পাদনা';
+            memberModal.classList.add('active');
+          }
+        });
+      });
+
+      committeeGrid.querySelectorAll('.btn-delete-member').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.id;
+          const member = state.committeeMembers.find(m => m.id === id);
+          if (!member) return;
+          if (confirm(`আপনি কি "${member.name}"-এর নাম তালিকা থেকে মুছে ফেলতে চান?`)) {
+            await window.pujaDB.deleteCommitteeMember(id);
+            state.committeeMembers = state.committeeMembers.filter(m => m.id !== id);
+            renderCommittee();
+            showToast(`🗑️ "${member.name}" তালিকা থেকে সফলভাবে মুছে ফেলা হয়েছে!`);
+          }
+        });
+      });
+    }
+  }
+
+  function initCommitteeSection() {
+    if (btnAddCommitteeMember) {
+      btnAddCommitteeMember.addEventListener('click', () => {
+        if (!state.isAdmin) {
+          showToast('🔒 সদস্য যোগ করার অধিকার শুধুমাত্র ক্লাবের অ্যাডমিনের জন্য।');
+          return;
+        }
+        if (memberForm) memberForm.reset();
+        if (memberIdInput) memberIdInput.value = '';
+        document.getElementById('member-modal-title').textContent = '➕ নতুন কর্মকর্তা / সদস্য যোগ করুন';
+        if (memberModal) memberModal.classList.add('active');
+      });
+    }
+
+    if (btnCloseMemberModal) {
+      btnCloseMemberModal.addEventListener('click', () => {
+        if (memberModal) memberModal.classList.remove('active');
+      });
+    }
+
+    // Filter pills
+    const filterPills = document.querySelectorAll('#committee-filter-pills .filter-pill');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        state.committeeCategory = pill.dataset.category;
+        renderCommittee();
+      });
+    });
+
+    // Search filter
+    if (committeeSearchInput) {
+      committeeSearchInput.addEventListener('input', (e) => {
+        state.committeeSearch = e.target.value;
+        renderCommittee();
+      });
+    }
+
+    // Photo file reader for committee
+    let selectedMemberPhoto = '';
+    if (memberPhotoFile) {
+      memberPhotoFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            selectedMemberPhoto = evt.target.result;
+            if (memberPhotoUrl) memberPhotoUrl.value = '';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Form submit
+    if (memberForm) {
+      memberForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!state.isAdmin) {
+          alert('শুধুমাত্র অ্যাডমিন সদস্য তথ্য সংরক্ষণ করতে পারেন।');
+          return;
+        }
+
+        const name = memberNameInput.value.trim();
+        const role = memberRoleInput.value.trim();
+        const category = memberCategoryInput.value;
+        const phone = memberPhoneInput.value.trim();
+        const photo = selectedMemberPhoto || memberPhotoUrl.value.trim();
+        const id = memberIdInput.value || '';
+
+        if (!name || !role) {
+          alert('সদস্যের নাম এবং পদবী আবশ্যক!');
+          return;
+        }
+
+        const memberData = {
+          id: id || undefined,
+          name,
+          role,
+          category,
+          phone,
+          photo
+        };
+
+        const saved = await window.pujaDB.saveCommitteeMember(memberData);
+        if (id) {
+          const idx = state.committeeMembers.findIndex(m => m.id === id);
+          if (idx >= 0) state.committeeMembers[idx] = saved;
+        } else {
+          state.committeeMembers.push(saved);
+        }
+
+        renderCommittee();
+        if (memberModal) memberModal.classList.remove('active');
+        showToast(`✅ "${name}"-এর নাম সফলভাবে সংরক্ষিত হয়েছে!`);
+        selectedMemberPhoto = '';
+      });
+    }
+  }
+
+  // ==========================================================
   // INITIAL DATA LOADING & LIVE CLOCK
   // ==========================================================
   updateFirebaseUIStatus();
@@ -6103,6 +7044,9 @@ async function initPujaApp() {
   await loadPhotos();
   await loadUpdates();
   await loadWishes();
+  await loadCommittee();
+  initBlessingCard();
+  initCommitteeSection();
 
   try {
     const savedDeity = await window.pujaDB.getDeityPhoto();
