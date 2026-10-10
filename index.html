@@ -3186,7 +3186,7 @@ const firebaseConfig = {
           </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label" for="blessing-name-input">আপনার বা পরিবারের নাম *</label>
-            <input type="text" id="blessing-name-input" class="form-input" placeholder="যেমন: সুদীপ্ত মাইতি" value="সুদীপ্ত মাইতি" required />
+            <input type="text" id="blessing-name-input" class="form-input" placeholder="আপনার বা পরিবারের নাম লিখুন..." value="" required />
           </div>
         </div>
 
@@ -6639,7 +6639,8 @@ async function initPujaApp() {
     const ctx = canvas.getContext('2d');
 
     function getFormattedDevoteeName() {
-      const rawName = (nameInput?.value.trim()) || 'সুদীপ্ত মাইতি';
+      const rawName = (nameInput?.value.trim()) || '';
+      if (!rawName) return '';
       const title = titleSelect?.value || 'শ্রী';
       if (title === 'none') {
         return rawName;
@@ -6866,9 +6867,25 @@ async function initPujaApp() {
       ctx.fillText('মা মহালক্ষ্মীর পরম কৃপা ও শুভাশিস জ্ঞাপন করা হচ্ছে:', cx, 148);
 
       // Recipient Name (with Sri / Srimati)
-      ctx.fillStyle = '#8b1320';
-      ctx.font = 'bold 23px "Hind Siliguri", serif';
-      ctx.fillText(displayName, cx, 180);
+      if (displayName) {
+        ctx.fillStyle = '#8b1320';
+        ctx.font = 'bold 23px "Hind Siliguri", serif';
+        ctx.fillText(displayName, cx, 180);
+      } else {
+        // Blank line when not typed yet (faka)
+        ctx.strokeStyle = 'rgba(139, 19, 32, 0.4)';
+        ctx.setLineDash([4, 4]);
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cx - 130, 185);
+        ctx.lineTo(cx + 130, 185);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#a87a82';
+        ctx.font = 'italic 13.5px "Hind Siliguri", sans-serif';
+        ctx.fillText('(এখানে আপনার নাম দেখা যাবে)', cx, 178);
+      }
 
       // Place
       if (place) {
@@ -6985,7 +7002,13 @@ async function initPujaApp() {
 
     if (btnDownload) {
       btnDownload.addEventListener('click', () => {
-        const cleanName = getFormattedDevoteeName().replace(/[\s\/\\]+/g, '_');
+        const raw = (nameInput?.value.trim()) || '';
+        if (!raw) {
+          showToast('⚠️ অনুগ্রহ করে প্রথমে আপনার বা পরিবারের নাম লিখুন!');
+          if (nameInput) nameInput.focus();
+          return;
+        }
+        const cleanName = (getFormattedDevoteeName() || 'Devotee').replace(/[\s\/\\]+/g, '_');
         try {
           const link = document.createElement('a');
           link.download = `Amfan_Lakshmi_Puja_Ashirbad_${cleanName}.png`;
@@ -7014,7 +7037,13 @@ async function initPujaApp() {
 
     if (btnWhatsApp) {
       btnWhatsApp.addEventListener('click', () => {
-        const fullName = getFormattedDevoteeName();
+        const raw = (nameInput?.value.trim()) || '';
+        if (!raw) {
+          showToast('⚠️ অনুগ্রহ করে প্রথমে আপনার বা পরিবারের নাম লিখুন!');
+          if (nameInput) nameInput.focus();
+          return;
+        }
+        const fullName = getFormattedDevoteeName() || 'ভক্ত সুধীবৃন্দ';
         const wish = wishSelect?.value || 'পারিবারিক সুখ ও শান্তি';
         const currentUrl = window.location.href.split('#')[0];
         const shareMsg = 
