@@ -2850,6 +2850,37 @@ body {
           </div>
         </div>
 
+        <!-- Admin Password & Security Settings Card -->
+        <div class="info-card" style="border: 2px solid var(--color-gold); background: #ffffff;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
+            <h3 style="margin-bottom: 0; color: var(--color-primary-dark);">🔐 অ্যাডমিন পাসওয়ার্ড ও সিকিউরিটি সেটিংস</h3>
+            <span class="update-badge" style="background: #fff8e1; color: #f57f17; border: 1px solid #ffe082;">Admin Security</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem; line-height: 1.5;">
+            প্রয়োজন অনুসারে ক্লাবের অ্যাডমিন পাসওয়ার্ড এবং পাসওয়ার্ড ভুলে গেলে রিকভারির সিকিউরিটি প্রশ্ন ও উত্তর আপডেট করে রাখতে পারেন।
+          </p>
+          <form id="admin-security-settings-form" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="setting-admin-pin">বর্তমান/নতুন অ্যাডমিন পাসওয়ার্ড (Admin Password) *</label>
+              <input type="text" id="setting-admin-pin" class="form-input" placeholder="যেমন: 24689011" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setting-sec-question">গোপন সিকিউরিটি প্রশ্ন (Security Question) *</label>
+              <input type="text" id="setting-sec-question" class="form-input" placeholder="যেমন: আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setting-sec-answer">সিকিউরিটি উত্তর (Security Answer) *</label>
+              <input type="text" id="setting-sec-answer" class="form-input" placeholder="যেমন: I AM A GOOD BOY" required />
+              <div style="font-size: 0.78rem; color: #777; margin-top: 4px;">পাসওয়ার্ড ভুলে গেলে এই উত্তরটি লিখলে তবেই নতুন পাসওয়ার্ড সেট করা যাবে।</div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+              <button type="button" class="btn-primary" id="btn-save-security-settings">
+                💾 সিকিউরিটি সেটিংস সংরক্ষণ করুন
+              </button>
+            </div>
+          </form>
+        </div>
+
         <div class="info-card">
           <h3>💾 Export Full Database Backup</h3>
           <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem;">
@@ -3151,36 +3182,143 @@ const firebaseConfig = {
        MODAL 5: AMFAN (N.S.C.C) CLUB ADMIN LOGIN MODAL
        ======================================================== -->
   <div class="modal-overlay" id="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
-    <div class="modal-card" style="max-width: 440px;">
+    <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header">
         <h3 id="admin-modal-title">👑 Amfan (N.S.C.C) অ্যাডমিন লগইন</h3>
         <button class="modal-close-btn" id="btn-close-admin-modal">&times;</button>
       </div>
 
-      <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; line-height: 1.5;">
-        শুধুমাত্র আমফান (N.S.C.C) ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। লগইন করলে আপনি গুরুত্বপূর্ণ আপডেট দিতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছে ফেলতে পারবেন। সাধারণ দর্শকরা কোনো নোটিশ দিতে বা ডিলিট করতে পারবে না।
-      </p>
+      <!-- VIEW 1: STANDARD ADMIN LOGIN -->
+      <div id="admin-login-view">
+        <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; line-height: 1.5;">
+          শুধুমাত্র আমফান (N.S.C.C) ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য। লগইন করলে আপনি গুরুত্বপূর্ণ আপডেট দিতে পারবেন এবং অপ্রয়োজনীয় পোস্ট মুছে ফেলতে পারবেন। সাধারণ দর্শকরা কোনো নোটিশ দিতে বা ডিলিট করতে পারবে না।
+        </p>
 
-      <form id="admin-login-form">
-        <div class="form-group">
-          <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret Password *</label>
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="password" id="admin-pin-input" class="form-input" placeholder="গোপন পাসওয়ার্ড লিখুন..." style="flex: 1;" required />
-            <button type="button" id="btn-toggle-pin-visibility" class="pill-btn" style="padding: 10px 14px; font-size: 0.82rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
-              👁️ পাসওয়ার্ড দেখুন
+        <form id="admin-login-form">
+          <div class="form-group">
+            <label class="form-label" for="admin-pin-input">অ্যাডমিন পাসকোড / Secret Password *</label>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="password" id="admin-pin-input" class="form-input" placeholder="গোপন পাসওয়ার্ড লিখুন..." style="flex: 1;" required />
+              <button type="button" id="btn-toggle-pin-visibility" class="pill-btn" style="padding: 10px 14px; font-size: 0.82rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
+                👁️ পাসওয়ার্ড দেখুন
+              </button>
+            </div>
+            <!-- Forgot Password Link -->
+            <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
+              <button type="button" id="btn-goto-forgot-pwd" style="background: none; border: none; color: #b32134; font-size: 0.84rem; cursor: pointer; text-decoration: underline; padding: 4px 0; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                ❓ পাসওয়ার্ড ভুলে গেছেন? (Forgot Password?)
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.25rem;">
+            <button type="button" class="btn-gold" onclick="document.getElementById('admin-modal').classList.remove('active')">
+              বাতিল
+            </button>
+            <button type="submit" class="btn-primary">
+              🔐 লগইন করুন
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- VIEW 2: FORGOT PASSWORD & SECURITY VERIFICATION -->
+      <div id="admin-forgot-view" style="display: none;">
+        <!-- STEP 1: SECURITY QUESTION & ANSWER -->
+        <div id="forgot-step-1">
+          <p style="font-size: 0.88rem; color: #555; margin-bottom: 1.1rem; line-height: 1.45;">
+            পাসওয়ার্ড রিসেট করতে ক্লাবের গোপন নিরাপত্তা প্রশ্নের সঠিক উত্তর দিয়ে নিজেকে যাচাই করুন:
+          </p>
+
+          <div style="background: linear-gradient(135deg, #fffcf5 0%, #fff6e0 100%); border: 1.5px solid var(--color-gold); border-radius: 8px; padding: 12px 14px; margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #8a5800; text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;">
+              <span>🔒 ক্লাবের সিকিউরিটি প্রশ্ন (Security Question)</span>
+            </div>
+            <div id="forgot-sec-question-display" style="font-size: 1rem; font-weight: 600; color: var(--color-primary-dark); line-height: 1.4;">
+              আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?
+            </div>
+            <div style="font-size: 0.8rem; color: #777; margin-top: 5px;">
+              💡 আপনার গোপন সিকিউরিটি উত্তরটি লিখুন
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="forgot-sec-answer-input">সিকিউরিটি উত্তর (Security Answer) *</label>
+            <input type="text" id="forgot-sec-answer-input" class="form-input" placeholder="এখানে সিকিউরিটি উত্তর লিখুন..." autocomplete="off" />
+            <div id="forgot-step1-error" style="color: #b32134; font-size: 0.82rem; margin-top: 6px; display: none; font-weight: 500;"></div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 1.3rem;">
+            <button type="button" class="btn-gold" id="btn-back-to-login" style="padding: 10px 14px; font-size: 0.88rem;">
+              ⬅️ লগইন-এ ফিরুন
+            </button>
+            <button type="button" class="btn-primary" id="btn-verify-security-answer">
+              যাচাই করুন ➔
             </button>
           </div>
         </div>
 
-        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.25rem;">
-          <button type="button" class="btn-gold" onclick="document.getElementById('admin-modal').classList.remove('active')">
-            বাতিল
-          </button>
-          <button type="submit" class="btn-primary">
-            🔐 লগইন করুন
+        <!-- STEP 2: NEW PASSWORD & CONFIRM PASSWORD -->
+        <div id="forgot-step-2" style="display: none;">
+          <div style="background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; border-radius: 6px; padding: 10px 14px; font-size: 0.88rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.25rem;">✅</span>
+            <div>
+              <strong>সিকিউরিটি উত্তর যাচাই সফল হয়েছে!</strong>
+              <div style="font-size: 0.8rem; color: #1b5e20;">এবার আপনার নতুন গোপন পাসওয়ার্ড দিন ও কনফার্ম করুন:</div>
+            </div>
+          </div>
+
+          <form id="forgot-reset-form" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label" for="forgot-new-pwd-input">নতুন পাসওয়ার্ড (New Password) *</label>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="password" id="forgot-new-pwd-input" class="form-input" placeholder="নতুন পাসওয়ার্ড লিখুন..." style="flex: 1;" required />
+                <button type="button" id="btn-toggle-new-pwd" class="pill-btn" style="padding: 10px 12px; font-size: 0.8rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
+                  👁️ দেখুন
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 0.85rem;">
+              <label class="form-label" for="forgot-confirm-pwd-input">পাসওয়ার্ড নিশ্চিত করুন (Confirm Password) *</label>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="password" id="forgot-confirm-pwd-input" class="form-input" placeholder="পুনরায় নতুন পাসওয়ার্ড লিখুন..." style="flex: 1;" required />
+                <button type="button" id="btn-toggle-confirm-pwd" class="pill-btn" style="padding: 10px 12px; font-size: 0.8rem; background: #fffdf7; border: 1px solid #ffd54f; white-space: nowrap;">
+                  👁️ দেখুন
+                </button>
+              </div>
+              <div id="forgot-pwd-match-msg" style="font-size: 0.82rem; margin-top: 6px; font-weight: 500;"></div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.3rem;">
+              <button type="button" class="btn-gold" id="btn-cancel-step2" style="padding: 10px 14px; font-size: 0.88rem;">
+                বাতিল
+              </button>
+              <button type="button" class="btn-primary" id="btn-save-new-pwd">
+                💾 নতুন পাসওয়ার্ড সংরক্ষণ করুন
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP 3: SUCCESS CONFIRMATION SCREEN -->
+        <div id="forgot-step-success" style="display: none; text-align: center; padding: 1rem 0.25rem 0.25rem;">
+          <div style="width: 76px; height: 76px; background: #e8f5e9; border: 3px solid #81c784; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-size: 2.3rem; box-shadow: 0 4px 16px rgba(76, 175, 80, 0.25);">
+            🎉
+          </div>
+          <h3 style="color: #2e7d32; font-size: 1.35rem; margin-bottom: 0.35rem; font-weight: 700;">পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে!</h3>
+          <div style="font-size: 0.92rem; color: #666; margin-bottom: 1.2rem; font-weight: 600;">
+            (Password Successfully Changed!)
+          </div>
+          <div style="font-size: 0.9rem; color: #444; line-height: 1.55; background: #fffdf8; border: 1.5px dashed var(--color-gold); border-radius: 8px; padding: 14px 16px; margin-bottom: 1.5rem; text-align: left;">
+            <p style="margin-bottom: 6px;">✨ <strong>আমফান (N.S.C.C) ক্লাবের নতুন অ্যাডমিন পাসওয়ার্ড সফলভাবে আপডেট হয়েছে।</strong></p>
+            <p style="margin-bottom: 0; color: #666; font-size: 0.85rem;">নতুন পাসওয়ার্ডটি স্বয়ংক্রিয়ভাবে ক্লাউড ও ডিভাইসে সংরক্ষিত হয়েছে। আপনি এখনই সরাসরি অ্যাডমিন মোডে প্রবেশ করতে পারেন।</p>
+          </div>
+          <button type="button" class="btn-primary" id="btn-login-with-new-pwd" style="width: 100%; padding: 12px; font-size: 1.02rem; justify-content: center;">
+            👑 নতুন পাসওয়ার্ড দিয়ে এখনই লগইন করুন
           </button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 
@@ -3802,6 +3940,50 @@ class FirebaseService {
         }
       }, (err) => {
         console.warn('Deity photo listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- ADMIN AUTH & SECURITY SETTINGS CLOUD SYNC ---
+  async getAdminAuth() {
+    if (!this.isReady) return null;
+    try {
+      const doc = await this.db.collection('puja_settings').doc('admin_auth').get();
+      return doc.exists ? doc.data() : null;
+    } catch (e) {
+      console.warn('Firebase getAdminAuth error:', e);
+      return null;
+    }
+  }
+
+  async saveAdminAuth({ pin, securityQuestion, securityAnswer }) {
+    if (!this.isReady) return false;
+    try {
+      const payload = {
+        updatedAt: new Date().toISOString()
+      };
+      if (pin) payload.pin = String(pin).trim();
+      if (securityQuestion) payload.securityQuestion = String(securityQuestion).trim();
+      if (securityAnswer) payload.securityAnswer = String(securityAnswer).trim();
+
+      await this.db.collection('puja_settings').doc('admin_auth').set(payload, { merge: true });
+      return true;
+    } catch (e) {
+      console.error('Firebase saveAdminAuth error:', e);
+      return false;
+    }
+  }
+
+  onAdminAuthChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_settings').doc('admin_auth')
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          callback(doc.data());
+        }
+      }, (err) => {
+        console.warn('Admin auth listener error:', err);
       });
     this.listeners.push(unsubscribe);
     return unsubscribe;
@@ -5041,6 +5223,106 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
 
     return true;
   }
+
+  // ==========================================================
+  // ADMIN AUTH & RECOVERY SETTINGS
+  // ==========================================================
+  getAdminAuthLocal() {
+    const defaultPin = '24689011';
+    const defaultQuestion = 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+    const defaultAnswer = 'I AM A GOOD BOY';
+
+    const pin = localStorage.getItem('puja_admin_pin') || defaultPin;
+
+    let question = localStorage.getItem('puja_security_question');
+    if (!question || question === 'আমফান ক্লাবের সংক্ষিপ্ত ইংরেজি নাম কী?') {
+      question = defaultQuestion;
+      localStorage.setItem('puja_security_question', defaultQuestion);
+    }
+
+    let answer = localStorage.getItem('puja_security_answer');
+    if (!answer || answer.trim().toUpperCase() === 'NSCC') {
+      answer = defaultAnswer;
+      localStorage.setItem('puja_security_answer', defaultAnswer);
+    }
+
+    return { pin, securityQuestion: question, securityAnswer: answer };
+  }
+
+  async getAdminAuth() {
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        const cloudAuth = await window.firebaseService.getAdminAuth();
+        if (cloudAuth && cloudAuth.pin) {
+          const localUpdated = localStorage.getItem('puja_admin_pin_updated') || '';
+          const cloudUpdated = cloudAuth.updatedAt || '';
+          // Only sync from cloud if local has no pin or cloud is strictly newer
+          if (!localStorage.getItem('puja_admin_pin') || !localUpdated || (cloudUpdated && cloudUpdated >= localUpdated)) {
+            localStorage.setItem('puja_admin_pin', cloudAuth.pin);
+            if (cloudAuth.securityQuestion) localStorage.setItem('puja_security_question', cloudAuth.securityQuestion);
+            if (cloudAuth.securityAnswer) localStorage.setItem('puja_security_answer', cloudAuth.securityAnswer);
+            if (cloudUpdated) localStorage.setItem('puja_admin_pin_updated', cloudUpdated);
+          }
+        }
+      } catch (e) {
+        console.warn('Could not fetch cloud admin auth:', e);
+      }
+    }
+    return this.getAdminAuthLocal();
+  }
+
+  async saveAdminAuth({ pin, securityQuestion, securityAnswer }) {
+    const now = new Date().toISOString();
+    if (pin) {
+      const cleanPin = String(pin).trim();
+      localStorage.setItem('puja_admin_pin', cleanPin);
+      localStorage.setItem('puja_admin_pin_updated', now);
+    }
+    if (securityQuestion) localStorage.setItem('puja_security_question', String(securityQuestion).trim());
+    if (securityAnswer) localStorage.setItem('puja_security_answer', String(securityAnswer).trim());
+
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.saveAdminAuth({ pin, securityQuestion, securityAnswer });
+      } catch (e) {
+        console.warn('Could not sync admin auth to cloud:', e);
+      }
+    }
+    return this.getAdminAuthLocal();
+  }
+
+  verifySecurityAnswer(inputAnswer) {
+    if (!inputAnswer) return false;
+    // Strip surrounding quotes if typed with quotes e.g. "I AM A GOOD BOY"
+    let cleanInput = String(inputAnswer).trim();
+    if ((cleanInput.startsWith('"') && cleanInput.endsWith('"')) || (cleanInput.startsWith("'") && cleanInput.endsWith("'"))) {
+      cleanInput = cleanInput.slice(1, -1).trim();
+    }
+    cleanInput = cleanInput.toLowerCase().replace(/\s+/g, ' ');
+
+    const auth = this.getAdminAuthLocal();
+    let storedAnswer = (auth.securityAnswer || 'I AM A GOOD BOY').trim();
+    if ((storedAnswer.startsWith('"') && storedAnswer.endsWith('"')) || (storedAnswer.startsWith("'") && storedAnswer.endsWith("'"))) {
+      storedAnswer = storedAnswer.slice(1, -1).trim();
+    }
+    storedAnswer = storedAnswer.toLowerCase().replace(/\s+/g, ' ');
+
+    // 1. Direct match with configured answer (e.g. "i am a good boy")
+    if (cleanInput === storedAnswer) return true;
+
+    // 2. Space-insensitive match (e.g. "iamagoodboy" or extra spaces)
+    if (cleanInput.replace(/\s+/g, '') === storedAnswer.replace(/\s+/g, '')) return true;
+
+    // 3. Accepted variations for "I AM A GOOD BOY"
+    const validVariants = [
+      'i am a good boy',
+      'i am a goodboy',
+      'iam a good boy',
+      'i am good boy',
+      'iamagoodboy'
+    ];
+    return validVariants.includes(cleanInput) || validVariants.includes(cleanInput.replace(/\s+/g, ''));
+  }
 }
 
 // Global instance
@@ -5247,6 +5529,9 @@ async function initPujaApp() {
         return;
       }
       state.currentTab = target;
+      if (target === 'manage' && typeof populateSecuritySettingsForm === 'function') {
+        populateSecuritySettingsForm();
+      }
 
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
@@ -6124,6 +6409,7 @@ async function initPujaApp() {
           showToast('🔒 অ্যাডমিন মোড থেকে লগআউট করা হয়েছে। এখন পাবলিক ভিউ সক্রিয়।');
         }
       } else {
+        if (typeof resetForgotModal === 'function') resetForgotModal();
         if (adminModal) adminModal.classList.add('active');
       }
     });
@@ -6132,6 +6418,7 @@ async function initPujaApp() {
   if (btnCloseAdminModal) {
     btnCloseAdminModal.addEventListener('click', () => {
       if (adminModal) adminModal.classList.remove('active');
+      if (typeof resetForgotModal === 'function') resetForgotModal();
     });
   }
 
@@ -6226,25 +6513,297 @@ async function initPujaApp() {
     });
   }
 
+  // ==========================================================
+  // ADMIN LOGIN & FORGOT PASSWORD RECOVERY SYSTEM
+  // ==========================================================
+  const adminLoginView = document.getElementById('admin-login-view');
+  const adminForgotView = document.getElementById('admin-forgot-view');
+  const btnGotoForgotPwd = document.getElementById('btn-goto-forgot-pwd');
+  const btnBackToLogin = document.getElementById('btn-back-to-login');
+  const adminModalTitle = document.getElementById('admin-modal-title');
+
+  const forgotStep1 = document.getElementById('forgot-step-1');
+  const forgotStep2 = document.getElementById('forgot-step-2');
+  const forgotStepSuccess = document.getElementById('forgot-step-success');
+
+  const forgotSecQuestionDisplay = document.getElementById('forgot-sec-question-display');
+  const forgotSecAnswerInput = document.getElementById('forgot-sec-answer-input');
+  const forgotStep1Error = document.getElementById('forgot-step1-error');
+  const btnVerifySecurityAnswer = document.getElementById('btn-verify-security-answer');
+
+  const forgotNewPwdInput = document.getElementById('forgot-new-pwd-input');
+  const forgotConfirmPwdInput = document.getElementById('forgot-confirm-pwd-input');
+  const btnToggleNewPwd = document.getElementById('btn-toggle-new-pwd');
+  const btnToggleConfirmPwd = document.getElementById('btn-toggle-confirm-pwd');
+  const forgotPwdMatchMsg = document.getElementById('forgot-pwd-match-msg');
+  const btnSaveNewPwd = document.getElementById('btn-save-new-pwd');
+  const btnCancelStep2 = document.getElementById('btn-cancel-step2');
+  const btnLoginWithNewPwd = document.getElementById('btn-login-with-new-pwd');
+
+  function resetForgotModal() {
+    if (adminLoginView) adminLoginView.style.display = 'block';
+    if (adminForgotView) adminForgotView.style.display = 'none';
+    if (forgotStep1) forgotStep1.style.display = 'block';
+    if (forgotStep2) forgotStep2.style.display = 'none';
+    if (forgotStepSuccess) forgotStepSuccess.style.display = 'none';
+    if (adminModalTitle) adminModalTitle.textContent = '👑 Amfan (N.S.C.C) অ্যাডমিন লগইন';
+    if (forgotSecAnswerInput) forgotSecAnswerInput.value = '';
+    if (forgotStep1Error) {
+      forgotStep1Error.textContent = '';
+      forgotStep1Error.style.display = 'none';
+    }
+    if (forgotNewPwdInput) {
+      forgotNewPwdInput.value = '';
+      forgotNewPwdInput.type = 'password';
+    }
+    if (forgotConfirmPwdInput) {
+      forgotConfirmPwdInput.value = '';
+      forgotConfirmPwdInput.type = 'password';
+    }
+    if (btnToggleNewPwd) btnToggleNewPwd.textContent = '👁️ দেখুন';
+    if (btnToggleConfirmPwd) btnToggleConfirmPwd.textContent = '👁️ দেখুন';
+    if (forgotPwdMatchMsg) forgotPwdMatchMsg.textContent = '';
+  }
+
+  // Admin Login Submit
   if (adminLoginForm) {
-    adminLoginForm.addEventListener('submit', (e) => {
+    adminLoginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const enteredPin = (adminPinInput ? adminPinInput.value.trim() : '');
-      if (localStorage.getItem('puja_admin_pin') === '1234') {
-        localStorage.setItem('puja_admin_pin', '24689011');
-      }
-      const validPin = localStorage.getItem('puja_admin_pin') || '24689011';
-      if (enteredPin === validPin || enteredPin === '24689011') {
+      const auth = window.pujaDB ? await window.pujaDB.getAdminAuth() : null;
+      const validPin = (auth && auth.pin) ? auth.pin : (localStorage.getItem('puja_admin_pin') || '24689011');
+      if (enteredPin && enteredPin === validPin) {
         sessionStorage.setItem('puja_is_admin', 'true');
         state.isAdmin = true;
         if (adminModal) adminModal.classList.remove('active');
         if (adminPinInput) adminPinInput.value = '';
+        resetForgotModal();
         updateAdminUI();
         renderUpdates();
-        window.pujaAudio.playTempleBell();
+        if (window.pujaAudio) window.pujaAudio.playTempleBell();
         showToast('👑 স্বাগতম! আমফান (N.S.C.C) অ্যাডমিন হিসেবে লগইন সফল। আপনি এখন আপডেট ও ফটো ম্যানেজ করতে পারবেন।');
       } else {
-        alert('❌ ভুল পাসওয়ার্ড! শুধুমাত্র ক্লাবের দায়িত্বপ্রাপ্ত অ্যাডমিনদের জন্য।');
+        alert('❌ ভুল পাসওয়ার্ড! পাসওয়ার্ড মনে না থাকলে "পাসওয়ার্ড ভুলে গেছেন?" বাটনে ক্লিক করে সিকিউরিটি প্রশ্নের মাধ্যমে রিসেট করুন।');
+      }
+    });
+  }
+
+  // Open Forgot Password Screen
+  if (btnGotoForgotPwd) {
+    btnGotoForgotPwd.addEventListener('click', () => {
+      const auth = window.pujaDB ? window.pujaDB.getAdminAuthLocal() : {};
+      if (forgotSecQuestionDisplay) {
+        forgotSecQuestionDisplay.textContent = auth.securityQuestion || 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+      }
+      if (adminLoginView) adminLoginView.style.display = 'none';
+      if (adminForgotView) adminForgotView.style.display = 'block';
+      if (forgotStep1) forgotStep1.style.display = 'block';
+      if (forgotStep2) forgotStep2.style.display = 'none';
+      if (forgotStepSuccess) forgotStepSuccess.style.display = 'none';
+      if (adminModalTitle) adminModalTitle.textContent = '🔑 পাসওয়ার্ড রিসেট ও সিকিউরিটি ভেরিফিকেশন';
+      if (forgotSecAnswerInput) {
+        forgotSecAnswerInput.value = '';
+        setTimeout(() => forgotSecAnswerInput.focus(), 150);
+      }
+    });
+  }
+
+  // Back to Login Screen
+  if (btnBackToLogin) btnBackToLogin.addEventListener('click', resetForgotModal);
+  if (btnCancelStep2) btnCancelStep2.addEventListener('click', resetForgotModal);
+
+  // Step 1: Verify Security Answer
+  function handleVerifySecurityAnswer() {
+    if (!forgotSecAnswerInput) return;
+    const answer = forgotSecAnswerInput.value.trim();
+    if (!answer) {
+      if (forgotStep1Error) {
+        forgotStep1Error.textContent = '⚠️ অনুগ্রহ করে ক্লাবের সিকিউরিটি উত্তরটি লিখুন!';
+        forgotStep1Error.style.display = 'block';
+      }
+      forgotSecAnswerInput.focus();
+      return;
+    }
+
+    const isCorrect = window.pujaDB && window.pujaDB.verifySecurityAnswer(answer);
+    if (!isCorrect) {
+      if (forgotStep1Error) {
+        forgotStep1Error.textContent = '❌ ভুল সিকিউরিটি উত্তর! সঠিক উত্তর লিখে আবার চেষ্টা করুন।';
+        forgotStep1Error.style.display = 'block';
+      }
+      forgotSecAnswerInput.focus();
+      return;
+    }
+
+    // Correct Answer: Advance to Step 2
+    if (forgotStep1Error) forgotStep1Error.style.display = 'none';
+    if (forgotStep1) forgotStep1.style.display = 'none';
+    if (forgotStep2) forgotStep2.style.display = 'block';
+    if (adminModalTitle) adminModalTitle.textContent = '🔑 নতুন পাসওয়ার্ড সেট করুন';
+    if (window.pujaAudio) window.pujaAudio.playTempleBell();
+    showToast('✅ সিকিউরিটি উত্তর সঠিক হয়েছে! এবার নতুন পাসওয়ার্ড সেট করুন।');
+    if (forgotNewPwdInput) {
+      forgotNewPwdInput.value = '';
+      setTimeout(() => forgotNewPwdInput.focus(), 150);
+    }
+  }
+
+  if (btnVerifySecurityAnswer) {
+    btnVerifySecurityAnswer.addEventListener('click', handleVerifySecurityAnswer);
+  }
+  if (forgotSecAnswerInput) {
+    forgotSecAnswerInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleVerifySecurityAnswer();
+      }
+    });
+  }
+
+  // Toggle Visibility for New & Confirm Password
+  if (btnToggleNewPwd && forgotNewPwdInput) {
+    btnToggleNewPwd.addEventListener('click', () => {
+      if (forgotNewPwdInput.type === 'password') {
+        forgotNewPwdInput.type = 'text';
+        btnToggleNewPwd.textContent = '🙈 লুকান';
+      } else {
+        forgotNewPwdInput.type = 'password';
+        btnToggleNewPwd.textContent = '👁️ দেখুন';
+      }
+    });
+  }
+  if (btnToggleConfirmPwd && forgotConfirmPwdInput) {
+    btnToggleConfirmPwd.addEventListener('click', () => {
+      if (forgotConfirmPwdInput.type === 'password') {
+        forgotConfirmPwdInput.type = 'text';
+        btnToggleConfirmPwd.textContent = '🙈 লুকান';
+      } else {
+        forgotConfirmPwdInput.type = 'password';
+        btnToggleConfirmPwd.textContent = '👁️ দেখুন';
+      }
+    });
+  }
+
+  // Real-time password matching check
+  function checkPasswordMatch() {
+    if (!forgotPwdMatchMsg || !forgotNewPwdInput || !forgotConfirmPwdInput) return;
+    const p1 = forgotNewPwdInput.value;
+    const p2 = forgotConfirmPwdInput.value;
+    if (!p2) {
+      forgotPwdMatchMsg.textContent = '';
+      return;
+    }
+    if (p1 === p2) {
+      forgotPwdMatchMsg.textContent = '✅ পাসওয়ার্ড দুটি হুবহু মিলেছে!';
+      forgotPwdMatchMsg.style.color = '#2e7d32';
+    } else {
+      forgotPwdMatchMsg.textContent = '⚠️ পাসওয়ার্ড দুটি মিলছে না!';
+      forgotPwdMatchMsg.style.color = '#b32134';
+    }
+  }
+  if (forgotNewPwdInput) forgotNewPwdInput.addEventListener('input', checkPasswordMatch);
+  if (forgotConfirmPwdInput) forgotConfirmPwdInput.addEventListener('input', checkPasswordMatch);
+
+  // Step 2 -> Step 3: Save New Password
+  if (btnSaveNewPwd) {
+    btnSaveNewPwd.addEventListener('click', async () => {
+      const p1 = forgotNewPwdInput ? forgotNewPwdInput.value.trim() : '';
+      const p2 = forgotConfirmPwdInput ? forgotConfirmPwdInput.value.trim() : '';
+
+      if (!p1) {
+        alert('অনুগ্রহ করে নতুন পাসওয়ার্ড লিখুন!');
+        if (forgotNewPwdInput) forgotNewPwdInput.focus();
+        return;
+      }
+      if (p1.length < 4) {
+        alert('পাসওয়ার্ডটি অন্তত ৪ অক্ষরের বা সংখ্যার হওয়া আবশ্যক!');
+        if (forgotNewPwdInput) forgotNewPwdInput.focus();
+        return;
+      }
+      if (p1 !== p2) {
+        alert('পাসওয়ার্ড দুটি মেলেনি! অনুগ্রহ করে নিশ্চিত করুন যে দুটি পাসওয়ার্ডই এক।');
+        if (forgotConfirmPwdInput) forgotConfirmPwdInput.focus();
+        return;
+      }
+
+      btnSaveNewPwd.disabled = true;
+      btnSaveNewPwd.textContent = '⏳ সংরক্ষণ হচ্ছে...';
+      try {
+        await window.pujaDB.saveAdminAuth({ pin: p1 });
+        if (forgotStep2) forgotStep2.style.display = 'none';
+        if (forgotStepSuccess) forgotStepSuccess.style.display = 'block';
+        if (adminModalTitle) adminModalTitle.textContent = '🎉 পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে';
+        if (window.pujaAudio) window.pujaAudio.playTempleBell();
+        showToast('🎉 সফলভাবে পাসওয়ার্ড পরিবর্তন করা হয়েছে!');
+      } catch (err) {
+        console.error('Password save error:', err);
+        alert('পাসওয়ার্ড সেভ করতে সমস্যা হয়েছে, পুনরায় চেষ্টা করুন।');
+      } finally {
+        btnSaveNewPwd.disabled = false;
+        btnSaveNewPwd.textContent = '💾 নতুন পাসওয়ার্ড সংরক্ষণ করুন';
+      }
+    });
+  }
+
+  // Step 3 Success Screen: Direct login button
+  if (btnLoginWithNewPwd) {
+    btnLoginWithNewPwd.addEventListener('click', () => {
+      sessionStorage.setItem('puja_is_admin', 'true');
+      state.isAdmin = true;
+      if (adminModal) adminModal.classList.remove('active');
+      resetForgotModal();
+      updateAdminUI();
+      renderUpdates();
+      if (window.pujaAudio) window.pujaAudio.playTempleBell();
+      showToast('👑 স্বাগতম! আপনার নতুন পাসওয়ার্ড দিয়ে সফলভাবে অ্যাডমিন মোডে লগইন হয়েছে!');
+    });
+  }
+
+  // Pane-Manage Security Settings Handlers
+  const settingAdminPin = document.getElementById('setting-admin-pin');
+  const settingSecQuestion = document.getElementById('setting-sec-question');
+  const settingSecAnswer = document.getElementById('setting-sec-answer');
+  const btnSaveSecSettings = document.getElementById('btn-save-security-settings');
+
+  function populateSecuritySettingsForm() {
+    if (!window.pujaDB) return;
+    const auth = window.pujaDB.getAdminAuthLocal();
+    if (settingAdminPin) settingAdminPin.value = auth.pin || '24689011';
+    if (settingSecQuestion) settingSecQuestion.value = auth.securityQuestion || 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+    if (settingSecAnswer) settingSecAnswer.value = auth.securityAnswer || 'I AM A GOOD BOY';
+  }
+
+  if (btnSaveSecSettings) {
+    btnSaveSecSettings.addEventListener('click', async () => {
+      if (!state.isAdmin) {
+        showToast('🔒 এই সেটিংস পরিবর্তন শুধুমাত্র ক্লাবের অ্যাডমিনের জন্য।');
+        return;
+      }
+      const pin = settingAdminPin ? settingAdminPin.value.trim() : '';
+      const question = settingSecQuestion ? settingSecQuestion.value.trim() : '';
+      const answer = settingSecAnswer ? settingSecAnswer.value.trim() : '';
+
+      if (!pin || pin.length < 4) {
+        alert('অ্যাডমিন পাসওয়ার্ড অন্তত ৪ অক্ষরের বা সংখ্যার হওয়া প্রয়োজন!');
+        return;
+      }
+      if (!question || !answer) {
+        alert('সিকিউরিটি প্রশ্ন ও উত্তর উভয়ই পূরণ করা আবশ্যক!');
+        return;
+      }
+
+      btnSaveSecSettings.disabled = true;
+      btnSaveSecSettings.textContent = '⏳ সংরক্ষণ হচ্ছে...';
+      try {
+        await window.pujaDB.saveAdminAuth({ pin, securityQuestion: question, securityAnswer: answer });
+        showToast('✅ অ্যাডমিন পাসওয়ার্ড ও সিকিউরিটি সেটিংস সফলভাবে সংরক্ষিত হয়েছে!');
+        if (window.pujaAudio) window.pujaAudio.playTempleBell();
+      } catch (err) {
+        console.error('Settings save error:', err);
+        showToast('⚠️ সেটিংস সংরক্ষণে সমস্যা হয়েছে।');
+      } finally {
+        btnSaveSecSettings.disabled = false;
+        btnSaveSecSettings.textContent = '💾 সিকিউরিটি সেটিংস সংরক্ষণ করুন';
       }
     });
   }
@@ -6463,6 +7022,28 @@ async function initPujaApp() {
         localStorage.setItem('amfan_committee_members', JSON.stringify(members));
       } catch (e) {}
     });
+
+    if (window.firebaseService.onAdminAuthChanged) {
+      window.firebaseService.onAdminAuthChanged((authData) => {
+        if (authData && authData.pin) {
+          const localUpdated = localStorage.getItem('puja_admin_pin_updated') || '';
+          const cloudUpdated = authData.updatedAt || '';
+          if (!localStorage.getItem('puja_admin_pin') || !localUpdated || (cloudUpdated && cloudUpdated >= localUpdated)) {
+            localStorage.setItem('puja_admin_pin', authData.pin);
+            if (authData.securityQuestion) localStorage.setItem('puja_security_question', authData.securityQuestion);
+            if (authData.securityAnswer) localStorage.setItem('puja_security_answer', authData.securityAnswer);
+            if (cloudUpdated) localStorage.setItem('puja_admin_pin_updated', cloudUpdated);
+            console.log('Firebase: Real-time admin auth updated');
+            const setPin = document.getElementById('setting-admin-pin');
+            const setQ = document.getElementById('setting-sec-question');
+            const setA = document.getElementById('setting-sec-answer');
+            if (setPin) setPin.value = authData.pin;
+            if (setQ && authData.securityQuestion) setQ.value = authData.securityQuestion;
+            if (setA && authData.securityAnswer) setA.value = authData.securityAnswer;
+          }
+        }
+      });
+    }
   }
 
   // Open/Close Firebase Modal
