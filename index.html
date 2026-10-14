@@ -5227,18 +5227,24 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
   // ==========================================================
   // ADMIN AUTH & RECOVERY SETTINGS
   // ==========================================================
+  cleanSecurityQuestion(question) {
+    const defaultQ = 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+    if (!question || typeof question !== 'string') return defaultQ;
+    const q = question.trim();
+    if (q.includes('à¦') || q.includes('\u008d') || q.includes('') || q.includes('?_') || q.includes('+r') || q.length < 5) {
+      return defaultQ;
+    }
+    return q;
+  }
+
   getAdminAuthLocal() {
     const defaultPin = '24689011';
     const defaultQuestion = 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
     const defaultAnswer = 'I AM A GOOD BOY';
 
     const pin = localStorage.getItem('puja_admin_pin') || defaultPin;
-
-    let question = localStorage.getItem('puja_security_question');
-    if (!question || question === 'আমফান ক্লাবের সংক্ষিপ্ত ইংরেজি নাম কী?') {
-      question = defaultQuestion;
-      localStorage.setItem('puja_security_question', defaultQuestion);
-    }
+    const question = this.cleanSecurityQuestion(localStorage.getItem('puja_security_question'));
+    localStorage.setItem('puja_security_question', question);
 
     let answer = localStorage.getItem('puja_security_answer');
     if (!answer || answer.trim().toUpperCase() === 'NSCC') {
@@ -5259,7 +5265,8 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
           // Only sync from cloud if local has no pin or cloud is strictly newer
           if (!localStorage.getItem('puja_admin_pin') || !localUpdated || (cloudUpdated && cloudUpdated >= localUpdated)) {
             localStorage.setItem('puja_admin_pin', cloudAuth.pin);
-            if (cloudAuth.securityQuestion) localStorage.setItem('puja_security_question', cloudAuth.securityQuestion);
+            const cleanQ = this.cleanSecurityQuestion(cloudAuth.securityQuestion);
+            localStorage.setItem('puja_security_question', cleanQ);
             if (cloudAuth.securityAnswer) localStorage.setItem('puja_security_answer', cloudAuth.securityAnswer);
             if (cloudUpdated) localStorage.setItem('puja_admin_pin_updated', cloudUpdated);
           }
@@ -6592,8 +6599,11 @@ async function initPujaApp() {
   if (btnGotoForgotPwd) {
     btnGotoForgotPwd.addEventListener('click', () => {
       const auth = window.pujaDB ? window.pujaDB.getAdminAuthLocal() : {};
+      const cleanQ = (window.pujaDB && typeof window.pujaDB.cleanSecurityQuestion === 'function')
+        ? window.pujaDB.cleanSecurityQuestion(auth.securityQuestion)
+        : 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
       if (forgotSecQuestionDisplay) {
-        forgotSecQuestionDisplay.textContent = auth.securityQuestion || 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+        forgotSecQuestionDisplay.textContent = cleanQ;
       }
       if (adminLoginView) adminLoginView.style.display = 'none';
       if (adminForgotView) adminForgotView.style.display = 'block';
@@ -7029,8 +7039,10 @@ async function initPujaApp() {
           const localUpdated = localStorage.getItem('puja_admin_pin_updated') || '';
           const cloudUpdated = authData.updatedAt || '';
           if (!localStorage.getItem('puja_admin_pin') || !localUpdated || (cloudUpdated && cloudUpdated >= localUpdated)) {
-            localStorage.setItem('puja_admin_pin', authData.pin);
-            if (authData.securityQuestion) localStorage.setItem('puja_security_question', authData.securityQuestion);
+            const cleanQ = (window.pujaDB && typeof window.pujaDB.cleanSecurityQuestion === 'function')
+              ? window.pujaDB.cleanSecurityQuestion(authData.securityQuestion)
+              : 'আমফান ক্লাবের গোপন সিকিউরিটি পাসফ্রেস কী?';
+            localStorage.setItem('puja_security_question', cleanQ);
             if (authData.securityAnswer) localStorage.setItem('puja_security_answer', authData.securityAnswer);
             if (cloudUpdated) localStorage.setItem('puja_admin_pin_updated', cloudUpdated);
             console.log('Firebase: Real-time admin auth updated');
@@ -7038,8 +7050,9 @@ async function initPujaApp() {
             const setQ = document.getElementById('setting-sec-question');
             const setA = document.getElementById('setting-sec-answer');
             if (setPin) setPin.value = authData.pin;
-            if (setQ && authData.securityQuestion) setQ.value = authData.securityQuestion;
+            if (setQ) setQ.value = cleanQ;
             if (setA && authData.securityAnswer) setA.value = authData.securityAnswer;
+            if (forgotSecQuestionDisplay) forgotSecQuestionDisplay.textContent = cleanQ;
           }
         }
       });
