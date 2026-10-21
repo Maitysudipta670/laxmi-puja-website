@@ -835,6 +835,15 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
       const stored = localStorage.getItem('amfan_payment_config');
       if (stored) {
         const parsed = JSON.parse(stored);
+        if (parsed.primaryUpiId === '7407352005@ybl' || parsed.primaryUpiId === '7407352005@upi' || String(parsed.primaryUpiId).includes('%40')) {
+          parsed.primaryUpiId = 'sudiptamaity670@ybl';
+        }
+        if (String(parsed.secondaryUpiId).includes('%40')) {
+          parsed.secondaryUpiId = '7407352005@axl';
+        }
+        try {
+          localStorage.setItem('amfan_payment_config', JSON.stringify(parsed));
+        } catch (e) {}
         return { ...defaultConfig, ...parsed };
       }
     } catch (e) {

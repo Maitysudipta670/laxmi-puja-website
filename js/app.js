@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Laxmi Puja Interactive Application
  * Powers photo uploads, public viewing gallery, multi-category updates,
  * flower shower particle physics, and devotional controls.
@@ -2946,18 +2946,22 @@ async function initPujaApp() {
     return (words.trim() + ' টাকা মাত্র');
   }
 
+  let selectedUpiId = 'sudiptamaity670@ybl';
+
   function getUpiUri(appScheme = 'upi', amount = selectedAmount) {
-    const upiId = activePaymentConfig.primaryUpiId || 'sudiptamaity670@ybl';
-    const payee = activePaymentConfig.payeeName || 'Amfan NSCC Kojagari Laxmi Puja';
-    const note = 'Kojagari Laxmi Puja Pronami - Amfan NSCC';
+    const upiId = selectedUpiId || activePaymentConfig.primaryUpiId || 'sudiptamaity670@ybl';
+    const payee = 'Amfan NSCC Laxmi Puja';
+    const note = 'Laxmi Puja Pronami';
     const amtStr = Number(amount).toFixed(2);
 
-    let prefix = 'upi://pay';
-    if (appScheme === 'phonepe') prefix = 'phonepe://pay';
-    else if (appScheme === 'gpay') prefix = 'tez://upi/pay';
-    else if (appScheme === 'paytm') prefix = 'paytmmp://pay';
+    // CRITICAL NPCI STANDARD: 'pa' MUST contain literal '@' character (NOT %40).
+    // Encoding '@' to '%40' breaks Google Pay, BHIM, and PhonePe QR scanners.
+    const query = `pa=${upiId}&pn=${encodeURIComponent(payee)}&am=${amtStr}&cu=INR&tn=${encodeURIComponent(note)}`;
 
-    return `${prefix}?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payee)}&am=${amtStr}&cu=INR&tn=${encodeURIComponent(note)}`;
+    if (appScheme === 'phonepe') return `phonepe://pay?${query}`;
+    if (appScheme === 'paytm') return `paytmmp://pay?${query}`;
+    // Universal intent works for Google Pay, BHIM, Cred, and all UPI apps
+    return `upi://pay?${query}`;
   }
 
   function updatePaymentUIFromConfig() {
@@ -2989,23 +2993,31 @@ async function initPujaApp() {
   }
 
   function updateUpiAppLinks() {
+    const currentUpi = selectedUpiId || activePaymentConfig.primaryUpiId || 'sudiptamaity670@ybl';
     const phonepeBtn = document.getElementById('btn-upi-phonepe');
     const gpayBtn = document.getElementById('btn-upi-gpay');
     const paytmBtn = document.getElementById('btn-upi-paytm');
     const genericBtn = document.getElementById('btn-upi-generic');
 
     if (phonepeBtn) phonepeBtn.href = getUpiUri('phonepe');
-    if (gpayBtn) gpayBtn.href = getUpiUri('gpay');
+    if (gpayBtn) gpayBtn.href = getUpiUri('upi'); // Universal intent for GPay
     if (paytmBtn) paytmBtn.href = getUpiUri('paytm');
     if (genericBtn) genericBtn.href = getUpiUri('upi');
 
-    // Dynamic QR update
+    // Dynamic QR update with unencoded '@' in UPI payload
     const dynamicQrImg = document.getElementById('dynamic-qr-img');
     const dynamicLabel = document.getElementById('qr-dynamic-amount-label');
     if (dynamicLabel) dynamicLabel.textContent = `₹${toBengaliNumerals(selectedAmount)}`;
     if (dynamicQrImg) {
-      const qrData = encodeURIComponent(getUpiUri('upi'));
-      dynamicQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${qrData}`;
+      const upiPayload = `upi://pay?pa=${currentUpi}&pn=${encodeURIComponent('Amfan NSCC Laxmi Puja')}&am=${Number(selectedAmount).toFixed(2)}&cu=INR&tn=${encodeURIComponent('Laxmi Puja Pronami')}`;
+      dynamicQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(upiPayload)}`;
+    }
+
+    // Update club-qr-img so it matches selected UPI ID without encoding errors
+    const clubQrImg = document.getElementById('club-qr-img');
+    if (clubQrImg && !activePaymentConfig.customQrUrl) {
+      const staticPayload = `upi://pay?pa=${currentUpi}&pn=${encodeURIComponent('Amfan NSCC Laxmi Puja')}&cu=INR&tn=${encodeURIComponent('Laxmi Puja Pronami')}`;
+      clubQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(staticPayload)}`;
     }
 
     // Sync Devotee Form amount input
@@ -3758,6 +3770,30 @@ async function initPujaApp() {
           e.preventDefault();
           applyCustomAmount();
         }
+      });
+    }
+
+    // 3B. Select Primary vs Secondary UPI ID
+    const btnSelectPri = document.getElementById('btn-select-upi-pri');
+    const btnSelectSec = document.getElementById('btn-select-upi-sec');
+
+    if (btnSelectPri) {
+      btnSelectPri.addEventListener('click', () => {
+        selectedUpiId = activePaymentConfig.primaryUpiId || 'sudiptamaity670@ybl';
+        btnSelectPri.classList.add('active');
+        if (btnSelectSec) btnSelectSec.classList.remove('active');
+        updateUpiAppLinks();
+        showToast(`✅ প্রাথমিক UPI আইডি (${selectedUpiId}) নির্বাচন করা হয়েছে`);
+      });
+    }
+
+    if (btnSelectSec) {
+      btnSelectSec.addEventListener('click', () => {
+        selectedUpiId = activePaymentConfig.secondaryUpiId || '7407352005@axl';
+        btnSelectSec.classList.add('active');
+        if (btnSelectPri) btnSelectPri.classList.remove('active');
+        updateUpiAppLinks();
+        showToast(`✅ বিকল্প UPI আইডি (${selectedUpiId}) নির্বাচন করা হয়েছে`);
       });
     }
 
