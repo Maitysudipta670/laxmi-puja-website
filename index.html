@@ -2186,6 +2186,999 @@ body {
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   DONATION, PRONAMI & DIGITAL RECEIPT PORTAL (100% FREE UPI PAYMENT)
+   ========================================================================== */
+
+/* 2-Column Donation Main Grid */
+.donation-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .donation-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.donation-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1.5px dashed var(--color-border);
+}
+
+.donation-card-icon {
+  font-size: 2rem;
+  background: rgba(229, 169, 59, 0.15);
+  border: 1px solid var(--color-gold);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.donation-card-header h3 {
+  font-family: var(--font-bengali), var(--font-heading), sans-serif;
+  color: var(--color-primary-dark);
+  font-size: 1.25rem;
+  margin-bottom: 3px;
+}
+
+.donation-card-header p {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+}
+
+/* Step Boxes */
+.donation-step-box {
+  background: #fffdf9;
+  border: 1px solid #edd7ba;
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.donation-step-box:last-child {
+  margin-bottom: 0;
+}
+
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 0.75rem;
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-subtitle {
+  font-size: 0.82rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  line-height: 1.45;
+}
+
+/* Amount Chips Grid */
+.amount-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0.85rem;
+}
+
+.amount-chip {
+  flex: 1 0 calc(25% - 8px);
+  min-width: 65px;
+  padding: 8px 6px;
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-family: var(--font-sans);
+}
+
+.amount-chip:hover {
+  border-color: var(--color-gold);
+  background: #fff8e1;
+  transform: translateY(-2px);
+}
+
+.amount-chip.active {
+  background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%);
+  color: #3e0409;
+  border-color: #b37e19;
+  box-shadow: 0 3px 10px rgba(255, 152, 0, 0.35);
+  transform: scale(1.02);
+}
+
+.custom-amount-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.custom-currency-symbol {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  padding-left: 4px;
+}
+
+.custom-amount-input {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  padding: 8px 12px;
+}
+
+.btn-apply-amount {
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+/* 1-Click Mobile UPI App Buttons (Point 1) */
+.upi-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.upi-app-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border: 1px solid transparent;
+}
+
+.upi-brand-icon {
+  font-size: 1.25rem;
+}
+
+.upi-brand-name {
+  flex: 1;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.upi-badge-fast {
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.3);
+}
+
+.upi-phonepe {
+  background: linear-gradient(135deg, #5f259f 0%, #4b1a82 100%);
+  color: #ffffff;
+}
+
+.upi-phonepe:hover {
+  box-shadow: 0 4px 14px rgba(95, 37, 159, 0.4);
+  transform: translateY(-2px);
+}
+
+.upi-gpay {
+  background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+  color: #ffffff;
+}
+
+.upi-gpay:hover {
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
+  transform: translateY(-2px);
+}
+
+.upi-paytm {
+  background: linear-gradient(135deg, #00b9f5 0%, #0082c3 100%);
+  color: #ffffff;
+}
+
+.upi-paytm:hover {
+  box-shadow: 0 4px 14px rgba(0, 185, 245, 0.4);
+  transform: translateY(-2px);
+}
+
+.upi-bhim {
+  background: linear-gradient(135deg, #f37021 0%, #c85010 100%);
+  color: #ffffff;
+}
+
+.upi-bhim:hover {
+  box-shadow: 0 4px 14px rgba(243, 112, 33, 0.4);
+  transform: translateY(-2px);
+}
+
+/* QR Code Section (Point 2) */
+.qr-mode-switch {
+  display: inline-flex;
+  background: #f0eae1;
+  padding: 3px;
+  border-radius: 9999px;
+  gap: 3px;
+}
+
+.qr-mode-btn {
+  border: none;
+  background: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  color: #5d4037;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qr-mode-btn.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.qr-display-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+  .qr-display-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.qr-frame {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  background: #ffffff;
+  padding: 8px;
+  border: 2px solid var(--color-gold);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qr-code-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.qr-corner-decor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--color-primary);
+  border-style: solid;
+}
+
+.qr-corner-decor.tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; border-top-left-radius: 6px; }
+.qr-corner-decor.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-top-right-radius: 6px; }
+.qr-corner-decor.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-bottom-left-radius: 6px; }
+.qr-corner-decor.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-bottom-right-radius: 6px; }
+
+.qr-instructions {
+  flex: 1;
+}
+
+/* UPI Copy Bar */
+.upi-copy-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.upi-copy-item {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  gap: 8px;
+}
+
+.upi-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #8b1320;
+  text-transform: uppercase;
+}
+
+.upi-val {
+  flex: 1;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2b1317;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-copy-upi {
+  background: #fff8e1;
+  border: 1px solid var(--color-gold);
+  color: #5c0712;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-copy-upi:hover {
+  background: #ffd700;
+  color: #3e0409;
+}
+
+.zero-fee-badge {
+  margin-top: 10px;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+/* Devotee Form & Receipt Generator */
+.devotee-pronami-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 580px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-hint {
+  font-size: 0.76rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+.btn-generate-receipt {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.05rem;
+  padding: 12px 18px;
+  margin-top: 6px;
+  box-shadow: 0 4px 14px rgba(139, 19, 32, 0.3);
+}
+
+.receipt-generate-note {
+  font-size: 0.8rem;
+  color: #7a5800;
+  text-align: center;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Donors Wall Section */
+.donors-wall-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fffdf9;
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.donors-wall-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px dashed var(--color-border);
+  margin-bottom: 1.25rem;
+}
+
+.donors-stats-badge {
+  background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%);
+  color: #3e0409;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+}
+
+.donors-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.donor-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.donor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(229, 169, 59, 0.2);
+  border-color: var(--color-gold);
+}
+
+.donor-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.donor-card-name {
+  font-family: var(--font-bengali), var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-primary-dark);
+}
+
+.donor-amount-tag {
+  background: linear-gradient(135deg, #8b1320 0%, #5c0712 100%);
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.donor-details-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 0.82rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.donor-prayer-quote {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #7a5800;
+  background: #fffcf5;
+  border-left: 3px solid var(--color-gold);
+  padding: 4px 8px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 10px;
+}
+
+.donor-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: #888;
+  padding-top: 8px;
+  border-top: 1px dashed #f0e0cc;
+}
+
+.btn-view-rcpt {
+  background: none;
+  border: 1px solid var(--color-gold);
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view-rcpt:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* Temple Digital Receipt Modal & Printable Card (Point 4) */
+.receipt-modal-card {
+  max-width: 620px;
+  width: 95%;
+  background: #fff;
+  padding: 1.5rem;
+}
+
+.temple-receipt-container {
+  background: #fffefb;
+  border: 4px double #b37e19;
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 20px rgba(92, 7, 18, 0.08);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-bengali), var(--font-sans);
+}
+
+.receipt-top-border {
+  height: 12px;
+  background-image: repeating-linear-gradient(90deg, #ff9800 0px, #ffb300 10px, #e65100 20px, #ffc107 30px);
+  margin: -1.5rem -1.75rem 1rem -1.75rem;
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.receipt-header {
+  text-align: center;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid #ecd5b6;
+  position: relative;
+}
+
+.receipt-om {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.receipt-puja-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.5px;
+}
+
+.receipt-club-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #b37e19;
+  margin: 2px 0;
+}
+
+.receipt-venue-address {
+  font-size: 0.8rem;
+  color: #6b4c52;
+}
+
+.receipt-tagline {
+  font-size: 0.78rem;
+  color: #8b1320;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.receipt-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff9ea;
+  border: 1px dashed var(--color-gold);
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin: 10px 0 12px;
+  font-size: 0.82rem;
+}
+
+.highlight-receipt-no {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-size: 0.95rem;
+}
+
+.receipt-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+
+.receipt-field-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.receipt-field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-lbl {
+  color: #6b4c52;
+  font-size: 0.85rem;
+  min-width: 120px;
+}
+
+.field-val {
+  color: #2b1317;
+  font-weight: 600;
+}
+
+.field-val.strong-val {
+  color: var(--color-primary-dark);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.field-val.mono-val {
+  font-family: monospace;
+  font-size: 0.88rem;
+}
+
+.receipt-amount-box {
+  background: radial-gradient(circle, #fffdf2 0%, #fff2d6 100%);
+  border: 2px dashed #b37e19;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.amount-title {
+  font-size: 0.86rem;
+  color: #5d4037;
+  display: block;
+}
+
+.amount-big {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  letter-spacing: 1px;
+}
+
+.amount-in-words {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #8b1320;
+  margin-top: 3px;
+}
+
+.receipt-blessing-quote {
+  font-size: 0.82rem;
+  color: #5c0712;
+  text-align: center;
+  line-height: 1.5;
+  padding: 6px 12px;
+  background: rgba(229, 169, 59, 0.1);
+  border-radius: 6px;
+}
+
+.receipt-footer-signatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #ecd5b6;
+}
+
+.seal-graphic {
+  width: 78px;
+  height: 78px;
+  border: 3px solid #b37e19;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #fffdf2 0%, #ffecb3 100%);
+  box-shadow: 0 0 10px rgba(179, 126, 25, 0.25);
+  margin-bottom: 4px;
+}
+
+.seal-inner {
+  width: 66px;
+  height: 66px;
+  border: 1px dashed #8b1320;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.52rem;
+  font-weight: 800;
+  color: #8b1320;
+  text-align: center;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.seal-star {
+  color: #ff9800;
+  font-size: 0.58rem;
+}
+
+.signature-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.signature-sub {
+  font-size: 0.74rem;
+  color: #777;
+}
+
+.sign-line {
+  width: 140px;
+  height: 1px;
+  background: #2b1317;
+  margin-bottom: 6px;
+  margin-left: auto;
+}
+
+.receipt-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(229, 169, 59, 0.04);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 4px;
+}
+
+.receipt-actions-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+/* Admin Donation Controls (Point 5) */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.admin-stat-card {
+  background: #ffffff;
+  border: 1px solid #ffd54f;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.admin-stat-icon {
+  font-size: 1.8rem;
+}
+
+.admin-stat-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.admin-stat-lbl {
+  font-size: 0.76rem;
+  color: #666;
+}
+
+.admin-donor-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  margin-top: 8px;
+}
+
+.admin-donor-table th {
+  background: #fff4d9;
+  color: var(--color-primary-dark);
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 2px solid var(--color-gold);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-donor-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.admin-donor-table tr:hover {
+  background: #fffdf5;
+}
+
+/* Print Only Receipt */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #donation-receipt-printable, #donation-receipt-printable * {
+    visibility: visible;
+  }
+  #donation-receipt-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+    border-width: 2px;
+  }
+  .receipt-top-border {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Pronami Highlight Tab Button */
+.tab-btn-pronami-highlight {
+  animation: pulse-gold-tab 2.5s infinite;
+}
+
+@keyframes pulse-gold-tab {
+  0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(255, 152, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+}
+
+/* Mandap Pronami Banner in Darshan */
+.mandap-pronami-banner:hover {
+  transform: translateY(-2px);
+  border-color: #ff9800 !important;
+  box-shadow: 0 8px 22px rgba(229, 169, 59, 0.4) !important;
+}
+
+/* Admin Verification Actions */
+.btn-donor-approve {
+  background: #2e7d32;
+  color: #fff;
+  border: 1px solid #1b5e20;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-donor-approve:hover {
+  background: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.btn-donor-reject {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-donor-reject:hover {
+  background: #c62828;
+  color: #fff;
+}
+
+/* Floating Mobile Pronami Pill */
+.floating-mobile-pronami-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%);
+  color: #3e0409;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 2px solid #b37e19;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.floating-mobile-pronami-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 22px rgba(255, 152, 0, 0.5);
+}
+
+@media (min-width: 900px) {
+  .floating-mobile-pronami-btn {
+    display: none;
+  }
+}
+
 
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
@@ -2232,6 +3225,9 @@ body {
       </button>
       <button class="pill-btn" id="btn-offer-flowers" title="Offer Flower Shower">
         🌸 পুষ্পাঞ্জলি (Offer Flowers)
+      </button>
+      <button class="pill-btn" onclick="switchTab('donation')" style="background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%); color: #3e0409; font-weight: 700; border-color: #b37e19; box-shadow: 0 2px 10px rgba(255, 152, 0, 0.45);" title="মা লক্ষ্মীর চরণে সরাসরি প্রণামী অর্পণ করুন">
+        🪙 প্রণামী দিন (Offer Pronami)
       </button>
       <button class="pill-btn" id="btn-hero-blessing" style="border-color: #ffd700;" title="মা লক্ষ্মীর পুণ্য আশীর্বাদপত্র সংগ্রহ করুন">
         📜 পুণ্য আশীর্বাদপত্র (Blessing Card)
@@ -2292,6 +3288,9 @@ body {
       <button class="tab-btn active" data-tab="darshan">
         🪔 Virtual Darshan
       </button>
+      <button class="tab-btn tab-btn-pronami-highlight" data-tab="donation" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.22) 0%, rgba(255, 152, 0, 0.22) 100%); border-color: #ffd700; color: #5c0712; font-weight: 700;">
+        🪙 প্রণামী ও অনুদান <span style="font-size: 0.72rem; background: #e65100; color: #fff; padding: 2px 7px; border-radius: 9999px; font-weight: 800; margin-left: 3px;">লাইভ</span>
+      </button>
       <button class="tab-btn" data-tab="gallery">
         📸 Photo Gallery
       </button>
@@ -2306,9 +3305,6 @@ body {
       </button>
       <button class="tab-btn" data-tab="wishes">
         💌 Wishes & Pranam
-      </button>
-      <button class="tab-btn" data-tab="donation">
-        🪙 আর্থিক সহায়তা <span class="badge-coming-soon">Coming Soon</span>
       </button>
       <button class="tab-btn" data-tab="manage" id="tab-manage-btn" style="display: none;">
         ⚙️ Backup & Data
@@ -2424,6 +3420,27 @@ body {
             <button class="ritual-btn" id="btn-open-blessing-modal" style="background: linear-gradient(135deg, #e5a93b 0%, #b37e19 100%); color: #2b0409; font-weight: 700;">
               📜 ডিজিটাল আশীর্বাদপত্র
             </button>
+            <button class="ritual-btn" onclick="switchTab('donation')" style="background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%); color: #3e0409; font-weight: 700;" title="মা লক্ষ্মীর চরণে প্রণামী ও আর্থিক সহায়তা দিন">
+              🪙 প্রণামী ও দান অর্পণ
+            </button>
+          </div>
+
+          <!-- Prominent Pronami Callout Card inside Virtual Mandap -->
+          <div class="mandap-pronami-banner" onclick="switchTab('donation')" style="cursor: pointer; background: linear-gradient(135deg, #fff9ea 0%, #fff1cc 100%); border: 2px solid #ffd700; border-radius: 14px; padding: 14px 18px; margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 4px 15px rgba(229,169,59,0.3); transition: all 0.3s ease;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">🪙</span>
+              <div style="text-align: left;">
+                <div style="font-weight: 700; color: #5c0712; font-size: 1.05rem; font-family: var(--font-bengali), var(--font-heading);">
+                  মা লক্ষ্মীর চরণে সরাসরি প্রণামী অর্পণ করুন
+                </div>
+                <div style="font-size: 0.84rem; color: #6b4c52; margin-top: 2px;">
+                  ১০০% ফ্রি UPI পেমেন্ট (PhonePe / GPay / Paytm / QR) এবং ডিজিটাল প্রণামী রসিদ সংগ্রহ করুন
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn-primary" style="white-space: nowrap; font-size: 0.88rem; padding: 8px 16px; background: #8b1320; border-color: #ffd700; box-shadow: 0 2px 8px rgba(139,19,32,0.3);">
+              প্রণামী দিন ➔
+            </button>
           </div>
         </div>
 
@@ -2432,13 +3449,13 @@ body {
           
           <div class="info-card" style="border: 2px solid var(--color-gold); background: linear-gradient(135deg, #fffcf6 0%, #fff7eb 100%);">
             <h3 style="color: var(--color-primary); font-size: 1.25rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
-              📅 পূজার মহোৎসব ও অনুষ্ঠান নির্ঘণ্ট
+              📅 পূজার পুণ্য অনুষ্ঠান নির্ঘণ্ট
             </h3>
 
             <!-- Official Dates Callout Card -->
             <div style="background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%); color: #fffdf7; border: 2px solid var(--color-gold); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 1rem; box-shadow: var(--shadow-sm);">
               <div style="font-size: 0.8rem; color: #ffd700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
-                🌺 আমফান (N.S.C.C) মহোৎসবের পুণ্য দিনক্ষণ
+                🌺 আমফান (N.S.C.C) পূজার পুণ্য দিনক্ষণ
               </div>
               <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; margin-bottom: 4px;">
                 📌 <strong>বাংলা তারিখ:</strong> <span style="color: #ffd700;">১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩</span>
@@ -2748,71 +3765,400 @@ body {
     </section>
 
     <!-- ========================================================
-         TAB 6: ARTHIK SAHAYATA (FINANCIAL CONTRIBUTION / DONATION) - COMING SOON
+         TAB 6: ARTHIK SAHAYATA & PRONAMI (100% FREE DIRECT UPI)
          ======================================================== -->
     <section class="tab-pane" id="pane-donation">
+      <!-- Section Banner -->
       <div class="section-banner">
         <div>
-          <h2>আমফান (N.S.C.C) আর্থিক সহায়তা ও অনুদান</h2>
-          <p>পবিত্র কোজাগরী লক্ষ্মী পূজা ও ক্লাবের বার্ষিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠানে আপনার ঐচ্ছিক অনুদান ও আর্থিক সহায়তা।</p>
+          <h2>🪙 শ্রী শ্রী লক্ষ্মী পূজা প্রণামী ও আর্থিক সহায়তা</h2>
+          <p>পবিত্র কোজাগরী লক্ষ্মী পূজায় মা লক্ষ্মীর চরণে ভক্তিভরে প্রণামী বা ক্লাবের জন্য ঐচ্ছিক অনুদান প্রদান করুন। কোনো মধ্যস্থতাকারী নেই — ১০০% ফ্রি ডিরেক্ট UPI পেমেন্ট।</p>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-gold" onclick="switchTab('wishes')">
-            💌 Wishes & Pranam Wall
+          <button class="btn-gold" onclick="switchTab('darshan')">
+            🪔 ভার্চুয়াল প্রতিমা দর্শন
           </button>
-          <button class="btn-primary" onclick="switchTab('darshan')">
-            🪔 Virtual Darshan
+          <button class="btn-primary" onclick="switchTab('wishes')">
+            💌 শুভেচ্ছা ও প্রণাম বার্তা
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Donation Controls Panel (Shown only when admin is logged in) -->
+      <div id="admin-donation-panel" class="admin-only-section" style="display: none; margin-bottom: 2rem;">
+        <div class="info-card" style="border: 2px solid #ff9800; background: linear-gradient(135deg, #fffbf0 0%, #fff7e0 100%);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.5rem;">👑</span>
+              <h3 style="margin-bottom: 0; color: #b71c1c;">অ্যাডমিন প্রণামী ও ফান্ড ড্যাশবোর্ড (Donation Controls)</h3>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="btn-primary" id="btn-admin-add-donation" style="font-size: 0.85rem; padding: 6px 14px; background: #2e7d32; border-color: #1b5e20;">
+                ➕ অফলাইন / ক্যাশ প্রণামী যোগ
+              </button>
+              <button type="button" class="btn-gold" id="btn-export-donations-csv" style="font-size: 0.85rem; padding: 6px 14px;">
+                📥 এক্সেল / CSV ডাউনলোড
+              </button>
+              <button type="button" class="pill-btn" id="btn-toggle-upi-settings" style="font-size: 0.85rem; padding: 6px 12px; background: #5c0712; color: #fff;">
+                ⚙️ UPI & QR সেটিংস
+              </button>
+            </div>
+          </div>
+
+          <!-- Financial KPI Cards -->
+          <div class="admin-stats-grid">
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">💰</div>
+              <div>
+                <div class="admin-stat-val" id="stat-total-amount">₹০</div>
+                <div class="admin-stat-lbl">মোট সংগৃহীত অনুদান</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">👥</div>
+              <div>
+                <div class="admin-stat-val" id="stat-total-donors">০ জন</div>
+                <div class="admin-stat-lbl">মোট ভক্ত / দাতা</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">📱</div>
+              <div>
+                <div class="admin-stat-val" id="stat-online-amount">₹০</div>
+                <div class="admin-stat-lbl">অনলাইন UPI প্রণামী</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">💵</div>
+              <div>
+                <div class="admin-stat-val" id="stat-cash-amount">₹০</div>
+                <div class="admin-stat-lbl">নগদ / মণ্ডপ দান</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collapsible Admin UPI Settings Form -->
+          <div id="admin-upi-settings-wrap" style="display: none; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed #e0a800;">
+            <h4 style="color: var(--color-primary-dark); margin-bottom: 0.8rem; font-size: 1.05rem;">
+              ⚙️ ক্লাবের অফিসিয়াল UPI আইডি ও কিউআর সেটিংস (Admin UPI Settings)
+            </h4>
+            <form id="admin-upi-settings-form" onsubmit="return false;" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+              <div class="form-group">
+                <label class="form-label" for="setting-primary-upi">প্রাথমিক UPI ID (Primary UPI) *</label>
+                <input type="text" id="setting-primary-upi" class="form-input" value="sudiptamaity670@ybl" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="setting-secondary-upi">বিকল্প UPI ID (Secondary UPI)</label>
+                <input type="text" id="setting-secondary-upi" class="form-input" value="7407352005@axl" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="setting-payee-name">প্রাপকের নাম (Payee Display Name)</label>
+                <input type="text" id="setting-payee-name" class="form-input" value="Amfan NSCC Kojagari Laxmi Puja" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">নতুন QR ছবি আপলোড (ঐচ্ছিক)</label>
+                <input type="file" id="setting-qr-file" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.84rem;" />
+              </div>
+              <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" class="btn-primary" id="btn-save-upi-settings" style="padding: 8px 18px;">
+                  💾 UPI সেটিংস আপডেট করুন
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Devotee Donation Grid (2 Columns) -->
+      <div class="donation-main-grid">
+
+        <!-- Column 1: Payment & QR Code Card (Points 1 & 2) -->
+        <div class="donation-card payment-action-card">
+          <div class="donation-card-header">
+            <span class="donation-card-icon">💳</span>
+            <div>
+              <h3>ধাপ ১: প্রণামী পেমেন্ট ও স্ক্যান</h3>
+              <p>১০০% সুরক্ষিত ও ফ্রি ডিরেক্ট পেমেন্ট — 0% গেটওয়ে কমিশন</p>
+            </div>
+          </div>
+
+          <!-- Step 1.1: Choose Amount Presets -->
+          <div class="donation-step-box">
+            <label class="step-label">
+              <span class="step-num">১</span> প্রণামী বা অনুদানের পরিমাণ নির্বাচন করুন (₹):
+            </label>
+            <div class="amount-chips-grid" id="amount-chips-grid">
+              <button type="button" class="amount-chip" data-amount="51">₹৫১</button>
+              <button type="button" class="amount-chip active" data-amount="101">₹১০১</button>
+              <button type="button" class="amount-chip" data-amount="251">₹২৫১</button>
+              <button type="button" class="amount-chip" data-amount="501">₹৫০১</button>
+              <button type="button" class="amount-chip" data-amount="1001">₹১,০০১</button>
+              <button type="button" class="amount-chip" data-amount="2101">₹২,১০১</button>
+              <button type="button" class="amount-chip" data-amount="5001">₹৫,০০১</button>
+            </div>
+            
+            <div class="custom-amount-wrap">
+              <span class="custom-currency-symbol">₹</span>
+              <input type="number" id="input-custom-amount" class="form-input custom-amount-input" placeholder="অন্যান্য পরিমাণ লিখুন (যেমন: ৫০১)" value="101" min="1" />
+              <button type="button" class="btn-gold btn-apply-amount" id="btn-apply-custom-amount">নিশ্চিত করুন</button>
+            </div>
+          </div>
+
+          <!-- Step 1.2: 1-Click Mobile Payment Intent Buttons (Point 1) -->
+          <div class="donation-step-box">
+            <label class="step-label">
+              <span class="step-num">২</span> মোবাইল থেকে ১-ক্লিকে সরাসরি UPI অ্যাপে পেমেন্ট:
+            </label>
+            <p class="step-subtitle">নিচের বোতামে ক্লিক করলে সরাসরি আপনার পছন্দের UPI অ্যাপ খুলে যাবে এবং টাকা প্রাক-পূরণ থাকবে:</p>
+            <div class="upi-apps-grid">
+              <a href="#" id="btn-upi-phonepe" class="upi-app-btn upi-phonepe" title="PhonePe দিয়ে সরাসরি পেমেন্ট করুন">
+                <span class="upi-brand-icon">🟣</span>
+                <span class="upi-brand-name">PhonePe</span>
+                <span class="upi-badge-fast">১-ক্লিক</span>
+              </a>
+              <a href="#" id="btn-upi-gpay" class="upi-app-btn upi-gpay" title="Google Pay দিয়ে সরাসরি পেমেন্ট করুন">
+                <span class="upi-brand-icon">🔵</span>
+                <span class="upi-brand-name">Google Pay</span>
+                <span class="upi-badge-fast">১-ক্লিক</span>
+              </a>
+              <a href="#" id="btn-upi-paytm" class="upi-app-btn upi-paytm" title="Paytm দিয়ে সরাসরি পেমেন্ট করুন">
+                <span class="upi-brand-icon">🔷</span>
+                <span class="upi-brand-name">Paytm</span>
+                <span class="upi-badge-fast">১-ক্লিক</span>
+              </a>
+              <a href="#" id="btn-upi-generic" class="upi-app-btn upi-bhim" title="BHIM বা অন্য যেকোনো UPI অ্যাপে পেমেন্ট">
+                <span class="upi-brand-icon">🟠</span>
+                <span class="upi-brand-name">BHIM / Other</span>
+                <span class="upi-badge-fast">১-ক্লিক</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 1.3: QR Code for PC/Laptop/Other Device (Point 2) -->
+          <div class="donation-step-box qr-scanner-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
+              <label class="step-label" style="margin-bottom: 0;">
+                <span class="step-num">৩</span> কিউআর কোড স্ক্যান করে পেমেন্ট করুন (QR Code):
+              </label>
+              <!-- QR Switcher Tabs -->
+              <div class="qr-mode-switch">
+                <button type="button" class="qr-mode-btn active" id="btn-qr-mode-official">
+                  🖼️ ক্লাবের অফিসিয়াল QR
+                </button>
+                <button type="button" class="qr-mode-btn" id="btn-qr-mode-dynamic">
+                  ⚡ ডায়নামিক টাকার QR (<span id="qr-dynamic-amount-label">₹১০১</span>)
+                </button>
+              </div>
+            </div>
+
+            <div class="qr-display-container">
+              <div class="qr-frame">
+                <!-- Official Club QR Code Image -->
+                <img id="club-qr-img" src="assets/club-upi-qr.jpg" alt="Amfan NSCC Laxmi Puja UPI QR Code" class="qr-code-img active" />
+                <!-- Dynamic Amount QR Code Image (Loaded on demand) -->
+                <img id="dynamic-qr-img" src="" alt="Dynamic Amount QR Code" class="qr-code-img" style="display: none;" />
+                <div class="qr-corner-decor tl"></div>
+                <div class="qr-corner-decor tr"></div>
+                <div class="qr-corner-decor bl"></div>
+                <div class="qr-corner-decor br"></div>
+              </div>
+              <div class="qr-instructions">
+                <div style="font-weight: 600; color: var(--color-primary); font-size: 0.95rem;">
+                  📱 যেকোনো UPI অ্যাপ (PhonePe / GPay / Paytm) দিয়ে স্ক্যান করুন
+                </div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 4px;">
+                  ল্যাপটপ বা কম্পিউটার স্ক্রিনে রাখা এই কিউআর কোডটি আপনার মোবাইলের ক্যামেরা দিয়ে স্ক্যান করলেই সরাসরি ক্লাবের অ্যাকাউন্টে পেমেন্ট হয়ে যাবে।
+                </div>
+                <div style="margin-top: 8px;">
+                  <button type="button" class="pill-btn" id="btn-enlarge-qr" style="font-size: 0.8rem; background: #fffdf7; border-color: var(--color-gold); color: #5c0712;">
+                    🔍 বড় করে দেখুন (Enlarge QR)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 1.4: Direct UPI ID Copy Bar -->
+          <div class="donation-step-box upi-copy-container">
+            <div style="font-size: 0.85rem; font-weight: 600; color: #5d4037; margin-bottom: 6px;">
+              📋 অথবা সরাসরি UPI আইডি কপি করে যেকোনো অ্যাপে পাঠান:
+            </div>
+            <div class="upi-copy-row">
+              <div class="upi-copy-item">
+                <span class="upi-tag">Primary:</span>
+                <span class="upi-val" id="text-primary-upi">sudiptamaity670@ybl</span>
+                <button type="button" class="btn-copy-upi" data-copy="sudiptamaity670@ybl" title="কপি করুন">
+                  📋 কপি
+                </button>
+              </div>
+              <div class="upi-copy-item">
+                <span class="upi-tag">Secondary:</span>
+                <span class="upi-val" id="text-secondary-upi">7407352005@axl</span>
+                <button type="button" class="btn-copy-upi" data-copy="7407352005@axl" title="কপি করুন">
+                  📋 কপি
+                </button>
+              </div>
+            </div>
+            <div class="zero-fee-badge">
+              <span>🛡️ ১০০% ডিরেক্ট অ্যাকাউন্ট ট্রান্সফার | ০% গেটওয়ে ফি | সরাসরি ক্লাবের তহবিলে জমা</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Devotee Details & Digital Receipt Generator Form (Point 4) -->
+        <div class="donation-card devotee-form-card">
+          <div class="donation-card-header">
+            <span class="donation-card-icon">📜</span>
+            <div>
+              <h3>ধাপ ২: ভক্তের তথ্য ও প্রণামী জমা</h3>
+              <p>সঠিক তথ্য ও পেমেন্টের ১২ সংখ্যার UTR নম্বর দিয়ে যাচাইকরণ স্লিপ সংগ্রহ করুন</p>
+            </div>
+          </div>
+
+          <form id="donation-devotee-form" class="devotee-pronami-form" onsubmit="return false;">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="donor-name-input">ভক্ত / দানকারীর পূর্ণ নাম *</label>
+                <input type="text" id="donor-name-input" class="form-input" placeholder="আপনার পূর্ণ নাম লিখুন" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="donor-gotra-input">গোত্র (Gotra)</label>
+                <input type="text" id="donor-gotra-input" class="form-input" placeholder="যেমন: কাশ্যপ / শাণ্ডিল্য / শিব / মৌদগল্য" />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="donor-phone-input">মোবাইল / WhatsApp নম্বর *</label>
+                <input type="tel" id="donor-phone-input" class="form-input" placeholder="যেমন: ৯৮XXXXXXXX" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="donor-village-input">গ্রাম / ঠিকানা *</label>
+                <input type="text" id="donor-village-input" class="form-input" placeholder="আপনার গ্রাম বা শহরের নাম" required />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="donor-amount-input">প্রণামীর পরিমাণ (₹) *</label>
+                <input type="number" id="donor-amount-input" class="form-input" value="101" min="1" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="donor-method-select">পেমেন্ট মাধ্যম *</label>
+                <select id="donor-method-select" class="form-select">
+                  <option value="PhonePe">PhonePe (ফোনপে)</option>
+                  <option value="Google Pay">Google Pay (গুগল পে)</option>
+                  <option value="Paytm">Paytm (পেটিএম)</option>
+                  <option value="BHIM UPI">BHIM / Any UPI</option>
+                  <option value="Cash">ক্যাশ / মণ্ডপে নগদ দান</option>
+                  <option value="Bank">সরাসরি ব্যাঙ্ক ট্রান্সফার</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="donor-utr-input">
+                UPI রেফারেন্স / UTR নং (১২ সংখ্যার ট্রানজ্যাকশন আইডি) *
+              </label>
+              <input type="text" id="donor-utr-input" class="form-input" placeholder="যেমন: 429381029384 (PhonePe/GPay-তে থাকা ১২ সংখ্যার UTR নং)" pattern="[0-9A-Za-z]{8,24}" title="পেমেন্টের ১২ সংখ্যার UTR নম্বর লিখুন" required />
+              <div class="form-hint">💡 পেমেন্ট সম্পূর্ণ হলে আপনার PhonePe / GPay অ্যাপের স্টেটমেন্টে ১২ সংখ্যার UTR / Ref No দেখতে পাবেন।</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="donor-prayer-input">ভক্তিপূর্ণ প্রার্থনা বা ক্লাবের উদ্দেশ্যে বার্তা (ঐচ্ছিক)</label>
+              <textarea id="donor-prayer-input" class="form-textarea" rows="2" placeholder="মা লক্ষ্মীর চরণে আপনার মনের প্রার্থনা বা শুভকামনা লিখুন..."></textarea>
+            </div>
+
+            <div class="form-actions-stack">
+              <button type="submit" class="btn-primary btn-generate-receipt" id="btn-submit-donation">
+                <span>🙏</span> প্রণামী তথ্য জমা দিন ও যাচাইকরণ স্লিপ সংগ্রহ করুন
+              </button>
+              <div style="background: #fff8e1; border: 1px solid #ffd54f; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: #5d4037; line-height: 1.5; margin-top: 8px; text-align: left;">
+                🔒 <strong>নিরাপত্তা ও রসিদ অনুমোদন নীতি:</strong> টাকা না পাঠিয়ে ভুল/নকল UTR নম্বর দিলে তা ক্লাবের অ্যাকাউন্টে মিলবে না এবং বাতিল হয়ে যাবে। পেমেন্ট সম্পূর্ণ হওয়ার পর সঠিক UTR নম্বর জমা দিলে ক্লাব অ্যাডমিন ব্যাংক অ্যাকাউন্ট চেক করে চূড়ান্ত অনুমোদিত রসিদ অনুমোদন করবেন।
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Devotee Receipt Search Box (Mobile Verification Required) -->
+      <div style="max-width: 1200px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #fffcf5 0%, #fff7e5 100%); border: 1.5px solid var(--color-gold); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">🔒</span>
+          <div>
+            <strong style="color: var(--color-primary-dark); font-size: 0.95rem;">আপনার প্রণামী রসিদ খুঁজুন ও ডাউনলোড করুন:</strong>
+            <div style="font-size: 0.8rem; color: #777;">নিরাপত্তার স্বার্থে প্রণামী দেওয়ার সময় ব্যবহৃত আপনার ১০ সংখ্যার মোবাইল নম্বর লিখুন</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex: 1; max-width: 360px;">
+          <input type="tel" id="public-receipt-search-input" class="form-input" placeholder="১০ সংখ্যার মোবাইল নম্বর লিখুন..." maxlength="10" style="padding: 7px 12px; font-size: 0.88rem;" />
+          <button type="button" class="btn-primary" id="btn-public-receipt-search" style="padding: 7px 14px; font-size: 0.86rem; white-space: nowrap;">
+            রসিদ খুঁজুন
           </button>
         </div>
       </div>
 
-      <div style="max-width: 680px; margin: 0 auto; text-align: center; padding: 2.5rem 1.5rem; background: var(--color-surface); border: 2px solid var(--color-gold); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
-        <div style="width: 80px; height: 80px; background: rgba(229, 169, 59, 0.15); border: 2px solid var(--color-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.25rem;">
-          🪙
-        </div>
-        
-        <div style="display: inline-block; background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%); color: #3e0409; font-weight: 700; font-size: 0.88rem; padding: 5px 18px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(255, 152, 0, 0.35);">
-          ⏳ Coming Soon (শীঘ্রই আসছে)
-        </div>
-
-        <h3 style="font-family: var(--font-bengali), var(--font-heading); color: var(--color-primary); font-size: 1.6rem; margin-bottom: 0.8rem;">
-          অনলাইন আর্থিক সহায়তা ও প্রণামী পোর্টাল
-        </h3>
-
-        <p style="color: var(--color-text-muted); font-size: 1rem; line-height: 1.7; max-width: 540px; margin: 0 auto 1.5rem;">
-          আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা এবং বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের জন্য অনলাইন আর্থিক সহায়তা ও অনুদান প্রদানের সুবিধা খুব শীঘ্রই চালু করা হচ্ছে।
-        </p>
-
-        <div style="background: #fffdf7; border: 1px dashed var(--color-gold); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; max-width: 500px; margin: 0 auto 1.5rem; text-align: left;">
-          <h4 style="color: var(--color-primary-dark); font-size: 0.95rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px;">
-            ✨ শীঘ্রই যে সুবিধাগুলো যুক্ত হচ্ছে:
-          </h4>
-          <ul style="list-style: none; font-size: 0.88rem; color: #5d4037; display: flex; flex-direction: column; gap: 8px;">
-            <li style="display: flex; align-items: center; gap: 8px;">
-              <span>🔹</span> <span>সরাসরি UPI / QR কোড স্ক্যান করে সুবিধাজনক অনুদান</span>
-            </li>
-            <li style="display: flex; align-items: center; gap: 8px;">
-              <span>🔹</span> <span>ক্লাবের অফিসিয়াল ব্যাংক অ্যাকাউন্ট বিবরণী</span>
-            </li>
-            <li style="display: flex; align-items: center; gap: 8px;">
-              <span>🔹</span> <span>অনুদানকারী ভক্তদের তালিকা ও ডিজিটাল রশিদ</span>
-            </li>
-          </ul>
+      <!-- Donors & Pronami Wall (Live Public List) -->
+      <div class="donors-wall-section">
+        <div class="donors-wall-header">
+          <div>
+            <h3 style="color: var(--color-primary-dark); font-size: 1.35rem; display: flex; align-items: center; gap: 8px;">
+              <span>🌺</span> সাম্প্রতিক প্রণামী অর্পণকারী ভক্তবৃন্দ (Devotees Wall)
+            </h3>
+            <p style="color: var(--color-text-muted); font-size: 0.9rem;">
+              মা লক্ষ্মীর পূজার পুণ্যলগ্নে যে সকল ভক্তবৃন্দ প্রণামী অর্পণ করেছেন তাঁদের তালিকা ও আশীর্বাদপত্র।
+            </p>
+          </div>
+          <div class="donors-stats-badge">
+            মোট দাতা: <span id="wall-donors-count">০</span> জন
+          </div>
         </div>
 
-        <p style="font-size: 0.92rem; color: #8c7377; font-style: italic; line-height: 1.6; margin-bottom: 1.5rem;">
-          "আপনার আন্তরিক শুভেচ্ছা ও সহযোগিতাই আমাদের ক্লাবের প্রেরণা। মা লক্ষ্মীর কৃপায় আপনার পরিবারে সুখ, শান্তি ও সমৃদ্ধি সর্বদা বিরাজ করুক।"
-        </p>
-
-        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-          <button class="btn-gold" onclick="switchTab('wishes')">
-            💌 শুভেচ্ছা ও প্রণাম বার্তা পাঠান
-          </button>
-          <button class="btn-primary" onclick="switchTab('darshan')">
-            🪔 ভার্চুয়াল প্রতিমা দর্শন করুন
-          </button>
+        <div class="donors-cards-grid" id="donors-cards-grid">
+          <!-- Populated by JS -->
         </div>
       </div>
+
+      <!-- Admin Donation Table Section (Inside Tab 6, shown if Admin) -->
+      <div id="admin-donations-table-section" class="admin-only-section" style="display: none; margin-top: 2.5rem;">
+        <div class="info-card" style="border: 2px solid var(--color-gold); background: #ffffff;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 1rem;">
+            <div>
+              <h3 style="margin-bottom: 0; color: var(--color-primary-dark);">📊 সম্পূর্ণ প্রণামী ও অনুদান রেকর্ড খাতা (Admin Donors Register)</h3>
+              <p style="font-size: 0.88rem; color: #666; margin-top: 4px;">সকল অনলাইন ও অফলাইন প্রণামীর সম্পূর্ণ হিসাব ও ভেরিফিকেশন ব্যবস্থা।</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="admin-donor-search" class="form-input" placeholder="🔍 নাম, ফোন বা রসিদ দিয়ে খুঁজুন..." style="max-width: 240px; font-size: 0.85rem; padding: 6px 10px;" />
+              <button type="button" class="btn-gold" onclick="document.getElementById('btn-export-donations-csv').click()" style="padding: 6px 12px; font-size: 0.85rem;">
+                📥 CSV
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive" style="overflow-x: auto;">
+            <table class="admin-donor-table">
+              <thead>
+                <tr>
+                  <th>তারিখ</th>
+                  <th>রসিদ নং</th>
+                  <th>ভক্তের নাম ও গোত্র</th>
+                  <th>ঠিকানা ও ফোন</th>
+                  <th>পরিমাণ</th>
+                  <th>পেমেন্ট মাধ্যম</th>
+                  <th>UTR / Ref</th>
+                  <th>স্ট্যাটাস</th>
+                  <th>অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="admin-donations-table-body">
+                <!-- Dynamically generated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ========================================================
@@ -2879,6 +4225,25 @@ body {
               </button>
             </div>
           </form>
+        </div>
+
+        <!-- Admin Donations Quick Management Card -->
+        <div class="info-card" style="border: 2px solid var(--color-gold); background: #ffffff;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
+            <h3 style="margin-bottom: 0; color: var(--color-primary-dark);">🪙 প্রণামী ও আর্থিক সহায়তা ডাটা</h3>
+            <span class="update-badge" style="background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9;">Free UPI</span>
+          </div>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem; line-height: 1.5;">
+            ভক্তদের জমা দেওয়া প্রণামী ও অনুদানের পূর্ণ রেকর্ড এক্সেল / CSV ফাইল হিসেবে ব্যাকআপ ডাউনলোড করুন অথবা প্রণামী পোর্টাল পরিচালনা করুন।
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn-gold" onclick="switchTab('donation')">
+              👉 প্রণামী পোর্টালে যান
+            </button>
+            <button type="button" class="btn-primary" onclick="if(window.exportDonationsToCSV) window.exportDonationsToCSV()">
+              📥 সম্পূর্ণ প্রণামী তালিকা (CSV) ডাউনলোড
+            </button>
+          </div>
         </div>
 
         <div class="info-card">
@@ -3333,7 +4698,7 @@ const firebaseConfig = {
       </div>
 
       <div style="font-size: 0.88rem; color: #555; margin-bottom: 1rem; line-height: 1.5; background: #fffcf5; padding: 10px 14px; border-radius: 6px; border: 1px solid #fedc97;">
-        🌺 <strong>মোবাইল টাইপিং সহজ করতে:</strong> আপনি সরাসরি ইংরেজিতেও (যেমন: Sudipta Maity) লিখতে পারেন, তারপর <strong>"🔄 English ➔ বাংলা"</strong> বাটনে চাপলেই তা খাঁটি বাংলায় রূপান্তর হয়ে যাবে। নিচের সহজ বাটনগুলোও স্পর্শ করতে পারেন।
+        🌺 <strong>মোবাইল টাইপিং সহজ করতে:</strong> আপনি সরাসরি ইংরেজিতেও (যেমন: Amit Mondal / Sourav Das) লিখতে পারেন, তারপর <strong>"🔄 English ➔ বাংলা"</strong> বাটনে চাপলেই তা খাঁটি বাংলায় রূপান্তর হয়ে যাবে। নিচের সহজ বাটনগুলোও স্পর্শ করতে পারেন।
       </div>
 
       <form id="blessing-card-form" onsubmit="return false;">
@@ -3482,6 +4847,221 @@ const firebaseConfig = {
     </div>
   </div>
 
+  <!-- ========================================================
+       MODAL 8: DIGITAL PRONAMI RECEIPT (Point 4)
+       ======================================================== -->
+  <div class="modal-overlay" id="donation-receipt-modal" role="dialog" aria-modal="true" aria-labelledby="receipt-modal-title">
+    <div class="modal-card receipt-modal-card">
+      <div class="modal-header receipt-modal-hdr">
+        <h3 id="receipt-modal-title" style="color: var(--color-primary-dark); font-size: 1.25rem;">📜 ডিজিটাল দান ও প্রণামী রসিদ</h3>
+        <button class="modal-close-btn" id="btn-close-receipt-modal">&times;</button>
+      </div>
+
+      <!-- Printable & Downloadable Temple Receipt Container -->
+      <div id="donation-receipt-printable" class="temple-receipt-container">
+        <!-- Traditional Alpona Header Border -->
+        <div class="receipt-top-border"></div>
+
+        <div class="receipt-header">
+          <div class="receipt-om">ॐ</div>
+          <div class="receipt-puja-title">শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ২০২৬</div>
+          <div class="receipt-club-name">আমফান (N.S.C.C) ক্লাব ও পূজা কমিটি</div>
+          <div class="receipt-tagline">"ধনং ধান্যং পশূন্ বহুন্ পুভ্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"</div>
+        </div>
+
+        <!-- Dynamic Verification Status Banner -->
+        <div id="rcpt-status-banner" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 7px 12px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; margin: 10px 0; background: #e8f5e9; color: #2e7d32; border: 1.5px solid #a5d6a7;">
+          <span id="rcpt-status-icon">✓</span> <span id="rcpt-status-text">অনুমোদিত ও যাচাইকৃত রসিদ (Verified Receipt)</span>
+        </div>
+
+        <div class="receipt-meta-bar">
+          <div class="receipt-meta-item">
+            <span class="meta-label">রসিদ নং (Receipt No):</span>
+            <span class="meta-val highlight-receipt-no" id="rcpt-no">AMF-LK-2026-1001</span>
+          </div>
+          <div class="receipt-meta-item">
+            <span class="meta-label">তারিখ ও সময় (Date):</span>
+            <span class="meta-val" id="rcpt-date">--/--/----</span>
+          </div>
+        </div>
+
+        <div class="receipt-body">
+          <div class="receipt-field-row">
+            <span class="field-lbl">ভক্ত / দানকারীর নাম:</span>
+            <span class="field-val strong-val" id="rcpt-donor-name">--</span>
+          </div>
+          <div class="receipt-field-grid">
+            <div class="receipt-field-row">
+              <span class="field-lbl">গোত্র (Gotra):</span>
+              <span class="field-val" id="rcpt-gotra">--</span>
+            </div>
+            <div class="receipt-field-row">
+              <span class="field-lbl">গ্রাম / বাসস্থান:</span>
+              <span class="field-val" id="rcpt-village">--</span>
+            </div>
+          </div>
+          <div class="receipt-field-grid">
+            <div class="receipt-field-row">
+              <span class="field-lbl">মোবাইল নং:</span>
+              <span class="field-val" id="rcpt-phone">--</span>
+            </div>
+            <div class="receipt-field-row">
+              <span class="field-lbl">পেমেন্ট মাধ্যম:</span>
+              <span class="field-val" id="rcpt-method">UPI / PhonePe</span>
+            </div>
+          </div>
+          <div class="receipt-field-row">
+            <span class="field-lbl">UTR / ট্রানজ্যাকশন আইডি:</span>
+            <span class="field-val mono-val" id="rcpt-utr">--</span>
+          </div>
+
+          <!-- Highlight Amount Box -->
+          <div class="receipt-amount-box">
+            <div class="amount-inner">
+              <span class="amount-title">প্রণামীর পরিমাণ (Amount Paid):</span>
+              <span class="amount-big" id="rcpt-amount">₹১০১ /-</span>
+            </div>
+            <div class="amount-in-words" id="rcpt-amount-words">কথায়: একশত এক টাকা মাত্র</div>
+          </div>
+
+          <div class="receipt-blessing-quote">
+            🌸 "মা শ্রী শ্রী কোজাগরী লক্ষ্মীর চরণে আপনার ও আপনার পরিবারের সর্বাঙ্গীণ সুখ, সমৃদ্ধি, সুস্বাস্থ্য ও মঙ্গল কামনা করি।"
+          </div>
+        </div>
+
+        <div class="receipt-footer-signatures">
+          <div class="signature-col">
+            <div class="seal-graphic" id="rcpt-seal-graphic">
+              <div class="seal-inner" id="rcpt-seal-inner">
+                <span>AMFAN N.S.C.C</span>
+                <span class="seal-star" id="rcpt-seal-star">★ VERIFIED ★</span>
+                <span>LAXMI PUJA 2026</span>
+              </div>
+            </div>
+            <div class="signature-title" id="rcpt-seal-title">ক্লাব সীলমোহর (Official Seal)</div>
+          </div>
+          <div class="signature-col" style="text-align: right;">
+            <div class="sign-line"></div>
+            <div class="signature-title">কোষাধ্যক্ষ / সম্পাদক</div>
+            <div class="signature-sub">আমফান (N.S.C.C) পূজা কমিটি</div>
+          </div>
+        </div>
+
+        <div class="receipt-watermark" id="rcpt-watermark">AMFAN NSCC</div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="receipt-actions-footer">
+        <button type="button" class="btn-primary" id="btn-download-receipt-img">
+          📥 ছবি ডাউনলোড (Download)
+        </button>
+        <button type="button" class="btn-gold" id="btn-print-receipt">
+          🖨️ প্রিন্ট করুন (Print)
+        </button>
+        <button type="button" class="whatsapp-share-btn" id="btn-share-receipt-whatsapp" style="margin: 0; padding: 9px 18px; font-size: 0.9rem;">
+          💬 WhatsApp-এ শেয়ার
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 8B: RECEIPT PRIVACY & MOBILE VERIFICATION
+       ======================================================== -->
+  <div class="modal-overlay" id="receipt-auth-modal" role="dialog" aria-modal="true" aria-labelledby="receipt-auth-title">
+    <div class="modal-card" style="max-width: 440px; text-align: center;">
+      <div class="modal-header" style="justify-content: flex-end; padding-bottom: 0; border-bottom: none;">
+        <button class="modal-close-btn" id="btn-close-receipt-auth-modal">&times;</button>
+      </div>
+      <div style="padding: 0 20px 24px;">
+        <div style="font-size: 2.8rem; margin-bottom: 8px;">🔐</div>
+        <h3 id="receipt-auth-title" style="color: var(--color-primary-dark); font-size: 1.25rem; margin-bottom: 6px;">
+          রসিদ নিরাপত্তা যাচাই
+        </h3>
+        <div id="receipt-auth-donor-name" style="font-weight: 700; color: #5c0712; font-size: 1.05rem; margin-bottom: 8px;"></div>
+        <p style="font-size: 0.88rem; color: #666; margin-bottom: 16px; line-height: 1.45;">
+          ভক্তের গোপনীয়তা ও রসিদ সুরক্ষার স্বার্থে, প্রণামী জমা দেওয়ার সময় যে <strong>১০ সংখ্যার মোবাইল নম্বরটি</strong> দিয়েছিলেন তা লিখুন:
+        </p>
+
+        <form id="receipt-auth-form" onsubmit="return false;">
+          <input type="tel" id="input-auth-mobile" class="form-input" placeholder="১০ সংখ্যার মোবাইল নম্বর লিখুন" maxlength="10" pattern="[0-9]{10}" style="text-align: center; font-size: 1.25rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px;" required />
+          <div id="auth-error-msg" style="display: none; color: #b32134; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; background: #fff0f0; padding: 8px; border-radius: 6px; border: 1px solid #ffcdd2;"></div>
+          <button type="submit" id="btn-submit-auth-mobile" class="btn-primary" style="width: 100%; padding: 11px; font-size: 1rem;">
+            🔓 যাচাই করুন ও রসিদ দেখুন
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 9: ADMIN OFFLINE / CASH DONATION (Point 5)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-offline-donation-modal" role="dialog" aria-modal="true" aria-labelledby="offline-donation-modal-title">
+    <div class="modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 id="offline-donation-modal-title">➕ নতুন অফলাইন / ক্যাশ প্রণামী যোগ</h3>
+        <button class="modal-close-btn" id="btn-close-offline-donation-modal">&times;</button>
+      </div>
+
+      <form id="admin-offline-donation-form" onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label" for="offline-donor-name">ভক্ত / দানকারীর নাম *</label>
+          <input type="text" id="offline-donor-name" class="form-input" placeholder="যেমন: শ্রী অমল জানা" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="offline-donor-gotra">গোত্র</label>
+            <input type="text" id="offline-donor-gotra" class="form-input" placeholder="যেমন: কাশ্যপ" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="offline-donor-village">গ্রাম / ঠিকানা *</label>
+            <input type="text" id="offline-donor-village" class="form-input" placeholder="যেমন: নাইকুন্ডি" required />
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="offline-donor-phone">ফোন নম্বর (ঐচ্ছিক)</label>
+            <input type="text" id="offline-donor-phone" class="form-input" placeholder="যেমন: ৯৮XXXXXXX" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="offline-donor-amount">প্রণামীর পরিমাণ (₹) *</label>
+            <input type="number" id="offline-donor-amount" class="form-input" value="101" min="1" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="offline-donor-method">পেমেন্ট প্রকার</label>
+          <select id="offline-donor-method" class="form-select">
+            <option value="Cash">ক্যাশ / নগদ প্রণামী (Mandap Cash)</option>
+            <option value="Bank">ব্যাঙ্ক ট্রান্সফার</option>
+            <option value="Offline UPI">অফলাইন UPI পেমেন্ট</option>
+          </select>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+          <button type="button" class="btn-gold" onclick="document.getElementById('admin-offline-donation-modal').classList.remove('active')">বাতিল</button>
+          <button type="submit" class="btn-primary" id="btn-save-offline-donation">💾 প্রণামী রেকর্ড ও রসিদ তৈরি</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 10: QR ZOOM (Point 2)
+       ======================================================== -->
+  <div class="modal-overlay" id="qr-zoom-modal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width: 440px; text-align: center;">
+      <div class="modal-header">
+        <h3>🔍 ক্লাবের অফিসিয়াল UPI কিউআর কোড</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('qr-zoom-modal').classList.remove('active')">&times;</button>
+      </div>
+      <div style="padding: 1rem 0;">
+        <img id="qr-zoom-img" src="assets/club-upi-qr.jpg" alt="Zoomed QR" style="max-width: 280px; width: 100%; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); border: 2px solid var(--color-gold);" />
+        <p style="margin-top: 12px; font-size: 0.92rem; color: #5c0712; font-weight: 600;">PhonePe / Google Pay / Paytm অ্যাপ দিয়ে স্ক্যান করুন</p>
+        <p style="font-size: 0.85rem; color: #777;">UPI ID: sudiptamaity670@ybl | 7407352005@axl</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Particle Shower Canvas -->
   <canvas id="flower-canvas" aria-hidden="true"></canvas>
 
@@ -3514,7 +5094,7 @@ const firebaseConfig = {
       </div>
 
       <div style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px dashed rgba(229, 169, 59, 0.4); font-size: 0.95rem; font-weight: 700; letter-spacing: 2px; color: #ffd700; text-transform: uppercase;">
-        ✨ CREATED AND DEVELOPED BY SUDIPTA MAITY ✨
+        ✨ আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ২০২৬ ✨
       </div>
     </div>
   </footer>
@@ -4064,6 +5644,114 @@ class FirebaseService {
         callback(list);
       }, (err) => {
         console.warn('Committee members listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- DONATIONS & PRONAMI (Cloud Firestore) ---
+  async getDonations() {
+    if (!this.isReady) return [];
+    try {
+      const snap = await this.db.collection('puja_donations').get();
+      const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      list.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+      return list;
+    } catch (err) {
+      console.error('Firebase getDonations error:', err);
+      return [];
+    }
+  }
+
+  async saveDonation(donation) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    const donId = donation.id || 'don_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    const docData = {
+      donorName: donation.donorName || '',
+      gotra: donation.gotra || '',
+      phone: donation.phone || '',
+      village: donation.village || '',
+      amount: Number(donation.amount) || 0,
+      paymentMethod: donation.paymentMethod || 'UPI',
+      upiIdUsed: donation.upiIdUsed || '',
+      utrNumber: donation.utrNumber || '',
+      receiptNo: donation.receiptNo || ('AMF-LK-2026-' + Math.floor(1000 + Math.random() * 9000)),
+      prayer: donation.prayer || '',
+      status: donation.status || 'verified',
+      timestamp: donation.timestamp || new Date().toISOString()
+    };
+    await this.db.collection('puja_donations').doc(donId).set(docData, { merge: true });
+    return { id: donId, ...docData };
+  }
+
+  async deleteDonation(donId) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('puja_donations').doc(donId).delete();
+    return true;
+  }
+
+  async updateDonationStatus(donId, status) {
+    if (!this.isReady) throw new Error('Firebase not connected');
+    await this.db.collection('puja_donations').doc(donId).update({
+      status: status,
+      verifiedAt: new Date().toISOString()
+    });
+    return true;
+  }
+
+  onDonationsChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_donations')
+      .onSnapshot((snapshot) => {
+        const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        list.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+        callback(list);
+      }, (err) => {
+        console.warn('Donations listener error:', err);
+      });
+    this.listeners.push(unsubscribe);
+    return unsubscribe;
+  }
+
+  // --- PAYMENT CONFIGURATION (Cloud Firestore) ---
+  async getPaymentConfig() {
+    if (!this.isReady) return null;
+    try {
+      const doc = await this.db.collection('puja_settings').doc('payment_config').get();
+      return doc.exists ? doc.data() : null;
+    } catch (e) {
+      console.warn('Firebase getPaymentConfig error:', e);
+      return null;
+    }
+  }
+
+  async savePaymentConfig(config) {
+    if (!this.isReady) return false;
+    try {
+      const payload = {
+        primaryUpiId: config.primaryUpiId || 'sudiptamaity670@ybl',
+        secondaryUpiId: config.secondaryUpiId || '7407352005@axl',
+        payeeName: config.payeeName || 'Amfan NSCC Kojagari Laxmi Puja',
+        customQrUrl: config.customQrUrl || '',
+        updatedAt: new Date().toISOString()
+      };
+      await this.db.collection('puja_settings').doc('payment_config').set(payload, { merge: true });
+      return true;
+    } catch (e) {
+      console.error('Firebase savePaymentConfig error:', e);
+      return false;
+    }
+  }
+
+  onPaymentConfigChanged(callback) {
+    if (!this.isReady) return null;
+    const unsubscribe = this.db.collection('puja_settings').doc('payment_config')
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          callback(doc.data());
+        }
+      }, (err) => {
+        console.warn('Payment config listener error:', err);
       });
     this.listeners.push(unsubscribe);
     return unsubscribe;
@@ -4975,7 +6663,7 @@ class PujaDB {
           },
           {
             id: 'update_seed_1',
-            title: '📅 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও ৩ দিনব্যাপী মহোৎসবের পুণ্য নির্ঘণ্ট',
+            title: '📅 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও ৩ দিনব্যাপী পুণ্য নির্ঘণ্ট',
             category: 'schedule',
             priority: 'urgent',
             isPinned: true,
@@ -4996,7 +6684,7 @@ class PujaDB {
 ক্লাবের বাৎসরিক ক্রীড়া প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান। ভক্তদের মাঝে মহাভাব প্রসাদ বিতরণ।
 
 🗓️ মঙ্গলবার — ৩ নভেম্বর, ২০২৬ (১৬ কার্তিক, ১৪৩৩):
-বাৎসরিক সাংস্কৃতিক ও ক্রীড়া মেগা পুরস্কার বিতরণী পর্ব, সান্ধ্য সাংস্কৃতিক পরিবেশনা ও সমাপ্তি মহোৎসব।
+বাৎসরিক সাংস্কৃতিক ও ক্রীড়া মেগা পুরস্কার বিতরণী পর্ব, সান্ধ্য সাংস্কৃতিক পরিবেশনা ও পূজা সমাপ্তি।
 
 সকল ভক্ত ও এলাকাবাসীকে ক্লাবের তরফ থেকে সপরিবারে সাদর আমন্ত্রণ জানানো হচ্ছে।`,
             likes: 125,
@@ -5225,6 +6913,189 @@ Winning designs are now showcased in the Photo Gallery under the "Alpona Designs
   }
 
   // ==========================================================
+  // PAYMENT CONFIGURATION & UPI SETTINGS
+  // ==========================================================
+  getPaymentConfigLocal() {
+    const defaultConfig = {
+      primaryUpiId: 'sudiptamaity670@ybl',
+      secondaryUpiId: '7407352005@axl',
+      payeeName: 'Amfan NSCC Kojagari Laxmi Puja',
+      customQrUrl: '',
+      presetAmounts: [51, 101, 251, 501, 1001, 2101, 5001]
+    };
+    try {
+      const stored = localStorage.getItem('amfan_payment_config');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return { ...defaultConfig, ...parsed };
+      }
+    } catch (e) {
+      console.warn('LocalStorage payment config read error:', e);
+    }
+    return defaultConfig;
+  }
+
+  async getPaymentConfig() {
+    if (this.isCloudActive()) {
+      try {
+        const cloudConfig = await window.firebaseService.getPaymentConfig();
+        if (cloudConfig && cloudConfig.primaryUpiId) {
+          try {
+            localStorage.setItem('amfan_payment_config', JSON.stringify(cloudConfig));
+          } catch (e) {}
+          return { ...this.getPaymentConfigLocal(), ...cloudConfig };
+        }
+      } catch (e) {
+        console.warn('Could not fetch cloud payment config:', e);
+      }
+    }
+    return this.getPaymentConfigLocal();
+  }
+
+  async savePaymentConfig(config) {
+    const current = this.getPaymentConfigLocal();
+    const updated = {
+      ...current,
+      ...config,
+      updatedAt: new Date().toISOString()
+    };
+    try {
+      localStorage.setItem('amfan_payment_config', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('LocalStorage save payment config error:', e);
+    }
+
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.savePaymentConfig(updated);
+      } catch (e) {
+        console.warn('Could not sync payment config to cloud:', e);
+      }
+    }
+    return updated;
+  }
+
+  // ==========================================================
+  // DONATIONS & PRONAMI MANAGEMENT
+  // ==========================================================
+  getInitialSampleDonations() {
+    return [];
+  }
+
+  getDonationsStorage() {
+    try {
+      const stored = localStorage.getItem('amfan_puja_donations');
+      if (stored) {
+        let parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          // Clean out old seeded sample records with personal names or sample IDs
+          const cleaned = parsed.filter(d => d && !String(d.id || '').startsWith('don_init_') && (!d.donorName || !d.donorName.includes('সুদীপ্ত')));
+          if (cleaned.length !== parsed.length) {
+            localStorage.setItem('amfan_puja_donations', JSON.stringify(cleaned));
+          }
+          return cleaned;
+        }
+      }
+    } catch (e) {
+      console.warn('LocalStorage donations read error:', e);
+    }
+    return [];
+  }
+
+  async getAllDonations() {
+    if (this.isCloudActive()) {
+      try {
+        const cloudDonations = await window.firebaseService.getDonations();
+        if (cloudDonations && cloudDonations.length > 0) {
+          // Filter out any legacy sample data from cloud
+          const cleanCloud = cloudDonations.filter(d => d && !String(d.id || '').startsWith('don_init_') && (!d.donorName || !d.donorName.includes('সুদীপ্ত')));
+          try {
+            localStorage.setItem('amfan_puja_donations', JSON.stringify(cleanCloud));
+          } catch (e) {}
+          return cleanCloud;
+        }
+      } catch (e) {
+        console.warn('Could not fetch cloud donations:', e);
+      }
+    }
+    return this.getDonationsStorage();
+  }
+
+  async saveDonation(donation) {
+    const list = this.getDonationsStorage();
+    const id = donation.id || 'don_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    const receiptNo = donation.receiptNo || ('AMF-LK-2026-' + Math.floor(1000 + Math.random() * 9000));
+    const newDonation = {
+      ...donation,
+      id,
+      receiptNo,
+      amount: Number(donation.amount) || 0,
+      status: donation.status || 'pending',
+      timestamp: donation.timestamp || new Date().toISOString()
+    };
+
+    const existingIdx = list.findIndex(d => d.id === id || (d.receiptNo && d.receiptNo === receiptNo));
+    if (existingIdx >= 0) {
+      list[existingIdx] = newDonation;
+    } else {
+      list.unshift(newDonation);
+    }
+
+    try {
+      localStorage.setItem('amfan_puja_donations', JSON.stringify(list));
+    } catch (e) {
+      console.warn('LocalStorage save donation error:', e);
+    }
+
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.saveDonation(newDonation);
+      } catch (e) {
+        console.warn('Could not sync donation to cloud:', e);
+      }
+    }
+
+    return newDonation;
+  }
+
+  async deleteDonation(id) {
+    const list = this.getDonationsStorage();
+    const filtered = list.filter(d => d.id !== id);
+    try {
+      localStorage.setItem('amfan_puja_donations', JSON.stringify(filtered));
+    } catch (e) {
+      console.warn('LocalStorage delete donation error:', e);
+    }
+
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.deleteDonation(id);
+      } catch (e) {
+        console.warn('Could not sync delete donation to cloud:', e);
+      }
+    }
+
+    return true;
+  }
+
+  async updateDonationStatus(id, status) {
+    const list = this.getDonationsStorage();
+    const item = list.find(d => d.id === id);
+    if (item) {
+      item.status = status;
+      try {
+        localStorage.setItem('amfan_puja_donations', JSON.stringify(list));
+      } catch (e) {}
+    }
+    if (this.isCloudActive()) {
+      try {
+        await window.firebaseService.updateDonationStatus(id, status);
+      } catch (e) {}
+    }
+    return item;
+  }
+
+  // ==========================================================
   // ADMIN AUTH & RECOVERY SETTINGS
   // ==========================================================
   cleanSecurityQuestion(question) {
@@ -5445,7 +7316,7 @@ async function initPujaApp() {
         cdSecs.textContent = '০০';
         const titleEl = document.querySelector('.countdown-badge-title');
         if (titleEl) {
-          titleEl.innerHTML = '<span>🎉</span><span>শুভ কোজাগরী লক্ষ্মী পূজা! মহোৎসব শুরু হয়েছে!</span>';
+          titleEl.innerHTML = '<span>🎉</span><span>শুভ কোজাগরী লক্ষ্মী পূজা! পূজা শুরু হয়েছে!</span>';
         }
         return;
       }
@@ -5478,7 +7349,7 @@ async function initPujaApp() {
       const message = 
 `🪔 আমফান (N.S.C.C) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান 🌺
 
-প্রণাম ও শারদ শুভেচ্ছা! আমাদের আমফান (N.S.C.C) ক্লাবের পুণ্য মহোৎসবে আপনারা সপরিবারে আমন্ত্রিত:
+প্রণাম ও শারদ শুভেচ্ছা! আমাদের আমফান (N.S.C.C) ক্লাবের পুণ্য পূজায় আপনারা সপরিবারে আমন্ত্রিত:
 
 📌 বাংলা তারিখ: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩
 📌 ইংরেজি তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬
@@ -5515,7 +7386,7 @@ async function initPujaApp() {
       btnLightboxShare.addEventListener('click', () => {
         const photoTitle = document.getElementById('lightbox-title')?.textContent || 'পূজা মুহূর্ত';
         const currentUrl = window.location.href.split('#')[0];
-        const photoMsg = `🪔 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ও মহোৎসব\n📸 ছবি: ${photoTitle}\n\nসম্পূর্ণ প্রতিমা দর্শন ও ক্লাবের গ্যালারি দেখুন:\n👉 ${currentUrl}`;
+        const photoMsg = `🪔 আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা\n📸 ছবি: ${photoTitle}\n\nসম্পূর্ণ প্রতিমা দর্শন ও ক্লাবের গ্যালারি দেখুন:\n👉 ${currentUrl}`;
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(photoMsg)}`;
         window.open(whatsappUrl, '_blank');
       });
@@ -6380,6 +8251,10 @@ async function initPujaApp() {
       if (firebaseStatusPill) firebaseStatusPill.style.display = 'inline-flex';
       const btnAddMem = document.getElementById('btn-add-committee-member');
       if (btnAddMem) btnAddMem.style.display = 'inline-flex';
+      const donAdminPanel = document.getElementById('admin-donation-panel');
+      if (donAdminPanel) donAdminPanel.style.display = 'block';
+      const donTableSec = document.getElementById('admin-donations-table-section');
+      if (donTableSec) donTableSec.style.display = 'block';
     } else {
       if (adminStatusPill) {
         adminStatusPill.innerHTML = `👑 ক্লাবের অ্যাডমিন`;
@@ -6395,11 +8270,16 @@ async function initPujaApp() {
       if (firebaseStatusPill) firebaseStatusPill.style.display = 'none';
       const btnAddMem = document.getElementById('btn-add-committee-member');
       if (btnAddMem) btnAddMem.style.display = 'none';
+      const donAdminPanel = document.getElementById('admin-donation-panel');
+      if (donAdminPanel) donAdminPanel.style.display = 'none';
+      const donTableSec = document.getElementById('admin-donations-table-section');
+      if (donTableSec) donTableSec.style.display = 'none';
     }
     renderUpdates();
     renderPhotos();
     renderWishes();
     if (typeof renderCommittee === 'function') renderCommittee();
+    if (typeof renderDonationsAdmin === 'function') renderDonationsAdmin();
   }
 
   if (adminStatusPill) {
@@ -7057,6 +8937,34 @@ async function initPujaApp() {
         }
       });
     }
+
+    if (window.firebaseService.onDonationsChanged) {
+      window.firebaseService.onDonationsChanged((donations) => {
+        console.log('Firebase: Real-time donations received:', donations.length);
+        if (typeof setDonationsList === 'function') {
+          setDonationsList(donations);
+        } else {
+          allDonationsList = donations;
+        }
+        if (typeof renderDonationsWall === 'function') renderDonationsWall();
+        if (state.isAdmin && typeof renderDonationsAdmin === 'function') renderDonationsAdmin();
+        try {
+          localStorage.setItem('amfan_puja_donations', JSON.stringify(allDonationsList));
+        } catch (e) {}
+      });
+    }
+
+    if (window.firebaseService.onPaymentConfigChanged) {
+      window.firebaseService.onPaymentConfigChanged((cfg) => {
+        if (cfg) {
+          activePaymentConfig = { ...activePaymentConfig, ...cfg };
+          if (typeof updatePaymentUIFromConfig === 'function') updatePaymentUIFromConfig();
+          try {
+            localStorage.setItem('amfan_payment_config', JSON.stringify(activePaymentConfig));
+          } catch (e) {}
+        }
+      });
+    }
   }
 
   // Open/Close Firebase Modal
@@ -7434,7 +9342,7 @@ async function initPujaApp() {
 
       ctx.fillStyle = '#b37e19';
       ctx.font = 'bold 13px "Hind Siliguri", sans-serif';
-      ctx.fillText('আমফান (এন.এস.সি.সি) সার্বজনীন পূজা মহোৎসব • কোজাগরী লক্ষ্মী পূজা', w / 2, 73);
+      ctx.fillText('আমফান (এন.এস.সি.সি) সার্বজনীন কোজাগরী লক্ষ্মী পূজা ২০২৬', w / 2, 73);
 
       // Gold divider line under header
       ctx.strokeStyle = 'rgba(179, 126, 25, 0.35)';
@@ -8164,6 +10072,1426 @@ async function initPujaApp() {
   }
 
   // ==========================================================
+  // DONATION, PRONAMI & DIGITAL RECEIPT PORTAL (100% FREE UPI)
+  // ==========================================================
+  let activePaymentConfig = {
+    primaryUpiId: 'sudiptamaity670@ybl',
+    secondaryUpiId: '7407352005@axl',
+    payeeName: 'Amfan NSCC Kojagari Laxmi Puja',
+    customQrUrl: ''
+  };
+
+  let selectedAmount = 101;
+  let allDonationsList = [];
+  let currentReceiptData = null;
+
+  // Security: Track authenticated receipt sessions (Devotee must verify mobile to view/download)
+  const verifiedReceiptSessions = new Set();
+  let pendingAuthDonationId = null;
+
+  // Deduplicate and sanitize donations list to prevent duplicate admin rows
+  function setDonationsList(list) {
+    const seenIds = new Set();
+    const seenReceipts = new Set();
+    const deduped = [];
+
+    (list || []).forEach(item => {
+      if (!item) return;
+
+      // Filter legacy demo/sample records
+      if (String(item.id || '').startsWith('don_init_')) return;
+      if (item.donorName && (item.donorName.includes('সুদীপ্ত') || item.donorName.includes('Sudipta'))) return;
+
+      const idKey = item.id ? String(item.id).trim() : null;
+      const rcptKey = item.receiptNo ? String(item.receiptNo).trim() : null;
+
+      if (idKey && seenIds.has(idKey)) return;
+      if (rcptKey && seenReceipts.has(rcptKey)) return;
+
+      if (idKey) seenIds.add(idKey);
+      if (rcptKey) seenReceipts.add(rcptKey);
+      deduped.push(item);
+    });
+
+    allDonationsList = deduped;
+  }
+
+  // Bengali numerals & words helpers
+  function toBengaliNumerals(num) {
+    const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return String(num).replace(/[0-9]/g, d => bengaliDigits[d]);
+  }
+
+  function convertNumberToBengaliWords(num) {
+    num = parseInt(num, 10);
+    if (isNaN(num) || num <= 0) return 'শূন্য টাকা মাত্র';
+    if (num === 51) return 'একান্ন টাকা মাত্র';
+    if (num === 101) return 'একশত এক টাকা মাত্র';
+    if (num === 251) return 'দুইশত একান্ন টাকা মাত্র';
+    if (num === 501) return 'পাঁচশত এক টাকা মাত্র';
+    if (num === 1001) return 'এক হাজার এক টাকা মাত্র';
+    if (num === 2101) return 'দুই হাজার একশত এক টাকা মাত্র';
+    if (num === 5001) return 'পাঁচ হাজার এক টাকা মাত্র';
+
+    let words = '';
+    if (num >= 100000) {
+      const lakh = Math.floor(num / 100000);
+      words += `${lakh} লক্ষ `;
+      num %= 100000;
+    }
+    if (num >= 1000) {
+      const thousand = Math.floor(num / 1000);
+      words += `${thousand} হাজার `;
+      num %= 1000;
+    }
+    if (num >= 100) {
+      const hundred = Math.floor(num / 100);
+      words += `${hundred === 1 ? 'একশত' : hundred + ' শত'} `;
+      num %= 100;
+    }
+    if (num > 0) {
+      words += `${num} `;
+    }
+    return (words.trim() + ' টাকা মাত্র');
+  }
+
+  function getUpiUri(appScheme = 'upi', amount = selectedAmount) {
+    const upiId = activePaymentConfig.primaryUpiId || 'sudiptamaity670@ybl';
+    const payee = activePaymentConfig.payeeName || 'Amfan NSCC Kojagari Laxmi Puja';
+    const note = 'Kojagari Laxmi Puja Pronami - Amfan NSCC';
+    const amtStr = Number(amount).toFixed(2);
+
+    let prefix = 'upi://pay';
+    if (appScheme === 'phonepe') prefix = 'phonepe://pay';
+    else if (appScheme === 'gpay') prefix = 'tez://upi/pay';
+    else if (appScheme === 'paytm') prefix = 'paytmmp://pay';
+
+    return `${prefix}?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payee)}&am=${amtStr}&cu=INR&tn=${encodeURIComponent(note)}`;
+  }
+
+  function updatePaymentUIFromConfig() {
+    const textPrimary = document.getElementById('text-primary-upi');
+    const textSecondary = document.getElementById('text-secondary-upi');
+    const settingPrimary = document.getElementById('setting-primary-upi');
+    const settingSecondary = document.getElementById('setting-secondary-upi');
+    const settingPayee = document.getElementById('setting-payee-name');
+
+    if (textPrimary) textPrimary.textContent = activePaymentConfig.primaryUpiId;
+    if (textSecondary) textSecondary.textContent = activePaymentConfig.secondaryUpiId || '7407352005@axl';
+    if (settingPrimary) settingPrimary.value = activePaymentConfig.primaryUpiId;
+    if (settingSecondary) settingSecondary.value = activePaymentConfig.secondaryUpiId || '7407352005@axl';
+    if (settingPayee) settingPayee.value = activePaymentConfig.payeeName;
+
+    document.querySelectorAll('.btn-copy-upi').forEach(btn => {
+      const isPrimary = btn.parentElement && btn.parentElement.textContent.includes('Primary');
+      btn.dataset.copy = isPrimary ? activePaymentConfig.primaryUpiId : (activePaymentConfig.secondaryUpiId || '7407352005@axl');
+    });
+
+    if (activePaymentConfig.customQrUrl) {
+      const clubQr = document.getElementById('club-qr-img');
+      const zoomQr = document.getElementById('qr-zoom-img');
+      if (clubQr) clubQr.src = activePaymentConfig.customQrUrl;
+      if (zoomQr) zoomQr.src = activePaymentConfig.customQrUrl;
+    }
+
+    updateUpiAppLinks();
+  }
+
+  function updateUpiAppLinks() {
+    const phonepeBtn = document.getElementById('btn-upi-phonepe');
+    const gpayBtn = document.getElementById('btn-upi-gpay');
+    const paytmBtn = document.getElementById('btn-upi-paytm');
+    const genericBtn = document.getElementById('btn-upi-generic');
+
+    if (phonepeBtn) phonepeBtn.href = getUpiUri('phonepe');
+    if (gpayBtn) gpayBtn.href = getUpiUri('gpay');
+    if (paytmBtn) paytmBtn.href = getUpiUri('paytm');
+    if (genericBtn) genericBtn.href = getUpiUri('upi');
+
+    // Dynamic QR update
+    const dynamicQrImg = document.getElementById('dynamic-qr-img');
+    const dynamicLabel = document.getElementById('qr-dynamic-amount-label');
+    if (dynamicLabel) dynamicLabel.textContent = `₹${toBengaliNumerals(selectedAmount)}`;
+    if (dynamicQrImg) {
+      const qrData = encodeURIComponent(getUpiUri('upi'));
+      dynamicQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${qrData}`;
+    }
+
+    // Sync Devotee Form amount input
+    const donorAmtInput = document.getElementById('donor-amount-input');
+    if (donorAmtInput && Number(donorAmtInput.value) !== selectedAmount) {
+      donorAmtInput.value = selectedAmount;
+    }
+  }
+
+  // Render Public Donors Wall (ONLY verified donations are displayed to prevent fraud)
+  function renderDonationsWall() {
+    const wallCount = document.getElementById('wall-donors-count');
+    const cardsGrid = document.getElementById('donors-cards-grid');
+    if (!cardsGrid) return;
+
+    const verifiedDonations = allDonationsList.filter(d => d.status === 'verified');
+
+    if (wallCount) wallCount.textContent = toBengaliNumerals(verifiedDonations.length);
+
+    if (verifiedDonations.length === 0) {
+      cardsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem 1.5rem; color: #777; background: #fffcf5; border-radius: 12px; border: 1.5px dashed #fedc97;">
+          🌸 এখনো কোনো যাচাইকৃত প্রণামী তালিকাভুক্ত হয়নি। প্রথম পুণ্যার্থী হিসেবে আপনি ভক্তিভরে প্রণামী অর্পণ করুন।
+        </div>
+      `;
+      return;
+    }
+
+    cardsGrid.innerHTML = verifiedDonations.slice(0, 18).map(d => {
+      const dateStr = d.timestamp ? new Date(d.timestamp).toLocaleDateString('bn-IN', { day: 'numeric', month: 'short' }) : '';
+      return `
+        <div class="donor-card">
+          <div>
+            <div class="donor-card-top">
+              <div class="donor-card-name">${escapeHtml(d.donorName)}</div>
+              <div class="donor-amount-tag">₹${toBengaliNumerals(d.amount)}</div>
+            </div>
+            <div class="donor-details-row">
+              ${d.gotra ? `<span>🏷️ <strong>গোত্র:</strong> ${escapeHtml(d.gotra)}</span>` : ''}
+              ${d.village ? `<span>📍 ${escapeHtml(d.village)}</span>` : ''}
+              <span>💳 ${escapeHtml(d.paymentMethod || 'UPI')}</span>
+            </div>
+            ${d.prayer ? `<div class="donor-prayer-quote">"${escapeHtml(d.prayer)}"</div>` : ''}
+          </div>
+          <div class="donor-card-bottom">
+            <span>📅 ${dateStr}</span>
+            <button type="button" class="btn-view-rcpt" onclick="requestReceiptAccess('${d.id}')" title="রসিদ দেখতে ও ডাউনলোড করতে মোবাইল নম্বর যাচাই করুন">
+              🔒 রসিদ দেখুন
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Privacy Protection: Devotee must enter their 10-digit mobile number to view/download receipt
+  window.requestReceiptAccess = (id) => {
+    const donation = allDonationsList.find(d => d.id === id);
+    if (!donation) {
+      alert('প্রণামী রেকর্ড পাওয়া যায়নি');
+      return;
+    }
+
+    // Admin has full access directly
+    if (state.isAdmin || verifiedReceiptSessions.has(id)) {
+      displayReceiptModal(donation);
+      return;
+    }
+
+    // Public user must verify mobile number
+    pendingAuthDonationId = id;
+    const authModal = document.getElementById('receipt-auth-modal');
+    const donorNameEl = document.getElementById('receipt-auth-donor-name');
+    const phoneInput = document.getElementById('input-auth-mobile');
+    const errorMsg = document.getElementById('auth-error-msg');
+
+    if (donorNameEl) {
+      donorNameEl.textContent = `ভক্ত: ${donation.donorName}`;
+    }
+    if (phoneInput) {
+      phoneInput.value = '';
+    }
+    if (errorMsg) {
+      errorMsg.style.display = 'none';
+      errorMsg.textContent = '';
+    }
+
+    if (authModal) {
+      authModal.classList.add('active');
+      setTimeout(() => {
+        if (phoneInput) phoneInput.focus();
+      }, 100);
+    }
+  };
+
+  // Admin Direct View (no phone prompt needed)
+  window.adminViewReceipt = (id) => {
+    const donation = allDonationsList.find(d => d.id === id);
+    if (donation) {
+      displayReceiptModal(donation);
+    }
+  };
+
+  // Safe wrapper for backwards compatibility
+  window.displayReceiptById = (id) => {
+    if (state.isAdmin) {
+      window.adminViewReceipt(id);
+    } else {
+      window.requestReceiptAccess(id);
+    }
+  };
+
+  // Display Receipt Modal with devotee data (Dual state: Pending Slip vs Approved Receipt)
+  function displayReceiptModal(rcpt) {
+    currentReceiptData = rcpt;
+
+    const modal = document.getElementById('donation-receipt-modal');
+    const rcptNo = document.getElementById('rcpt-no');
+    const rcptDate = document.getElementById('rcpt-date');
+    const rcptName = document.getElementById('rcpt-donor-name');
+    const rcptGotra = document.getElementById('rcpt-gotra');
+    const rcptVillage = document.getElementById('rcpt-village');
+    const rcptPhone = document.getElementById('rcpt-phone');
+    const rcptMethod = document.getElementById('rcpt-method');
+    const rcptUtr = document.getElementById('rcpt-utr');
+    const rcptAmount = document.getElementById('rcpt-amount');
+    const rcptAmountWords = document.getElementById('rcpt-amount-words');
+
+    const statusBanner = document.getElementById('rcpt-status-banner');
+    const statusIcon = document.getElementById('rcpt-status-icon');
+    const statusText = document.getElementById('rcpt-status-text');
+    const sealStar = document.getElementById('rcpt-seal-star');
+    const watermark = document.getElementById('rcpt-watermark');
+    const btnDownload = document.getElementById('btn-download-receipt-img');
+
+    const isVerified = (rcpt.status === 'verified');
+
+    if (statusBanner) {
+      if (isVerified) {
+        statusBanner.style.background = '#e8f5e9';
+        statusBanner.style.color = '#2e7d32';
+        statusBanner.style.borderColor = '#a5d6a7';
+        if (statusIcon) statusIcon.textContent = '✅';
+        if (statusText) statusText.textContent = 'অনুমোদিত ও যাচাইকৃত অফিসিয়াল রসিদ (Official Verified Receipt)';
+      } else {
+        statusBanner.style.background = '#fff3e0';
+        statusBanner.style.color = '#e65100';
+        statusBanner.style.borderColor = '#ffcc80';
+        if (statusIcon) statusIcon.textContent = '⏳';
+        if (statusText) statusText.textContent = 'পেমেন্ট যাচাইকরণ প্রক্রিয়াধীন (Verification in Progress)';
+      }
+    }
+
+    if (sealStar) {
+      sealStar.textContent = isVerified ? '★ VERIFIED ★' : '⏳ PENDING ⏳';
+      sealStar.style.color = isVerified ? '#2e7d32' : '#e65100';
+    }
+
+    if (watermark) {
+      watermark.textContent = isVerified ? 'AMFAN LAXMI PUJA 2026' : 'VERIFICATION PENDING';
+      watermark.style.color = isVerified ? 'rgba(229, 169, 59, 0.08)' : 'rgba(230, 81, 0, 0.08)';
+    }
+
+    if (btnDownload) {
+      btnDownload.innerHTML = isVerified ? '📥 রসিদ ডাউনলোড (PNG)' : '📥 অস্থায়ী স্লিপ ডাউনলোড';
+    }
+
+    if (rcptNo) rcptNo.textContent = rcpt.receiptNo || 'AMF-LK-2026-0000';
+    if (rcptDate) {
+      const d = rcpt.timestamp ? new Date(rcpt.timestamp) : new Date();
+      rcptDate.textContent = d.toLocaleString('bn-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+    if (rcptName) rcptName.textContent = rcpt.donorName || '--';
+    if (rcptGotra) rcptGotra.textContent = rcpt.gotra || 'স্বগোত্র';
+    if (rcptVillage) rcptVillage.textContent = rcpt.village || '--';
+    if (rcptPhone) rcptPhone.textContent = rcpt.phone ? String(rcpt.phone).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : '--';
+    if (rcptMethod) rcptMethod.textContent = rcpt.paymentMethod || 'UPI';
+    if (rcptUtr) rcptUtr.textContent = rcpt.utrNumber || 'CONFIRMED';
+    if (rcptAmount) rcptAmount.textContent = `₹${toBengaliNumerals(rcpt.amount)} /-`;
+    if (rcptAmountWords) rcptAmountWords.textContent = `কথায়: ${convertNumberToBengaliWords(rcpt.amount)}`;
+
+    if (modal) modal.classList.add('active');
+  }
+
+  // Render Admin Donors Register Table & Financial Stats (Pending vs Verified)
+  function renderDonationsAdmin() {
+    if (!state.isAdmin) return;
+
+    let totalAmount = 0;
+    let onlineAmount = 0;
+    let cashAmount = 0;
+    let pendingCount = 0;
+
+    allDonationsList.forEach(d => {
+      const amt = Number(d.amount) || 0;
+      if (d.status === 'verified') {
+        totalAmount += amt;
+        const method = (d.paymentMethod || '').toLowerCase();
+        if (method.includes('cash') || method.includes('নগদ')) {
+          cashAmount += amt;
+        } else {
+          onlineAmount += amt;
+        }
+      } else {
+        pendingCount++;
+      }
+    });
+
+    const statTotal = document.getElementById('stat-total-amount');
+    const statDonors = document.getElementById('stat-total-donors');
+    const statOnline = document.getElementById('stat-online-amount');
+    const statCash = document.getElementById('stat-cash-amount');
+
+    if (statTotal) statTotal.textContent = `₹${toBengaliNumerals(totalAmount)}`;
+    if (statDonors) {
+      statDonors.textContent = `${toBengaliNumerals(allDonationsList.length)} জন ${pendingCount > 0 ? `(${toBengaliNumerals(pendingCount)} টি যাচাই বাকি)` : ''}`;
+    }
+    if (statOnline) statOnline.textContent = `₹${toBengaliNumerals(onlineAmount)}`;
+    if (statCash) statCash.textContent = `₹${toBengaliNumerals(cashAmount)}`;
+
+    const tbody = document.getElementById('admin-donations-table-body');
+    if (!tbody) return;
+
+    const searchTerm = (document.getElementById('admin-donor-search')?.value || '').trim().toLowerCase();
+
+    const filtered = allDonationsList.filter(d => {
+      if (!searchTerm) return true;
+      const haystack = `${d.donorName} ${d.phone} ${d.receiptNo} ${d.utrNumber} ${d.village} ${d.gotra}`.toLowerCase();
+      return haystack.includes(searchTerm);
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:1.5rem; color:#777;">কোনো অনুদান রেকর্ড পাওয়া যায়নি</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(d => {
+      const dateStr = d.timestamp ? new Date(d.timestamp).toLocaleDateString('bn-IN') : '';
+      const isVerified = (d.status === 'verified');
+      return `
+        <tr style="${!isVerified ? 'background: #fffcf2;' : ''}">
+          <td style="white-space: nowrap;">${dateStr}</td>
+          <td><span class="highlight-receipt-no" style="font-size:0.8rem;">${escapeHtml(d.receiptNo)}</span></td>
+          <td>
+            <strong>${escapeHtml(d.donorName)}</strong>
+            ${d.gotra ? `<div style="font-size:0.75rem; color:#777;">গোত্র: ${escapeHtml(d.gotra)}</div>` : ''}
+          </td>
+          <td>
+            <div>${escapeHtml(d.village)}</div>
+            <div style="font-size:0.75rem; color:#777;">${escapeHtml(d.phone)}</div>
+          </td>
+          <td style="font-weight:700; color:#5c0712; font-size:0.95rem;">₹${toBengaliNumerals(d.amount)}</td>
+          <td><span class="update-badge" style="background:#f5f5f5; font-size:0.72rem;">${escapeHtml(d.paymentMethod || 'UPI')}</span></td>
+          <td style="font-family:monospace; font-size:0.76rem; font-weight:700; color:${isVerified ? '#2e7d32' : '#b32134'};">
+            ${escapeHtml(d.utrNumber || '--')}
+          </td>
+          <td>
+            ${isVerified ? `
+              <span style="display:inline-flex; align-items:center; gap:3px; padding: 3px 8px; border-radius: 9999px; font-size:0.74rem; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; font-weight:700;">
+                ✓ যাচাইকৃত
+              </span>
+            ` : `
+              <span style="display:inline-flex; align-items:center; gap:3px; padding: 3px 8px; border-radius: 9999px; font-size:0.74rem; background:#fff3e0; color:#e65100; border:1px solid #ffcc80; font-weight:700;">
+                ⏳ যাচাই বাকি
+              </span>
+            `}
+          </td>
+          <td style="white-space: nowrap;">
+            ${!isVerified ? `
+              <button type="button" class="btn-donor-approve" onclick="adminApproveDonation('${d.id}')" title="ব্যাংক অ্যাকাউন্ট চেক করে পেমেন্ট নিশ্চিত থাকলে অনুমোদন করুন">
+                ✅ পেয়েছি
+              </button>
+              <button type="button" class="btn-donor-reject" onclick="adminRejectDonation('${d.id}')" title="টাকা না এলে বা ফেক এন্ট্রি হলে সরাসরি বাতিল করুন">
+                ❌ আসেনি
+              </button>
+            ` : `
+              <button type="button" class="pill-btn" onclick="toggleDonationStatus('${d.id}')" style="padding: 2px 7px; font-size:0.72rem; background:#f5f5f5; border-color:#ccc; color:#555;" title="স্ট্যাটাস পরিবর্তন">
+                🔄 রিভার্স
+              </button>
+            `}
+            <button type="button" class="pill-btn" onclick="adminViewReceipt('${d.id}')" style="padding: 2px 8px; font-size:0.74rem; background:#fff8e1; border-color:#ffd54f; color:#5c0712;" title="রসিদ দেখুন">
+              📜 রসিদ
+            </button>
+            <button type="button" class="photo-like-btn" onclick="adminDeleteDonation('${d.id}')" style="background: #fff0f0; border-color: #ffcdd2; color: #b32134; cursor: pointer; padding: 2px 6px; font-size: 0.74rem;" title="ডিলিট করুন">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // One-click Admin Approval for Pending Payments
+  window.adminApproveDonation = async (id) => {
+    if (!state.isAdmin) return;
+    const item = allDonationsList.find(d => d.id === id);
+    if (!item) return;
+
+    item.status = 'verified';
+    await window.pujaDB.updateDonationStatus(id, 'verified');
+
+    window.pujaAudio.playTempleBell();
+    triggerPetalShower(30);
+    renderDonationsAdmin();
+    renderDonationsWall();
+    showToast(`✅ "${item.donorName}"-এর ₹${toBengaliNumerals(item.amount)} প্রণামী অনুমোদিত ও যাচাইকৃত হয়েছে!`);
+  };
+
+  // One-click Admin Rejection for Fake/Unpaid Entries
+  window.adminRejectDonation = async (id) => {
+    if (!state.isAdmin) return;
+    const item = allDonationsList.find(d => d.id === id);
+    if (!item) return;
+
+    if (confirm(`আপনি কি নিশ্চিত যে "${item.donorName}"-এর এই এন্ট্রিটি পেমেন্ট না আসায় বা ফেক হওয়ায় বাতিল করে মুছে ফেলতে চান?`)) {
+      await window.pujaDB.deleteDonation(id);
+      allDonationsList = allDonationsList.filter(d => d.id !== id);
+      renderDonationsAdmin();
+      renderDonationsWall();
+      showToast('🗑️ ভুয়ো প্রণামী এন্ট্রি বাতিল ও স্থায়ীভাবে মুছে ফেলা হয়েছে।');
+    }
+  };
+
+  window.toggleDonationStatus = async (id) => {
+    if (!state.isAdmin) return;
+    const item = allDonationsList.find(d => d.id === id);
+    if (!item) return;
+    const newStatus = (item.status === 'verified') ? 'pending' : 'verified';
+    item.status = newStatus;
+    await window.pujaDB.updateDonationStatus(id, newStatus);
+    renderDonationsAdmin();
+    renderDonationsWall();
+    showToast(`স্ট্যাটাস আপডেট হয়েছে: ${newStatus === 'verified' ? 'যাচাইকৃত' : 'পেন্ডিং'}`);
+  };
+
+  window.adminDeleteDonation = async (id) => {
+    if (!state.isAdmin) return;
+    const item = allDonationsList.find(d => d.id === id);
+    const name = item ? item.donorName : 'এই প্রণামীটি';
+    if (confirm(`আপনি কি নিশ্চিত যে "${name}"-এর প্রণামী রেকর্ডটি স্থায়ীভাবে মুছে ফেলতে চান?`)) {
+      await window.pujaDB.deleteDonation(id);
+      allDonationsList = allDonationsList.filter(d => d.id !== id);
+      renderDonationsWall();
+      renderDonationsAdmin();
+      showToast('🗑️ প্রণামী রেকর্ড সফলভাবে মুছে ফেলা হয়েছে।');
+    }
+  };
+
+  // Export Donors to CSV / Excel (UTF-8 BOM)
+  window.exportDonationsToCSV = () => {
+    if (allDonationsList.length === 0) {
+      alert('কোনো প্রণামী রেকর্ড পাওয়া যায়নি।');
+      return;
+    }
+
+    const headers = ['রসিদ নং', 'তারিখ', 'ভক্তের নাম', 'গোত্র', 'গ্রাম/ঠিকানা', 'ফোন নম্বর', 'প্রণামীর পরিমাণ (টাকা)', 'পেমেন্ট মাধ্যম', 'UTR/রেফারেন্স নং', 'স্ট্যাটাস', 'প্রার্থনা/মন্তব্য'];
+
+    const rows = allDonationsList.map(d => {
+      const dateStr = d.timestamp ? new Date(d.timestamp).toLocaleString('bn-IN') : '';
+      return [
+        `"${(d.receiptNo || '').replace(/"/g, '""')}"`,
+        `"${dateStr.replace(/"/g, '""')}"`,
+        `"${(d.donorName || '').replace(/"/g, '""')}"`,
+        `"${(d.gotra || '').replace(/"/g, '""')}"`,
+        `"${(d.village || '').replace(/"/g, '""')}"`,
+        `"${(d.phone || '').replace(/"/g, '""')}"`,
+        `"${d.amount || 0}"`,
+        `"${(d.paymentMethod || 'UPI').replace(/"/g, '""')}"`,
+        `"${(d.utrNumber || '').replace(/"/g, '""')}"`,
+        `"${(d.status || 'verified').replace(/"/g, '""')}"`,
+        `"${(d.prayer || '').replace(/"/g, '""')}"`
+      ].join(',');
+    });
+
+    const csvContent = '\uFEFF' + headers.join(',') + '\r\n' + rows.join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Amfan_NSCC_Laxmi_Puja_Donations_2026_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast('📥 প্রণামী খাতা এক্সেল/CSV ফাইলে ডাউনলোড সম্পন্ন হয়েছে!');
+  };
+
+  // High-Resolution Canvas Digital Receipt Image Generator (Dual state & NO personal name/address)
+  function downloadReceiptAsImage(rcpt) {
+    if (!rcpt) return;
+
+    // Security check: Must be Admin OR verified owner of receipt
+    if (!state.isAdmin && !verifiedReceiptSessions.has(rcpt.id)) {
+      alert('নিরাপত্তার স্বার্থে সঠিক মোবাইল নম্বর যাচাই ছাড়া রসিদ ডাউনলোড করা যাবে না।');
+      return;
+    }
+
+    const isVerified = (rcpt.status === 'verified');
+    const canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 1250;
+    const ctx = canvas.getContext('2d');
+
+    // 1. Parchment Background
+    ctx.fillStyle = '#fffdf7';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Subtle background pattern
+    ctx.fillStyle = 'rgba(229, 169, 59, 0.03)';
+    for (let i = 0; i < canvas.width; i += 40) {
+      for (let j = 0; j < canvas.height; j += 40) {
+        ctx.fillRect(i, j, 2, 2);
+      }
+    }
+
+    // 2. Auspicious Borders
+    // Outer border
+    ctx.strokeStyle = '#8b1320';
+    ctx.lineWidth = 14;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    // Inner gold border
+    ctx.strokeStyle = '#b37e19';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(34, 34, canvas.width - 68, canvas.height - 68);
+
+    // Corner decorative squares
+    ctx.fillStyle = '#8b1320';
+    ctx.fillRect(20, 20, 30, 30);
+    ctx.fillRect(canvas.width - 50, 20, 30, 30);
+    ctx.fillRect(20, canvas.height - 50, 30, 30);
+    ctx.fillRect(canvas.width - 50, canvas.height - 50, 30, 30);
+
+    ctx.fillStyle = '#ffd700';
+    ctx.fillRect(28, 28, 14, 14);
+    ctx.fillRect(canvas.width - 42, 28, 14, 14);
+    ctx.fillRect(28, canvas.height - 42, 14, 14);
+    ctx.fillRect(canvas.width - 42, canvas.height - 42, 14, 14);
+
+    // 3. Header
+    // Sacred Om
+    ctx.fillStyle = '#8b1320';
+    ctx.font = 'bold 50px "Hind Siliguri", "Noto Serif Bengali", serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('ॐ', canvas.width / 2, 95);
+
+    // Puja Title (ONLY PUJA - NO MOHOTSAV)
+    ctx.fillStyle = '#5c0712';
+    ctx.font = 'bold 32px "Hind Siliguri", sans-serif';
+    ctx.fillText('শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ২০২৬', canvas.width / 2, 145);
+
+    // Club Name
+    ctx.fillStyle = '#b37e19';
+    ctx.font = 'bold 28px "Hind Siliguri", sans-serif';
+    ctx.fillText('আমফান (N.S.C.C) ক্লাব ও পূজা কমিটি', canvas.width / 2, 185);
+
+    // Mandap Line (No personal address, ONLY PUJA)
+    ctx.fillStyle = '#5d4037';
+    ctx.font = '500 17px "Hind Siliguri", sans-serif';
+    ctx.fillText('আমফান (N.S.C.C) ক্লাব প্রাঙ্গণ • সর্বজনীন কোজাগরী লক্ষ্মী পূজা ২০২৬', canvas.width / 2, 218);
+
+    // Sloka
+    ctx.fillStyle = '#8b1320';
+    ctx.font = 'italic 16px "Hind Siliguri", sans-serif';
+    ctx.fillText('"ধনং ধান্যং পশূন্ বহুন্ পুত্রলাভং তথা পরম্। মা লক্ষ্মী ত্বং মে দেহি সৌভাগ্যং দেহি মে সদা॥"', canvas.width / 2, 246);
+
+    // Divider Line
+    ctx.strokeStyle = '#edd7ba';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(60, 265);
+    ctx.lineTo(canvas.width - 60, 265);
+    ctx.stroke();
+
+    // 4. Receipt Title Badge
+    ctx.fillStyle = isVerified ? '#8b1320' : '#d97706';
+    ctx.beginPath();
+    ctx.roundRect(canvas.width / 2 - 210, 285, 420, 42, 21);
+    ctx.fill();
+
+    ctx.fillStyle = isVerified ? '#ffd700' : '#ffffff';
+    ctx.font = 'bold 20px "Hind Siliguri", sans-serif';
+    ctx.fillText(isVerified ? '📜 ডিজিটাল দান ও প্রণামী রসিদ (অনুমোদিত)' : '⏳ প্রণামী স্বীকৃতি স্লিপ (যাচাইকরণ প্রক্রিয়াধীন)', canvas.width / 2, 313);
+
+    // Diagonal Background Watermark
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2 + 30);
+    ctx.rotate(-Math.PI / 6);
+    ctx.textAlign = 'center';
+    ctx.font = isVerified ? 'bold 64px "Hind Siliguri", sans-serif' : 'bold 48px "Hind Siliguri", sans-serif';
+    ctx.fillStyle = isVerified ? 'rgba(229, 169, 59, 0.07)' : 'rgba(217, 119, 6, 0.08)';
+    ctx.fillText(isVerified ? 'AMFAN N.S.C.C' : 'যাচাইকরণ প্রক্রিয়াধীন', 0, 0);
+    ctx.restore();
+
+    // 5. Meta Box: Receipt No & Date
+    ctx.fillStyle = '#fff9ea';
+    ctx.strokeStyle = '#e5a93b';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(60, 350, canvas.width - 120, 50, 8);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#5c0712';
+    ctx.font = 'bold 18px monospace, sans-serif';
+    ctx.fillText(`রসিদ নং: ${rcpt.receiptNo || 'AMF-LK-2026-0000'}`, 80, 382);
+
+    ctx.textAlign = 'right';
+    const dateFormatted = rcpt.timestamp ? new Date(rcpt.timestamp).toLocaleDateString('bn-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) : new Date().toLocaleDateString('bn-IN');
+    ctx.fillStyle = '#5d4037';
+    ctx.font = '16px "Hind Siliguri", sans-serif';
+    ctx.fillText(`তারিখ: ${dateFormatted}`, canvas.width - 80, 382);
+
+    // 6. Devotee Details List
+    const startY = 440;
+    const lineGap = 48;
+    const leftColX = 80;
+    const rightColX = 480;
+
+    ctx.textAlign = 'left';
+
+    // Name (Full Width)
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('ভক্ত / দানকারীর নাম:', leftColX, startY);
+
+    ctx.fillStyle = '#5c0712';
+    ctx.font = 'bold 24px "Hind Siliguri", sans-serif';
+    ctx.fillText(rcpt.donorName || '--', leftColX + 180, startY);
+
+    // Gotra & Village
+    const y1 = startY + lineGap;
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('গোত্র (Gotra):', leftColX, y1);
+    ctx.fillStyle = '#2b1317';
+    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    ctx.fillText(rcpt.gotra || 'স্বগোত্র', leftColX + 110, y1);
+
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('গ্রাম / বাসস্থান:', rightColX, y1);
+    ctx.fillStyle = '#2b1317';
+    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    ctx.fillText(rcpt.village || '--', rightColX + 120, y1);
+
+    // Phone & Method
+    const y2 = y1 + lineGap;
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('মোবাইল নম্বর:', leftColX, y2);
+    ctx.fillStyle = '#2b1317';
+    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    const phoneBn = rcpt.phone ? String(rcpt.phone).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : '--';
+    ctx.fillText(phoneBn, leftColX + 110, y2);
+
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('পেমেন্ট মাধ্যম:', rightColX, y2);
+    ctx.fillStyle = '#2b1317';
+    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    ctx.fillText(rcpt.paymentMethod || 'UPI', rightColX + 120, y2);
+
+    // UTR / Transaction ID
+    const y3 = y2 + lineGap;
+    ctx.fillStyle = '#6b4c52';
+    ctx.font = '17px "Hind Siliguri", sans-serif';
+    ctx.fillText('UTR / ট্রানজ্যাকশন আইডি:', leftColX, y3);
+    ctx.fillStyle = '#2b1317';
+    ctx.font = 'bold 17px monospace, sans-serif';
+    ctx.fillText(rcpt.utrNumber || 'CONFIRMED', leftColX + 210, y3);
+
+    // 7. Auspicious Amount Box
+    const amtBoxY = y3 + 45;
+    ctx.fillStyle = '#fff7e6';
+    ctx.strokeStyle = '#b37e19';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.roundRect(60, amtBoxY, canvas.width - 120, 130, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#5d4037';
+    ctx.font = '16px "Hind Siliguri", sans-serif';
+    ctx.fillText('প্রণামীর পরিমাণ (Amount Paid):', canvas.width / 2, amtBoxY + 36);
+
+    ctx.fillStyle = '#8b1320';
+    ctx.font = 'bold 44px "Hind Siliguri", sans-serif';
+    ctx.fillText(`₹${toBengaliNumerals(rcpt.amount)} /-`, canvas.width / 2, amtBoxY + 84);
+
+    ctx.fillStyle = '#b37e19';
+    ctx.font = 'bold 17px "Hind Siliguri", sans-serif';
+    ctx.fillText(`কথায়: ${convertNumberToBengaliWords(rcpt.amount)}`, canvas.width / 2, amtBoxY + 114);
+
+    // 8. Blessing Quote Card
+    const blessY = amtBoxY + 155;
+    ctx.fillStyle = 'rgba(229, 169, 59, 0.12)';
+    ctx.beginPath();
+    ctx.roundRect(60, blessY, canvas.width - 120, 60, 8);
+    ctx.fill();
+
+    ctx.fillStyle = '#5c0712';
+    ctx.font = 'italic 16px "Hind Siliguri", sans-serif';
+    ctx.fillText('🌸 "মা শ্রী শ্রী কোজাগরী লক্ষ্মীর চরণে আপনার ও আপনার পরিবারের সর্বাঙ্গীণ সুখ, সমৃদ্ধি, সুস্বাস্থ্য ও মঙ্গল কামনা করি।"', canvas.width / 2, blessY + 36);
+
+    // 9. Signatures and Official Stamp
+    const footerY = blessY + 150;
+
+    // Stamp (Left)
+    const sealX = 170;
+    const sealY = footerY + 20;
+
+    // Outer circle
+    ctx.strokeStyle = isVerified ? '#b37e19' : '#d97706';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(sealX, sealY, 50, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Inner circle
+    ctx.strokeStyle = isVerified ? '#8b1320' : '#d97706';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    ctx.arc(sealX, sealY, 43, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Stamp text
+    ctx.fillStyle = isVerified ? '#8b1320' : '#d97706';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.fillText('AMFAN N.S.C.C', sealX, sealY - 14);
+    ctx.fillStyle = isVerified ? '#ff9800' : '#e65100';
+    ctx.font = 'bold 9px sans-serif';
+    ctx.fillText(isVerified ? '★ VERIFIED ★' : '⏳ PENDING ⏳', sealX, sealY + 2);
+    ctx.fillStyle = isVerified ? '#8b1320' : '#d97706';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.fillText('LAXMI PUJA 2026', sealX, sealY + 18);
+
+    ctx.font = 'bold 14px "Hind Siliguri", sans-serif';
+    ctx.fillText(isVerified ? 'ক্লাব সীলমোহর (Official Seal)' : 'অস্থায়ী ভেরিফিকেশন সিল', sealX, sealY + 74);
+
+    // Signatures (Right)
+    const signX = canvas.width - 180;
+    ctx.strokeStyle = '#2b1317';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(signX - 90, sealY + 40);
+    ctx.lineTo(signX + 90, sealY + 40);
+    ctx.stroke();
+
+    ctx.fillStyle = '#5c0712';
+    ctx.font = 'bold 16px "Hind Siliguri", sans-serif';
+    ctx.fillText('কোষাধ্যক্ষ / সম্পাদক', signX, sealY + 64);
+    ctx.font = '14px "Hind Siliguri", sans-serif';
+    ctx.fillStyle = '#777';
+    ctx.fillText('আমফান (N.S.C.C) পূজা কমিটি', signX, sealY + 84);
+
+    // 10. Footer Credit Line (ONLY PUJA)
+    ctx.fillStyle = '#b37e19';
+    ctx.font = 'bold 12px "Hind Siliguri", sans-serif';
+    ctx.fillText('✨ আমফান (N.S.C.C) কোজাগরী লক্ষ্মী পূজা ২০২৬ ✨', canvas.width / 2, canvas.height - 35);
+
+    // Trigger Download
+    const dataUrl = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    const prefix = isVerified ? 'Amfan_Laxmi_Puja_Receipt' : 'Amfan_Laxmi_Puja_Pending_Slip';
+    a.download = `${prefix}_${rcpt.receiptNo || '2026'}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast(isVerified ? '📥 ডিজিটাল প্রণামী রসিদ ছবি হিসেবে ডাউনলোড হয়েছে!' : '📥 প্রণামী যাচাইকরণ স্লিপ ডাউনলোড হয়েছে!');
+  }
+
+  // Master Donation Portal Initializer
+  async function initDonationPortal() {
+    // 1. Load active config & donations
+    try {
+      const cfg = await window.pujaDB.getPaymentConfig();
+      if (cfg) {
+        activePaymentConfig = { ...activePaymentConfig, ...cfg };
+      }
+    } catch (e) {
+      console.warn('Could not load payment config:', e);
+    }
+
+    try {
+      const loaded = await window.pujaDB.getAllDonations();
+      setDonationsList(loaded);
+    } catch (e) {
+      console.warn('Could not load donations:', e);
+    }
+
+    updatePaymentUIFromConfig();
+    renderDonationsWall();
+    if (state.isAdmin) renderDonationsAdmin();
+
+    // 2. Amount Chip Clicks
+    const chips = document.querySelectorAll('.amount-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        selectedAmount = parseInt(chip.dataset.amount, 10) || 101;
+        const customInput = document.getElementById('input-custom-amount');
+        if (customInput) customInput.value = selectedAmount;
+        updateUpiAppLinks();
+      });
+    });
+
+    // 3. Custom Amount Apply
+    const btnApplyAmt = document.getElementById('btn-apply-custom-amount');
+    const customAmtInput = document.getElementById('input-custom-amount');
+
+    const applyCustomAmount = () => {
+      const val = parseInt(customAmtInput?.value, 10);
+      if (!val || val <= 0) {
+        alert('অনুগ্রহ করে সঠিক পরিমাণ টাকা লিখুন (কমপক্ষে ১ টাকা)');
+        return;
+      }
+      selectedAmount = val;
+      chips.forEach(c => {
+        if (parseInt(c.dataset.amount, 10) === val) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+      updateUpiAppLinks();
+      showToast(`🪙 প্রণামী পরিমাণ ₹${toBengaliNumerals(selectedAmount)} নির্ধারিত হয়েছে`);
+    };
+
+    if (btnApplyAmt) btnApplyAmt.addEventListener('click', applyCustomAmount);
+    if (customAmtInput) {
+      customAmtInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyCustomAmount();
+        }
+      });
+    }
+
+    // 4. Mobile UPI App Click Handler (Prompt on Desktop)
+    document.querySelectorAll('.upi-app-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.innerWidth > 800) {
+          showToast('💡 মোবাইল থেকে ক্লিক করলে সরাসরি অ্যাপ খুলবে। কম্পিউটারে স্ক্রিনের কিউআর কোড স্ক্যান করুন।');
+        }
+      });
+    });
+
+    // 5. QR Code Mode Switch
+    const btnQrOfficial = document.getElementById('btn-qr-mode-official');
+    const btnQrDynamic = document.getElementById('btn-qr-mode-dynamic');
+    const clubQrImg = document.getElementById('club-qr-img');
+    const dynamicQrImg = document.getElementById('dynamic-qr-img');
+    const btnEnlargeQr = document.getElementById('btn-enlarge-qr');
+
+    if (btnQrOfficial && btnQrDynamic) {
+      btnQrOfficial.addEventListener('click', () => {
+        btnQrOfficial.classList.add('active');
+        btnQrDynamic.classList.remove('active');
+        if (clubQrImg) clubQrImg.style.display = 'block';
+        if (dynamicQrImg) dynamicQrImg.style.display = 'none';
+      });
+
+      btnQrDynamic.addEventListener('click', () => {
+        btnQrDynamic.classList.add('active');
+        btnQrOfficial.classList.remove('active');
+        if (clubQrImg) clubQrImg.style.display = 'none';
+        if (dynamicQrImg) dynamicQrImg.style.display = 'block';
+      });
+    }
+
+    if (btnEnlargeQr) {
+      btnEnlargeQr.addEventListener('click', () => {
+        const zoomImg = document.getElementById('qr-zoom-img');
+        const zoomModal = document.getElementById('qr-zoom-modal');
+        if (zoomImg) {
+          const isOfficial = btnQrOfficial && btnQrOfficial.classList.contains('active');
+          zoomImg.src = isOfficial ? (clubQrImg?.src || 'assets/club-upi-qr.jpg') : (dynamicQrImg?.src || 'assets/club-upi-qr.jpg');
+        }
+        if (zoomModal) zoomModal.classList.add('active');
+      });
+    }
+
+    // 6. Copy UPI Buttons
+    document.querySelectorAll('.btn-copy-upi').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.dataset.copy || btn.previousElementSibling?.textContent?.trim();
+        if (!val) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(() => {
+            showToast(`📋 UPI আইডি কপি হয়েছে: ${val}`);
+          }).catch(() => {
+            fallbackCopy(val);
+          });
+        } else {
+          fallbackCopy(val);
+        }
+      });
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`📋 UPI আইডি কপি হয়েছে: ${text}`);
+      } catch (e) {
+        prompt('UPI আইডি কপি করুন:', text);
+      }
+      document.body.removeChild(ta);
+    }
+
+    // 7. Devotee Form Submission (Anti-Fraud & Pending Verification)
+    const donationForm = document.getElementById('donation-devotee-form');
+    if (donationForm) {
+      donationForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = donationForm.querySelector('button[type="submit"]');
+        if (submitBtn && submitBtn.disabled) return;
+
+        const nameInput = document.getElementById('donor-name-input');
+        const gotraInput = document.getElementById('donor-gotra-input');
+        const phoneInput = document.getElementById('donor-phone-input');
+        const villageInput = document.getElementById('donor-village-input');
+        const amountInput = document.getElementById('donor-amount-input');
+        const methodSelect = document.getElementById('donor-method-select');
+        const utrInput = document.getElementById('donor-utr-input');
+        const prayerInput = document.getElementById('donor-prayer-input');
+
+        const name = (nameInput?.value || '').trim();
+        const gotra = (gotraInput?.value || '').trim() || 'স্বগোত্র';
+        const phone = (phoneInput?.value || '').trim();
+        const village = (villageInput?.value || '').trim();
+        const amt = parseInt(amountInput?.value, 10);
+        const method = methodSelect?.value || 'UPI';
+        const utr = (utrInput?.value || '').trim();
+        const prayer = (prayerInput?.value || '').trim();
+
+        if (!name) {
+          alert('অনুগ্রহ করে ভক্তের পূর্ণ নাম লিখুন');
+          return;
+        }
+        if (!phone) {
+          alert('অনুগ্রহ করে ১০ সংখ্যার মোবাইল নম্বর লিখুন');
+          return;
+        }
+        if (!village) {
+          alert('অনুগ্রহ করে গ্রাম বা এলাকা লিখুন');
+          return;
+        }
+        if (!amt || amt <= 0) {
+          alert('অনুগ্রহ করে সঠিক পরিমাণ টাকা নির্বাচন করুন');
+          return;
+        }
+        if (!utr || utr.length < 8) {
+          alert('অনুগ্রহ করে আপনার পেমেন্ট অ্যাপ (PhonePe / GPay / Paytm) থেকে ১২ সংখ্যার সঠিক UTR / Transaction ID লিখুন। এটি ছাড়া প্রণামী যাচাই করা সম্ভব নয়।');
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.dataset.origText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '⏳ প্রণামী তথ্য যাচাই ও জমা হচ্ছে...';
+        }
+
+        try {
+          const donationData = {
+            donorName: name,
+            gotra: gotra,
+            phone: phone,
+            village: village,
+            amount: amt,
+            paymentMethod: method,
+            upiIdUsed: activePaymentConfig.primaryUpiId,
+            utrNumber: utr,
+            receiptNo: `AMF-LK-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+            prayer: prayer,
+            status: 'pending', // Public submission is pending until Admin verification
+            timestamp: new Date().toISOString()
+          };
+
+          const saved = await window.pujaDB.saveDonation(donationData);
+
+          // Deduplicate into allDonationsList
+          const exists = allDonationsList.some(d => (d.id && d.id === saved.id) || (d.receiptNo && d.receiptNo === saved.receiptNo));
+          if (!exists) {
+            allDonationsList.unshift(saved);
+          }
+
+          renderDonationsWall();
+          if (state.isAdmin) renderDonationsAdmin();
+
+          // Devotee who submitted can immediately view their pending slip
+          verifiedReceiptSessions.add(saved.id);
+
+          window.pujaAudio.playTempleBell();
+          triggerPetalShower(35);
+          showToast('🙏 প্রণামী তথ্য সফলভাবে জমা হয়েছে! ব্যাংক ভেরিফিকেশনের জন্য অস্থায়ী স্লিপ নিচে প্রস্তুত।');
+
+          displayReceiptModal(saved);
+
+          // Reset form
+          donationForm.reset();
+          selectedAmount = 101;
+          const customInput = document.getElementById('input-custom-amount');
+          if (customInput) customInput.value = 101;
+          updateUpiAppLinks();
+        } catch (err) {
+          console.error('Error saving donation:', err);
+          alert('প্রণামী তথ্য সংরক্ষণ করতে সমস্যা হয়েছে। অনুগ্রহ করে ইন্টারনেট সংযোগ চেক করে পুনরায় চেষ্টা করুন।');
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = submitBtn.dataset.origText || '🙏 প্রণামী তথ্য জমা দিন ও যাচাইকরণ স্লিপ সংগ্রহ করুন';
+          }
+        }
+      });
+    }
+
+    // 8. Receipt Privacy Authentication Modal Handling
+    const authForm = document.getElementById('receipt-auth-form');
+    const authModal = document.getElementById('receipt-auth-modal');
+    const btnCloseAuthModal = document.getElementById('btn-close-receipt-auth-modal');
+
+    const handleReceiptAuthSubmit = () => {
+      if (!pendingAuthDonationId) return;
+      const donation = allDonationsList.find(d => d.id === pendingAuthDonationId);
+      if (!donation) return;
+
+      const phoneInput = document.getElementById('input-auth-mobile');
+      const errorMsg = document.getElementById('auth-error-msg');
+      const enteredDigits = (phoneInput?.value || '').replace(/[^0-9]/g, '');
+
+      if (enteredDigits.length < 10) {
+        if (errorMsg) {
+          errorMsg.textContent = 'অনুগ্রহ করে সঠিক ১০ সংখ্যার মোবাইল নম্বর লিখুন';
+          errorMsg.style.display = 'block';
+        }
+        return;
+      }
+
+      const targetDigits = String(donation.phone || '').replace(/[^0-9]/g, '');
+      const isMatch = (targetDigits.length >= 10 && targetDigits.slice(-10) === enteredDigits.slice(-10));
+
+      if (isMatch) {
+        verifiedReceiptSessions.add(donation.id);
+        if (authModal) authModal.classList.remove('active');
+        displayReceiptModal(donation);
+        showToast(`✅ মোবাইল নম্বর যাচাই সফল! ${donation.donorName}-এর রসিদ প্রদর্শিত হলো।`);
+        pendingAuthDonationId = null;
+      } else {
+        if (errorMsg) {
+          errorMsg.textContent = '❌ ভুল মোবাইল নম্বর! এই রসিদটির সাথে আপনার দেওয়া নম্বর মেলেনি। শুধুমাত্র সংশ্লিষ্ট ভক্তই সঠিক মোবাইল নম্বর দিয়ে রসিদ দেখতে ও ডাউনলোড করতে পারবেন।';
+          errorMsg.style.display = 'block';
+        }
+        if (phoneInput) phoneInput.select();
+      }
+    };
+
+    if (authForm) {
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleReceiptAuthSubmit();
+      });
+    }
+
+    if (btnCloseAuthModal && authModal) {
+      btnCloseAuthModal.addEventListener('click', () => {
+        authModal.classList.remove('active');
+        pendingAuthDonationId = null;
+      });
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) {
+          authModal.classList.remove('active');
+          pendingAuthDonationId = null;
+        }
+      });
+    }
+
+    // 9. Public Devotee Receipt Search (Requires 10-digit Mobile Verification)
+    const btnPublicSearch = document.getElementById('btn-public-receipt-search');
+    const inputPublicSearch = document.getElementById('public-receipt-search-input');
+
+    const handlePublicReceiptSearch = () => {
+      const rawQuery = (inputPublicSearch?.value || '').trim();
+      if (!rawQuery) {
+        alert('অনুগ্রহ করে আপনার ১০ সংখ্যার মোবাইল নম্বর লিখুন');
+        return;
+      }
+
+      const queryDigits = rawQuery.replace(/[^0-9]/g, '');
+
+      // 1. If 10 digits entered -> match directly by phone number
+      if (queryDigits.length >= 10) {
+        const match = allDonationsList.find(d => {
+          const p = String(d.phone || '').replace(/[^0-9]/g, '');
+          return p.length >= 10 && p.slice(-10) === queryDigits.slice(-10);
+        });
+
+        if (match) {
+          // Devotee entered their own phone number -> authenticate and open!
+          verifiedReceiptSessions.add(match.id);
+          displayReceiptModal(match);
+          if (match.status === 'verified') {
+            showToast(`✅ ${match.donorName}-এর অনুমোদিত রসিদ পাওয়া গেছে!`);
+          } else {
+            showToast(`⏳ ${match.donorName}-এর প্রণামী এখনো যাচাইকরণ প্রক্রিয়াধীন রয়েছে।`);
+          }
+          return;
+        }
+      }
+
+      // 2. If entered by receiptNo -> find receipt but require phone verification for privacy!
+      const cleanText = rawQuery.toLowerCase();
+      const matchByRcpt = allDonationsList.find(d => {
+        const r = String(d.receiptNo || '').toLowerCase();
+        return r.includes(cleanText);
+      });
+
+      if (matchByRcpt) {
+        // Require phone verification before displaying
+        window.requestReceiptAccess(matchByRcpt.id);
+        return;
+      }
+
+      alert(`"${rawQuery}" দিয়ে কোনো প্রণামী রেকর্ড পাওয়া যায়নি। অনুগ্রহ করে প্রণামী দেওয়ার সময় ব্যবহৃত সঠিক ১০ সংখ্যার মোবাইল নম্বর লিখুন।`);
+    };
+
+    if (btnPublicSearch) btnPublicSearch.addEventListener('click', handlePublicReceiptSearch);
+    if (inputPublicSearch) {
+      inputPublicSearch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handlePublicReceiptSearch();
+        }
+      });
+    }
+
+    // 10. Quick Pronami Navigation Buttons (Header, Mandap, Mobile)
+    const headerPronamiBtn = document.getElementById('header-btn-pronami');
+    if (headerPronamiBtn) {
+      headerPronamiBtn.addEventListener('click', () => {
+        window.switchTab('donation');
+        const donPane = document.getElementById('pane-donation');
+        if (donPane) donPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    const mandapPronamiBtn = document.getElementById('mandap-banner-btn-pronami');
+    if (mandapPronamiBtn) {
+      mandapPronamiBtn.addEventListener('click', () => {
+        window.switchTab('donation');
+        const donPane = document.getElementById('pane-donation');
+        if (donPane) donPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    const floatPronamiBtn = document.getElementById('floating-mobile-pronami');
+    if (floatPronamiBtn) {
+      floatPronamiBtn.addEventListener('click', () => {
+        window.switchTab('donation');
+        const donPane = document.getElementById('pane-donation');
+        if (donPane) donPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // 11. Receipt Modal Actions (Secure download & print checks)
+    const btnCloseReceipt = document.getElementById('btn-close-receipt-modal');
+    const receiptModal = document.getElementById('donation-receipt-modal');
+    if (btnCloseReceipt && receiptModal) {
+      btnCloseReceipt.addEventListener('click', () => {
+        receiptModal.classList.remove('active');
+      });
+    }
+
+    const btnDownloadImg = document.getElementById('btn-download-receipt-img');
+    if (btnDownloadImg) {
+      btnDownloadImg.addEventListener('click', () => {
+        if (!currentReceiptData) return;
+        if (!state.isAdmin && !verifiedReceiptSessions.has(currentReceiptData.id)) {
+          alert('নিরাপত্তার স্বার্থে সঠিক মোবাইল নম্বর যাচাই ছাড়া রসিদ ডাউনলোড করা যাবে না।');
+          return;
+        }
+        downloadReceiptAsImage(currentReceiptData);
+      });
+    }
+
+    const btnPrintReceipt = document.getElementById('btn-print-receipt');
+    if (btnPrintReceipt) {
+      btnPrintReceipt.addEventListener('click', () => {
+        if (!currentReceiptData) return;
+        if (!state.isAdmin && !verifiedReceiptSessions.has(currentReceiptData.id)) {
+          alert('নিরাপত্তার স্বার্থে সঠিক মোবাইল নম্বর যাচাই ছাড়া রসিদ প্রিন্ট করা যাবে না।');
+          return;
+        }
+        window.print();
+      });
+    }
+
+    const btnShareWhatsapp = document.getElementById('btn-share-receipt-whatsapp');
+    if (btnShareWhatsapp) {
+      btnShareWhatsapp.addEventListener('click', () => {
+        if (!currentReceiptData) return;
+        if (!state.isAdmin && !verifiedReceiptSessions.has(currentReceiptData.id)) {
+          alert('নিরাপত্তার স্বার্থে সঠিক মোবাইল নম্বর যাচাই ছাড়া রসিদ শেয়ার করা যাবে না।');
+          return;
+        }
+        const isVer = (currentReceiptData.status === 'verified');
+        const statusLabel = isVer ? 'অনুমোদিত রসিদ' : 'যাচাইকরণ প্রক্রিয়াধীন স্লিপ';
+        const msg = `🌺 *শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ২০২৬* 🌺\n` +
+          `*আমফান (N.S.C.C) ক্লাব ও পূজা কমিটি*\n` +
+          `-----------------------------------------\n` +
+          `আমি মা লক্ষ্মীর চরণে ভক্তিভরে প্রণামী অর্পণ করেছি।\n` +
+          `📜 *রসিদ নং:* ${currentReceiptData.receiptNo}\n` +
+          `👤 *ভক্তের নাম:* ${currentReceiptData.donorName}\n` +
+          `🪙 *প্রণামী পরিমাণ:* ₹${currentReceiptData.amount} /- (${convertNumberToBengaliWords(currentReceiptData.amount)})\n` +
+          `📌 *স্ট্যাটাস:* ${statusLabel}\n` +
+          `-----------------------------------------\n` +
+          `"মা লক্ষ্মীর আশীর্বাদে আপনার ও আপনার সমগ্র পরিবারের সুখ, সমৃদ্ধি ও শান্তি বজায় থাকুক।"\n\n` +
+          `🙏 ঘরে বসে ভার্চুয়াল দর্শন ও পূজায় অংশগ্রহণ করতে ভিজিট করুন:\n${window.location.href}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    }
+
+    // 12. Admin Settings Toggle & Save
+    const btnToggleUpi = document.getElementById('btn-toggle-upi-settings');
+    const upiSettingsWrap = document.getElementById('admin-upi-settings-wrap');
+    if (btnToggleUpi && upiSettingsWrap) {
+      btnToggleUpi.addEventListener('click', () => {
+        upiSettingsWrap.style.display = (upiSettingsWrap.style.display === 'none' || !upiSettingsWrap.style.display) ? 'block' : 'none';
+      });
+    }
+
+    const btnSaveUpi = document.getElementById('btn-save-upi-settings');
+    if (btnSaveUpi) {
+      btnSaveUpi.addEventListener('click', async () => {
+        if (!state.isAdmin) return;
+        const pri = (document.getElementById('setting-primary-upi')?.value || '').trim();
+        const sec = (document.getElementById('setting-secondary-upi')?.value || '').trim();
+        const payee = (document.getElementById('setting-payee-name')?.value || '').trim();
+        const qrFileInput = document.getElementById('setting-qr-file');
+
+        if (!pri) {
+          alert('প্রাথমিক UPI ID আবশ্যক');
+          return;
+        }
+
+        let customQrUrl = activePaymentConfig.customQrUrl;
+
+        if (qrFileInput && qrFileInput.files && qrFileInput.files[0]) {
+          const file = qrFileInput.files[0];
+          customQrUrl = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+          });
+        }
+
+        activePaymentConfig = {
+          ...activePaymentConfig,
+          primaryUpiId: pri,
+          secondaryUpiId: sec,
+          payeeName: payee || 'Amfan NSCC Kojagari Laxmi Puja',
+          customQrUrl: customQrUrl
+        };
+
+        await window.pujaDB.savePaymentConfig(activePaymentConfig);
+        updatePaymentUIFromConfig();
+        showToast('✅ ক্লাবের UPI ও কিউআর সেটিংস সফলভাবে আপডেট হয়েছে!');
+      });
+    }
+
+    // 13. Admin Export CSV Button
+    const btnExportDonations = document.getElementById('btn-export-donations-csv');
+    if (btnExportDonations) {
+      btnExportDonations.addEventListener('click', () => {
+        window.exportDonationsToCSV();
+      });
+    }
+
+    // 14. Admin Add Offline / Cash Donation Modal (Verified immediately)
+    const btnAdminAddDonation = document.getElementById('btn-admin-add-donation');
+    const offlineModal = document.getElementById('admin-offline-donation-modal');
+    const btnCloseOffline = document.getElementById('btn-close-offline-donation-modal');
+    const offlineForm = document.getElementById('admin-offline-donation-form');
+
+    if (btnAdminAddDonation && offlineModal) {
+      btnAdminAddDonation.addEventListener('click', () => {
+        offlineModal.classList.add('active');
+      });
+    }
+    if (btnCloseOffline && offlineModal) {
+      btnCloseOffline.addEventListener('click', () => {
+        offlineModal.classList.remove('active');
+      });
+    }
+    if (offlineForm) {
+      offlineForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = (document.getElementById('offline-donor-name')?.value || '').trim();
+        const gotra = (document.getElementById('offline-donor-gotra')?.value || '').trim() || 'স্বগোত্র';
+        const village = (document.getElementById('offline-donor-village')?.value || '').trim();
+        const phone = (document.getElementById('offline-donor-phone')?.value || '').trim();
+        const amt = parseInt(document.getElementById('offline-donor-amount')?.value, 10);
+        const method = document.getElementById('offline-donor-method')?.value || 'Cash';
+
+        if (!name || !village || !amt || amt <= 0) {
+          alert('অনুগ্রহ করে নাম, ঠিকানা ও টাকার পরিমাণ সঠিকভাবে পূরণ করুন');
+          return;
+        }
+
+        const donationData = {
+          donorName: name,
+          gotra: gotra,
+          phone: phone,
+          village: village,
+          amount: amt,
+          paymentMethod: method,
+          upiIdUsed: 'N/A',
+          utrNumber: `CASH-${Date.now().toString().slice(-6)}`,
+          receiptNo: `AMF-LK-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+          prayer: 'মণ্ডপে নগদ প্রণামী',
+          status: 'verified', // Admin offline donations are verified immediately
+          timestamp: new Date().toISOString()
+        };
+
+        const saved = await window.pujaDB.saveDonation(donationData);
+
+        const exists = allDonationsList.some(d => (d.id && d.id === saved.id) || (d.receiptNo && d.receiptNo === saved.receiptNo));
+        if (!exists) {
+          allDonationsList.unshift(saved);
+        }
+
+        renderDonationsWall();
+        renderDonationsAdmin();
+        if (offlineModal) offlineModal.classList.remove('active');
+
+        // Admin who added can view immediately
+        verifiedReceiptSessions.add(saved.id);
+
+        window.pujaAudio.playTempleBell();
+        triggerPetalShower(30);
+        showToast('✅ নতুন নগদ/অফলাইন প্রণামী সফলভাবে সংরক্ষণ হয়েছে!');
+        displayReceiptModal(saved);
+
+        offlineForm.reset();
+      });
+    }
+
+    // 15. Admin Search Input
+    const adminSearch = document.getElementById('admin-donor-search');
+    if (adminSearch) {
+      adminSearch.addEventListener('input', () => {
+        renderDonationsAdmin();
+      });
+    }
+  }
+  // ==========================================================
   // INITIAL DATA LOADING & LIVE CLOCK
   // ==========================================================
   updateFirebaseUIStatus();
@@ -8176,6 +11504,7 @@ async function initPujaApp() {
   await loadCommittee();
   initBlessingCard();
   initCommitteeSection();
+  await initDonationPortal();
 
   try {
     const savedDeity = await window.pujaDB.getDeityPhoto();
@@ -8268,7 +11597,6 @@ if (document.readyState === 'loading') {
 } else {
   initPujaApp();
 }
-
   </script>
 </body>
 </html>
