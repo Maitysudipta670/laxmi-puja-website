@@ -3180,6 +3180,102 @@ body {
 }
 
 
+/* ==========================================================
+   LIVE DIGITAL CLOCK BAR
+   ========================================================== */
+.live-clock-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.live-clock-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulseLiveAnim 2s infinite ease-in-out;
+}
+
+.live-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #d32f2f;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(211, 47, 47, 0.8);
+}
+
+@keyframes pulseLiveAnim {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.live-date-text {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #5c0712;
+}
+
+.live-time-display-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.live-clock-time {
+  font-family: 'Cinzel Decorative', 'Courier New', monospace;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #8b1320;
+  background: #fffdf5;
+  padding: 4px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ffd54f;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06), 0 2px 6px rgba(139, 19, 32, 0.08);
+  letter-spacing: 1px;
+}
+
+.live-clock-desc {
+  font-size: 0.84rem;
+  color: #795548;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .live-clock-box {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .live-time-display-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .live-clock-time {
+    font-size: 1.35rem;
+  }
+}
+
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
@@ -3242,35 +3338,18 @@ body {
     </div>
   </header>
 
-  <!-- Festive Quick Bar: Puja Countdown & WhatsApp Share -->
+  <!-- Festive Quick Bar: Live Digital Clock & WhatsApp Share -->
   <div class="festive-action-bar-container">
     <div class="festive-action-bar">
-      <!-- 1. Puja Countdown Timer -->
-      <div class="puja-countdown-box">
-        <div class="countdown-badge-title">
-          <span>⏳</span>
-          <span>শ্রী শ্রী কোজাগরী লক্ষ্মী পূজার বাকি:</span>
+      <!-- Live Clock & Today's Date (Replaces Expired Countdown) -->
+      <div class="live-clock-box">
+        <div class="live-clock-header">
+          <span class="live-pulse-badge"><span class="live-pulse-dot"></span> লাইভ ঘড়ি</span>
+          <span class="live-date-text" id="live-clock-date">📅 লাইভ তারিখ লোড হচ্ছে...</span>
         </div>
-        <div class="countdown-digits-row">
-          <div class="cd-unit">
-            <span class="cd-val" id="cd-days">০০</span>
-            <span class="cd-lbl">দিন</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-unit">
-            <span class="cd-val" id="cd-hours">০০</span>
-            <span class="cd-lbl">ঘণ্টা</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-unit">
-            <span class="cd-val" id="cd-mins">০০</span>
-            <span class="cd-lbl">মিনিট</span>
-          </div>
-          <span class="cd-sep">:</span>
-          <div class="cd-unit">
-            <span class="cd-val" id="cd-secs">০০</span>
-            <span class="cd-lbl">সেকেন্ড</span>
-          </div>
+        <div class="live-time-display-wrap">
+          <span class="live-clock-time" id="main-live-clock">--:--:-- --</span>
+          <span class="live-clock-desc">আমফান কোজাগরী লক্ষ্মী পূজা ২০২৬</span>
         </div>
       </div>
 
@@ -3449,56 +3528,28 @@ body {
           
           <div class="info-card" style="border: 2px solid var(--color-gold); background: linear-gradient(135deg, #fffcf6 0%, #fff7eb 100%);">
             <h3 style="color: var(--color-primary); font-size: 1.25rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
-              📅 পূজার পুণ্য অনুষ্ঠান নির্ঘণ্ট
+              🪔 আমফান কোজাগরী লক্ষ্মী পূজা ২০২৬
             </h3>
 
-            <!-- Official Dates Callout Card -->
-            <div style="background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%); color: #fffdf7; border: 2px solid var(--color-gold); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 1rem; box-shadow: var(--shadow-sm);">
-              <div style="font-size: 0.8rem; color: #ffd700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
-                🌺 আমফান পূজার পুণ্য দিনক্ষণ
+            <!-- Festive Completion Announcement -->
+            <div style="background: linear-gradient(135deg, #5c0712 0%, #8b1320 100%); color: #fffdf7; border: 2px solid var(--color-gold); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 1rem; box-shadow: var(--shadow-sm); text-align: center;">
+              <div style="font-size: 1.08rem; color: #ffd700; font-weight: 700; margin-bottom: 6px;">
+                ✨ এই বছরের পূজা সফলভাবে সম্পন্ন ✨
               </div>
-              <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; margin-bottom: 4px;">
-                📌 <strong>বাংলা তারিখ:</strong> <span style="color: #ffd700;">১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩</span>
-              </div>
-              <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.5; margin-bottom: 10px;">
-                📌 <strong>ইংরেজি তারিখ:</strong> <span style="color: #ffd700;">১, ২ ও ৩ নভেম্বর, ২০২৬</span>
-              </div>
-              
-              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.86rem; background: rgba(0,0,0,0.25); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #ffd700;">
-                <div>🗓️ <strong>রবিবার — ১ নভেম্বর, ২০২৬:</strong> শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা সূচনা ও মহাপূজা</div>
-                <div>🗓️ <strong>সোমবার — ২ নভেম্বর, ২০২৬:</strong> বার্ষিক ক্রীড়া প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান</div>
-                <div>🗓️ <strong>মঙ্গলবার — ৩ নভেম্বর, ২০২৬:</strong> বাৎসরিক ক্রীড়া-সাংস্কৃতিক পুরস্কার বিতরণী পর্ব</div>
-              </div>
+              <p style="font-size: 0.88rem; line-height: 1.6; color: #fff8e7; margin: 0;">
+                মা লক্ষ্মীর অপার কৃপায় এবং সকল ভক্ত ও এলাকাবাসীর সহযোগিতায় আমফান ক্লাবের এই বছরের শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক অনুষ্ঠান মহাসমারোহে সুসম্পন্ন হয়েছে।
+              </p>
             </div>
 
             <div class="tithi-clock">
-              <div style="font-size: 0.82rem; color: #7a4603; font-weight: 600; text-transform: uppercase;">
-                Mandap Live Clock
+              <div style="font-size: 0.82rem; color: #7a4603; font-weight: 700; text-transform: uppercase;">
+                🕒 লাইভ ডিজিটাল ঘড়ি
               </div>
               <div class="tithi-clock-time" id="live-tithi-timer">--:--:--</div>
               <div style="font-size: 0.82rem; color: var(--color-primary); font-weight: 600; margin-top: 4px;">
-                🌕 আমফান Kojagari Purnima Festival
+                🌺 মা লক্ষ্মী সকলের মঙ্গল করুন
               </div>
             </div>
-
-            <ul style="list-style: none; font-size: 0.88rem; display: flex; flex-direction: column; gap: 8px;">
-              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🏆 বার্ষিক ক্রীড়া প্রতিযোগিতা:</span>
-                <strong>সকাল ৮:৩০ AM</strong>
-              </li>
-              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🔥 সন্ধ্যা আরতি:</span>
-                <strong>০৭:১৫ PM</strong>
-              </li>
-              <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed #eedfcb; padding-bottom: 4px;">
-                <span>🍲 মহাভাব প্রসাদ বিতরণ:</span>
-                <strong>০৯:৩০ PM onwards</strong>
-              </li>
-              <li style="display: flex; justify-content: space-between;">
-                <span>🥇 বাৎসরিক সাংস্কৃতিক ও ক্রীড়া পুরস্কার:</span>
-                <strong>৩ নভেম্বর সন্ধ্যায়</strong>
-              </li>
-            </ul>
           </div>
 
           <div class="info-card">
@@ -6784,30 +6835,14 @@ class PujaDB {
           },
           {
             id: 'update_seed_1',
-            title: '📅 আমফান কোজাগরী লক্ষ্মী পূজা ও ৩ দিনব্যাপী পুণ্য নির্ঘণ্ট',
+            title: '🎉 আমফান কোজাগরী লক্ষ্মী পূজা ২০২৬ সমাপ্তি ও কৃতজ্ঞতা জ্ঞাপন',
             category: 'schedule',
             priority: 'urgent',
             isPinned: true,
             author: 'আমফান পুজো কমিটি',
-            body: `আমফান সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠানের দিনক্ষণ:
+            body: `সকল ভক্ত, পুণ্যার্থী ও এলাকাবাসীর আন্তরিক সহযোগিতা ও উপস্থিতিতে আমফান ক্লাবের এই বছরের শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ও বাৎসরিক ক্রীড়া-সাংস্কৃতিক অনুষ্ঠান আনন্দঘন পরিবেশে সফলভাবে সম্পন্ন হয়েছে।
 
-📌 বাংলা তারিখ:-
-১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩
-
-📌 ইংরেজি তারিখ:-
-১, ২ ও ৩ নভেম্বর, ২০২৬
-
-৩ দিনব্যাপী উৎসবের দিনপঞ্জি:
-🗓️ রবিবার — ১ নভেম্বর, ২০২৬ (১৪ কার্তিক, ১৪৩৩):
-পবিত্র শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা সূচনা, ঘট স্থাপন, দেবীর আরাধনা, মহা সন্ধ্যা আরতি ও পুষ্পাঞ্জলি।
-
-🗓️ সোমবার — ২ নভেম্বর, ২০২৬ (১৫ কার্তিক, ১৪৩৩):
-ক্লাবের বাৎসরিক ক্রীড়া প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠান। ভক্তদের মাঝে মহাভাব প্রসাদ বিতরণ।
-
-🗓️ মঙ্গলবার — ৩ নভেম্বর, ২০২৬ (১৬ কার্তিক, ১৪৩৩):
-বাৎসরিক সাংস্কৃতিক ও ক্রীড়া মেগা পুরস্কার বিতরণী পর্ব, সান্ধ্য সাংস্কৃতিক পরিবেশনা ও পূজা সমাপ্তি।
-
-সকল ভক্ত ও এলাকাবাসীকে ক্লাবের তরফ থেকে সপরিবারে সাদর আমন্ত্রণ জানানো হচ্ছে।`,
+ক্লাবের পক্ষ থেকে সকলকে আন্তরিক প্রীতি, শুভেচ্ছা ও শুভকামনা জানাই। মা লক্ষ্মী সকলের জীবনে সুখ, শান্তি ও সমৃদ্ধি বর্ষণ করুন।`,
             likes: 125,
             timestamp: new Date().toISOString()
           },
@@ -7415,58 +7450,43 @@ async function initPujaApp() {
   } catch (err) {}
 
   // ==========================================================
-  // 1. PUJA COUNTDOWN TIMER (1 November 2026, 06:00:00 AM IST)
+  // 1. LIVE DIGITAL CLOCK & REAL-TIME DATE
   // ==========================================================
-  function initPujaCountdown() {
-    const cdDays = document.getElementById('cd-days');
-    const cdHours = document.getElementById('cd-hours');
-    const cdMins = document.getElementById('cd-mins');
-    const cdSecs = document.getElementById('cd-secs');
+  function updateLiveClock() {
+    const now = new Date();
 
-    if (!cdDays) return;
+    // 12-hour format with AM/PM
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const hoursStr = String(hours).padStart(2, '0');
+    const timeFormatted = `${hoursStr}:${minutes}:${seconds} ${ampm}`;
 
-    // Target: 1 November 2026, 06:00:00 IST (Kojagari Laxmi Puja Start)
-    const targetDate = new Date('2026-11-01T06:00:00+05:30').getTime();
+    // Bengali Date formatting
     const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    const bnDays = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+    const bnMonths = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+    const dayName = bnDays[now.getDay()];
+    const monthName = bnMonths[now.getMonth()];
+    const dateNum = String(now.getDate()).replace(/[0-9]/g, d => bnDigits[d]);
+    const yearNum = String(now.getFullYear()).replace(/[0-9]/g, d => bnDigits[d]);
+    const dateFormatted = `${dayName}, ${dateNum} ${monthName}, ${yearNum}`;
 
-    function toBn(num) {
-      return String(num).padStart(2, '0').split('').map(d => {
-        const idx = parseInt(d, 10);
-        return isNaN(idx) ? d : bnDigits[idx];
-      }).join('');
-    }
+    // Update all live clock elements on the page
+    const mainClock = document.getElementById('main-live-clock');
+    if (mainClock) mainClock.textContent = timeFormatted;
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+    const dateEl = document.getElementById('live-clock-date');
+    if (dateEl) dateEl.textContent = `📅 ${dateFormatted}`;
 
-      if (diff <= 0) {
-        cdDays.textContent = '০০';
-        cdHours.textContent = '০০';
-        cdMins.textContent = '০০';
-        cdSecs.textContent = '০০';
-        const titleEl = document.querySelector('.countdown-badge-title');
-        if (titleEl) {
-          titleEl.innerHTML = '<span>🎉</span><span>শুভ কোজাগরী লক্ষ্মী পূজা! পূজা শুরু হয়েছে!</span>';
-        }
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-      cdDays.textContent = toBn(days);
-      cdHours.textContent = toBn(hours);
-      cdMins.textContent = toBn(mins);
-      cdSecs.textContent = toBn(secs);
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const sidebarClock = document.getElementById('live-tithi-timer');
+    if (sidebarClock) sidebarClock.textContent = timeFormatted;
   }
-  initPujaCountdown();
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
 
   // ==========================================================
   // 2. WHATSAPP SHARE INVITATION
@@ -7480,10 +7500,7 @@ async function initPujaApp() {
       const message = 
 `🪔 আমফান সার্বজনীন কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান 🌺
 
-প্রণাম ও শারদ শুভেচ্ছা! আমাদের আমফান ক্লাবের পুণ্য পূজায় আপনারা সপরিবারে আমন্ত্রিত:
-
-📌 বাংলা তারিখ: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩
-📌 ইংরেজি তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬
+মা লক্ষ্মীর অপার কৃপায় আমাদের আমফান ক্লাবের কোজাগরী লক্ষ্মী পূজা ২০২৬ সফলভাবে সুসম্পন্ন হয়েছে!
 
 📍 পূজা প্রাঙ্গণ: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ
 ঠিকানা: নাইকুন্ডি,কুমোরআড়া,নন্দকুমার,পূর্ব মেদিনীপুর,পিন-৭২১৬৩২
@@ -9701,7 +9718,7 @@ async function initPujaApp() {
 
       ctx.fillStyle = '#7a1b24';
       ctx.font = 'bold 12px "Hind Siliguri", sans-serif';
-      ctx.fillText('📅 পুণ্য তিথি: ১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩ (১, ২ ও ৩ নভেম্বর, ২০২৬)', cx, 384);
+      ctx.fillText('📅 শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ২০২৬', cx, 384);
 
       // Signatures / Authorities on Certificate
       ctx.textAlign = 'left';
@@ -9878,7 +9895,7 @@ async function initPujaApp() {
 “ওঁ শ্রীং হ্রীং ক্লীং মহালক্ষ্ম্যৈ নমঃ”
 
 স্থান: নাইকুন্ডি শীতলামাতা মন্দির প্রাঙ্গণ, কুমোরআড়া, নন্দকুমার, পূর্ব মেদিনীপুর
-তারিখ: ১, ২ ও ৩ নভেম্বর, ২০২৬ (১৪, ১৫ ও ১৬ কার্তিক, ১৪৩৩)
+শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা ২০২৬
 
 আপনার নিজের ডিজিটাল আশীর্বাদপত্র সংগ্রহ করতে ও মা লক্ষ্মীর প্রতিমা দর্শন করতে ক্লিক করুন:
 👉 ${currentUrl}`;
@@ -11752,15 +11769,7 @@ async function initPujaApp() {
   state.diyasLit = initialDiyas;
   if (statDiyas) statDiyas.textContent = initialDiyas;
 
-  // Live Kojagari Countdown / Clock
-  function updateLiveClock() {
-    const clockEl = document.getElementById('live-tithi-timer');
-    if (!clockEl) return;
-    const now = new Date();
-    clockEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  }
-  setInterval(updateLiveClock, 1000);
-  updateLiveClock();
+  // Live Clock initialized at top
 
   // Helper Toast notification
   function showToast(message) {
