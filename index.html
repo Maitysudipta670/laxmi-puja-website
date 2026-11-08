@@ -3276,6 +3276,14 @@ body {
   }
 }
 
+/* ==========================================================
+   ADMIN MUSIC EFFECTS TOGGLE (Hide when disabled)
+   ========================================================== */
+body.music-effects-disabled .music-effect-btn,
+body.music-effects-disabled #music-effects-wrapper {
+  display: none !important;
+}
+
   </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
@@ -3307,16 +3315,16 @@ body {
 
     <!-- Quick Audio & Action Bar -->
     <div class="hero-action-pills">
-      <button class="pill-btn" id="btn-shankh" title="Blow Sacred Conch Shell">
+      <button class="pill-btn music-effect-btn" id="btn-shankh" title="Blow Sacred Conch Shell">
         🐚 শঙ্খধ্বনি (Shankha)
       </button>
-      <button class="pill-btn" id="btn-bell" title="Ring Temple Brass Bell">
+      <button class="pill-btn music-effect-btn" id="btn-bell" title="Ring Temple Brass Bell">
         🔔 ঘণ্টা ধ্বনি (Bell)
       </button>
-      <button class="pill-btn" id="btn-dhaak" title="Play Traditional Dhaak Rhythm">
+      <button class="pill-btn music-effect-btn" id="btn-dhaak" title="Play Traditional Dhaak Rhythm">
         🥁 Dhaak Beats (ঢাক)
       </button>
-      <button class="pill-btn" id="btn-drone" title="Play Soothing Temple Drone">
+      <button class="pill-btn music-effect-btn" id="btn-drone" title="Play Soothing Temple Drone">
         🎶 Temple Chants (সুর)
       </button>
       <button class="pill-btn" id="btn-offer-flowers" title="Offer Flower Shower">
@@ -3392,11 +3400,18 @@ body {
   </nav>
 
   <!-- Admin Active Banner (Only shown when Admin is logged in) -->
-  <div id="admin-active-banner" style="display: none; background: #fff8e1; border: 1px solid #ffd54f; border-radius: 8px; padding: 10px 16px; margin: 0 auto 1.5rem; max-width: 1240px; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #5d4037;">
-    <span>👑 <strong>আমফান ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন, প্রতিমা ছবি বদলাতে পারবেন এবং ব্যাকআপ ও ক্লাউড ডাটা ম্যানেজ করতে পারবেন।</span>
-    <button class="pill-btn" style="padding: 4px 12px; font-size: 0.8rem; background: #8b1320; color: #fff;" onclick="document.getElementById('admin-status-pill').click()">
-      লগআউট (Logout)
-    </button>
+  <div id="admin-active-banner" style="display: none; background: #fff8e1; border: 1.5px solid #ffd54f; border-radius: 8px; padding: 10px 16px; margin: 0 auto 1.5rem; max-width: 1240px; align-items: center; justify-content: space-between; font-size: 0.9rem; color: #5d4037; flex-wrap: wrap; gap: 10px;">
+    <div>
+      <span>👑 <strong>আমফান ক্লাব অ্যাডমিন মোড অ্যাক্টিভ:</strong> আপনি গুরুত্বপূর্ণ নোটিশ দিতে পারবেন, প্রতিমা ছবি বদলাতে পারবেন এবং মিউজিক এফেক্টস অন বা অফ করতে পারবেন।</span>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+      <button type="button" id="btn-admin-toggle-music" class="pill-btn" style="padding: 5px 14px; font-size: 0.84rem; background: #2e7d32; color: #fff; border-color: #81c784; font-weight: 700;" title="ওয়েবসাইটে মিউজিক ও সাউন্ড এফেক্টস অন/অফ করুন">
+        🎵 মিউজিক: চালু আছে (ON)
+      </button>
+      <button class="pill-btn" style="padding: 5px 14px; font-size: 0.84rem; background: #8b1320; color: #fff;" onclick="document.getElementById('admin-status-pill').click()">
+        লগআউট (Logout)
+      </button>
+    </div>
   </div>
 
   <!-- Main Content Area -->
@@ -3552,7 +3567,21 @@ body {
             </div>
           </div>
 
-          <div class="info-card">
+          
+        <!-- Admin Music & Sound Effects Control Card -->
+        <div class="info-card" style="border-left: 4px solid #2e7d32;">
+          <h3 style="color: #2e7d32;">🎵 ওয়েবসাইটের মিউজিক ও সাউন্ড এফেক্টস নিয়ন্ত্রণ (Music & Sound Effects)</h3>
+          <p style="font-size: 0.92rem; color: #555; margin-bottom: 1rem; line-height: 1.5;">
+            অ্যাডমিন হিসেবে আপনি ওয়েবসাইট থেকে শঙ্খধ্বনি, ঘণ্টা, ঢাক ও সুরের সমস্ত মিউজিক বোতাম ও সাউন্ড এফেক্টস সম্পূর্ণ বন্ধ (Hide &amp; Mute) করে দিতে পারেন। বন্ধ করলে সাধারণ দর্শকদের কাছে কোনো মিউজিক বোতাম দেখাবে না।
+          </p>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button type="button" id="btn-admin-toggle-music-manage" class="btn-primary" style="background: #2e7d32; border-color: #1b5e20; font-weight: 700;">
+              🎵 মিউজিক এফেক্টস: চালু আছে (ক্লিক করে বন্ধ করুন)
+            </button>
+          </div>
+        </div>
+
+        <div class="info-card">
             <h3>📊 আমফান অ্যাক্টিভিটি</h3>
             <div class="stats-grid">
               <div class="stat-box" style="border: 1.5px solid var(--color-gold); background: #fffdf5;">
@@ -5981,6 +6010,7 @@ class PujaSoundEngine {
     this.isDronePlaying = false;
     this.isDhaakPlaying = false;
     this.dhaakInterval = null;
+    this.isEnabled = (typeof localStorage !== 'undefined' && localStorage.getItem('puja_music_effects_enabled') === 'false') ? false : true;
   }
 
   // Initialize AudioContext on first user interaction (browser policy)
@@ -5994,11 +6024,33 @@ class PujaSoundEngine {
     }
   }
 
+    /**
+   * Admin Music Control: Turn all audio effects ON / OFF
+   */
+  setEnabled(enabled) {
+    this.isEnabled = !!enabled;
+    try {
+      localStorage.setItem('puja_music_effects_enabled', this.isEnabled ? 'true' : 'false');
+    } catch(e) {}
+    if (!this.isEnabled) {
+      this.stopAll();
+    }
+  }
+
+  stopAll() {
+    if (this.isDhaakPlaying) {
+      this.toggleDhaak(() => {});
+    }
+    if (this.isDronePlaying) {
+      this.toggleAmbientDrone(() => {});
+    }
+  }
+
   /**
    * Sacred Shankha Dhwani (Conch Shell Sound)
-   * Simulates the low-frequency drone rising into a powerful resonant blow
    */
   playShankh() {
+    if (!this.isEnabled) return false;
     this.init();
     const ctx = this.ctx;
     const now = ctx.currentTime;
@@ -6078,6 +6130,7 @@ class PujaSoundEngine {
    * High pure strike with long sparkling harmonic decay
    */
   playTempleBell() {
+    if (!this.isEnabled) return false;
     this.init();
     const ctx = this.ctx;
     const now = ctx.currentTime;
@@ -6113,6 +6166,7 @@ class PujaSoundEngine {
    * @param {string} type 'open' or 'slap' or 'rim'
    */
   playSingleDhaakStrike(type = 'open') {
+    if (!this.isEnabled) return false;
     this.init();
     const ctx = this.ctx;
     const now = ctx.currentTime;
@@ -6251,6 +6305,7 @@ class PujaSoundEngine {
    * Soft flower offering whoosh / chime
    */
   playFlowerChime() {
+    if (!this.isEnabled) return false;
     this.init();
     const ctx = this.ctx;
     const now = ctx.currentTime;
@@ -7698,6 +7753,98 @@ async function initPujaApp() {
     }
   }
 
+    // ==========================================================
+  // MUSIC & SOUND EFFECTS ADMIN CONTROL
+  // ==========================================================
+  let isMusicEffectsEnabled = (localStorage.getItem('puja_music_effects_enabled') !== 'false');
+
+  function applyMusicEffectsState(enabled, showNotification = false) {
+    isMusicEffectsEnabled = !!enabled;
+    try {
+      localStorage.setItem('puja_music_effects_enabled', isMusicEffectsEnabled ? 'true' : 'false');
+    } catch(e) {}
+
+    if (window.pujaAudio) {
+      window.pujaAudio.setEnabled(isMusicEffectsEnabled);
+    }
+
+    if (isMusicEffectsEnabled) {
+      document.body.classList.remove('music-effects-disabled');
+    } else {
+      document.body.classList.add('music-effects-disabled');
+    }
+
+    updateAdminMusicUI();
+
+    if (showNotification) {
+      if (isMusicEffectsEnabled) {
+        showToast('🎵 মিউজিক এফেক্টস চালু করা হয়েছে। ওয়েবসাইটে মিউজিক বোতাম ও সাউন্ড দৃশ্যমান হবে।');
+      } else {
+        showToast('🔇 মিউজিক এফেক্টস বন্ধ করা হয়েছে। ওয়েবসাইটে আর কোনো মিউজিক বোতাম দেখাবে না।');
+      }
+    }
+  }
+
+  function updateAdminMusicUI() {
+    const btnBanner = document.getElementById('btn-admin-toggle-music');
+    const btnManage = document.getElementById('btn-admin-toggle-music-manage');
+
+    if (btnBanner) {
+      if (isMusicEffectsEnabled) {
+        btnBanner.innerHTML = '🎵 মিউজিক: চালু আছে (ON)';
+        btnBanner.style.background = '#2e7d32';
+        btnBanner.style.borderColor = '#81c784';
+      } else {
+        btnBanner.innerHTML = '🔇 মিউজিক: বন্ধ আছে (OFF)';
+        btnBanner.style.background = '#c62828';
+        btnBanner.style.borderColor = '#ef5350';
+      }
+    }
+
+    if (btnManage) {
+      if (isMusicEffectsEnabled) {
+        btnManage.innerHTML = '🎵 মিউজিক এফেক্টস: চালু আছে (ক্লিক করে বন্ধ করুন)';
+        btnManage.style.background = '#2e7d32';
+        btnManage.style.borderColor = '#1b5e20';
+      } else {
+        btnManage.innerHTML = '🔇 মিউজিক এফেক্টস: বন্ধ আছে (ক্লিক করে চালু করুন)';
+        btnManage.style.background = '#c62828';
+        btnManage.style.borderColor = '#8b1320';
+      }
+    }
+  }
+
+  async function toggleMusicEffectsByAdmin() {
+    if (!state.isAdmin) {
+      alert('শুধুমাত্র আমফান ক্লাবের অ্যাডমিন মিউজিক এফেক্টস অন/অফ করতে পারেন।');
+      return;
+    }
+    const newState = !isMusicEffectsEnabled;
+    applyMusicEffectsState(newState, true);
+
+    // Sync to Cloud Firestore if connected
+    if (window.firebaseService && window.firebaseService.isReady) {
+      try {
+        await window.firebaseService.saveGeneralSettings({ musicEffectsEnabled: newState });
+      } catch (e) {
+        console.warn('Could not sync music settings to cloud:', e);
+      }
+    }
+  }
+
+  // Hook up admin toggle button click handlers
+  const btnBannerToggle = document.getElementById('btn-admin-toggle-music');
+  if (btnBannerToggle) {
+    btnBannerToggle.addEventListener('click', toggleMusicEffectsByAdmin);
+  }
+  const btnManageToggle = document.getElementById('btn-admin-toggle-music-manage');
+  if (btnManageToggle) {
+    btnManageToggle.addEventListener('click', toggleMusicEffectsByAdmin);
+  }
+
+  // Apply initial music state
+  applyMusicEffectsState(isMusicEffectsEnabled, false);
+
   // Hook Up Audio and Ritual Buttons
   const btnShankh = document.getElementById('btn-shankh');
   const btnBell = document.getElementById('btn-bell');
@@ -8387,6 +8534,7 @@ async function initPujaApp() {
   // AMFAN CLUB ADMIN MANAGEMENT
   // ==========================================================
   function updateAdminUI() {
+    updateAdminMusicUI();
     if (state.isAdmin) {
       if (adminStatusPill) {
         adminStatusPill.innerHTML = `👑 আমফান অ্যাডমিন [লগআউট]`;
@@ -9016,6 +9164,12 @@ async function initPujaApp() {
 
   function setupFirebaseRealtimeListeners() {
     if (!window.firebaseService || !window.firebaseService.isReady) return;
+
+    window.firebaseService.onGeneralSettingsChanged && window.firebaseService.onGeneralSettingsChanged((settings) => {
+      if (settings && typeof settings.musicEffectsEnabled === 'boolean') {
+        applyMusicEffectsState(settings.musicEffectsEnabled, false);
+      }
+    });
 
     window.firebaseService.onPhotosChanged((photos) => {
       console.log('Firebase: Real-time photos update received (' + photos.length + ' photos)');
