@@ -1,106 +1,56 @@
-# 🪔 শ্রী শ্রী কোজাগরী লক্ষ্মী পূজা (Shree Shree Kojagari Laxmi Puja Web Portal)
+# 🪔 আমফান কোজাগরী লক্ষ্মী পূজা ও বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান
 
-A divine, festive, and responsive web application designed for **Laxmi Puja (Kojagari Lokkhi Pujo)** celebrations. It allows organizers and devotees to easily save and view photos publicly, publish different types of live announcements, and participate in virtual darshan.
-
----
-
-## ✨ Features Overview
-
-### 1. 📸 Public Photo Gallery & Easy Photo Saver
-* **Save Photos Easily**: Devotees and organizers can click **"Upload Photo"** or drag & drop images directly from phones or computers.
-* **Automatic Client-Side Optimization**: Automatically resizes and optimizes photos via HTML5 Canvas before saving into browser `IndexedDB`, ensuring fast loading and huge storage capacity without size limits.
-* **Public Viewing Lightbox**: Full-resolution viewing with zoom, photo metadata (Photographer, Category, Timestamp, Story/Caption), Like counter, and direct Download button.
-* **Categorized Filtering**:
-  - প্রতিমা (Maa Lakshmi Idol / Pratima)
-  - মণ্ডপ (Mandap & Pandal Decoration)
-  - আলপনা (Traditional Rice-Paste Alpona Designs & Lokkhir Paa)
-  - ভোগ ও প্রসাদ (Mahabhog, Naru, Moa & Prasad Offerings)
-  - আরতি ও ধুনুচি (Sandhya Aarti & Dhunuchi Naach)
-  - পরিবার ও ভক্তবৃন্দ (Family & Devotees)
-* **Real-time Search**: Search by title, photographer, or keyword.
-* **Social Sharing**: One-click sharing with Web Share API and link copying.
+A complete festive and responsive community web portal for **আমফান** club's **Kojagari Laxmi Puja & Annual Sports and Cultural Program (বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান)**.
 
 ---
 
-### 2. 📢 Live Puja Updates Notice Board ("Different Types of Updates")
-Post and view organized bulletins across distinct categories with color-coded badges and priority indicators:
-* 🕒 **Puja Schedule & Tithi Timings**: Kojagari Purnima timings, Nishita Muhurat, Sandhya Aarti time, Pushpanjali batches.
-* 🍲 **Bhog & Prasad Details**: Daily bhog items (Khichuri, Labra, Chhanar Payesh, Naru), distribution timings, coupon notices.
-* 🔴 **Urgent Announcements**: Immediate instructions, weather advisories, photography rules, crowd control.
-* 🎭 **Cultural & Competitions**: Alpona competition results, Dhunuchi dance, musical soiree ("Ke Jagore" vigil).
-* 📢 **General Notices**: Committee information, donation receipts, and volunteer schedules.
-* 📌 **Pin to Top**: Important notices can be pinned to stay at the very top.
+## 🌟 প্রধান বৈশিষ্ট্যসমূহ (Key Highlights)
+
+### 1. 👑 ক্লাব অ্যাডমিন মোড ও পাসওয়ার্ড (Admin Login & Protection)
+* **লগইন বাটন**: ওয়েবসাইটের একদম উপরে ডানদিকের **`👑 ক্লাবের অ্যাডমিন`** বাটনে ক্লিক করুন।
+* **অ্যাডমিন পাসওয়ার্ড (Admin Password)**: **`24689011`**
+* **পাসওয়ার্ড টাইপিং সিকিউরিটি**: ইনপুট বক্সে কোনো পাসওয়ার্ড শো করা নেই (`গোপন পাসওয়ার্ড লিখুন...`), শুধুমাত্র আপনি টাইপ করার সময় দেখতে পাওয়ার জন্য **`👁️ পাসওয়ার্ড দেখুন`** বোতাম রয়েছে।
+* **অ্যাডমিনের ক্ষমতা**:
+  - **ভার্চুয়াল দর্শনে প্রতিমার ছবি পরিবর্তন**: শুধুমাত্র অ্যাডমিন প্রতিমার ছবি মোবাইল/পিসি থেকে আপলোড করতে পারেন অথবা **`🔗 ছবির লিংক দিন`** বাটনে যে কোনো অনলাইন লিংক দিয়ে পরিবর্তন করতে পারেন।
+  - **⚙️ Backup & Data এবং 🔥 Google Firebase**: সাধারণ পাবলিকের জন্য এই অপশনগুলো সম্পূর্ণ লুকানো (Hide)। শুধুমাত্র অ্যাডমিন লগইন করলেই এই অপশনগুলো দৃশ্যমান হবে।
+  - **নোটিশ বোর্ডে পোস্ট**: শুধুমাত্র অ্যাডমিন ক্লাবের অফিশিয়াল নোটিশ পোস্ট করতে পারবেন।
+  - **ডিলিট অধিকার**: যেকোনো ছবি বা নোটিশ মুছে ফেলার অধিকার শুধু অ্যাডমিনের হাতে থাকবে (`🗑️ Delete`)।
 
 ---
 
-### 3. 🪔 Virtual Mandap & Devotional Interactivity
-* **Interactive Diya Lighting**: Click to light an earthen deepam with flickering flame animation and a persistent counter tracking total diyas lit.
-* **Pushpanjali Flower Shower**: Click to shower animated red lotus and yellow marigold petals over Maa Lakshmi's sanctum.
-* **Web Audio API Temple Soundscape** (Zero external audio file dependencies):
-  - 🐚 **Shankha Dhwani**: Realistic sacred conch shell blow.
-  - 🔔 **Temple Ghanta**: Clear brass bell chime with natural reverberation.
-  - 🥁 **Bengali Dhaak**: Traditional festive rhythm beat sequence.
-  - 🎶 **Temple Drone**: Soothing ambient tanpura/chant drone.
+### 2. 🪔 ভার্চুয়াল দর্শন (Virtual Darshan) — পাবলিকের কোনো অপশন নেই
+* ভার্চুয়াল দর্শনের মূল প্রতিমার ছবি শুধু **ক্লাব অ্যাডমিন** পরিবর্তন বা মুছতে পারবেন।
+* সাধারণ পাবলিকের জন্য এখানে ছবি পরিবর্তন বা ডিলিট করার **কোনো অপশন রাখা হয়নি**।
+* পাবলিক দর্শনার্থীরা কেবল ভক্তিভরে দর্শন করতে পারবেন, প্রদীপ জ্বালাতে পারবেন এবং পুষ্পাঞ্জলি দিতে পারবেন।
 
 ---
 
-### 4. 📜 Authentic Mantras & Panchali
-* **Laxmi Pranam Mantra**: Bengali script with English meaning and pronunciation.
-* **Pushpanjali Mantra**: Sacred prayer for flower offerings.
-* **Dhyan Mantra**: Meditation sloka.
-* **Kojagari Brotokatha & Panchali Highlights**: The story and sacred significance of Kojagari night.
+### 3. 🏆 বার্ষিক ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান (Sports & Cultural Events)
+* **ফটো গ্যালারিতে বিশেষ বিভাগ**: **`🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান`** ক্যাটাগরিতে দৌড় প্রতিযোগিতা, অঙ্কন প্রতিযোগিতা ও সাংস্কৃতিক অনুষ্ঠানের ছবি থাকবে।
+* **নোটিশ বোর্ডে বিশেষ বিভাগ**: **`🏆 ক্রীড়া ও সাংস্কৃতিক অনুষ্ঠান`** ক্যাটাগরিতে ক্লাবের স্পোর্টস শিডিউল ও প্রাইজ ডিস্ট্রিবিউশন সংক্রান্ত নোটিশ দেওয়া যাবে।
 
 ---
 
-### 5. 💌 Wishes & Pranam Guestbook Wall
-* Community members from near and far can post auspicious greetings and prayers.
+### 4. 📸 পাবলিক ফটো গ্যালারি (Community Photo Gallery)
+* সাধারণ দর্শকরা পুজো বা সাংস্কৃতিক অনুষ্ঠানের স্মরণীয় ছবি আপলোড করতে পারবেন।
+* কিন্তু কোনো ছবি ডিলিট করার অধিকার পাবলিকের থাকবে না; ডিলিট শুধুমাত্র অ্যাডমিন করতে পারবেন।
 
 ---
 
-### 6. 💾 Zero-Backend Database & Portable Backup
-* Built on browser **IndexedDB**, allowing offline functioning and permanent storage across browser refreshes.
-* **Export Backup**: Download all photos and notices into a single portable `.json` file.
-* **Import Backup**: Restore your gallery on any machine with one click.
+### 5. ✨ ডেভেলপার ক্রেডিট (Developer Credit)
+* ওয়েবসাইটের একদম ফুটারে সোনালী হরফে যুক্ত রয়েছে:
+  **CREATED AND DEVELOPED BY SUDIPTA MAITY**
 
 ---
 
-## 🚀 How to Open and Run the Website
+## 🚀 GitHub ও Vercel এ কীভাবে আপডেট করবেন (Step-by-Step)
 
-### Option 1: Direct Browser Launch (Simplest)
-1. Double-click the file `start.bat` inside this directory:
-   ```
-   C:\Users\maity\.gemini\antigravity\scratch\laxmi-puja-website\start.bat
-   ```
-2. Or simply double-click `index.html` to open it in Chrome, Edge, Brave, or Firefox.
+যেহেতু সমস্ত CSS ও JavaScript কোড এখন সরাসরি `index.html`-এর ভেতরে সংযুক্ত (Self-Contained):
 
-### Option 2: Run Local Web Server (PowerShell)
-If you wish to run a local web server (e.g. at `http://localhost:8080`):
-1. Open PowerShell in this folder:
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\serve.ps1
-   ```
-2. The server will start and automatically open your default browser.
-
----
-
-## 📂 Project Structure
-```
-laxmi-puja-website/
-├── index.html           # Main application structure, tabs & modals
-├── start.bat            # One-click Windows launcher
-├── serve.ps1            # Lightweight PowerShell HTTP server
-├── README.md            # Documentation and instructions
-├── css/
-│   └── styles.css       # Festive Bengali Alpona theme, animations & layouts
-├── js/
-│   ├── app.js           # Core UI logic, photo handling & particle shower
-│   ├── audio.js         # Web Audio API engine (Shankha, Bell, Dhaak, Drone)
-│   └── db.js            # IndexedDB persistent database & seed demo data
-└── assets/              # Icons and custom media assets
-```
-
----
-
-## 💡 Setting Active Workspace
-To set this project as your active workspace in Antigravity, open folder:
-`C:\Users\maity\.gemini\antigravity\scratch\laxmi-puja-website`
+1. আপনার ব্রাউজারে [GitHub.com](https://github.com) ওপেন করুন।
+2. আপনার রিপোজিটরিতে ঢুকুন।
+3. **Add file** &rarr; **Upload files** এ ক্লিক করুন।
+4. আপনার কম্পিউটারের এই ফোল্ডার থেকে শুধু **`index.html`** ফাইলটি টেনে ড্র্যাগ করে ছেড়ে দিন:
+   `C:\Users\maity\.gemini\antigravity\scratch\laxmi-puja-website\index.html`
+5. নিচে সবুজ রঙের **Commit changes** বোতামে ক্লিক করুন।
+6. **ব্যাস!** আপনার Vercel লিঙ্কে ৩০ সেকেন্ডের মধ্যে নতুন ওয়েবসাইট লাইভ হয়ে যাবে!
